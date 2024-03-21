@@ -1139,7 +1139,7 @@ GameObject:
   - component: {fileID: 1565437287}
   - component: {fileID: 1565437286}
   - component: {fileID: 1565437290}
-  - component: {fileID: 1565437285}
+  - component: {fileID: 1565437291}
   m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
@@ -1147,20 +1147,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1565437285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565437284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef52c1e5749ae9347a6dd4a44670a989, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotSpeed: 50
 --- !u!136 &1565437286
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1257,6 +1243,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1565437291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565437284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b32a979440c78b4d906999b563f7565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMoveSpeed: 50
+  moveSpeed: 0
+  maxRotSpeed: 50
+  rotSpeed: 0
 --- !u!1 &1725928096
 GameObject:
   m_ObjectHideFlags: 0
