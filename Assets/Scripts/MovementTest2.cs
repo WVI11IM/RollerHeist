@@ -23,8 +23,8 @@ public class MovementTest2 : MonoBehaviour
 
         float vertical = Input.GetAxis("Vertical");
 
-        rotSpeed += Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
-        transform.eulerAngles = new Vector3(0, rotSpeed, 0);
+        float rotation = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+        transform.eulerAngles += new Vector3(0, rotation, 0);
 
         Vector3 direction = new Vector3(0, 0, vertical);
 
