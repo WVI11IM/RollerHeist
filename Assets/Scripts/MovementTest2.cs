@@ -4,9 +4,33 @@ using UnityEngine;
 
 public class MovementTest2 : MonoBehaviour
 {
-    public float moveSpeed;
+    [Header("PLAYER PROPERTIES")]
+    public float acceleration;
+    public float maxMoveSpeed;
     public float rotSpeed;
+    public bool isGrounded = false;
+    public bool isBraking = false;
+    public TrailRenderer trailRenderer;
+    public Gradient[] gradients;
+
+    [Space]
+    [Header("DRIFT SETTINGS")]
+    public bool isDriftingA = false;
+    public bool isDriftingD = false;
+    public ParticleSystem driftSparks;
+
+    private float doubleATapTimeThreshold = 0.25f;
+    private float lastATapTime;
+    private float doubleDTapTimeThreshold = 0.25f;
+    private float lastDTapTime;
+
+    [Space]
+    [Header("FLOOR DETECTION SETTINGS")]
+    public float raycastDistanceToFloor = 1.25f;
+    public LayerMask floorLayerMask;
+
     Rigidbody rb;
+
 
     void Start()
     {
@@ -15,24 +39,89 @@ public class MovementTest2 : MonoBehaviour
 
     void Update()
     {
-        //Variável local de vetor de velocidade
-        float vertical;
+        //Muda a cor do rastro dependendo da velocidade.
+        if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2) trailRenderer.colorGradient = gradients[2];
+        else if (rb.velocity.magnitude >= maxMoveSpeed / 3) trailRenderer.colorGradient = gradients[1];
+        else trailRenderer.colorGradient = gradients[0];
 
-        //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem desacelera. Senão, segue em frente com velocidade normal
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) vertical = 0;
-        else vertical = 1;
+        //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção
+        if(rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+        {
+            if (Input.GetKeyDown(KeyCode.A) && isGrounded)
+            {
+                if (Time.time - lastATapTime <= doubleATapTimeThreshold)
+                {
+                    isDriftingA = true;
+                    isDriftingD = false;
+                    rb.velocity /= 1.25f;
+                }
+                lastATapTime = Time.time;
+            }
+            if (Input.GetKeyDown(KeyCode.D) && isGrounded)
+            {
+                if (Time.time - lastDTapTime <= doubleDTapTimeThreshold)
+                {
+                    isDriftingD = true;
+                    isDriftingA = false;
+                    rb.velocity /= 1.25f;
+                }
+                lastDTapTime = Time.time;
+            }
+        }
 
-        //Variável local de valor de rotação a adicionar
-        float rotation = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+        //Variável local de rotação.
+        float rotation;
 
-        //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem para de girar para os lados.
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) rotation = 0;
-        
+        //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
+        if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude > maxMoveSpeed / 3 * 2)
+        {
+            rotation = Input.GetAxis("Horizontal") * rotSpeed * 3f * Time.deltaTime;
+            driftSparks.Play();
+        }
+        else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude > maxMoveSpeed / 3 * 2)
+        {
+            rotation = Input.GetAxis("Horizontal") * rotSpeed * 3f * Time.deltaTime;
+            driftSparks.Play();
+        }
+        else
+        {
+            isDriftingA = false;
+            isDriftingD = false;
+            driftSparks.Stop();
+            rotation = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+        }
+
+        //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem para de girar para os lados e dá ré.
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        {
+            rotation = 0;
+            if (isGrounded) isBraking = true;
+        }
+        else isBraking = false;
+
         transform.eulerAngles += new Vector3(0, rotation, 0);
 
-        Vector3 direction = new Vector3(0, 0, vertical);
+        //Gera uma Raycast abaixo do personagem que detecta colisão com chão.
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistanceToFloor, floorLayerMask))
+        {
+            isGrounded = true;
+        }
+        else isGrounded = false;
+    }
 
+    void FixedUpdate()
+    {
+        Vector3 direction = new Vector3(0, 0, 1);
         direction = transform.TransformDirection(direction);
-        rb.AddForce(direction * moveSpeed);
+
+        //Enquanto personagem estiver abaixo da velocidade máxima e no chão, ele acelera.
+        if (rb.velocity.magnitude < maxMoveSpeed && isGrounded && !isBraking)
+        {
+            rb.AddForce(direction * acceleration);
+            Debug.Log("Applying force");
+        }
+
+        if (isBraking) rb.AddForce(-direction * acceleration);
     }
 }
