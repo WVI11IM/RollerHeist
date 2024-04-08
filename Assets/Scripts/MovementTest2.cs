@@ -17,7 +17,7 @@ public class MovementTest2 : MonoBehaviour
     [Header("DRIFT SETTINGS")]
     public bool isDriftingA = false;
     public bool isDriftingD = false;
-    public ParticleSystem driftSparks;
+    public ParticleSystem[] driftParticleSystems;
 
     private float doubleATapTimeThreshold = 0.25f;
     private float lastATapTime;
@@ -53,7 +53,7 @@ public class MovementTest2 : MonoBehaviour
                 {
                     isDriftingA = true;
                     isDriftingD = false;
-                    rb.velocity /= 1.25f;
+                    rb.velocity /= 1.75f;
                 }
                 lastATapTime = Time.time;
             }
@@ -63,7 +63,7 @@ public class MovementTest2 : MonoBehaviour
                 {
                     isDriftingD = true;
                     isDriftingA = false;
-                    rb.velocity /= 1.25f;
+                    rb.velocity /= 1.75f;
                 }
                 lastDTapTime = Time.time;
             }
@@ -73,21 +73,21 @@ public class MovementTest2 : MonoBehaviour
         float rotation;
 
         //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
-        if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude > maxMoveSpeed / 3 * 2)
+        if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude > maxMoveSpeed / 3)
         {
-            rotation = Input.GetAxis("Horizontal") * rotSpeed * 3f * Time.deltaTime;
-            driftSparks.Play();
+            rotation = Input.GetAxis("Horizontal") * rotSpeed * 2f * Time.deltaTime;
+            for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Play();
         }
-        else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude > maxMoveSpeed / 3 * 2)
+        else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude > maxMoveSpeed / 3)
         {
-            rotation = Input.GetAxis("Horizontal") * rotSpeed * 3f * Time.deltaTime;
-            driftSparks.Play();
+            rotation = Input.GetAxis("Horizontal") * rotSpeed * 2f * Time.deltaTime;
+            for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Play();
         }
         else
         {
             isDriftingA = false;
             isDriftingD = false;
-            driftSparks.Stop();
+            for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Stop();
             rotation = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
         }
 
@@ -119,7 +119,6 @@ public class MovementTest2 : MonoBehaviour
         if (rb.velocity.magnitude < maxMoveSpeed && isGrounded && !isBraking)
         {
             rb.AddForce(direction * acceleration);
-            Debug.Log("Applying force");
         }
 
         if (isBraking) rb.AddForce(-direction * acceleration);
