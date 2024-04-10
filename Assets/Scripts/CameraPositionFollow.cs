@@ -8,9 +8,9 @@ public class CameraPositionFollow : MonoBehaviour
 
     void Update()
     {
-        float posX = playerPosition.transform.position.x + 20;
-        float posY = playerPosition.transform.position.y + 20f;
-        float posZ = playerPosition.transform.position.z + -20;
+        float posX = playerPosition.transform.position.x + 25;
+        float posY = playerPosition.transform.position.y + 25f;
+        float posZ = playerPosition.transform.position.z + -25;
 
         transform.position = new Vector3(posX, posY, posZ);
     }
