@@ -46,13 +46,13 @@ public class MovementTest2 : MonoBehaviour
         else if (rb.velocity.magnitude >= maxMoveSpeed / 3) trailRenderer.colorGradient = trailGradients[1];
         else trailRenderer.colorGradient = trailGradients[0];
 
-        //Faz personagem dar um pulo com barra de espaço
+        //Faz personagem dar um pulo com barra de espaço.
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce * 100);
         }
 
-        //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção
+        //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
         if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
         {
             if (Input.GetKeyDown(KeyCode.A) && isGrounded)
@@ -81,12 +81,12 @@ public class MovementTest2 : MonoBehaviour
         //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
         if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 3)
         {
-            rotation = Input.GetAxis("Horizontal") * rotSpeed * 1.75f * Time.deltaTime;
+            rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
             for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Play();
         }
         else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 3)
         {
-            rotation = Input.GetAxis("Horizontal") * rotSpeed * 1.75f * Time.deltaTime;
+            rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
             for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Play();
         }
         else
@@ -94,8 +94,12 @@ public class MovementTest2 : MonoBehaviour
             isDriftingA = false;
             isDriftingD = false;
             for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Stop();
-            if(!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Time.deltaTime;
-            else rotation = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+
+            //Caso personagem esteja no ar, rotação será reduzida.
+            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Mathf.Lerp(2.5f, 1f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+
+            //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
+            else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 1f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
         }
 
         //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem para de girar para os lados e desacelera.
@@ -120,7 +124,7 @@ public class MovementTest2 : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistanceToFloor, floorLayerMask))
         {
             isGrounded = true;
-            //Evita a nulificação de velocidade ao entrar em contato com o chão
+            //Evita a nulificação de velocidade ao entrar em contato com o chão.
             if (isAirborne)
             {
                 Vector3 velocity = rb.velocity;
@@ -136,22 +140,51 @@ public class MovementTest2 : MonoBehaviour
         }
     }
 
+    //Para todas as linhas de código que envolvem a constante aplicação de forças direcionais ao Rigidbody do personagem, utilizei o FixedUpdate().
     void FixedUpdate()
     {
-        Vector3 direction = new Vector3(0, 0, 1);
-        direction = transform.TransformDirection(direction);
+        Vector3 directionFront = new Vector3(0, 0, 1);
+        directionFront = transform.TransformDirection(directionFront);
+
+        Vector3 directionSides = new Vector3(1, 0, 0);
+        directionSides = transform.TransformDirection(directionSides);
 
         //Enquanto personagem estiver abaixo da velocidade máxima e no chão, ele acelera.
         if (rb.velocity.magnitude < maxMoveSpeed && isGrounded)
         {
-            rb.AddForce(direction * acceleration);
-            if (isDriftingA || isDriftingD) rb.velocity /= 1.015f;
+            rb.AddForce(directionFront * acceleration);
+
+            //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
+            if (isDriftingA || isDriftingD)
+            {
+                rb.velocity /= 1.01f;
+                if (isDriftingA)
+                {
+                    rb.AddForce(-directionSides * acceleration);
+                }
+                else
+                {
+                    rb.AddForce(directionSides * acceleration);
+                }
+            }
+            //Porém se a curva for normal, a velocidade dele reduzirá, a força lateral será menor e também proporcional à velocidade frontal do personagem.
+            else
+            {
+                if (!isBraking)
+                {
+                    rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 3) * (rb.velocity.magnitude / maxMoveSpeed)));
+                    if (Input.GetAxis("Horizontal") != 0)
+                    {
+                        rb.AddForce(-directionFront * acceleration / 10);
+                    }
+                }
+            }
         }
 
         //Se personagem brecar, é aplicada uma força oposta para desacelerar.
         if (isBraking)
         {
-            rb.AddForce(-direction * acceleration);
+            rb.AddForce(-directionFront * acceleration);
         }
     }
 }
