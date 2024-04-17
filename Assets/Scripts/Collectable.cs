@@ -8,11 +8,20 @@ public class Collectable : MonoBehaviour
     {
         if (canCollect)
         {
+            if (gameObject.tag == "BigItem")
+            {
+                Debug.Log("Collect Item");
+                CollectableManager.instance.bigItemCollected++;
+            }
+            else if (gameObject.tag == "SmallItem")
+            {
+                CollectableManager.instance.smallItensCollected++;
+            }
             //Destroy this gameobject
             Destroy(gameObject);
 
             //Hide this gameObject
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 

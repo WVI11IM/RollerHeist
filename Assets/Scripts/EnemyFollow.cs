@@ -8,15 +8,18 @@ public class EnemyFollow : MonoBehaviour
     public NavMeshAgent enemy;
     public Transform player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        enemy.SetDestination(player.position);
+        //enemy.SetDestination(player.position);
+        FollowPlayer();
+    }
+
+    public void FollowPlayer()
+    {
+        if (EnemyManager.Instance.canFollow == true)
+        {
+            enemy.SetDestination(player.position);
+        }
     }
 }
