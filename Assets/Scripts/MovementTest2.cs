@@ -46,6 +46,11 @@ public class MovementTest2 : MonoBehaviour
         else if (rb.velocity.magnitude >= maxMoveSpeed / 3) trailRenderer.colorGradient = trailGradients[1];
         else trailRenderer.colorGradient = trailGradients[0];
 
+        if (!isGrounded)
+        {
+            rb.AddForce(-Vector2.up * 9.81f);
+        }
+
         //Faz personagem dar um pulo com barra de espaço.
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -79,12 +84,12 @@ public class MovementTest2 : MonoBehaviour
         float rotation;
 
         //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
-        if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 3)
+        if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
         {
             rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
             for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Play();
         }
-        else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 3)
+        else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
         {
             rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
             for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Play();
