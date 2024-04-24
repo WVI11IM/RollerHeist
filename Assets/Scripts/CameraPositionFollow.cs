@@ -6,7 +6,7 @@ public class CameraPositionFollow : MonoBehaviour
 {
     public Transform playerPosition;
 
-    void Update()
+    void FixedUpdate()
     {
         float posX = playerPosition.transform.position.x + 25;
         float posY = playerPosition.transform.position.y + 25f;

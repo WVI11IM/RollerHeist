@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class MovementTest2 : MonoBehaviour
 {
+    public Animator animator;
+
     [Header("PLAYER PROPERTIES")]
     public float acceleration;
     public float maxMoveSpeed;
     public float rotSpeed;
     public float jumpForce;
     public bool isBraking = false;
-    public TrailRenderer trailRenderer;
+    public TrailRenderer[] trailRenderers;
     public Gradient[] trailGradients;
 
     [Space]
@@ -42,9 +44,31 @@ public class MovementTest2 : MonoBehaviour
     void Update()
     {
         //Muda a cor do rastro dependendo da velocidade.
-        if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2) trailRenderer.colorGradient = trailGradients[2];
-        else if (rb.velocity.magnitude >= maxMoveSpeed / 3) trailRenderer.colorGradient = trailGradients[1];
-        else trailRenderer.colorGradient = trailGradients[0];
+        if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+        {
+            for (int i = 0; i < trailRenderers.Length; i++)
+            {
+                trailRenderers[i].colorGradient = trailGradients[2];
+            }
+            animator.SetInteger("speed", 2);
+        }
+        else if (rb.velocity.magnitude >= maxMoveSpeed / 3)
+        {
+            for (int i = 0; i < trailRenderers.Length; i++)
+            {
+                trailRenderers[i].colorGradient = trailGradients[1];
+            }
+            animator.SetInteger("speed", 1);
+        }
+        else
+        {
+            for (int i = 0; i < trailRenderers.Length; i++)
+            {
+                trailRenderers[i].colorGradient = trailGradients[0];
+            }
+            if (rb.velocity.magnitude <= 0.05f) animator.SetInteger("speed", 0);
+            else animator.SetInteger("speed", 1);
+        }
 
         if (!isGrounded)
         {
@@ -55,6 +79,7 @@ public class MovementTest2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce * 100);
+            animator.SetBool("isGrounded", false);
         }
 
         //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
@@ -80,6 +105,9 @@ public class MovementTest2 : MonoBehaviour
             }
         }
 
+        animator.SetBool("isDriftingD", isDriftingD);
+        animator.SetBool("isDriftingA", isDriftingA);
+
         //Variável local de rotação.
         float rotation;
 
@@ -101,10 +129,10 @@ public class MovementTest2 : MonoBehaviour
             for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Stop();
 
             //Caso personagem esteja no ar, rotação será reduzida.
-            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Mathf.Lerp(2.5f, 1f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Mathf.Lerp(2.5f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
 
             //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
-            else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 1f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+            else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
         }
 
         //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem para de girar para os lados e desacelera.
@@ -129,6 +157,7 @@ public class MovementTest2 : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistanceToFloor, floorLayerMask))
         {
             isGrounded = true;
+            animator.SetBool("isGrounded", true);
             //Evita a nulificação de velocidade ao entrar em contato com o chão.
             if (isAirborne)
             {
@@ -141,6 +170,7 @@ public class MovementTest2 : MonoBehaviour
         else
         {
             isGrounded = false;
+            animator.SetBool("isGrounded", false);
             isAirborne = true;
         }
     }
@@ -187,7 +217,7 @@ public class MovementTest2 : MonoBehaviour
         }
 
         //Se personagem brecar, é aplicada uma força oposta para desacelerar.
-        if (isBraking)
+        if (isBraking && isGrounded)
         {
             rb.AddForce(-directionFront * acceleration);
         }
