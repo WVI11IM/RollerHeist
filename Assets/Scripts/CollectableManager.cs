@@ -39,7 +39,10 @@ public class CollectableManager : MonoBehaviour
 
     void Update()
     {
-        GotItem();
+        if (GameManager.Instance.state == GameState.Invade)
+        {
+            GotItem();
+        }
         SetCollectables();
     }
 
@@ -49,7 +52,7 @@ public class CollectableManager : MonoBehaviour
         smallItem.text = "Small Item (" + smallItensCollected + "/" + smallItensToCollect + ")";
     }
 
-    void GotItem()
+    public void GotItem()
     {
         if (bigItemCollected >= 1)
         {

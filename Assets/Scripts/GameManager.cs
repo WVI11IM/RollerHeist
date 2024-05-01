@@ -95,31 +95,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SetScore()
-    {
-        //int minutes = Mathf.FloorToInt(Timer.Instance.elapsedTime / 60);
-        //int seconds = Mathf.FloorToInt(Timer.Instance.elapsedTime % 60);
-        //int miliseconds = (int)(Timer.Instance.elapsedTime * 1000) % 1000;
-        //scoreText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
-    }
-
     private void UpdateHighScore()
     {
-        //sfloat score = PlayerPrefs.GetFloat("HighScore", 0);
-        //string newScore = Timer.Instance.SetTextScore(score);
-        //highScoreText.text = $"HighScore: {PlayerPrefs.GetFloat("HighScore", 0)}";
-
-        /*
-        if (Timer.Instance.elapsedTime > PlayerPrefs.GetFloat("HighScore", 0))
-        {
-            //PlayerPrefs.SetFloat("HighScore", Timer.Instance.elapsedTime);
-            int minutes = Mathf.FloorToInt(Timer.Instance.elapsedTime / 60);
-            int seconds = Mathf.FloorToInt(Timer.Instance.elapsedTime % 60);
-            int miliseconds = (int)(Timer.Instance.elapsedTime * 1000) % 1000;
-            highScoreText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
-        }
-        */
-
         int minutes = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) / 60);
         int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) % 60);
         int miliseconds = (int)((PlayerPrefs.GetFloat("HighScore", 0)) * 1000) % 1000;
