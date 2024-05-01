@@ -7,50 +7,131 @@ public class Enemy : MonoBehaviour
 {
     public EnemySO enemyType;
     public NavMeshAgent enemy;
-    public Transform player;
+    [HideInInspector] public Transform player;
+    public float health;
 
     private enum State
     {
         PATROL,
-        LOOK,
         CHASE,
         ATTACK,
-        STUNNED
+        STUNNED,
+        FAINTED
     }
 
     private State enemyState;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        health = enemyType.health;
+    }
 
     // Update is called once per frame
     void Update()
     {
         float dist = Vector3.Distance(player.position, transform.position);
-        if(dist > enemyType.detectionDist)
+
+        if (health <= 0)
         {
-            enemyState = State.LOOK;
+            enemyState = State.FAINTED;
         }
+        else
+        {
+            if (enemyState == State.CHASE)
+            {
+                if (dist > enemyType.chaseDist)
+                {
+                    enemyState = State.PATROL;
+                }
+                if (dist <= enemyType.conflictDist)
+                {
+                    enemyState = State.ATTACK;
+                }
+            }
+            else if (dist <= enemyType.detectionDist)
+            {
+                enemyState = State.CHASE;
+            }
+            else
+            {
+                enemyState = State.PATROL;
+            }
+        }
+        
 
         switch (enemyState)
         {
             case State.PATROL:
-                break;
-            case State.LOOK:
+                PatrolArea();
                 break;
             case State.CHASE:
-                FollowPlayer();
+                ChasePlayer();
                 break;
             case State.ATTACK:
+                AttackPlayer();
                 break;
             case State.STUNNED:
+                Stun();
+                break;
+            case State.FAINTED:
+                Faint();
                 break;
 
         }
     }
 
-    public void FollowPlayer()
+    public void PatrolArea()
     {
-        if (EnemyManager.Instance.canFollow == true)
+        //Patrulhar área com velocidade lenta
+        enemy.isStopped = false;
+        enemy.speed = enemyType.walkSpeed;
+        
+    }
+    public void ChasePlayer()
+    {
+        //Perseguir jogador com velocidade alta
+        enemy.isStopped = false;
+        enemy.SetDestination(player.position);
+        enemy.speed = enemyType.runSpeed;
+    }
+    public void AttackPlayer() 
+    {
+        //Parar e atacar na direção do jogador
+        enemy.speed = 0;
+    }
+    public void Stun()
+    {
+        //Paralisar
+        enemy.isStopped = true;
+    }
+    public void Faint() 
+    {
+        //Morrer
+        enemy.isStopped = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        float radius = enemyType.detectionDist;
+        int segments = 24; // Number of segments to approximate the circle
+
+        // Calculate the center of the circle parallel to the floor
+        Vector3 center = transform.position;
+        center.y = transform.position.y - (transform.localScale.y / 2); // Adjust the y-coordinate to be at the bottom of the GameObject
+
+        // Draw the circle using Gizmos.DrawLine
+        Vector3 previousPoint = Vector3.zero;
+        for (int i = 0; i <= 24; i++)
         {
-            enemy.SetDestination(player.position);
+            float angle = (i / (float)segments) * 360.0f;
+            Vector3 point = center + new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad) * radius, 0.0f, Mathf.Cos(angle * Mathf.Deg2Rad) * radius);
+            if (i > 0)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawLine(previousPoint, point);
+            }
+            previousPoint = point;
         }
     }
 }

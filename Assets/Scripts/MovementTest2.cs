@@ -33,6 +33,15 @@ public class MovementTest2 : MonoBehaviour
     public float raycastDistanceToFloor = 1.25f;
     public LayerMask floorLayerMask;
 
+    [Space]
+    [Header("TRICKS AND BOOST")]
+    private float nextActionTime = 0.0f;
+    public float trickCooldown = 1.0f;
+    public bool isBoosting = false;
+    public float maxBoostValue;
+    public float boostValue;
+    public float boostSpeedMultiplier;
+
     Rigidbody rb;
 
 
@@ -80,6 +89,21 @@ public class MovementTest2 : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce * 100);
             animator.SetBool("isGrounded", false);
+        }
+
+        //Se personagem apertar ou segurar barra de espaço no ar, fará um truque.
+        if (Input.GetKey(KeyCode.Space) && isAirborne)
+        {
+            if (Time.time > nextActionTime)
+            {
+                nextActionTime = Time.time + trickCooldown;
+                Trick();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Boost();
         }
 
         //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
@@ -139,7 +163,7 @@ public class MovementTest2 : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
         {
             rotation = 0;
-            if (isGrounded)
+            if (isGrounded && !isBoosting)
             {
                 isBraking = true;
             }
@@ -221,5 +245,16 @@ public class MovementTest2 : MonoBehaviour
         {
             rb.AddForce(-directionFront * acceleration);
         }
+    }
+
+    public void Trick()
+    {
+        Debug.Log("TRICK!!");
+        boostValue += 1;
+    }
+
+    public void Boost()
+    {
+        Debug.Log("BOOST!!");
     }
 }
