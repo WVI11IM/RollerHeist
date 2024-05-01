@@ -6,6 +6,7 @@ using TMPro;
 
 public class CollectableManager : MonoBehaviour
 {
+    [Header("Collectables Text References")]
     public TextMeshProUGUI bigItem;
     public TextMeshProUGUI smallItem;
 

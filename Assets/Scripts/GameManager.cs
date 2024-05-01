@@ -2,9 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject losePanel;
+    public GameObject winPanel;
+    public TextMeshProUGUI highScoreText;
+    //public TextMeshProUGUI scoreText;
+
     public static GameManager Instance;
 
     public GameState state;
@@ -46,23 +52,78 @@ public class GameManager : MonoBehaviour
 
     private void HandleInvade()
     {
-
+        //Level Start
+        //When player didnt get the pieces yet
+        //reset elapsedTime
+        //bool runTime = true;
+        EnemyManager.Instance.canFollow = true;
     }
 
     private void HandleEscape()
     {
-        //Security guards chase player;
-        EnemyManager.Instance.canFollow = true;
+        //Pleyer got pieces and need to escape
+        //Spawn more security guards
+        EnemyManager.Instance.canSpawn = true;
     }
 
     private void HandleWin()
     {
-
+        //Stop Time
+        //Open Win Panel
+        winPanel.SetActive(true);
+        //Update HighScore
+        CheckTimeScore();
+        //scoreText.text = Timer.Instance.timerText.text;
+        UpdateHighScore();
+        //SetScore();
     }
 
     private void HandleLose()
     {
+        //Stop Time
+        //Open Lose Panel
+        losePanel.SetActive(true);
+    }
 
+    ///////////////////////////////////////////////////////
+
+    private void CheckTimeScore()
+    {
+        if (Timer.Instance.elapsedTime < PlayerPrefs.GetFloat("HighScore", 0))
+        {
+            PlayerPrefs.SetFloat("HighScore", Timer.Instance.elapsedTime);
+        }
+    }
+
+    private void SetScore()
+    {
+        //int minutes = Mathf.FloorToInt(Timer.Instance.elapsedTime / 60);
+        //int seconds = Mathf.FloorToInt(Timer.Instance.elapsedTime % 60);
+        //int miliseconds = (int)(Timer.Instance.elapsedTime * 1000) % 1000;
+        //scoreText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+    }
+
+    private void UpdateHighScore()
+    {
+        //sfloat score = PlayerPrefs.GetFloat("HighScore", 0);
+        //string newScore = Timer.Instance.SetTextScore(score);
+        //highScoreText.text = $"HighScore: {PlayerPrefs.GetFloat("HighScore", 0)}";
+
+        /*
+        if (Timer.Instance.elapsedTime > PlayerPrefs.GetFloat("HighScore", 0))
+        {
+            //PlayerPrefs.SetFloat("HighScore", Timer.Instance.elapsedTime);
+            int minutes = Mathf.FloorToInt(Timer.Instance.elapsedTime / 60);
+            int seconds = Mathf.FloorToInt(Timer.Instance.elapsedTime % 60);
+            int miliseconds = (int)(Timer.Instance.elapsedTime * 1000) % 1000;
+            highScoreText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+        }
+        */
+
+        int minutes = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) / 60);
+        int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) % 60);
+        int miliseconds = (int)((PlayerPrefs.GetFloat("HighScore", 0)) * 1000) % 1000;
+        highScoreText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
     }
 }
 
