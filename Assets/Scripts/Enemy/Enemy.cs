@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class Enemy : MonoBehaviour
 {
     public EnemySO enemyType;
@@ -83,7 +84,7 @@ public class Enemy : MonoBehaviour
 
     public void PatrolArea()
     {
-        //Patrulhar área com velocidade lenta
+        //Patrulhar ï¿½rea com velocidade lenta
         enemy.isStopped = false;
         enemy.speed = enemyType.walkSpeed;
         
@@ -97,7 +98,7 @@ public class Enemy : MonoBehaviour
     }
     public void AttackPlayer() 
     {
-        //Parar e atacar na direção do jogador
+        //Parar e atacar na direï¿½ï¿½o do jogador
         enemy.speed = 0;
     }
     public void Stun()
@@ -132,6 +133,21 @@ public class Enemy : MonoBehaviour
                 Gizmos.DrawLine(previousPoint, point);
             }
             previousPoint = point;
+        }
+    }
+    
+   public float damage = 10f;
+
+    private void OnTriggerEnter(Collider collider)
+    {   
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            HealthBar playerHealth = collider.gameObject.GetComponent<HealthBar>();
+            Debug.Log(playerHealth);
+            if (playerHealth != null)
+            {
+                playerHealth.takeDamage(damage);
+            }
         }
     }
 }
