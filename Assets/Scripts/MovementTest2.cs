@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovementTest2 : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MovementTest2 : MonoBehaviour
     public float acceleration;
     public float maxMoveSpeed;
     public float rotSpeed;
+    private bool hasJumped;
     public float jumpForce;
     public bool isBraking = false;
     public TrailRenderer[] trailRenderers;
@@ -34,13 +36,22 @@ public class MovementTest2 : MonoBehaviour
     public LayerMask floorLayerMask;
 
     [Space]
-    [Header("TRICKS AND BOOST")]
+    [Header("TRICKS SETTINGS")]
     private float nextActionTime = 0.0f;
     public float trickCooldown = 1.0f;
+
+    [Space]
+    [Header("BOOST SETTINGS")]
     public bool isBoosting = false;
+    public ParticleSystem boostParticleSystem;
+    public Slider boostSlider;
     public float maxBoostValue;
     public float boostValue;
     public float boostSpeedMultiplier;
+    private float normalMaxSpeed;
+    private float boostMaxSpeed;
+    private float normalAcceleration;
+    private float boostAcceleration;
 
     Rigidbody rb;
 
@@ -48,49 +59,68 @@ public class MovementTest2 : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        normalMaxSpeed = maxMoveSpeed;
+        boostMaxSpeed = maxMoveSpeed * boostSpeedMultiplier;
+        normalAcceleration = acceleration;
+        boostAcceleration = acceleration * 5;
     }
 
     void Update()
     {
-        //Muda a cor do rastro dependendo da velocidade.
-        if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+        boostSlider.value = boostValue / maxBoostValue * 100;
+        if (boostValue > maxBoostValue) boostValue = maxBoostValue;
+        if (boostValue < 0) boostValue = 0;
+
+        if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0)
         {
-            for (int i = 0; i < trailRenderers.Length; i++)
-            {
-                trailRenderers[i].colorGradient = trailGradients[2];
-            }
-            animator.SetInteger("speed", 2);
-        }
-        else if (rb.velocity.magnitude >= maxMoveSpeed / 3)
-        {
-            for (int i = 0; i < trailRenderers.Length; i++)
-            {
-                trailRenderers[i].colorGradient = trailGradients[1];
-            }
-            animator.SetInteger("speed", 1);
+            Boost();
         }
         else
         {
+            isBoosting = false;
+            boostParticleSystem.Stop();
+            maxMoveSpeed = normalMaxSpeed;
+            acceleration = normalAcceleration;
+        }
+
+        //Muda a cor do rastro dependendo da velocidade.
+        if (isBoosting)
+        {
             for (int i = 0; i < trailRenderers.Length; i++)
             {
-                trailRenderers[i].colorGradient = trailGradients[0];
+                trailRenderers[i].colorGradient = trailGradients[3];
             }
-            if (rb.velocity.magnitude <= 0.05f) animator.SetInteger("speed", 0);
-            else animator.SetInteger("speed", 1);
+            animator.SetInteger("speed", 3);
         }
-
-        if (!isGrounded)
+        else
         {
-            rb.AddForce(-Vector2.up * 9.81f);
+            if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+            {
+                for (int i = 0; i < trailRenderers.Length; i++)
+                {
+                    trailRenderers[i].colorGradient = trailGradients[2];
+                }
+                animator.SetInteger("speed", 2);
+            }
+            else if (rb.velocity.magnitude >= maxMoveSpeed / 3)
+            {
+                for (int i = 0; i < trailRenderers.Length; i++)
+                {
+                    trailRenderers[i].colorGradient = trailGradients[1];
+                }
+                animator.SetInteger("speed", 1);
+            }
+            else
+            {
+                for (int i = 0; i < trailRenderers.Length; i++)
+                {
+                    trailRenderers[i].colorGradient = trailGradients[0];
+                }
+                if (rb.velocity.magnitude <= 0.05f) animator.SetInteger("speed", 0);
+                else animator.SetInteger("speed", 1);
+            }
         }
-
-        //Faz personagem dar um pulo com barra de espaço.
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce * 100);
-            animator.SetBool("isGrounded", false);
-        }
-
+        
         //Se personagem apertar ou segurar barra de espaço no ar, fará um truque.
         if (Input.GetKey(KeyCode.Space) && isAirborne)
         {
@@ -99,11 +129,6 @@ public class MovementTest2 : MonoBehaviour
                 nextActionTime = Time.time + trickCooldown;
                 Trick();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            Boost();
         }
 
         //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
@@ -202,6 +227,18 @@ public class MovementTest2 : MonoBehaviour
     //Para todas as linhas de código que envolvem a constante aplicação de forças direcionais ao Rigidbody do personagem, utilizei o FixedUpdate().
     void FixedUpdate()
     {
+        if (!isGrounded)
+        {
+            rb.AddForce(-Vector2.up * 10f);
+        }
+
+        //Faz personagem dar um pulo com barra de espaço.
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpForce * 100);
+            animator.SetBool("isGrounded", false);
+        }
+
         Vector3 directionFront = new Vector3(0, 0, 1);
         directionFront = transform.TransformDirection(directionFront);
 
@@ -250,11 +287,16 @@ public class MovementTest2 : MonoBehaviour
     public void Trick()
     {
         Debug.Log("TRICK!!");
-        boostValue += 1;
+        boostValue += 1.0f;
     }
 
     public void Boost()
     {
         Debug.Log("BOOST!!");
+        boostParticleSystem.Play();
+        isBoosting = true;
+        maxMoveSpeed = boostMaxSpeed;
+        acceleration = boostAcceleration;
+        boostValue -= 0.005f;
     }
 }

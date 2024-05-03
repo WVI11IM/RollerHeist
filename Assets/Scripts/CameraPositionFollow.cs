@@ -1,17 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraPositionFollow : MonoBehaviour
 {
     public Transform playerPosition;
+    public float smoothSpeed = 0.125f; // Adjust the smoothness factor
 
     void FixedUpdate()
     {
-        float posX = playerPosition.transform.position.x + 25;
-        float posY = playerPosition.transform.position.y + 25f;
-        float posZ = playerPosition.transform.position.z + -25;
+        // Calculate the desired position with an offset
+        Vector3 desiredPosition = playerPosition.position + new Vector3(25f, 25f, -25f);
 
-        transform.position = new Vector3(posX, posY, posZ);
+        // Smoothly move the camera towards the desired position using damping
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+
+        // Update the camera's position
+        transform.position = smoothedPosition;
     }
 }
