@@ -39,6 +39,7 @@ public class MovementTest2 : MonoBehaviour
     [Header("TRICKS SETTINGS")]
     private float nextActionTime = 0.0f;
     public float trickCooldown = 1.0f;
+    public bool isTricking = false;
 
     [Space]
     [Header("BOOST SETTINGS")]
@@ -120,16 +121,19 @@ public class MovementTest2 : MonoBehaviour
                 else animator.SetInteger("speed", 1);
             }
         }
-        
+
         //Se personagem apertar ou segurar barra de espaço no ar, fará um truque.
         if (Input.GetKey(KeyCode.Space) && isAirborne)
-        {
-            if (Time.time > nextActionTime)
+        {if (Time.time > nextActionTime)
             {
                 nextActionTime = Time.time + trickCooldown;
                 Trick();
             }
         }
+        else
+        {
+        }
+
 
         //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
         if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
