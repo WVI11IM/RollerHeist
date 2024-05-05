@@ -31,8 +31,9 @@ public class MovementTest2 : MonoBehaviour
     [Space]
     [Header("FLOOR DETECTION SETTINGS")]
     public bool isGrounded = false;
-    private bool isAirborne = false;
+    private bool isJumping = false;
     public float raycastDistanceToFloor = 1.25f;
+
     public LayerMask floorLayerMask;
 
     [Space]
@@ -63,7 +64,7 @@ public class MovementTest2 : MonoBehaviour
         normalMaxSpeed = maxMoveSpeed;
         boostMaxSpeed = maxMoveSpeed * boostSpeedMultiplier;
         normalAcceleration = acceleration;
-        boostAcceleration = acceleration * 5;
+        boostAcceleration = acceleration * 2.25f;
     }
 
     void Update()
@@ -122,8 +123,14 @@ public class MovementTest2 : MonoBehaviour
             }
         }
 
+        //Faz personagem dar um pulo com barra de espaço.
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
+        {
+            Jump();
+        }
+
         //Se personagem apertar ou segurar barra de espaço no ar, fará um truque.
-        if (Input.GetKey(KeyCode.Space) && isAirborne)
+        if (Input.GetKey(KeyCode.Space) && !isGrounded)
         {if (Time.time > nextActionTime)
             {
                 nextActionTime = Time.time + trickCooldown;
@@ -182,10 +189,10 @@ public class MovementTest2 : MonoBehaviour
             for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Stop();
 
             //Caso personagem esteja no ar, rotação será reduzida.
-            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Mathf.Lerp(2.5f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
 
             //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
-            else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+            else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
         }
 
         //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem para de girar para os lados e desacelera.
@@ -211,20 +218,17 @@ public class MovementTest2 : MonoBehaviour
         {
             isGrounded = true;
             animator.SetBool("isGrounded", true);
-            //Evita a nulificação de velocidade ao entrar em contato com o chão.
-            if (isAirborne)
+            if (!isJumping)
             {
                 Vector3 velocity = rb.velocity;
                 velocity.y = 0f;
                 rb.velocity = velocity;
-                isAirborne = false;
             }
         }
         else
         {
             isGrounded = false;
             animator.SetBool("isGrounded", false);
-            isAirborne = true;
         }
     }
 
@@ -234,13 +238,6 @@ public class MovementTest2 : MonoBehaviour
         if (!isGrounded)
         {
             rb.AddForce(-Vector2.up * 10f);
-        }
-
-        //Faz personagem dar um pulo com barra de espaço.
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce * 100);
-            animator.SetBool("isGrounded", false);
         }
 
         Vector3 directionFront = new Vector3(0, 0, 1);
@@ -286,6 +283,20 @@ public class MovementTest2 : MonoBehaviour
         {
             rb.AddForce(-directionFront * acceleration);
         }
+    }
+
+    public void Jump()
+    {
+        isJumping = true;
+        rb.AddForce(Vector3.up * jumpForce * 100);
+        animator.SetBool("isGrounded", false);
+        StartCoroutine(ResetJumpFlag());
+    }
+
+    IEnumerator ResetJumpFlag()
+    {
+        yield return new WaitForSeconds(0.25f);
+        isJumping = false;
     }
 
     public void Trick()
