@@ -31,6 +31,7 @@ public class MovementTest2 : MonoBehaviour
     [Space]
     [Header("FLOOR DETECTION SETTINGS")]
     public bool isGrounded = false;
+    private bool isAirborne = false;
     private bool isJumping = false;
     public float raycastDistanceToFloor = 1.25f;
 
@@ -213,22 +214,31 @@ public class MovementTest2 : MonoBehaviour
         transform.eulerAngles += new Vector3(0, rotation, 0);
 
         //Gera uma Raycast abaixo do personagem que detecta colisão com chão.
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistanceToFloor, floorLayerMask))
+        RaycastHit hit1;
+        RaycastHit hit2;
+
+        bool isHit1 = Physics.Raycast(transform.position, Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
+        bool isHit2 = Physics.Raycast(transform.position + Vector3.forward, Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
+
+        if (isHit1 || isHit2)
         {
             isGrounded = true;
             animator.SetBool("isGrounded", true);
-            if (!isJumping)
+            
+            //Evita a nulificação de velocidade ao entrar em contato com o chão.
+            if (isAirborne)
             {
                 Vector3 velocity = rb.velocity;
                 velocity.y = 0f;
                 rb.velocity = velocity;
+                isAirborne = false;
             }
         }
         else
         {
             isGrounded = false;
             animator.SetBool("isGrounded", false);
+            isAirborne = true;
         }
     }
 
@@ -313,5 +323,12 @@ public class MovementTest2 : MonoBehaviour
         maxMoveSpeed = boostMaxSpeed;
         acceleration = boostAcceleration;
         boostValue -= 0.005f;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, Vector3.down * raycastDistanceToFloor);
+        Gizmos.DrawLine(transform.position + Vector3.forward, Vector3.down * raycastDistanceToFloor);
     }
 }
