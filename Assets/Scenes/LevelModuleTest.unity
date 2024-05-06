@@ -1341,7 +1341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633151791}
   m_LocalRotation: {x: -0, y: -0, z: -0.258819, w: 0.9659259}
-  m_LocalPosition: {x: 70, y: 3.619999, z: 42}
+  m_LocalPosition: {x: 63.47, y: 3.619999, z: 49.42}
   m_LocalScale: {x: 1.4498299, y: 1, z: 1.4733499}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8597,7 +8597,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 5d2b05c56470c8c4882ef1779edc947f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -8679,7 +8679,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565437284}
   serializedVersion: 2
-  m_Mass: 3
+  m_Mass: 3.25
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -8700,10 +8700,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5866666021842758228}
-  acceleration: 87.5
-  maxMoveSpeed: 23.5
+  acceleration: 88.5
+  maxMoveSpeed: 22.5
   rotSpeed: 105
-  jumpForce: 13.5
+  jumpForce: 12.5
   isBraking: 0
   trailRenderers:
   - {fileID: 1162653820}
@@ -8828,10 +8828,11 @@ MonoBehaviour:
   - {fileID: 893352984}
   isGrounded: 0
   raycastDistanceToFloor: 1.35
+  minDistForTrick: 4
   floorLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  trickCooldown: 1.5
+  trickCooldown: 1
   isTricking: 0
   isBoosting: 0
   boostParticleSystem: {fileID: 1567946171}

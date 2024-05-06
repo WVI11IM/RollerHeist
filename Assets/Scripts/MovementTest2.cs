@@ -34,6 +34,7 @@ public class MovementTest2 : MonoBehaviour
     private bool isAirborne = false;
     private bool isJumping = false;
     public float raycastDistanceToFloor = 1.25f;
+    public float minDistForTrick = 2.5f;
 
     public LayerMask floorLayerMask;
 
@@ -41,7 +42,9 @@ public class MovementTest2 : MonoBehaviour
     [Header("TRICKS SETTINGS")]
     private float nextActionTime = 0.0f;
     public float trickCooldown = 1.0f;
+    public float trickBoostToAdd = 0.5f;
     public bool isTricking = false;
+    private int trickNumber;
 
     [Space]
     [Header("BOOST SETTINGS")]
@@ -131,7 +134,9 @@ public class MovementTest2 : MonoBehaviour
         }
 
         //Se personagem apertar ou segurar barra de espaço no ar, fará um truque.
-        if (Input.GetKey(KeyCode.Space) && !isGrounded)
+        RaycastHit hit;
+        bool isHit = Physics.Raycast(transform.position, Vector3.down, out hit, minDistForTrick, floorLayerMask);
+        if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
         {if (Time.time > nextActionTime)
             {
                 nextActionTime = Time.time + trickCooldown;
@@ -190,7 +195,7 @@ public class MovementTest2 : MonoBehaviour
             for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Stop();
 
             //Caso personagem esteja no ar, rotação será reduzida.
-            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 3 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
 
             //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
             else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -312,7 +317,10 @@ public class MovementTest2 : MonoBehaviour
     public void Trick()
     {
         Debug.Log("TRICK!!");
-        boostValue += 1.0f;
+        trickNumber = Random.Range(0, 4);
+        animator.SetInteger("trickNumber", trickNumber);
+        animator.SetTrigger("tricked");
+        boostValue += trickBoostToAdd;
     }
 
     public void Boost()
