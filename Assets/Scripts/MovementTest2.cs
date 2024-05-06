@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class MovementTest2 : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class MovementTest2 : MonoBehaviour
     private float nextActionTime = 0.0f;
     public float trickCooldown = 1.0f;
     public float trickBoostToAdd = 0.5f;
-    public bool isTricking = false;
+    private int trickCombo = 0;
     private int trickNumber;
 
     [Space]
@@ -59,12 +60,20 @@ public class MovementTest2 : MonoBehaviour
     private float normalAcceleration;
     private float boostAcceleration;
 
+    [Header("CAMERA SETTINGS")]
+    public CinemachineVirtualCamera virtualCamera;
+    public float minLensOrthoSize;
+    public float maxLensOrthoSize;
+    private int speedInteger;
+
     Rigidbody rb;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        //Guarda os valores de velocidades e acelerações antes de iniciar o jogo.
         normalMaxSpeed = maxMoveSpeed;
         boostMaxSpeed = maxMoveSpeed * boostSpeedMultiplier;
         normalAcceleration = acceleration;
@@ -73,11 +82,17 @@ public class MovementTest2 : MonoBehaviour
 
     void Update()
     {
-        boostSlider.value = boostValue / maxBoostValue * 100;
-        if (boostValue > maxBoostValue) boostValue = maxBoostValue;
-        if (boostValue < 0) boostValue = 0;
+        //Regula o valor da barra de boost.
+        UpdateBoostValue();
 
-        if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0)
+        //Muda a cor do rastro dependendo da velocidade.
+        UpdateTrail();
+
+        //Regula o campo de visão da câmera dependendo da velocidade.
+        ChangeLensSize();
+
+        //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
+        if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded)
         {
             Boost();
         }
@@ -89,51 +104,13 @@ public class MovementTest2 : MonoBehaviour
             acceleration = normalAcceleration;
         }
 
-        //Muda a cor do rastro dependendo da velocidade.
-        if (isBoosting)
-        {
-            for (int i = 0; i < trailRenderers.Length; i++)
-            {
-                trailRenderers[i].colorGradient = trailGradients[3];
-            }
-            animator.SetInteger("speed", 3);
-        }
-        else
-        {
-            if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
-            {
-                for (int i = 0; i < trailRenderers.Length; i++)
-                {
-                    trailRenderers[i].colorGradient = trailGradients[2];
-                }
-                animator.SetInteger("speed", 2);
-            }
-            else if (rb.velocity.magnitude >= maxMoveSpeed / 3)
-            {
-                for (int i = 0; i < trailRenderers.Length; i++)
-                {
-                    trailRenderers[i].colorGradient = trailGradients[1];
-                }
-                animator.SetInteger("speed", 1);
-            }
-            else
-            {
-                for (int i = 0; i < trailRenderers.Length; i++)
-                {
-                    trailRenderers[i].colorGradient = trailGradients[0];
-                }
-                if (rb.velocity.magnitude <= 0.05f) animator.SetInteger("speed", 0);
-                else animator.SetInteger("speed", 1);
-            }
-        }
-
         //Faz personagem dar um pulo com barra de espaço.
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
         {
             Jump();
         }
 
-        //Se personagem apertar ou segurar barra de espaço no ar, fará um truque.
+        //Se personagem apertar ou segurar barra de espaço no ar, uma determinada distância do chão e com velocidade suficiente, fará um truque.
         RaycastHit hit;
         bool isHit = Physics.Raycast(transform.position, Vector3.down, out hit, minDistForTrick, floorLayerMask);
         if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
@@ -146,7 +123,6 @@ public class MovementTest2 : MonoBehaviour
         else
         {
         }
-
 
         //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
         if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
@@ -229,7 +205,9 @@ public class MovementTest2 : MonoBehaviour
         {
             isGrounded = true;
             animator.SetBool("isGrounded", true);
-            
+            trickCombo = 0;
+            ChangeLensSizeForTrick(trickCombo);
+
             //Evita a nulificação de velocidade ao entrar em contato com o chão.
             if (isAirborne)
             {
@@ -250,9 +228,10 @@ public class MovementTest2 : MonoBehaviour
     //Para todas as linhas de código que envolvem a constante aplicação de forças direcionais ao Rigidbody do personagem, utilizei o FixedUpdate().
     void FixedUpdate()
     {
+        //Se personagem estiver não estiver no chão, força para baixo é aplicada.
         if (!isGrounded)
         {
-            rb.AddForce(-Vector2.up * 10f);
+            rb.AddForce(Vector2.down * 10f);
         }
 
         Vector3 directionFront = new Vector3(0, 0, 1);
@@ -300,6 +279,54 @@ public class MovementTest2 : MonoBehaviour
         }
     }
 
+    public void UpdateBoostValue()
+    {
+        boostSlider.value = boostValue / maxBoostValue * 100;
+        if (boostValue > maxBoostValue) boostValue = maxBoostValue;
+        if (boostValue < 0) boostValue = 0;
+    }
+
+    public void UpdateTrail()
+    {
+        if (isBoosting)
+        {
+            for (int i = 0; i < trailRenderers.Length; i++)
+            {
+                trailRenderers[i].colorGradient = trailGradients[3];
+            }
+            speedInteger = 3;
+        }
+        else
+        {
+            if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+            {
+                for (int i = 0; i < trailRenderers.Length; i++)
+                {
+                    trailRenderers[i].colorGradient = trailGradients[2];
+                }
+                speedInteger = 2;
+            }
+            else if (rb.velocity.magnitude >= maxMoveSpeed / 3)
+            {
+                for (int i = 0; i < trailRenderers.Length; i++)
+                {
+                    trailRenderers[i].colorGradient = trailGradients[1];
+                }
+                speedInteger = 1;
+            }
+            else
+            {
+                for (int i = 0; i < trailRenderers.Length; i++)
+                {
+                    trailRenderers[i].colorGradient = trailGradients[0];
+                }
+                if (rb.velocity.magnitude <= 0.05f) speedInteger = 0;
+                else speedInteger = 1;
+            }
+        }
+        animator.SetInteger("speed", speedInteger);
+    }
+
     public void Jump()
     {
         isJumping = true;
@@ -317,10 +344,12 @@ public class MovementTest2 : MonoBehaviour
     public void Trick()
     {
         Debug.Log("TRICK!!");
-        trickNumber = Random.Range(0, 4);
+        trickNumber = Random.Range(0, 8);
         animator.SetInteger("trickNumber", trickNumber);
         animator.SetTrigger("tricked");
         boostValue += trickBoostToAdd;
+        trickCombo += 1;
+        ChangeLensSizeForTrick(trickCombo);
     }
 
     public void Boost()
@@ -331,6 +360,23 @@ public class MovementTest2 : MonoBehaviour
         maxMoveSpeed = boostMaxSpeed;
         acceleration = boostAcceleration;
         boostValue -= 0.005f;
+    }
+
+    public void ChangeLensSize()
+    {
+        float normalizedSpeed = Mathf.Clamp01(rb.velocity.magnitude / boostMaxSpeed);
+
+        float dampingFactor = 0.01f;
+        float targetSize = Mathf.Lerp(minLensOrthoSize, maxLensOrthoSize, normalizedSpeed);
+        float currentSize = virtualCamera.m_Lens.OrthographicSize;
+        float newSize = Mathf.Lerp(currentSize, targetSize, dampingFactor);
+        virtualCamera.m_Lens.OrthographicSize = newSize;
+    }
+
+    public void ChangeLensSizeForTrick(int combo)
+    {
+        float zoomIn = 0.5f;
+        virtualCamera.m_Lens.OrthographicSize -= (combo * zoomIn);
     }
 
     void OnDrawGizmos()
