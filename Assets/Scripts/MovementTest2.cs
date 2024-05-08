@@ -55,6 +55,7 @@ public class MovementTest2 : MonoBehaviour
     public float maxBoostValue;
     public float boostValue;
     public float boostSpeedMultiplier;
+    public float boostToDeplete = 0.25f;
     private float normalMaxSpeed;
     private float boostMaxSpeed;
     private float normalAcceleration;
@@ -359,7 +360,7 @@ public class MovementTest2 : MonoBehaviour
         isBoosting = true;
         maxMoveSpeed = boostMaxSpeed;
         acceleration = boostAcceleration;
-        boostValue -= 0.005f;
+        boostValue -= boostToDeplete * Time.deltaTime;
     }
 
     public void ChangeLensSize()

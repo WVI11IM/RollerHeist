@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
     //public TextMeshProUGUI scoreText;
 
+    public GameObject GameOverUI;
     public static GameManager Instance;
 
     public GameState state;
@@ -83,6 +85,16 @@ public class GameManager : MonoBehaviour
         //Stop Time
         //Open Lose Panel
         losePanel.SetActive(true);
+    }
+
+    public void gameOver()
+    {
+        GameOverUI.SetActive(true);
+    }
+
+    public void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     ///////////////////////////////////////////////////////
