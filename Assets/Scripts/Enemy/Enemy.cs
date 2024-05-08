@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
                 enemyState = State.PATROL;
             }
         }
-        
+
 
         switch (enemyState)
         {
@@ -84,10 +84,10 @@ public class Enemy : MonoBehaviour
 
     public void PatrolArea()
     {
-        //Patrulhar �rea com velocidade lenta
+        //Patrulhar área com velocidade lenta
         enemy.isStopped = false;
         enemy.speed = enemyType.walkSpeed;
-        
+
     }
     public void ChasePlayer()
     {
@@ -96,9 +96,9 @@ public class Enemy : MonoBehaviour
         enemy.SetDestination(player.position);
         enemy.speed = enemyType.runSpeed;
     }
-    public void AttackPlayer() 
+    public void AttackPlayer()
     {
-        //Parar e atacar na dire��o do jogador
+        //Parar e atacar na direção do jogador
         enemy.speed = 0;
     }
     public void Stun()
@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
         //Paralisar
         enemy.isStopped = true;
     }
-    public void Faint() 
+    public void Faint()
     {
         //Morrer
         enemy.isStopped = true;
@@ -135,11 +135,11 @@ public class Enemy : MonoBehaviour
             previousPoint = point;
         }
     }
-    
-   public float damage = 10f;
+
+    public float damage = 10f;
 
     private void OnTriggerEnter(Collider collider)
-    {   
+    {
         if (collider.gameObject.CompareTag("Player"))
         {
             HealthBar playerHealth = collider.gameObject.GetComponent<HealthBar>();
@@ -148,6 +148,10 @@ public class Enemy : MonoBehaviour
             {
                 playerHealth.takeDamage(damage);
             }
+        }
+        else if (collider.gameObject.CompareTag("Projetil"))
+        {
+            Destroy(gameObject); // Destroi o inimigo quando entra em contato com o projetil
         }
     }
 }
