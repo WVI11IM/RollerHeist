@@ -5,12 +5,13 @@ using TMPro;
 
 public class ContadorBalas : MonoBehaviour
 {
-    public int balasMaximas = 30;
-    public float tempoDeRecarga = 5f;
-
+    public int balasMaximas = 20;
+    public float tempoDeRecarga = 2.5f;
+    public float cooldownEntreTiros = 0.2f; // Tempo de espera entre cada tiro
     private int balasRestantes;
     private float tempoInicioRecarga;
     private bool emRecarga;
+    private float tempoUltimoTiro; // Tempo do último tiro
 
     public TMP_Text textoBalas;
 
@@ -22,16 +23,21 @@ public class ContadorBalas : MonoBehaviour
 
     void Update()
     {
-        if (!emRecarga && Input.GetKeyDown(KeyCode.Return)) // Modificado para a tecla Enter
+        if (!emRecarga && Input.GetMouseButton(0)) // Modificado para o botão esquerdo do mouse
         {
-            if (balasRestantes > 0)
+            // Verifica se o cooldown entre tiros foi atingido
+            if (Time.time >= tempoUltimoTiro + cooldownEntreTiros)
             {
-                balasRestantes--;
-                AtualizarTextoBalas();
-            }
-            else
-            {
-                IniciarRecarga();
+                if (balasRestantes > 0)
+                {
+                    balasRestantes--;
+                    AtualizarTextoBalas();
+                    tempoUltimoTiro = Time.time; // Atualiza o tempo do último tiro
+                }
+                else
+                {
+                    IniciarRecarga();
+                }
             }
         }
 
@@ -40,6 +46,12 @@ public class ContadorBalas : MonoBehaviour
             balasRestantes = balasMaximas;
             emRecarga = false;
             AtualizarTextoBalas();
+        }
+
+        // Verifica se o contador de balas chegou a 0 e inicia a recarga
+        if (balasRestantes == 0 && !emRecarga)
+        {
+            IniciarRecarga();
         }
     }
 
@@ -55,4 +67,3 @@ public class ContadorBalas : MonoBehaviour
         textoBalas.text = balasRestantes > 0 ? "Balas: " + balasRestantes : "Balas: ";
     }
 }
-
