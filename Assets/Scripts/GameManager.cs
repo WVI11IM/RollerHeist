@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
         UpdateGameState(GameState.Invade);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) restart();
+    }
+
     public void UpdateGameState(GameState newState)
     {
         state = newState;

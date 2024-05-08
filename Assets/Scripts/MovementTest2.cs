@@ -376,7 +376,7 @@ public class MovementTest2 : MonoBehaviour
 
     public void ChangeLensSizeForTrick(int combo)
     {
-        float zoomIn = 0.5f;
+        float zoomIn = 1f;
         virtualCamera.m_Lens.OrthographicSize -= (combo * zoomIn);
     }
 
