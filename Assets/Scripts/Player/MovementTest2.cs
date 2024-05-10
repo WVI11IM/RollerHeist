@@ -79,6 +79,15 @@ public class MovementTest2 : MonoBehaviour
         boostMaxSpeed = maxMoveSpeed * boostSpeedMultiplier;
         normalAcceleration = acceleration;
         boostAcceleration = acceleration * 2.25f;
+
+        //Garante que emissão de partículas esteja desligada de início.
+        for (int i = 0; i < driftParticleSystems.Length; i++)
+        {
+            var driftEmissionModule = driftParticleSystems[i].emission;
+            driftEmissionModule.enabled = false;
+        }
+        var boostEmissionModule = boostParticleSystem.emission;
+        boostEmissionModule.enabled = false;
     }
 
     void Update()
@@ -100,7 +109,8 @@ public class MovementTest2 : MonoBehaviour
         else
         {
             isBoosting = false;
-            boostParticleSystem.Stop();
+            var emissionModule = boostParticleSystem.emission;
+            emissionModule.enabled = false;
             maxMoveSpeed = normalMaxSpeed;
             acceleration = normalAcceleration;
         }
@@ -158,18 +168,30 @@ public class MovementTest2 : MonoBehaviour
         if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
         {
             rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-            for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Play();
+            for (int i = 0; i < driftParticleSystems.Length; i++)
+            {
+                var emissionModule = driftParticleSystems[i].emission;
+                emissionModule.enabled = true;
+            }
         }
         else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
         {
             rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-            for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Play();
+            for (int i = 0; i < driftParticleSystems.Length; i++)
+            {
+                var emissionModule = driftParticleSystems[i].emission;
+                emissionModule.enabled = true;
+            }
         }
         else
         {
             isDriftingA = false;
             isDriftingD = false;
-            for (int i = 0; i < driftParticleSystems.Length; i++) driftParticleSystems[i].Stop();
+            for (int i = 0; i < driftParticleSystems.Length; i++)
+            {
+                var emissionModule = driftParticleSystems[i].emission;
+                emissionModule.enabled = false;
+            }
 
             //Caso personagem esteja no ar, rotação será reduzida.
             if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 3 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -356,7 +378,8 @@ public class MovementTest2 : MonoBehaviour
     public void Boost()
     {
         Debug.Log("BOOST!!");
-        boostParticleSystem.Play();
+        var emissionModule = boostParticleSystem.emission;
+        emissionModule.enabled = true;
         isBoosting = true;
         maxMoveSpeed = boostMaxSpeed;
         acceleration = boostAcceleration;
