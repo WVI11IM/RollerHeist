@@ -266,7 +266,7 @@ public class MovementTest2 : MonoBehaviour
         //Se personagem estiver não estiver no chão, força para baixo é aplicada.
         if (!isGrounded && !isGrinding)
         {
-            rb.AddForce(Vector2.down * 10f);
+            rb.AddForce(Vector2.down * 15f);
         }
 
         Vector3 directionFront = new Vector3(0, 0, 1);
@@ -330,7 +330,7 @@ public class MovementTest2 : MonoBehaviour
             velocity.y = 0f;
             velocity.z = 0f;
             rb.velocity = velocity;
-            rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.5f);
+            rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.25f);
         }
         wasOnRail = isGrinding;
 
