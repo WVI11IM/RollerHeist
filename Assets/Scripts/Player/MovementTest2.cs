@@ -34,8 +34,8 @@ public class MovementTest2 : MonoBehaviour
     public bool isGrounded = false;
     private bool isAirborne = false;
     private bool isJumping = false;
-    public float raycastDistanceToFloor = 1.25f;
-    public float minDistForTrick = 2.5f;
+    public float raycastDistanceToFloor = 1.35f;
+    public float minDistForTrick = 4f;
 
     public LayerMask floorLayerMask;
 
@@ -60,6 +60,13 @@ public class MovementTest2 : MonoBehaviour
     private float boostMaxSpeed;
     private float normalAcceleration;
     private float boostAcceleration;
+
+    [Space]
+    [Header("ADDITIONAL RAIL GRIND SETTINGS")]
+    [SerializeField] PlayerGrind playerGrind;
+    public bool isGrinding;
+    public ParticleSystem trailSparksParticleSystem;
+    private bool wasOnRail = false;
 
     [Header("CAMERA SETTINGS")]
     public CinemachineVirtualCamera virtualCamera;
@@ -88,10 +95,15 @@ public class MovementTest2 : MonoBehaviour
         }
         var boostEmissionModule = boostParticleSystem.emission;
         boostEmissionModule.enabled = false;
+        var trailSparksEmissionModule = trailSparksParticleSystem.emission;
+        trailSparksEmissionModule.enabled = false;
     }
 
     void Update()
     {
+        //Regula os parâmetros envolvendo o grind de trilhos.
+        UpdateRailGrind();
+
         //Regula o valor da barra de boost.
         UpdateBoostValue();
 
@@ -102,7 +114,7 @@ public class MovementTest2 : MonoBehaviour
         ChangeLensSize();
 
         //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
-        if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded)
+        if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding)
         {
             Boost();
         }
@@ -116,14 +128,14 @@ public class MovementTest2 : MonoBehaviour
         }
 
         //Faz personagem dar um pulo com barra de espaço.
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !isGrinding)
         {
             Jump();
         }
 
         //Se personagem apertar ou segurar barra de espaço no ar, uma determinada distância do chão e com velocidade suficiente, fará um truque.
         RaycastHit hit;
-        bool isHit = Physics.Raycast(transform.position, Vector3.down, out hit, minDistForTrick, floorLayerMask);
+        bool isHit = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, minDistForTrick, floorLayerMask);
         if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
         {if (Time.time > nextActionTime)
             {
@@ -138,7 +150,7 @@ public class MovementTest2 : MonoBehaviour
         //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
         if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
         {
-            if (Input.GetKeyDown(KeyCode.A) && isGrounded)
+            if (Input.GetKeyDown(KeyCode.A) && isGrounded && !isGrinding)
             {
                 if (Time.time - lastATapTime <= doubleATapTimeThreshold)
                 {
@@ -147,7 +159,7 @@ public class MovementTest2 : MonoBehaviour
                 }
                 lastATapTime = Time.time;
             }
-            if (Input.GetKeyDown(KeyCode.D) && isGrounded)
+            if (Input.GetKeyDown(KeyCode.D) && isGrounded && !isGrinding)
             {
                 if (Time.time - lastDTapTime <= doubleDTapTimeThreshold)
                 {
@@ -194,7 +206,7 @@ public class MovementTest2 : MonoBehaviour
             }
 
             //Caso personagem esteja no ar, rotação será reduzida.
-            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 3 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 4 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
 
             //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
             else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -204,7 +216,7 @@ public class MovementTest2 : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
         {
             rotation = 0;
-            if (isGrounded && !isBoosting)
+            if (isGrounded && !isBoosting && !isGrinding)
             {
                 isBraking = true;
             }
@@ -221,8 +233,8 @@ public class MovementTest2 : MonoBehaviour
         RaycastHit hit1;
         RaycastHit hit2;
 
-        bool isHit1 = Physics.Raycast(transform.position, Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
-        bool isHit2 = Physics.Raycast(transform.position + Vector3.forward, Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
+        bool isHit1 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
+        bool isHit2 = Physics.Raycast(transform.position + Vector3.up + Vector3.forward, Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
 
         if (isHit1 || isHit2)
         {
@@ -252,7 +264,7 @@ public class MovementTest2 : MonoBehaviour
     void FixedUpdate()
     {
         //Se personagem estiver não estiver no chão, força para baixo é aplicada.
-        if (!isGrounded)
+        if (!isGrounded && !isGrinding)
         {
             rb.AddForce(Vector2.down * 10f);
         }
@@ -264,7 +276,7 @@ public class MovementTest2 : MonoBehaviour
         directionSides = transform.TransformDirection(directionSides);
 
         //Enquanto personagem estiver abaixo da velocidade máxima e no chão, ele acelera.
-        if (rb.velocity.magnitude < maxMoveSpeed && isGrounded)
+        if (rb.velocity.magnitude < maxMoveSpeed && isGrounded && !isGrinding)
         {
             rb.AddForce(directionFront * acceleration);
 
@@ -296,9 +308,42 @@ public class MovementTest2 : MonoBehaviour
         }
 
         //Se personagem brecar, é aplicada uma força oposta para desacelerar.
-        if (isBraking && isGrounded)
+        if (isBraking && isGrounded && !isGrinding)
         {
             rb.AddForce(-directionFront * acceleration);
+        }
+    }
+
+    public void UpdateRailGrind()
+    {
+        var emissionModule = trailSparksParticleSystem.emission;
+
+        isGrinding = playerGrind.onRail;
+        animator.SetBool("isGrinding", isGrinding);
+        if (wasOnRail && !isGrinding)
+        {
+            Vector3 directionFront = new Vector3(0, 0, 1);
+            directionFront = transform.TransformDirection(directionFront);
+
+            Vector3 velocity = rb.velocity;
+            velocity.x = 0f;
+            velocity.y = 0f;
+            velocity.z = 0f;
+            rb.velocity = velocity;
+            rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.5f);
+        }
+        wasOnRail = isGrinding;
+
+        if (isGrinding)
+        {
+            Vector3 velocity = rb.velocity;
+            velocity.y = 0f;
+            rb.velocity = velocity;
+            emissionModule.enabled = true;
+        }
+        else
+        {
+            emissionModule.enabled = false;
         }
     }
 
