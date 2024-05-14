@@ -250,6 +250,7 @@ public class MovementTest2 : MonoBehaviour
                 velocity.y = 0f;
                 rb.velocity = velocity;
                 isAirborne = false;
+                SFXManager.Instance.PlaySFX("impactoPatins");
             }
         }
         else
