@@ -28,9 +28,6 @@ public class ArrowRotation : MonoBehaviour
             // Convert the rotation difference to an angle
             float angle = Quaternion.Angle(Quaternion.identity, rotationDifference);
 
-            // Print the rotation difference for debugging
-            Debug.Log("Rotation difference: " + angle);
-
             // Update previousPlayerRotation for the next frame
             previousPlayerRotation = playerTransform.rotation;
 

@@ -5,7 +5,8 @@ using UnityEngine;
 public class FloorLevelFeedback : MonoBehaviour
 {
     public LayerMask groundLayer;
-    public float raycastDistance = 28f;
+    private float raycastDistance = 28f;
+    public float minDistance = 2.75f;
     public RectTransform floorLevelIcon;
 
     private void Update()
@@ -18,8 +19,7 @@ public class FloorLevelFeedback : MonoBehaviour
         if (Physics.Raycast(transform.position, worldDown, out hit, raycastDistance, groundLayer))
         {
             float distanceToGround = hit.distance;
-            Debug.Log("Distance to ground: " + distanceToGround);
-            if (distanceToGround > 3.5f)
+            if (distanceToGround > minDistance)
             {
                 floorLevelIcon.gameObject.SetActive(true);
                 floorLevelIcon.localPosition = new Vector3(0, -distanceToGround + 0.1f, 0);
@@ -32,7 +32,6 @@ public class FloorLevelFeedback : MonoBehaviour
         else
         {
             floorLevelIcon.gameObject.SetActive(false);
-            Debug.Log("No ground detected.");
         }
     }
 }
