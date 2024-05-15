@@ -60,6 +60,8 @@ public class PaintballShoot : MonoBehaviour
 
     void Shoot()
     {
+        SFXManager.Instance.PlaySFXRandomPitch("tiro");
+
         // Cria uma instância da bala
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
