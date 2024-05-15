@@ -8,11 +8,12 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioSource sfxObject;
     [SerializeField] private AudioSource sfxObjectSpacialBlend;
 
-    private List<AudioSource> activeAudioSources = new List<AudioSource>();
+    private Dictionary<string, AudioSource> activeLoopAudioSources = new Dictionary<string, AudioSource>();
 
     [SerializeField] SoundEffect[] soundEffects;
     [SerializeField] SoundEffectSpacialBlend[] soundEffectsSpacialBlend;
-    
+    [SerializeField] SoundEffectRandomPitch[] soundEffectsRandomPitch;
+
     public static SFXManager Instance;
 
     private void Awake()
@@ -51,6 +52,27 @@ public class SFXManager : MonoBehaviour
             audioSource.volume = effect.volumeModifier;
             audioSource.spatialBlend = 1f;
             audioSource.minDistance = effect.minDist;
+            audioSource.maxDistance = effect.maxDist;
+            audioSource.Play();
+            float clipLength = audioSource.clip.length;
+            Destroy(audioSource.gameObject, clipLength);
+        }
+        else
+        {
+            Debug.LogWarning("Sound effect not found: " + soundEffectName);
+        }
+    }
+
+    public void PlaySFXRandomPitch(string soundEffectName)
+    {
+        SoundEffectRandomPitch effect = Array.Find(soundEffectsRandomPitch, e => e.soundEffectName == soundEffectName);
+        if (effect != null)
+        {
+            AudioSource audioSource = Instantiate(sfxObject, transform.position, Quaternion.identity);
+            audioSource.clip = effect.soundClip;
+            audioSource.volume = effect.volumeModifier;
+            float randomPitch = UnityEngine.Random.Range(effect.minPitch, effect.maxPitch);
+            audioSource.pitch = randomPitch;
             audioSource.Play();
             float clipLength = audioSource.clip.length;
             Destroy(audioSource.gameObject, clipLength);
@@ -63,6 +85,11 @@ public class SFXManager : MonoBehaviour
 
     public void PlaySFXLoop(string soundEffectName)
     {
+        if (activeLoopAudioSources.ContainsKey(soundEffectName) && activeLoopAudioSources[soundEffectName].isPlaying)
+        {
+            return; // If the looped audio source for this sound effect is already playing, do nothing.
+        }
+
         SoundEffect effect = Array.Find(soundEffects, e => e.soundEffectName == soundEffectName);
         if (effect != null)
         {
@@ -73,7 +100,7 @@ public class SFXManager : MonoBehaviour
             audioSource.time = UnityEngine.Random.Range(0f, audioSource.clip.length);
             audioSource.Play();
 
-            activeAudioSources.Add(audioSource);
+            activeLoopAudioSources[soundEffectName] = audioSource;
         }
         else
         {
@@ -83,16 +110,13 @@ public class SFXManager : MonoBehaviour
 
     public void StopSFXLoop(string soundEffectName)
     {
-        for (int i = activeAudioSources.Count - 1; i >= 0; i--)
+        if (activeLoopAudioSources.ContainsKey(soundEffectName))
         {
-            AudioSource audioSource = activeAudioSources[i];
-            if (audioSource.clip.name == soundEffectName && audioSource.isPlaying)
-            {
-                audioSource.loop = false;
-                audioSource.Stop();
-                Destroy(audioSource.gameObject);
-                activeAudioSources.RemoveAt(i);
-            }
+            AudioSource audioSource = activeLoopAudioSources[soundEffectName];
+            audioSource.loop = false;
+            audioSource.Stop();
+            Destroy(audioSource.gameObject);
+            activeLoopAudioSources.Remove(soundEffectName);
         }
     }
 }
@@ -102,6 +126,7 @@ public class SoundEffect
 {
     public string soundEffectName;
     public AudioClip soundClip;
+    [Range(0.0f, 1.0f)]
     public float volumeModifier = 1f;
 }
 
@@ -110,7 +135,18 @@ public class SoundEffectSpacialBlend
 {
     public string soundEffectName;
     public AudioClip soundClip;
+    [Range(0.0f, 1.0f)]
     public float volumeModifier = 1f;
     public float minDist = 0.5f;
     public float maxDist = 5f;
+}
+[System.Serializable]
+public class SoundEffectRandomPitch
+{
+    public string soundEffectName;
+    public AudioClip soundClip;
+    [Range(0.0f, 1.0f)]
+    public float volumeModifier = 1f;
+    public float minPitch = 0.9f;
+    public float maxPitch = 1.1f;
 }

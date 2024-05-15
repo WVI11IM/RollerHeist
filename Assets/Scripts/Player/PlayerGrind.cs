@@ -23,7 +23,7 @@ public class PlayerGrind : MonoBehaviour
     [SerializeField] float lerpSpeed = 10f;
 
     [Header("Scripts")]
-    [SerializeField] RailScript currentRailScript;
+    [HideInInspector] RailScript currentRailScript;
     Rigidbody playerRigidbody;
     //CharacterController charController;
 

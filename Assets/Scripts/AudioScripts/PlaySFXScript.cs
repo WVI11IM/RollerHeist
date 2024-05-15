@@ -8,4 +8,9 @@ public class PlaySFXScript : MonoBehaviour
     {
         SFXManager.Instance.PlaySFX(soundEffectName);
     }
+
+    public void PlaySFXRandomPitch(string soundEffectName)
+    {
+        SFXManager.Instance.PlaySFXRandomPitch(soundEffectName);
+    }
 }

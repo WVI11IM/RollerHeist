@@ -110,6 +110,9 @@ public class MovementTest2 : MonoBehaviour
         //Muda a cor do rastro dependendo da velocidade.
         UpdateTrail();
 
+        //Gerencia os sons de loop do patins.
+        UpdateSpeedSound();
+
         //Regula o campo de visão da câmera dependendo da velocidade.
         ChangeLensSize();
 
@@ -250,7 +253,7 @@ public class MovementTest2 : MonoBehaviour
                 velocity.y = 0f;
                 rb.velocity = velocity;
                 isAirborne = false;
-                SFXManager.Instance.PlaySFX("impactoPatins");
+                SFXManager.Instance.PlaySFXRandomPitch("impactoPatins");
             }
         }
         else
@@ -394,6 +397,38 @@ public class MovementTest2 : MonoBehaviour
             }
         }
         animator.SetInteger("speed", speedInteger);
+    }
+
+    public void UpdateSpeedSound()
+    {
+        if (isBoosting)
+        {
+            SFXManager.Instance.PlaySFXLoop("velocidade1");
+            SFXManager.Instance.PlaySFXLoop("velocidade2");
+        }
+        else if(isGrounded)
+        {
+            if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+            {
+                SFXManager.Instance.PlaySFXLoop("velocidade1");
+                SFXManager.Instance.PlaySFXLoop("velocidade2");
+            }
+            else if (rb.velocity.magnitude >= maxMoveSpeed / 3)
+            {
+                SFXManager.Instance.PlaySFXLoop("velocidade1");
+                SFXManager.Instance.StopSFXLoop("velocidade2");
+            }
+            else
+            {
+                SFXManager.Instance.StopSFXLoop("velocidade1");
+                SFXManager.Instance.StopSFXLoop("velocidade2");
+            }
+        }
+        else
+        {
+            SFXManager.Instance.StopSFXLoop("velocidade1");
+            SFXManager.Instance.StopSFXLoop("velocidade2");
+        }
     }
 
     public void Jump()
