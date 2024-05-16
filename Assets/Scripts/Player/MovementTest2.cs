@@ -38,6 +38,7 @@ public class MovementTest2 : MonoBehaviour
     public float minDistForTrick = 4f;
 
     public LayerMask floorLayerMask;
+    public LayerMask wallLayerMask;
 
     [Space]
     [Header("TRICKS SETTINGS")]
@@ -70,6 +71,7 @@ public class MovementTest2 : MonoBehaviour
 
     [Header("CAMERA SETTINGS")]
     public CinemachineVirtualCamera virtualCamera;
+    public CinemachineVirtualCamera virtualCamera2;
     public float minLensOrthoSize;
     public float maxLensOrthoSize;
     private int speedInteger;
@@ -115,6 +117,8 @@ public class MovementTest2 : MonoBehaviour
 
         //Regula o campo de visão da câmera dependendo da velocidade.
         ChangeLensSize();
+
+        SwitchCameras();
 
         //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
         if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding)
@@ -474,14 +478,34 @@ public class MovementTest2 : MonoBehaviour
         float dampingFactor = 0.01f;
         float targetSize = Mathf.Lerp(minLensOrthoSize, maxLensOrthoSize, normalizedSpeed);
         float currentSize = virtualCamera.m_Lens.OrthographicSize;
+        float currentSize2 = virtualCamera2.m_Lens.OrthographicSize;
         float newSize = Mathf.Lerp(currentSize, targetSize, dampingFactor);
+        float newSize2 = Mathf.Lerp(currentSize2, targetSize, dampingFactor);
         virtualCamera.m_Lens.OrthographicSize = newSize;
+        virtualCamera2.m_Lens.OrthographicSize = newSize2;
     }
 
     public void ChangeLensSizeForTrick(int combo)
     {
         float zoomIn = 1f;
         virtualCamera.m_Lens.OrthographicSize -= (combo * zoomIn);
+        virtualCamera2.m_Lens.OrthographicSize -= (combo * zoomIn);
+    }
+
+    public void SwitchCameras()
+    {
+        Vector3 direction = new Vector3(1, 0.5f, -1);
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position, direction * 4f, Color.red);
+        if (Physics.Raycast(transform.position, direction, out hit, 8, wallLayerMask))
+        {
+            virtualCamera.enabled = false;
+        }
+        else
+        {
+            virtualCamera.enabled = true;
+        }
     }
 
     void OnDrawGizmos()
