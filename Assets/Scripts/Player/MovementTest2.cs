@@ -71,7 +71,6 @@ public class MovementTest2 : MonoBehaviour
 
     [Header("CAMERA SETTINGS")]
     public CinemachineVirtualCamera virtualCamera;
-    public CinemachineVirtualCamera virtualCamera2;
     public float minLensOrthoSize;
     public float maxLensOrthoSize;
     private int speedInteger;
@@ -478,18 +477,14 @@ public class MovementTest2 : MonoBehaviour
         float dampingFactor = 0.01f;
         float targetSize = Mathf.Lerp(minLensOrthoSize, maxLensOrthoSize, normalizedSpeed);
         float currentSize = virtualCamera.m_Lens.OrthographicSize;
-        float currentSize2 = virtualCamera2.m_Lens.OrthographicSize;
         float newSize = Mathf.Lerp(currentSize, targetSize, dampingFactor);
-        float newSize2 = Mathf.Lerp(currentSize2, targetSize, dampingFactor);
         virtualCamera.m_Lens.OrthographicSize = newSize;
-        virtualCamera2.m_Lens.OrthographicSize = newSize2;
     }
 
     public void ChangeLensSizeForTrick(int combo)
     {
         float zoomIn = 1f;
         virtualCamera.m_Lens.OrthographicSize -= (combo * zoomIn);
-        virtualCamera2.m_Lens.OrthographicSize -= (combo * zoomIn);
     }
 
     public void SwitchCameras()
