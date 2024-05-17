@@ -117,8 +117,6 @@ public class MovementTest2 : MonoBehaviour
         //Regula o campo de visão da câmera dependendo da velocidade.
         ChangeLensSize();
 
-        SwitchCameras();
-
         //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
         if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding)
         {
@@ -485,22 +483,6 @@ public class MovementTest2 : MonoBehaviour
     {
         float zoomIn = 1f;
         virtualCamera.m_Lens.OrthographicSize -= (combo * zoomIn);
-    }
-
-    public void SwitchCameras()
-    {
-        Vector3 direction = new Vector3(1, 0.5f, -1);
-        RaycastHit hit;
-
-        Debug.DrawRay(transform.position, direction * 4f, Color.red);
-        if (Physics.Raycast(transform.position, direction, out hit, 8, wallLayerMask))
-        {
-            virtualCamera.enabled = false;
-        }
-        else
-        {
-            virtualCamera.enabled = true;
-        }
     }
 
     void OnDrawGizmos()
