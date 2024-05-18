@@ -71,8 +71,9 @@ public class MovementTest2 : MonoBehaviour
 
     [Header("CAMERA SETTINGS")]
     public CinemachineVirtualCamera virtualCamera;
-    public float minLensOrthoSize;
-    public float maxLensOrthoSize;
+    public CinemachineVirtualCamera virtualCamera2;
+    public float minLensFOV;
+    public float maxLensFOV;
     private int speedInteger;
 
     Rigidbody rb;
@@ -116,6 +117,8 @@ public class MovementTest2 : MonoBehaviour
 
         //Regula o campo de visão da câmera dependendo da velocidade.
         ChangeLensSize();
+
+        SwitchCameras();
 
         //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
         if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding)
@@ -473,16 +476,39 @@ public class MovementTest2 : MonoBehaviour
         float normalizedSpeed = Mathf.Clamp01(rb.velocity.magnitude / boostMaxSpeed);
 
         float dampingFactor = 0.01f;
-        float targetSize = Mathf.Lerp(minLensOrthoSize, maxLensOrthoSize, normalizedSpeed);
-        float currentSize = virtualCamera.m_Lens.OrthographicSize;
+        float targetSize = Mathf.Lerp(minLensFOV, maxLensFOV, normalizedSpeed);
+        float currentSize = virtualCamera.m_Lens.FieldOfView;
+        float currentSize2 = virtualCamera2.m_Lens.FieldOfView;
         float newSize = Mathf.Lerp(currentSize, targetSize, dampingFactor);
-        virtualCamera.m_Lens.OrthographicSize = newSize;
+        float newSize2 = Mathf.Lerp(currentSize2, targetSize, dampingFactor);
+        virtualCamera.m_Lens.FieldOfView = newSize;
+        virtualCamera2.m_Lens.FieldOfView = newSize2;
     }
 
     public void ChangeLensSizeForTrick(int combo)
     {
         float zoomIn = 1f;
-        virtualCamera.m_Lens.OrthographicSize -= (combo * zoomIn);
+        virtualCamera.m_Lens.FieldOfView -= (combo * zoomIn);
+        virtualCamera2.m_Lens.FieldOfView -= (combo * zoomIn);
+    }
+
+    public void SwitchCameras()
+    {
+        Vector3 direction = new Vector3(1, 1, -1);
+        RaycastHit hit;
+
+        Vector3 raycastOrigin = transform.position;
+        raycastOrigin.y += 1;
+
+        Debug.DrawRay(raycastOrigin, direction * 8f, Color.red);
+        if (Physics.Raycast(raycastOrigin, direction, out hit, 8, wallLayerMask))
+        {
+            virtualCamera2.enabled = true;
+        }
+        else
+        {
+            virtualCamera2.enabled = false;
+        }
     }
 
     void OnDrawGizmos()
