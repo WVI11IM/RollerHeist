@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130791d3e20646d2b6d81688877b0909, type: 3}
   m_Name: '[FlatKit] Example Outline Settings'
   m_EditorClassIdentifier: 
-  edgeColor: {r: 0, g: 0, b: 0, a: 1}
+  edgeColor: {r: 0, g: 0, b: 0, a: 0.88235295}
   thickness: 1
   resolutionInvariant: 0
   useDepth: 0
@@ -69,9 +69,9 @@ MonoBehaviour:
   minDepthThreshold: 0.1
   maxDepthThreshold: 0.1
   minNormalsThreshold: 0
-  maxNormalsThreshold: 2
+  maxNormalsThreshold: 2.5
   minColorThreshold: 0
-  maxColorThreshold: 0.575
+  maxColorThreshold: 1.25
   renderEvent: 500
   outlineOnly: 0
   applyInSceneView: 1

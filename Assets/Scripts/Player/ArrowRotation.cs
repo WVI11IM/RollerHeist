@@ -8,6 +8,9 @@ public class ArrowRotation : MonoBehaviour
     // Variable to store the previous player rotation
     private Quaternion previousPlayerRotation;
 
+    // Smoothness factor for rotation interpolation
+    public float rotationSmoothness = 5f;
+
     void Start()
     {
         // Initialize previousPlayerRotation with the initial player rotation
@@ -17,7 +20,7 @@ public class ArrowRotation : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Check if playerTransform is assigned
         if (playerTransform != null)
@@ -31,7 +34,8 @@ public class ArrowRotation : MonoBehaviour
             // Update previousPlayerRotation for the next frame
             previousPlayerRotation = playerTransform.rotation;
 
-            transform.localRotation = rotationDifference;
+            // Smoothly interpolate the arrow's rotation towards the rotation difference
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, rotationDifference, rotationSmoothness * Time.deltaTime);
         }
     }
 }

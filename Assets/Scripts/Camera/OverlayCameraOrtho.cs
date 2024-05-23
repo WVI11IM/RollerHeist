@@ -16,6 +16,6 @@ public class OverlayCameraOrtho : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        overlayCamera.orthographicSize = mainCamera.orthographicSize;
+        overlayCamera.fieldOfView = mainCamera.fieldOfView;
     }
 }
