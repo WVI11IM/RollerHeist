@@ -19,7 +19,7 @@ public class MovementTest2 : MonoBehaviour
     public Gradient[] trailGradients;
 
     private Vector3 previousVelocity;
-    private float decelerationThreshold = 12.5f;
+    private float decelerationThreshold = 15f;
 
     [Space]
     [Header("DRIFT SETTINGS")]
@@ -124,8 +124,10 @@ public class MovementTest2 : MonoBehaviour
         //Regula o campo de visão da câmera dependendo da velocidade.
         ChangeLensSize();
 
+        //Detecta desacelerações bruscas para animação de impacto com parede.
         DetectSuddenDeceleration();
 
+        //Muda entre duas câmeras durante o jogo.
         SwitchCameras();
 
         //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
@@ -157,9 +159,6 @@ public class MovementTest2 : MonoBehaviour
                 nextActionTime = Time.time + trickCooldown;
                 Trick();
             }
-        }
-        else
-        {
         }
 
         //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
@@ -499,6 +498,7 @@ public class MovementTest2 : MonoBehaviour
         if (horizontalVelocityChange.magnitude >= decelerationThreshold && isGrounded && !isGrinding && !isBoosting)
         {
             animator.SetTrigger("bumped");
+            SFXManager.Instance.PlaySFXRandomPitch("impactoParede");
         }
 
         previousVelocity = currentVelocity;
@@ -531,7 +531,7 @@ public class MovementTest2 : MonoBehaviour
         RaycastHit hit;
 
         Vector3 raycastOrigin = transform.position;
-        raycastOrigin.y += 1;
+        raycastOrigin.y += 2;
 
         Debug.DrawRay(raycastOrigin, direction * 8f, Color.red);
         if (Physics.Raycast(raycastOrigin, direction, out hit, 8, wallLayerMask))
@@ -542,12 +542,5 @@ public class MovementTest2 : MonoBehaviour
         {
             virtualCamera2.enabled = false;
         }
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, Vector3.down * raycastDistanceToFloor);
-        Gizmos.DrawLine(transform.position + Vector3.forward, Vector3.down * raycastDistanceToFloor);
     }
 }
