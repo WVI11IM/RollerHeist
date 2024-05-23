@@ -18,6 +18,9 @@ public class MovementTest2 : MonoBehaviour
     public TrailRenderer[] trailRenderers;
     public Gradient[] trailGradients;
 
+    private Vector3 previousVelocity;
+    private float decelerationThreshold = 12.5f;
+
     [Space]
     [Header("DRIFT SETTINGS")]
     public bool isDriftingA = false;
@@ -45,6 +48,7 @@ public class MovementTest2 : MonoBehaviour
     private float nextActionTime = 0.0f;
     public float trickCooldown = 1.0f;
     public float trickBoostToAdd = 0.5f;
+    public ParticleSystem trickParticleSystem;
     private int trickCombo = 0;
     private int trickNumber;
 
@@ -83,6 +87,8 @@ public class MovementTest2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        previousVelocity = rb.velocity;
+
         //Guarda os valores de velocidades e acelerações antes de iniciar o jogo.
         normalMaxSpeed = maxMoveSpeed;
         boostMaxSpeed = maxMoveSpeed * boostSpeedMultiplier;
@@ -117,6 +123,8 @@ public class MovementTest2 : MonoBehaviour
 
         //Regula o campo de visão da câmera dependendo da velocidade.
         ChangeLensSize();
+
+        DetectSuddenDeceleration();
 
         SwitchCameras();
 
@@ -339,15 +347,26 @@ public class MovementTest2 : MonoBehaviour
             velocity.z = 0f;
             rb.velocity = velocity;
             rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.25f);
+            SFXManager.Instance.StopSFXLoop("trilhos");
         }
+
+        if (!wasOnRail && isGrinding)
+        {
+            animator.SetTrigger("startedGrind");
+            SFXManager.Instance.PlaySFXRandomPitch("impactoTrilhos");
+        }
+
         wasOnRail = isGrinding;
 
         if (isGrinding)
         {
             Vector3 velocity = rb.velocity;
+            velocity.x = 0f;
             velocity.y = 0f;
+            velocity.z = 0f;
             rb.velocity = velocity;
             emissionModule.enabled = true;
+            SFXManager.Instance.PlaySFXLoop("trilhos");
         }
         else
         {
@@ -438,6 +457,7 @@ public class MovementTest2 : MonoBehaviour
     public void Jump()
     {
         isJumping = true;
+        SFXManager.Instance.PlaySFXRandomPitch("pulo");
         rb.AddForce(Vector3.up * jumpForce * 100);
         animator.SetBool("isGrounded", false);
         StartCoroutine(ResetJumpFlag());
@@ -452,9 +472,10 @@ public class MovementTest2 : MonoBehaviour
     public void Trick()
     {
         Debug.Log("TRICK!!");
-        trickNumber = Random.Range(0, 8);
+        trickNumber = Random.Range(0, 12);
         animator.SetInteger("trickNumber", trickNumber);
         animator.SetTrigger("tricked");
+        trickParticleSystem.Play();
         boostValue += trickBoostToAdd;
         trickCombo += 1;
         ChangeLensSizeForTrick(trickCombo);
@@ -462,13 +483,25 @@ public class MovementTest2 : MonoBehaviour
 
     public void Boost()
     {
-        Debug.Log("BOOST!!");
         var emissionModule = boostParticleSystem.emission;
         emissionModule.enabled = true;
         isBoosting = true;
         maxMoveSpeed = boostMaxSpeed;
         acceleration = boostAcceleration;
         boostValue -= boostToDeplete * Time.deltaTime;
+    }
+
+    public void DetectSuddenDeceleration()
+    {
+        Vector3 currentVelocity = rb.velocity;
+        Vector3 horizontalVelocityChange = new Vector3(currentVelocity.x - previousVelocity.x, 0, currentVelocity.z - previousVelocity.z);
+
+        if (horizontalVelocityChange.magnitude >= decelerationThreshold && isGrounded && !isGrinding && !isBoosting)
+        {
+            animator.SetTrigger("bumped");
+        }
+
+        previousVelocity = currentVelocity;
     }
 
     public void ChangeLensSize()
@@ -487,7 +520,7 @@ public class MovementTest2 : MonoBehaviour
 
     public void ChangeLensSizeForTrick(int combo)
     {
-        float zoomIn = 1f;
+        float zoomIn = 2.5f;
         virtualCamera.m_Lens.FieldOfView -= (combo * zoomIn);
         virtualCamera2.m_Lens.FieldOfView -= (combo * zoomIn);
     }
