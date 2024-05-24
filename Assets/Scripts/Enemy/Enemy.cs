@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Transform player;
     public float health;
 
+    [SerializeField] Animator animator;
+
     private enum State
     {
         PATROL,
@@ -31,6 +33,9 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        animator.SetFloat("speed", enemy.velocity.magnitude / enemy.speed);
+
         float dist = Vector3.Distance(player.position, transform.position);
 
         if (health <= 0)
