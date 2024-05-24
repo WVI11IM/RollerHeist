@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PaintballShoot : MonoBehaviour
 {
+    public LayerMask hitAimMask;
     public Transform firePoint; // Ponto de origem do tiro
     public GameObject bulletPrefab; // Prefab da bala
     public float bulletSpeed = 20f; // Velocidade da bala
@@ -25,7 +26,8 @@ public class PaintballShoot : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
+            //if (Physics.Raycast(ray, out hit))
             {
                 Vector3 direction = (hit.point - firePoint.position);
                 direction.y = 0f;
@@ -73,7 +75,8 @@ public class PaintballShoot : MonoBehaviour
         RaycastHit hit;
 
         // Se o raio atingir algo no mundo
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
+        //if (Physics.Raycast(ray, out hit))
         {
             // Calcula a direção do tiro baseado na posição do mouse e do personagem
             Vector3 direction = (hit.point - firePoint.position).normalized;
