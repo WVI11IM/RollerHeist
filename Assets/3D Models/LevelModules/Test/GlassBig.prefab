@@ -1852,6 +1852,7 @@ GameObject:
   - component: {fileID: 4159798711953159940}
   - component: {fileID: 2188298251798086606}
   - component: {fileID: 1014798065771968672}
+  - component: {fileID: 8680378363981734284}
   m_Layer: 0
   m_Name: Glass_Big
   m_TagString: Untagged
@@ -1937,6 +1938,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.27, y: 0.0025, z: 0.35}
   m_Center: {x: 0.000000029802322, y: 0.00000005960465, z: 0.17499998}
+--- !u!208 &8680378363981734284
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386915780918714907}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.14, y: 0.010000001, z: 0.185}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.17500001}
+  m_TimeToStationary: 0.5
 --- !u!1 &405207919217934388
 GameObject:
   m_ObjectHideFlags: 0

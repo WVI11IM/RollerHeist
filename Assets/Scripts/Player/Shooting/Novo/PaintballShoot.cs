@@ -4,30 +4,49 @@ using UnityEngine;
 
 public class PaintballShoot : MonoBehaviour
 {
-    public LayerMask hitAimMask;
+    [Space]
+    [Header("SHOOTING SETTINGS")]
     public Transform firePoint; // Ponto de origem do tiro
     public GameObject bulletPrefab; // Prefab da bala
     public float bulletSpeed = 20f; // Velocidade da bala
     public float maxAngle = 180f; // Ângulo máximo de tiro em relação à direção do personagem
     public float fireRate = 0.5f; // Taxa de disparo em tiros por segundo
-
     private float nextFireTime = 0f; // Tempo do próximo disparo, inicializado como 0 para permitir o primeiro tiro imediatamente
 
+    [Space]
+    [Header("ANIMATION PROPERTIES")]
     [SerializeField] private Animator animator;
+    private float targetLayerWeight = 0f; // The target weight for the shooting layer
+    public float transitionSpeed = 2f; // Speed of the transition
+
+    [Space]
+    [Header("LAYER MASK AND VISUAL FEEDBACK")]
+    public LayerMask hitAimMask;
+    public GameObject aimHitReference;
+    public GameObject redArea;
+    [SerializeField] private Texture2D canShootCursor;
+    [SerializeField] private Texture2D canNotShootCursor;
+
+    private MovementTest2 playerMovement;
+
+    private void Start()
+    {
+        playerMovement = GetComponent<MovementTest2>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding))
         {
+            redArea.SetActive(true);
             Vector3 mousePosition = Input.mousePosition;
 
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
-            //if (Physics.Raycast(ray, out hit))
             {
                 Vector3 direction = (hit.point - firePoint.position);
                 direction.y = 0f;
@@ -35,8 +54,9 @@ public class PaintballShoot : MonoBehaviour
                 float angle2 = Vector3.Angle(direction, transform.forward);
                 if (angle1 < 180 && angle1 > 0 && angle2 < 90)
                 {
-                    animator.SetLayerWeight(1, 1);
-                    animator.SetFloat("lookAngle", Mathf.Lerp(0, 1, angle1/180));
+                    targetLayerWeight = 1f;
+                    Cursor.SetCursor(canShootCursor, Vector2.zero, CursorMode.Auto);
+                    animator.SetFloat("lookAngle", Mathf.Lerp(0, 1, angle1 / 180));
                     if (Time.time >= nextFireTime)
                     {
                         Shoot();
@@ -46,18 +66,47 @@ public class PaintballShoot : MonoBehaviour
                 }
                 else
                 {
-                    animator.SetLayerWeight(1, 0);
+                    targetLayerWeight = 0f;
+                    Cursor.SetCursor(canNotShootCursor, Vector2.zero, CursorMode.Auto);
                 }
             }
             else
             {
-                animator.SetLayerWeight(1, 0);
+                targetLayerWeight = 0f;
+                Cursor.SetCursor(canNotShootCursor, Vector2.zero, CursorMode.Auto);
             }
         }
         else
         {
-            animator.SetLayerWeight(1, 0);
+            redArea.SetActive(false);
+            targetLayerWeight = 0f;
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
+
+        // Smoothly transition the layer weight
+        float currentLayerWeight = animator.GetLayerWeight(1);
+        animator.SetLayerWeight(1, Mathf.MoveTowards(currentLayerWeight, targetLayerWeight, transitionSpeed * Time.deltaTime));
+    }
+
+    void LateUpdate()
+    {
+        // Get the parent's rotation
+        Quaternion playerRotation = transform.rotation;
+
+        // Convert the player's rotation to Euler angles
+        Vector3 playerEulerAngles = playerRotation.eulerAngles;
+
+        // Invert the x component of the player's Euler angles
+        float invertedXRotation = -playerEulerAngles.x;
+
+        // Get the current local rotation of the redArea as Euler angles
+        Vector3 aimHitReferenceEulerAngles = aimHitReference.transform.localRotation.eulerAngles;
+
+        // Set the x component to the inverted x rotation, keeping the y and z components the same
+        aimHitReferenceEulerAngles.x = invertedXRotation;
+
+        // Apply the modified rotation back to the redArea
+        aimHitReference.transform.localRotation = Quaternion.Euler(aimHitReferenceEulerAngles);
     }
 
     void Shoot()
