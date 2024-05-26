@@ -11,10 +11,11 @@ public class HealthBar : MonoBehaviour
     public float invincibilityDuration = 2f; // Duração da invencibilidade em segundos
 
     private bool isDead;
-    private bool isInvincible = false;
+    public bool isInvincible = false;
     private float invincibilityTimer = 0f;
 
-    public GameManager gameManager; 
+    public GameManager gameManager;
+    public Animator animator;
 
     void Start()
     {
@@ -45,10 +46,11 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    public void takeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         if (!isInvincible) // Só aplica o dano se não estiver invencível
         {
+            animator.SetTrigger("flinched");
             health -= damage;
             health = Mathf.Clamp(health, 0f, maxHealth);
             isInvincible = true;

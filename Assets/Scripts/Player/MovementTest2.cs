@@ -73,6 +73,7 @@ public class MovementTest2 : MonoBehaviour
     public ParticleSystem trailSparksParticleSystem;
     private bool wasOnRail = false;
 
+    [Space]
     [Header("CAMERA SETTINGS")]
     public CinemachineVirtualCamera virtualCamera;
     public CinemachineVirtualCamera virtualCamera2;
@@ -131,7 +132,7 @@ public class MovementTest2 : MonoBehaviour
         SwitchCameras();
 
         //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
-        if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding)
+        if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding && !isBraking)
         {
             Boost();
         }
@@ -254,7 +255,6 @@ public class MovementTest2 : MonoBehaviour
         {
             isGrounded = true;
             animator.SetBool("isGrounded", true);
-            trickCombo = 0;
             ChangeLensSizeForTrick(trickCombo);
 
             //Evita a nulificação de velocidade ao entrar em contato com o chão.
@@ -264,7 +264,15 @@ public class MovementTest2 : MonoBehaviour
                 velocity.y = 0f;
                 rb.velocity = velocity;
                 isAirborne = false;
-                SFXManager.Instance.PlaySFXRandomPitch("impactoPatins");
+                if(trickCombo == 0)
+                {
+                    SFXManager.Instance.PlaySFXRandomPitch("impactoPatins");
+                }
+                else
+                {
+                    SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
+                }
+                trickCombo = 0;
             }
         }
         else
@@ -281,7 +289,7 @@ public class MovementTest2 : MonoBehaviour
         //Se personagem estiver não estiver no chão, força para baixo é aplicada.
         if (!isGrounded && !isGrinding)
         {
-            rb.AddForce(Vector2.down * 15f);
+            rb.AddForce(Vector3.down * 15f);
         }
 
         Vector3 directionFront = new Vector3(0, 0, 1);

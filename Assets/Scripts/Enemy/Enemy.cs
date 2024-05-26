@@ -6,10 +6,14 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("ENEMY PROPERTIES")]
     public EnemySO enemyType;
     public NavMeshAgent enemy;
     [HideInInspector] public Transform player;
     public float health;
+    public bool isAttacking = false;
+    public bool isStunned = false;
+    public bool hasFainted = false;
 
     [SerializeField] Animator animator;
 
@@ -24,17 +28,30 @@ public class Enemy : MonoBehaviour
 
     private State enemyState;
 
+    [Space]
+    [Header("PATROL SETTINGS")]
+    public float patrolRadius;
+    public float waitTimeAtPatrolPoint;
+    private Vector3 patrolTarget;
+    private float waitTimer;
+    private bool hasPatrolTarget = false;
+    private float stuckTimer = 0f;
+    private const float stuckTimeout = 5f;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         health = enemyType.health;
+
+        enemyState = State.PATROL;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        animator.SetFloat("speed", enemy.velocity.magnitude / enemy.speed);
+        animator.SetBool("isAttacking", isAttacking);
+        animator.SetBool("isStunned", isStunned);
+        animator.SetFloat("speed", enemy.velocity.magnitude / enemyType.runSpeed);
 
         float dist = Vector3.Distance(player.position, transform.position);
 
@@ -44,27 +61,37 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (enemyState == State.CHASE)
+            switch (enemyState)
             {
-                if (dist > enemyType.chaseDist)
-                {
+                case State.CHASE:
+                    if (dist > enemyType.chaseDist)
+                    {
+                        enemyState = State.PATROL;
+                    }
+                    if (dist <= enemyType.conflictDist)
+                    {
+                        enemyState = State.ATTACK;
+                    }
+                    break;
+                case State.PATROL:
+                    if (dist <= enemyType.detectionDist)
+                    {
+                        enemyState = State.CHASE;
+                    }
+                    break;
+                case State.ATTACK:
+                    if (dist > enemyType.conflictDist)
+                    {
+                        enemyState = State.CHASE;
+                    }
+                    break;
+                case State.STUNNED:
+                    break;
+                default:
                     enemyState = State.PATROL;
-                }
-                if (dist <= enemyType.conflictDist)
-                {
-                    enemyState = State.ATTACK;
-                }
-            }
-            else if (dist <= enemyType.detectionDist)
-            {
-                enemyState = State.CHASE;
-            }
-            else
-            {
-                enemyState = State.PATROL;
+                    break;
             }
         }
-
 
         switch (enemyState)
         {
@@ -83,19 +110,83 @@ public class Enemy : MonoBehaviour
             case State.FAINTED:
                 Faint();
                 break;
-
         }
     }
 
     public void PatrolArea()
     {
-        //Patrulhar área com velocidade lenta
+        isAttacking = false;
+
+        // Set a random patrol target if not already set or if close to the current target
+        if (!hasPatrolTarget || Vector3.Distance(transform.position, patrolTarget) < 1f)
+        {
+            patrolTarget = GetRandomPatrolPoint();
+            hasPatrolTarget = true;
+            stuckTimer = 0f;  // Reset stuck timer when a new target is set
+        }
+
+        // Move towards the random patrol target
         enemy.isStopped = false;
         enemy.speed = enemyType.walkSpeed;
+        enemy.SetDestination(patrolTarget);
 
+        // Check if the enemy has reached the patrol target
+        if (!enemy.pathPending && enemy.remainingDistance < 0.5f)
+        {
+            // Wait at the patrol target
+            if (waitTimer >= waitTimeAtPatrolPoint)
+            {
+                patrolTarget = GetRandomPatrolPoint();
+                waitTimer = 0f;
+            }
+            else
+            {
+                waitTimer += Time.deltaTime;
+                enemy.isStopped = true;
+            }
+        }
+
+        // Check if the enemy is stuck (not moving towards the target)
+        if (enemy.velocity.magnitude < 0.1f)
+        {
+            stuckTimer += Time.deltaTime;
+            if (stuckTimer >= stuckTimeout)
+            {
+                patrolTarget = GetRandomPatrolPoint();
+                stuckTimer = 0f;
+                waitTimer = 0f;
+                hasPatrolTarget = true;
+            }
+        }
+        else
+        {
+            stuckTimer = 0f;  // Reset stuck timer if the enemy is moving
+        }
+    }
+
+    private Vector3 GetRandomPatrolPoint()
+    {
+        Vector3 randomDirection;
+        NavMeshHit hit;
+        int maxAttempts = 30;  // Limit the number of attempts to find a valid point
+
+        for (int i = 0; i < maxAttempts; i++)
+        {
+            randomDirection = Random.insideUnitSphere * patrolRadius;
+            randomDirection += transform.position;
+            if (NavMesh.SamplePosition(randomDirection, out hit, patrolRadius, NavMesh.AllAreas))
+            {
+                return hit.position;
+            }
+        }
+
+        // If no valid point is found after maxAttempts, return the current position
+        return transform.position;
     }
     public void ChasePlayer()
     {
+        isAttacking = false;
+
         //Perseguir jogador com velocidade alta
         enemy.isStopped = false;
         enemy.SetDestination(player.position);
@@ -103,18 +194,29 @@ public class Enemy : MonoBehaviour
     }
     public void AttackPlayer()
     {
-        //Parar e atacar na direção do jogador
+        isAttacking = true;
+        GiveDamage();
         enemy.speed = 0;
     }
     public void Stun()
     {
-        //Paralisar
+        isAttacking = false;
         enemy.isStopped = true;
+        if (!isStunned)
+        {
+            StartCoroutine(Stunned());
+        }
+        //Paralisar
     }
     public void Faint()
     {
-        //Morrer
+        isAttacking = false;
         enemy.isStopped = true;
+        if (!hasFainted)
+        {
+            animator.SetTrigger("hasFainted");
+            hasFainted = true;
+        }
     }
 
     private void OnDrawGizmos()
@@ -145,18 +247,55 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        /*
         if (collider.gameObject.CompareTag("Player"))
         {
             HealthBar playerHealth = collider.gameObject.GetComponent<HealthBar>();
-            Debug.Log(playerHealth);
             if (playerHealth != null)
             {
-                playerHealth.takeDamage(damage);
+                playerHealth.TakeDamage(damage);
             }
         }
-        else if (collider.gameObject.CompareTag("Projetil"))
+        else
+        */
+        if (collider.gameObject.CompareTag("Projetil"))
         {
-            Destroy(gameObject); // Destroi o inimigo quando entra em contato com o projetil
+            TakeDamage();
+        }
+    }
+
+    public void TakeDamage()
+    {
+        health -= 1;
+
+        if (health <= 0)
+        {
+            enemyState = State.FAINTED;
+        }
+        else
+        {
+            enemyState = State.STUNNED;
+        }
+    }
+
+    private IEnumerator Stunned()
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(0.5f);
+        isStunned = false;
+
+        if (enemyState == State.STUNNED) // Ensure the state is still stunned before changing
+        {
+            enemyState = State.PATROL;
+        }
+    }
+
+    public void GiveDamage()
+    {
+        HealthBar playerHealth = player.GetComponent<HealthBar>();
+        if (playerHealth != null && !playerHealth.isInvincible)
+        {
+            playerHealth.TakeDamage(damage);
         }
     }
 }
