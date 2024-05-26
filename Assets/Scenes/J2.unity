@@ -1222,9 +1222,10 @@ GameObject:
   - component: {fileID: 86463266}
   - component: {fileID: 86463265}
   - component: {fileID: 86463264}
+  - component: {fileID: 86463268}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1237,10 +1238,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86463263}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &86463265
 MeshRenderer:
@@ -1307,6 +1308,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &86463268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86463263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede79e52c72995d48bf4c0633c1a1ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &88484147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9953,7 +9966,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh560124
+  m_Name: pb_Mesh1130886
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12918,7 +12931,7 @@ Transform:
   m_GameObject: {fileID: 574288546}
   m_LocalRotation: {x: -0, y: -0, z: 0.2164396, w: 0.97629607}
   m_LocalPosition: {x: 138.14, y: 6.66, z: -0.72}
-  m_LocalScale: {x: 3.5000002, y: 1, z: 2.5}
+  m_LocalScale: {x: 3.5000002, y: 1, z: 2.65}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1484758123}
@@ -12930,7 +12943,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh560268
+  m_Name: pb_Mesh1131030
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23229,14 +23242,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014463796}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 250.29, y: 16, z: -11.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 352523058}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1014463798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23366,9 +23379,9 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: 0
+        x: -1
         y: 0
-        z: 1
+        z: 0
       TangentIn:
         x: 0
         y: 0
@@ -23390,11 +23403,11 @@ MonoBehaviour:
       TangentIn:
         x: 0
         y: 0
-        z: -1
+        z: 0
       TangentOut:
-        x: 0
+        x: 10
         y: 0
-        z: -10
+        z: 0
       Rotation:
         value:
           x: 0
@@ -23404,7 +23417,7 @@ MonoBehaviour:
     - Position:
         x: 14
         y: 0
-        z: -14
+        z: 14
       TangentIn:
         x: 0
         y: 0
@@ -23416,13 +23429,13 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0
-          y: 0.70710677
+          y: 0
           z: 0
-          w: 0.70710677
+          w: 1
     - Position:
-        x: 28
+        x: 14
         y: 0
-        z: -14
+        z: 28
       TangentIn:
         x: 0
         y: 0
@@ -24316,7 +24329,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh559576
+  m_Name: pb_Mesh1130338
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -39684,7 +39697,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 1743193720}
   virtualCamera2: {fileID: 1885435285}
   minLensFOV: 20
-  maxLensFOV: 35
+  maxLensFOV: 40
 --- !u!114 &1565437292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42061,9 +42074,10 @@ GameObject:
   - component: {fileID: 1732978437}
   - component: {fileID: 1732978436}
   - component: {fileID: 1732978435}
+  - component: {fileID: 1732978439}
   m_Layer: 0
   m_Name: EnemySpawner (1)
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42076,10 +42090,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732978434}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1732978436
 MeshRenderer:
@@ -42146,6 +42160,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1732978439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732978434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede79e52c72995d48bf4c0633c1a1ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1735592618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2748552827706820645, guid: f9deab890cd950f42b88074f4c35d576, type: 3}
@@ -44548,7 +44574,7 @@ MonoBehaviour:
     - Position:
         x: 0
         y: 0
-        z: 1
+        z: 0
       TangentIn:
         x: 0
         y: 0
@@ -44566,11 +44592,11 @@ MonoBehaviour:
     - Position:
         x: 0
         y: 0
-        z: 0
+        z: -4
       TangentIn:
         x: 0
         y: 0
-        z: -1
+        z: 0
       TangentOut:
         x: 0
         y: 0
@@ -44582,9 +44608,9 @@ MonoBehaviour:
           z: 0
           w: 1
     - Position:
-        x: 14
+        x: 12
         y: 0
-        z: -14
+        z: -16
       TangentIn:
         x: 0
         y: 0
@@ -44600,9 +44626,9 @@ MonoBehaviour:
           z: 0
           w: 0.70710677
     - Position:
-        x: 15
+        x: 18
         y: 0
-        z: -14
+        z: -16
       TangentIn:
         x: 0
         y: 0
@@ -44645,7 +44671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873429398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 60, y: 2, z: 2.1}
+  m_LocalPosition: {x: 59.99, y: 2, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51418,8 +51444,8 @@ MonoBehaviour:
     soundClip: {fileID: 8300000, guid: 29b05960dff681d4389a08268e82bc5c, type: 3}
     volumeModifier: 0.05
   - soundEffectName: trilhos
-    soundClip: {fileID: 8300000, guid: 2c6b632a47073434f9c7bd06c08842b5, type: 3}
-    volumeModifier: 0.5
+    soundClip: {fileID: 8300000, guid: e8d18dbba4f87314da1923480e65e89c, type: 3}
+    volumeModifier: 0.25
   soundEffectsSpacialBlend: []
   soundEffectsRandomPitch:
   - soundEffectName: pisoCurto1
@@ -51440,13 +51466,13 @@ MonoBehaviour:
   - soundEffectName: impactoPatins
     soundClip: {fileID: 8300000, guid: c35a0c10d6025884c83b135b7f07a50b, type: 3}
     volumeModifier: 0.5
-    minPitch: 0.75
-    maxPitch: 1.25
+    minPitch: 1
+    maxPitch: 1.5
   - soundEffectName: impactoPatins2
     soundClip: {fileID: 8300000, guid: ef6afbfd7e0053f4fbe1ccb5732ea796, type: 3}
     volumeModifier: 0.6
-    minPitch: 0.85
-    maxPitch: 1.15
+    minPitch: 1.15
+    maxPitch: 1.4
   - soundEffectName: tiro
     soundClip: {fileID: 8300000, guid: f4eca9264bc6a2240a0ab2b910f0763c, type: 3}
     volumeModifier: 0.45
@@ -51458,10 +51484,10 @@ MonoBehaviour:
     minPitch: 0.75
     maxPitch: 0.9
   - soundEffectName: impactoTrilhos
-    soundClip: {fileID: 8300000, guid: b8f82a84b7d29424eb635923902c0c86, type: 3}
-    volumeModifier: 0.25
-    minPitch: 1.5
-    maxPitch: 1.75
+    soundClip: {fileID: 8300000, guid: 20a7c4afb5071c1459df7ed87e27221a, type: 3}
+    volumeModifier: 0.75
+    minPitch: 1.75
+    maxPitch: 2
   - soundEffectName: impactoParede
     soundClip: {fileID: 8300000, guid: c59e9acc7f109af44842bd706ef7d44f, type: 3}
     volumeModifier: 0.25
@@ -51512,7 +51538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097173044}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 120.11, y: 2, z: -11.65}
+  m_LocalPosition: {x: 120.11, y: 2, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51751,9 +51777,10 @@ GameObject:
   - component: {fileID: 2098720145}
   - component: {fileID: 2098720144}
   - component: {fileID: 2098720143}
+  - component: {fileID: 2098720147}
   m_Layer: 0
   m_Name: EnemySpawner (2)
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51766,10 +51793,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098720142}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2098720144
 MeshRenderer:
@@ -51836,6 +51863,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2098720147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098720142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede79e52c72995d48bf4c0633c1a1ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2107838653
 GameObject:
   m_ObjectHideFlags: 0
@@ -56807,7 +56846,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh559464
+  m_Name: pb_Mesh1130226
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -57789,7 +57828,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8b466541bd04ab541a31213726d9cfea, type: 2}
+  - {fileID: 2100000, guid: b07e09ddca2e1774fa25de6d646b624a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
