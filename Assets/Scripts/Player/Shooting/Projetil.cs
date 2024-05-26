@@ -15,7 +15,7 @@ public class Projetil : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Se colidir com algo que não seja o jogador
-        if (!other.gameObject.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("Player") && !other.CompareTag("Spawner"))
         {
             // Destroi o projetil
             Destroy(gameObject);

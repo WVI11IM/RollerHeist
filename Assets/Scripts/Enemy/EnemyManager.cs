@@ -5,10 +5,12 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public bool canFollow = true;
-
     public bool canSpawn = false;
-    [SerializeField] private List<GameObject> enemySpawners;
+
+    public List<GameObject> enemySpawners;
     public float spawnCoolDown = 5;
+    public float spawnerRangeDetectPlayer = 5;
+    public LayerMask spawnerDetectPlayer;
 
     public static EnemyManager Instance;
 
