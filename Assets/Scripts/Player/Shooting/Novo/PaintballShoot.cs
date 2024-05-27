@@ -38,7 +38,7 @@ public class PaintballShoot : MonoBehaviour
     void Update()
     {
         // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo
-        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding))
+        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput)
         {
             redArea.SetActive(true);
             Vector3 mousePosition = Input.mousePosition;
@@ -111,7 +111,8 @@ public class PaintballShoot : MonoBehaviour
 
     void Shoot()
     {
-        SFXManager.Instance.PlaySFXRandomPitch("tiro");
+        SFXManager.Instance.PlaySFXRandomPitch("tiro1");
+        SFXManager.Instance.PlaySFXRandomPitch("tiro2");
 
         // Cria uma instância da bala
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);

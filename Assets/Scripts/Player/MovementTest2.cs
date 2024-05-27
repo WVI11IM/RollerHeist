@@ -17,6 +17,7 @@ public class MovementTest2 : MonoBehaviour
     public bool isBraking = false;
     public TrailRenderer[] trailRenderers;
     public Gradient[] trailGradients;
+    public bool canInput = true;
 
     private Vector3 previousVelocity;
     private float decelerationThreshold = 15f;
@@ -25,6 +26,8 @@ public class MovementTest2 : MonoBehaviour
     [Header("DRIFT SETTINGS")]
     public bool isDriftingA = false;
     public bool isDriftingD = false;
+    private bool isDrifting = false;
+    private bool wasDrifting = false;
     public ParticleSystem[] driftParticleSystems;
 
     private float doubleATapTimeThreshold = 0.25f;
@@ -56,7 +59,7 @@ public class MovementTest2 : MonoBehaviour
     [Header("BOOST SETTINGS")]
     public bool isBoosting = false;
     public ParticleSystem boostParticleSystem;
-    public Slider boostSlider;
+    public Image boostMeter;
     public float maxBoostValue;
     public float boostValue;
     public float boostSpeedMultiplier;
@@ -65,6 +68,7 @@ public class MovementTest2 : MonoBehaviour
     private float boostMaxSpeed;
     private float normalAcceleration;
     private float boostAcceleration;
+    private bool wasBoosting = false;
 
     [Space]
     [Header("ADDITIONAL RAIL GRIND SETTINGS")]
@@ -131,118 +135,138 @@ public class MovementTest2 : MonoBehaviour
         //Muda entre duas câmeras durante o jogo.
         SwitchCameras();
 
-        //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
-        if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding && !isBraking)
+        if (canInput)
         {
-            Boost();
-        }
-        else
-        {
-            isBoosting = false;
-            var emissionModule = boostParticleSystem.emission;
-            emissionModule.enabled = false;
-            maxMoveSpeed = normalMaxSpeed;
-            acceleration = normalAcceleration;
-        }
-
-        //Faz personagem dar um pulo com barra de espaço.
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !isGrinding)
-        {
-            Jump();
-        }
-
-        //Se personagem apertar ou segurar barra de espaço no ar, uma determinada distância do chão e com velocidade suficiente, fará um truque.
-        RaycastHit hit;
-        bool isHit = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, minDistForTrick, floorLayerMask);
-        if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
-        {if (Time.time > nextActionTime)
+            //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
+            if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding && !isBraking)
             {
-                nextActionTime = Time.time + trickCooldown;
-                Trick();
+                Boost();
             }
-        }
-
-        //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
-        if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
-        {
-            if (Input.GetKeyDown(KeyCode.A) && isGrounded && !isGrinding)
+            else
             {
-                if (Time.time - lastATapTime <= doubleATapTimeThreshold)
-                {
-                    isDriftingA = true;
-                    isDriftingD = false;
-                }
-                lastATapTime = Time.time;
-            }
-            if (Input.GetKeyDown(KeyCode.D) && isGrounded && !isGrinding)
-            {
-                if (Time.time - lastDTapTime <= doubleDTapTimeThreshold)
-                {
-                    isDriftingD = true;
-                    isDriftingA = false;
-                }
-                lastDTapTime = Time.time;
-            }
-        }
-
-        animator.SetBool("isDriftingD", isDriftingD);
-        animator.SetBool("isDriftingA", isDriftingA);
-
-        //Variável local de rotação.
-        float rotation;
-
-        //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
-        if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
-        {
-            rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-            for (int i = 0; i < driftParticleSystems.Length; i++)
-            {
-                var emissionModule = driftParticleSystems[i].emission;
-                emissionModule.enabled = true;
-            }
-        }
-        else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
-        {
-            rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-            for (int i = 0; i < driftParticleSystems.Length; i++)
-            {
-                var emissionModule = driftParticleSystems[i].emission;
-                emissionModule.enabled = true;
-            }
-        }
-        else
-        {
-            isDriftingA = false;
-            isDriftingD = false;
-            for (int i = 0; i < driftParticleSystems.Length; i++)
-            {
-                var emissionModule = driftParticleSystems[i].emission;
+                isBoosting = false;
+                var emissionModule = boostParticleSystem.emission;
                 emissionModule.enabled = false;
+                maxMoveSpeed = normalMaxSpeed;
+                acceleration = normalAcceleration;
+                wasBoosting = false;
+                SFXManager.Instance.StopSFXLoop("boost");
             }
 
-            //Caso personagem esteja no ar, rotação será reduzida.
-            if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 3 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-
-            //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
-            else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-        }
-
-        //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem para de girar para os lados e desacelera.
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
-        {
-            rotation = 0;
-            if (isGrounded && !isBoosting && !isGrinding)
+            //Faz personagem dar um pulo com barra de espaço.
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !isGrinding)
             {
-                isBraking = true;
+                Jump();
             }
-        }
-        else
-        {
-            isBraking = false;
-        }
 
-        //Rotaciona o personagem a partir da variável "rotation".
-        transform.eulerAngles += new Vector3(0, rotation, 0);
+            //Se personagem apertar ou segurar barra de espaço no ar, uma determinada distância do chão e com velocidade suficiente, fará um truque.
+            RaycastHit hit;
+            bool isHit = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, minDistForTrick, floorLayerMask);
+            if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+            {
+                if (Time.time > nextActionTime)
+                {
+                    nextActionTime = Time.time + trickCooldown;
+                    Trick();
+                }
+            }
+
+            //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
+            if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+            {
+                if (Input.GetKeyDown(KeyCode.A) && isGrounded && !isGrinding)
+                {
+                    if (Time.time - lastATapTime <= doubleATapTimeThreshold)
+                    {
+                        isDriftingA = true;
+                        isDriftingD = false;
+                    }
+                    lastATapTime = Time.time;
+                }
+                if (Input.GetKeyDown(KeyCode.D) && isGrounded && !isGrinding)
+                {
+                    if (Time.time - lastDTapTime <= doubleDTapTimeThreshold)
+                    {
+                        isDriftingD = true;
+                        isDriftingA = false;
+                    }
+                    lastDTapTime = Time.time;
+                }
+            }
+
+            animator.SetBool("isDriftingD", isDriftingD);
+            animator.SetBool("isDriftingA", isDriftingA);
+
+            //Variável local de rotação.
+            float rotation;
+
+            //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
+            if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
+            {
+                isDrifting = true;
+                rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                for (int i = 0; i < driftParticleSystems.Length; i++)
+                {
+                    var emissionModule = driftParticleSystems[i].emission;
+                    emissionModule.enabled = true;
+                }
+            }
+            else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
+            {
+                isDrifting = true;
+                rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                for (int i = 0; i < driftParticleSystems.Length; i++)
+                {
+                    var emissionModule = driftParticleSystems[i].emission;
+                    emissionModule.enabled = true;
+                }
+            }
+            else
+            {
+                isDrifting = false;
+                isDriftingA = false;
+                isDriftingD = false;
+                for (int i = 0; i < driftParticleSystems.Length; i++)
+                {
+                    var emissionModule = driftParticleSystems[i].emission;
+                    emissionModule.enabled = false;
+                }
+
+                //Caso personagem esteja no ar, rotação será reduzida.
+                if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 3 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+
+                //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
+                else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+            }
+
+            if (isDrifting && !wasDrifting)
+            {
+                wasDrifting = true;
+                SFXManager.Instance.PlaySFXLoop("drift");
+            }
+            else if(!isDrifting && wasDrifting)
+            {
+                wasDrifting = false;
+                SFXManager.Instance.StopSFXLoop("drift");
+            }
+
+            //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem para de girar para os lados e desacelera.
+            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+            {
+                rotation = 0;
+                if (isGrounded && !isBoosting && !isGrinding)
+                {
+                    isBraking = true;
+                }
+            }
+            else
+            {
+                isBraking = false;
+            }
+
+            //Rotaciona o personagem a partir da variável "rotation".
+            transform.eulerAngles += new Vector3(0, rotation, 0);
+        }
 
         //Gera uma Raycast abaixo do personagem que detecta colisão com chão.
         RaycastHit hit1;
@@ -383,7 +407,9 @@ public class MovementTest2 : MonoBehaviour
 
     public void UpdateBoostValue()
     {
-        boostSlider.value = boostValue / maxBoostValue * 100;
+        float boostSliderValue = boostValue / maxBoostValue;
+        boostMeter.fillAmount = Mathf.Lerp(0.333f, 0.666f, boostSliderValue);
+
         if (boostValue > maxBoostValue) boostValue = maxBoostValue;
         if (boostValue < 0) boostValue = 0;
     }
@@ -496,6 +522,12 @@ public class MovementTest2 : MonoBehaviour
         maxMoveSpeed = boostMaxSpeed;
         acceleration = boostAcceleration;
         boostValue -= boostToDeplete * Time.deltaTime;
+        if (!wasBoosting)
+        {
+            SFXManager.Instance.PlaySFXLoop("boost");
+            SFXManager.Instance.PlaySFXRandomPitch("boost");
+            wasBoosting = true;
+        }
     }
 
     public void DetectSuddenDeceleration()
@@ -510,6 +542,11 @@ public class MovementTest2 : MonoBehaviour
         }
 
         previousVelocity = currentVelocity;
+    }
+
+    public void ActivateInput(bool isActive)
+    {
+        canInput = isActive;
     }
 
     public void ChangeLensSize()

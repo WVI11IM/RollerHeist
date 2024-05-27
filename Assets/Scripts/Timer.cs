@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        runTime = true;
+        runTime = false;
     }
 
     void Update()

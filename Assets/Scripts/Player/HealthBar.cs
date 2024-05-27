@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {  
-    public Slider healthSlider;
+    public Image healthMeter;
     public float maxHealth = 100f;
     public float health;
     public float invincibilityDuration = 2f; // Duração da invencibilidade em segundos
@@ -33,10 +33,14 @@ public class HealthBar : MonoBehaviour
             }
         }
 
+        float healthSliderValue = health / maxHealth;
+        healthMeter.fillAmount = Mathf.Lerp(0.39f, 0.61f, healthSliderValue);
+         /*
         if(healthSlider.value != health)
         {
             healthSlider.value = health;
         }
+         */
         
         if (health <= 0 && !isDead)
         {

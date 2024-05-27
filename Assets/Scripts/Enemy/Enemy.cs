@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public bool isAttacking = false;
     public bool isStunned = false;
     public bool hasFainted = false;
+    private bool canDamage = true;
 
     [SerializeField] Animator animator;
 
@@ -216,6 +217,8 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("hasFainted");
             hasFainted = true;
+            canDamage = false;
+            Destroy(gameObject, 5);
         }
     }
 
@@ -293,7 +296,7 @@ public class Enemy : MonoBehaviour
     public void GiveDamage()
     {
         HealthBar playerHealth = player.GetComponent<HealthBar>();
-        if (playerHealth != null && !playerHealth.isInvincible)
+        if (playerHealth != null && !playerHealth.isInvincible && canDamage)
         {
             playerHealth.TakeDamage(damage);
         }
