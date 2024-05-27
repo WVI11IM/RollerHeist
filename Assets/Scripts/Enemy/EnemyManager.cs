@@ -8,9 +8,17 @@ public class EnemyManager : MonoBehaviour
     public bool canSpawn = false;
 
     public List<GameObject> enemySpawners;
-    public float spawnCoolDown = 5;
-    public float spawnerRangeDetectPlayer = 5;
-    public LayerMask spawnerDetectPlayer;
+
+    [Header("Spawn's Frequency")]
+    [Tooltip("This will be changed in script, no need to attribute a value :D")]
+    public float currentSpawnCooldown = 0;
+    public float startSpawnCooldown = 10;
+    public float oneItemSpawnCooldown = 8;
+    public float twoItemSpawnCooldown = 7;
+    public float threeItemSpawnCooldown = 6;
+    public float mainItemSpawnCooldown = 5;
+
+    //private List<GameObject> enemiesOnScene;
 
     public static EnemyManager Instance;
 
@@ -30,6 +38,10 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        //enemiesOnScene = GameObject.FindGameObjectsWithTag("Enemy");
+
+        ChangeSpawnFrequency();
+
         if (canSpawn)
         {
             StartCoroutine(EnemySpawner());
@@ -44,8 +56,33 @@ public class EnemyManager : MonoBehaviour
 
         Instantiate(Resources.Load<GameObject>("ENEMY"), enemySpawners[i].transform);
 
-        yield return new WaitForSeconds(spawnCoolDown);
+        yield return new WaitForSeconds(currentSpawnCooldown);
         canSpawn = true;
     }
 
+    private void ChangeSpawnFrequency()
+    {
+        if (CollectableManager.instance.bigItemCollected == 1)
+        {
+            currentSpawnCooldown = mainItemSpawnCooldown;
+        }
+        else if (CollectableManager.instance.bigItemCollected == 0)
+        {
+            switch (CollectableManager.instance.smallItensCollected)
+            {
+                case 0:
+                    currentSpawnCooldown = startSpawnCooldown;
+                    break;
+                case 1:
+                    currentSpawnCooldown = oneItemSpawnCooldown;
+                    break;
+                case 2:
+                    currentSpawnCooldown = twoItemSpawnCooldown;
+                    break;
+                case 3:
+                    currentSpawnCooldown = threeItemSpawnCooldown;
+                    break;
+            }
+        }
+    }
 }
