@@ -87,7 +87,6 @@ public class MovementTest2 : MonoBehaviour
 
     Rigidbody rb;
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -117,7 +116,7 @@ public class MovementTest2 : MonoBehaviour
         //Regula os parâmetros envolvendo o grind de trilhos.
         UpdateRailGrind();
 
-        //Regula o valor da barra de boost.
+        //Regula o valor e a barra de boost.
         UpdateBoostValue();
 
         //Muda a cor do rastro dependendo da velocidade.
@@ -147,8 +146,6 @@ public class MovementTest2 : MonoBehaviour
                 isBoosting = false;
                 var emissionModule = boostParticleSystem.emission;
                 emissionModule.enabled = false;
-                maxMoveSpeed = normalMaxSpeed;
-                acceleration = normalAcceleration;
                 wasBoosting = false;
                 SFXManager.Instance.StopSFXLoop("boost");
             }
@@ -271,11 +268,15 @@ public class MovementTest2 : MonoBehaviour
         //Gera uma Raycast abaixo do personagem que detecta colisão com chão.
         RaycastHit hit1;
         RaycastHit hit2;
+        RaycastHit hit3;
+        RaycastHit hit4;
 
-        bool isHit1 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
-        bool isHit2 = Physics.Raycast(transform.position + Vector3.up + Vector3.forward, Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
+        bool isHit1 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
+        bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 4), Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
+        bool isHit3 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 4), Vector3.down, out hit3, raycastDistanceToFloor, floorLayerMask);
+        bool isHit4 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 4), Vector3.down, out hit4, raycastDistanceToFloor, floorLayerMask);
 
-        if (isHit1 || isHit2)
+        if (isHit1 || isHit2 || isHit3 || isHit4)
         {
             isGrounded = true;
             animator.SetBool("isGrounded", true);
@@ -323,33 +324,27 @@ public class MovementTest2 : MonoBehaviour
         directionSides = transform.TransformDirection(directionSides);
 
         //Enquanto personagem estiver abaixo da velocidade máxima e no chão, ele acelera.
-        if (rb.velocity.magnitude < maxMoveSpeed && isGrounded && !isGrinding)
+        if (rb.velocity.magnitude <= maxMoveSpeed && isGrounded && !isGrinding)
         {
             rb.AddForce(directionFront * acceleration);
+        }
 
-            //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
-            if (isDriftingA || isDriftingD)
+        //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
+        if (isDriftingA || isDriftingD)
+        {
+            rb.velocity *= 0.99f;
+            Vector3 driftForce = isDriftingA ? -directionSides : directionSides;
+            rb.AddForce(driftForce * acceleration);
+        }
+        //Porém se a curva for normal, a velocidade dele reduzirá, a força lateral será menor e também proporcional à velocidade frontal do personagem.
+        else
+        {
+            if (!isBraking)
             {
-                rb.velocity /= 1.01f;
-                if (isDriftingA)
+                rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 3) * (rb.velocity.magnitude / maxMoveSpeed)));
+                if (Input.GetAxis("Horizontal") != 0)
                 {
-                    rb.AddForce(-directionSides * acceleration);
-                }
-                else
-                {
-                    rb.AddForce(directionSides * acceleration);
-                }
-            }
-            //Porém se a curva for normal, a velocidade dele reduzirá, a força lateral será menor e também proporcional à velocidade frontal do personagem.
-            else
-            {
-                if (!isBraking)
-                {
-                    rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 3) * (rb.velocity.magnitude / maxMoveSpeed)));
-                    if (Input.GetAxis("Horizontal") != 0)
-                    {
-                        rb.AddForce(-directionFront * acceleration / 10);
-                    }
+                    rb.AddForce(-directionFront * acceleration / 10);
                 }
             }
         }
@@ -407,6 +402,17 @@ public class MovementTest2 : MonoBehaviour
 
     public void UpdateBoostValue()
     {
+        if (isBoosting)
+        {
+            maxMoveSpeed = boostMaxSpeed;
+            acceleration = boostAcceleration;
+        }
+        else
+        {
+            maxMoveSpeed = normalMaxSpeed;
+            acceleration = normalAcceleration;
+        }
+
         float boostSliderValue = boostValue / maxBoostValue;
         boostMeter.fillAmount = Mathf.Lerp(0.333f, 0.666f, boostSliderValue);
 
@@ -519,9 +525,9 @@ public class MovementTest2 : MonoBehaviour
         var emissionModule = boostParticleSystem.emission;
         emissionModule.enabled = true;
         isBoosting = true;
-        maxMoveSpeed = boostMaxSpeed;
-        acceleration = boostAcceleration;
         boostValue -= boostToDeplete * Time.deltaTime;
+
+
         if (!wasBoosting)
         {
             SFXManager.Instance.PlaySFXLoop("boost");
@@ -587,5 +593,36 @@ public class MovementTest2 : MonoBehaviour
         {
             virtualCamera2.enabled = false;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        // Draw the first raycast
+        Vector3 rayStart1 = transform.position + Vector3.up + (Vector3.forward / 4);
+        Vector3 rayEnd1 = rayStart1 + Vector3.down * raycastDistanceToFloor;
+        Gizmos.DrawLine(rayStart1, rayEnd1);
+
+        // Draw the second raycast
+        Vector3 rayStart2 = transform.position + Vector3.up + (Vector3.back / 4);
+        Vector3 rayEnd2 = rayStart2 + Vector3.down * raycastDistanceToFloor;
+        Gizmos.DrawLine(rayStart2, rayEnd2);
+
+        // Draw the third raycast
+        Vector3 rayStart3 = transform.position + Vector3.up + (Vector3.left / 4);
+        Vector3 rayEnd3 = rayStart3 + Vector3.down * raycastDistanceToFloor;
+        Gizmos.DrawLine(rayStart3, rayEnd3);
+
+        // Draw the second raycast
+        Vector3 rayStart4 = transform.position + Vector3.up + (Vector3.right / 4);
+        Vector3 rayEnd4 = rayStart4 + Vector3.down * raycastDistanceToFloor;
+        Gizmos.DrawLine(rayStart4, rayEnd4);
+
+        // Optionally, draw spheres at the end points for better visualization
+        Gizmos.DrawSphere(rayEnd1, 0.1f);
+        Gizmos.DrawSphere(rayEnd2, 0.1f);
+        Gizmos.DrawSphere(rayEnd3, 0.1f);
+        Gizmos.DrawSphere(rayEnd4, 0.1f);
     }
 }

@@ -71,7 +71,10 @@ public class Enemy : MonoBehaviour
                     }
                     if (dist <= enemyType.conflictDist)
                     {
-                        enemyState = State.ATTACK;
+                        if (player.position.y < transform.position.y + 3 && player.position.y > transform.position.y - 3) 
+                        {
+                            enemyState = State.ATTACK;
+                        }
                     }
                     break;
                 case State.PATROL:
@@ -284,8 +287,13 @@ public class Enemy : MonoBehaviour
     private IEnumerator Stunned()
     {
         isStunned = true;
+        canDamage = false;
         yield return new WaitForSeconds(0.5f);
         isStunned = false;
+        if (!hasFainted)
+        {
+            canDamage = true;
+        }
 
         if (enemyState == State.STUNNED) // Ensure the state is still stunned before changing
         {
@@ -296,7 +304,7 @@ public class Enemy : MonoBehaviour
     public void GiveDamage()
     {
         HealthBar playerHealth = player.GetComponent<HealthBar>();
-        if (playerHealth != null && !playerHealth.isInvincible && canDamage)
+        if (playerHealth != null && !playerHealth.isInvincible && canDamage && !isStunned)
         {
             playerHealth.TakeDamage(damage);
         }
