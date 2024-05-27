@@ -12,6 +12,9 @@ public class PaintballShoot : MonoBehaviour
     public float maxAngle = 180f; // Ângulo máximo de tiro em relação à direção do personagem
     public float fireRate = 0.5f; // Taxa de disparo em tiros por segundo
     private float nextFireTime = 0f; // Tempo do próximo disparo, inicializado como 0 para permitir o primeiro tiro imediatamente
+    public float maxAmmo = 5;
+    public float currentAmmo;
+    public float reloadTime = 2;
 
     [Space]
     [Header("ANIMATION PROPERTIES")]
@@ -32,13 +35,19 @@ public class PaintballShoot : MonoBehaviour
     private void Start()
     {
         playerMovement = GetComponent<MovementTest2>();
+        currentAmmo = maxAmmo;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo)
+        {
+            StartCoroutine(Reload());
+        }
+
         // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo
-        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput)
+        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && currentAmmo > 0)
         {
             redArea.SetActive(true);
             Vector3 mousePosition = Input.mousePosition;
@@ -59,6 +68,8 @@ public class PaintballShoot : MonoBehaviour
                     animator.SetFloat("lookAngle", Mathf.Lerp(0, 1, angle1 / 180));
                     if (Time.time >= nextFireTime)
                     {
+                        currentAmmo--;
+
                         Shoot();
                         // Define o tempo do próximo disparo adicionando o intervalo entre os tiros
                         nextFireTime = Time.time + 1f / fireRate;
@@ -156,5 +167,11 @@ public class PaintballShoot : MonoBehaviour
         {
             Debug.Log("Mouse não está apontando para um objeto no cenário.");
         }
+    }
+
+    IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(reloadTime);
+        currentAmmo = maxAmmo;
     }
 }

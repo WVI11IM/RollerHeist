@@ -16170,7 +16170,9 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   invincibilityDuration: 2
+  isInvincible: 0
   gameManager: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &869317442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36264,7 +36266,9 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   invincibilityDuration: 2
+  isInvincible: 0
   gameManager: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &1383487476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38603,7 +38607,9 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   invincibilityDuration: 2
+  isInvincible: 0
   gameManager: {fileID: 66311027}
+  animator: {fileID: 0}
 --- !u!114 &1565437294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38649,15 +38655,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed020f1dd97d8384283d3fafaf3388ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitAimMask:
-    serializedVersion: 2
-    m_Bits: 4104
   firePoint: {fileID: 694144290}
   bulletPrefab: {fileID: 9070974583837955472, guid: fb8803851824b494dac839db607160c5, type: 3}
   bulletSpeed: 60
   maxAngle: 90
   fireRate: 4
+  maxAmmo: 5
+  currentAmmo: 0
+  reloadTime: 2
   animator: {fileID: 5866666019883864895}
+  transitionSpeed: 2
+  hitAimMask:
+    serializedVersion: 2
+    m_Bits: 4104
+  aimHitReference: {fileID: 639771507}
+  redArea: {fileID: 0}
+  canShootCursor: {fileID: 0}
+  canNotShootCursor: {fileID: 0}
 --- !u!1 &1568100986
 GameObject:
   m_ObjectHideFlags: 0
@@ -41233,11 +41247,12 @@ MonoBehaviour:
   - {fileID: 86463263}
   - {fileID: 1732978434}
   - {fileID: 2098720142}
-  spawnCoolDown: 5
-  spawnerRangeDetectPlayer: 15
-  spawnerDetectPlayer:
-    serializedVersion: 2
-    m_Bits: 128
+  currentSpawnCooldown: 0
+  startSpawnCooldown: 10
+  oneItemSpawnCooldown: 8
+  twoItemSpawnCooldown: 7
+  threeItemSpawnCooldown: 6
+  mainItemSpawnCooldown: 5
 --- !u!4 &1796355124
 Transform:
   m_ObjectHideFlags: 0
