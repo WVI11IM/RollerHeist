@@ -40694,10 +40694,10 @@ MonoBehaviour:
   isBoosting: 0
   boostParticleSystem: {fileID: 1113941136}
   boostMeter: {fileID: 1090280123}
-  maxBoostValue: 3
+  maxBoostValue: 3.5
   boostValue: 0
-  boostSpeedMultiplier: 1.1
-  boostToDeplete: 0.25
+  boostSpeedMultiplier: 1.15
+  boostToDeplete: 0.35
   playerGrind: {fileID: 1565437294}
   isGrinding: 0
   trailSparksParticleSystem: {fileID: 1907197391}
@@ -52459,7 +52459,22 @@ MonoBehaviour:
     volumeModifier: 0.025
   - soundEffectName: vento
     soundClip: {fileID: 8300000, guid: 4d407353b9e46a740b3e0ba086c1dabb, type: 3}
-    volumeModifier: 0.025
+    volumeModifier: 0.03
+  - soundEffectName: vento2
+    soundClip: {fileID: 8300000, guid: d7516f469eee7f2418152d42c15351aa, type: 3}
+    volumeModifier: 0.2
+  - soundEffectName: disco1
+    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco2
+    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco3
+    soundClip: {fileID: 8300000, guid: 5cdf5f65030898c49a1602e623e3107f, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco4
+    soundClip: {fileID: 8300000, guid: 544d2a98a332aa74083f659450f6e024, type: 3}
+    volumeModifier: 0.15
   soundEffectsSpacialBlend: []
   soundEffectsRandomPitch:
   - soundEffectName: pisoCurto1
@@ -52489,7 +52504,7 @@ MonoBehaviour:
     maxPitch: 1.4
   - soundEffectName: pulo
     soundClip: {fileID: 8300000, guid: c871a468efdc3874586c0ccd59882a15, type: 3}
-    volumeModifier: 0.5
+    volumeModifier: 0.35
     minPitch: 0.75
     maxPitch: 0.9
   - soundEffectName: impactoTrilhos
@@ -52514,9 +52529,39 @@ MonoBehaviour:
     maxPitch: 1.25
   - soundEffectName: tiro2
     soundClip: {fileID: 8300000, guid: b39727832c1bae64ba6d8575230a9545, type: 3}
-    volumeModifier: 0.025
+    volumeModifier: 0.03
     minPitch: 1.25
     maxPitch: 1.75
+  - soundEffectName: truque1
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.9
+    maxPitch: 0.9
+  - soundEffectName: truque2
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1
+    maxPitch: 1
+  - soundEffectName: truque3
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1.1
+    maxPitch: 1.1
+  - soundEffectName: truque4
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1.2
+    maxPitch: 1.2
+  - soundEffectName: glass1
+    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: glass2
+    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.8
+    maxPitch: 1.2
 --- !u!4 &2096699526
 Transform:
   m_ObjectHideFlags: 0

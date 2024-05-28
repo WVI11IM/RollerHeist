@@ -14,6 +14,7 @@ public class MovementTest2 : MonoBehaviour
     public float rotSpeed;
     private bool hasJumped;
     private bool wasFast = true;
+    private bool wasFalling = false;
     public float jumpForce;
     public bool isBraking = false;
     public TrailRenderer[] trailRenderers;
@@ -318,6 +319,18 @@ public class MovementTest2 : MonoBehaviour
             SFXManager.Instance.StopSFXLoop("vento");
             wasFast = true;
         }
+        if(rb.velocity.y < -2.5f && !isGrounded && !wasFalling)
+        {
+            SFXManager.Instance.PlaySFXLoop("vento2");
+            Debug.Log("Playing vento2");
+            wasFalling = true;
+        }
+        else if (isGrounded && wasFalling)
+        {
+            SFXManager.Instance.StopSFXLoop("vento2");
+            Debug.Log("Stopping vento2");
+            wasFalling = false;
+        }
     }
 
     //Para todas as linhas de código que envolvem a constante aplicação de forças direcionais ao Rigidbody do personagem, utilizei o FixedUpdate().
@@ -531,7 +544,28 @@ public class MovementTest2 : MonoBehaviour
         animator.SetInteger("trickNumber", trickNumber);
         animator.SetTrigger("tricked");
         trickParticleSystem.Play();
-        boostValue += trickBoostToAdd;
+        switch (trickCombo)
+        {
+            case 0:
+                SFXManager.Instance.PlaySFXRandomPitch("truque1");
+                boostValue += trickBoostToAdd;
+                break;
+            case 1:
+                SFXManager.Instance.PlaySFXRandomPitch("truque2");
+                boostValue += (trickBoostToAdd + trickBoostToAdd / 4);
+                break;
+            case 2:
+                SFXManager.Instance.PlaySFXRandomPitch("truque3");
+                boostValue += (trickBoostToAdd + trickBoostToAdd / 2);
+                break;
+            default:
+                SFXManager.Instance.PlaySFXRandomPitch("truque4");
+                boostValue += (trickBoostToAdd * 2);
+                break;
+        }
+        int discoInteger = Random.Range(0, 4) + 1;
+        SFXManager.Instance.PlaySFX("disco" + discoInteger);
+
         trickCombo += 1;
         ChangeLensSizeForTrick(trickCombo);
     }

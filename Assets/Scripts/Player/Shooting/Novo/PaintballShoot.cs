@@ -77,7 +77,7 @@ public class PaintballShoot : MonoBehaviour
 
                 animator.SetFloat("lookAngle", lookAngle);
                 targetLayerWeight = 1f;
-                Cursor.SetCursor(canShootCursor, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
                 if (Time.time >= nextFireTime)
                 {
                     currentAmmo--;
