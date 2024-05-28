@@ -45,12 +45,26 @@ public class GlassBreak : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Projetil"))
+        if (other.gameObject.CompareTag("Projetil") && !isBroken)
         {
             brokenGlass.SetActive(true);
             normalGlass.SetActive(false);
             isBroken = true;
             StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
+        }
+
+        if (other.gameObject.CompareTag("Player") && !isBroken)
+        {
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            float mms = other.gameObject.GetComponent<MovementTest2>().maxMoveSpeed;
+
+            if(rb.velocity.magnitude >= mms * 2 / 3)
+            {
+                brokenGlass.SetActive(true);
+                normalGlass.SetActive(false);
+                isBroken = true;
+                StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
+            }
         }
     }
 

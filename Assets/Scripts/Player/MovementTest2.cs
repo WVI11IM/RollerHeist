@@ -13,6 +13,7 @@ public class MovementTest2 : MonoBehaviour
     public float maxMoveSpeed;
     public float rotSpeed;
     private bool hasJumped;
+    private bool wasFast = true;
     public float jumpForce;
     public bool isBraking = false;
     public TrailRenderer[] trailRenderers;
@@ -306,6 +307,17 @@ public class MovementTest2 : MonoBehaviour
             animator.SetBool("isGrounded", false);
             isAirborne = true;
         }
+
+        if(rb.velocity.magnitude >= maxMoveSpeed * 2 / 3 && wasFast)
+        {
+            SFXManager.Instance.PlaySFXLoop("vento");
+            wasFast = false;
+        }
+        if (rb.velocity.magnitude < maxMoveSpeed * 2 / 3 && !wasFast)
+        {
+            SFXManager.Instance.StopSFXLoop("vento");
+            wasFast = true;
+        }
     }
 
     //Para todas as linhas de código que envolvem a constante aplicação de forças direcionais ao Rigidbody do personagem, utilizei o FixedUpdate().
@@ -329,25 +341,29 @@ public class MovementTest2 : MonoBehaviour
             rb.AddForce(directionFront * acceleration);
         }
 
-        //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
-        if (isDriftingA || isDriftingD)
+        if(isGrounded && !isGrinding)
         {
-            rb.velocity *= 0.99f;
-            Vector3 driftForce = isDriftingA ? -directionSides : directionSides;
-            rb.AddForce(driftForce * acceleration);
-        }
-        //Porém se a curva for normal, a velocidade dele reduzirá, a força lateral será menor e também proporcional à velocidade frontal do personagem.
-        else
-        {
-            if (!isBraking)
+            //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
+            if (isDriftingA || isDriftingD)
             {
-                rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 3) * (rb.velocity.magnitude / maxMoveSpeed)));
-                if (Input.GetAxis("Horizontal") != 0)
+                rb.velocity *= 0.99f;
+                Vector3 driftForce = isDriftingA ? -directionSides : directionSides;
+                rb.AddForce(driftForce * acceleration);
+            }
+            //Porém se a curva for normal, a velocidade dele reduzirá, a força lateral será menor e também proporcional à velocidade frontal do personagem.
+            else
+            {
+                if (!isBraking)
                 {
-                    rb.AddForce(-directionFront * acceleration / 10);
+                    rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 3) * (rb.velocity.magnitude / maxMoveSpeed)));
+                    if (Input.GetAxis("Horizontal") != 0)
+                    {
+                        rb.AddForce(-directionFront * acceleration / 10);
+                    }
                 }
             }
         }
+        
 
         //Se personagem brecar, é aplicada uma força oposta para desacelerar.
         if (isBraking && isGrounded && !isGrinding)
