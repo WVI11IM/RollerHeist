@@ -26,9 +26,7 @@ public class PaintballShoot : MonoBehaviour
     [Header("LAYER MASK AND VISUAL FEEDBACK")]
     public LayerMask hitAimMask;
     public GameObject aimHitReference;
-    public GameObject redArea;
     [SerializeField] private Texture2D canShootCursor;
-    [SerializeField] private Texture2D canNotShootCursor;
 
     private MovementTest2 playerMovement;
 
@@ -49,7 +47,6 @@ public class PaintballShoot : MonoBehaviour
         // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo
         if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && currentAmmo > 0)
         {
-            redArea.SetActive(true);
             Vector3 mousePosition = Input.mousePosition;
 
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
@@ -59,37 +56,44 @@ public class PaintballShoot : MonoBehaviour
             {
                 Vector3 direction = (hit.point - firePoint.position);
                 direction.y = 0f;
-                float angle1 = Vector3.Angle(direction, transform.right);
-                float angle2 = Vector3.Angle(direction, transform.forward);
-                if (angle1 < 180 && angle1 > 0 && angle2 < 90)
-                {
-                    targetLayerWeight = 1f;
-                    Cursor.SetCursor(canShootCursor, Vector2.zero, CursorMode.Auto);
-                    animator.SetFloat("lookAngle", Mathf.Lerp(0, 1, angle1 / 180));
-                    if (Time.time >= nextFireTime)
-                    {
-                        currentAmmo--;
 
-                        Shoot();
-                        // Define o tempo do próximo disparo adicionando o intervalo entre os tiros
-                        nextFireTime = Time.time + 1f / fireRate;
-                    }
-                }
-                else
+
+                // Get the character's forward direction
+                Vector3 forward = transform.forward;
+                forward.y = 0f;
+
+                // Calculate the angle between the character's forward direction and the direction to the hit point
+                float angle = Vector3.SignedAngle(forward, direction, Vector3.up);
+
+                // Normalize the angle to be within [0, 360)
+                angle = (angle + 360) % 360;
+
+                // Map the angle to the range [0, 1] for the animator parameter
+                float lookAngle = angle / 360f;
+
+                // Adjust the lookAngle to match the desired orientation
+                lookAngle = (lookAngle + 0.5f) % 1f;
+
+
+                animator.SetFloat("lookAngle", lookAngle);
+                targetLayerWeight = 1f;
+                Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
+                if (Time.time >= nextFireTime)
                 {
-                    targetLayerWeight = 0f;
-                    Cursor.SetCursor(canNotShootCursor, Vector2.zero, CursorMode.Auto);
+                    currentAmmo--;
+
+                    Shoot();
+                    // Define o tempo do próximo disparo adicionando o intervalo entre os tiros
+                    nextFireTime = Time.time + 1f / fireRate;
                 }
             }
             else
             {
                 targetLayerWeight = 0f;
-                Cursor.SetCursor(canNotShootCursor, Vector2.zero, CursorMode.Auto);
             }
         }
         else
         {
-            redArea.SetActive(false);
             targetLayerWeight = 0f;
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
@@ -145,23 +149,11 @@ public class PaintballShoot : MonoBehaviour
             // Zera o componente Y da direção para garantir que o tiro permaneça na mesma altura
             direction.y = 0f;
 
-            // Calcula o ângulo entre a direção do tiro e a direção para onde o personagem está olhando
-            float angle = Vector3.Angle(direction, transform.forward);
+            // Obtém o componente Rigidbody da bala
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
 
-            // Verifica se o ângulo está dentro do intervalo permitido
-            if (angle <= maxAngle)
-            {
-                // Obtém o componente Rigidbody da bala
-                Rigidbody rb = bullet.GetComponent<Rigidbody>();
-
-                // Define a velocidade da bala na direção do mouse
-                rb.velocity = direction * bulletSpeed;
-            }
-            else
-            {
-                Debug.Log("Tiro bloqueado! O ângulo de tiro está além do limite permitido.");
-                Destroy(bullet); // Destruir a bala porque está fora do limite
-            }
+            // Define a velocidade da bala na direção do mouse
+            rb.velocity = direction * bulletSpeed;
         }
         else
         {
