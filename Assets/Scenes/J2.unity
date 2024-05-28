@@ -13542,6 +13542,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 844cdb61fbbc4704da21d8615dc0e78b, type: 3}
+--- !u!1 &603667205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2530647889160140420, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+  m_PrefabInstance: {fileID: 668135768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &605408146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16960,6 +16965,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1565437289}
   rotationSmoothness: 5
+--- !u!1 &865018919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2530647889160140420, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+  m_PrefabInstance: {fileID: 1238110618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &869396272
 GameObject:
   m_ObjectHideFlags: 0
@@ -23426,6 +23436,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1565437289}
   rotationSmoothness: 5
+--- !u!1 &1011634133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2530647889160140420, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+  m_PrefabInstance: {fileID: 712376101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1014463796
 GameObject:
   m_ObjectHideFlags: 0
@@ -25046,6 +25061,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8158144433022304280, guid: eef73c6449a806e4fabc30a18652bf6f, type: 3}
   m_PrefabInstance: {fileID: 1095094413}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1096895756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2530647889160140420, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+  m_PrefabInstance: {fileID: 1121964467}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1098013656 stripped
 Transform:
@@ -43972,8 +43992,10 @@ MonoBehaviour:
   canSpawn: 0
   enemySpawners:
   - {fileID: 86463263}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1011634133}
+  - {fileID: 865018919}
+  - {fileID: 1096895756}
+  - {fileID: 603667205}
   currentSpawnCooldown: 0
   startSpawnCooldown: 10
   oneItemSpawnCooldown: 8
