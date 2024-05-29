@@ -10291,7 +10291,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh113984
+  m_Name: pb_Mesh1666466
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13268,7 +13268,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh114114
+  m_Name: pb_Mesh1666942
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15904,7 +15904,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -1913922472, guid: 21d2cbed5fe38ad43baa7f122b4c6ef6, type: 3}
   m_Type: 3
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -23602,7 +23602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014463796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250.29, y: 16, z: -11.74}
+  m_LocalPosition: {x: 250.33, y: 16, z: -12.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24690,7 +24690,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh113426
+  m_Name: pb_Mesh1664426
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25116,7 +25116,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -926742566, guid: 21d2cbed5fe38ad43baa7f122b4c6ef6, type: 3}
   m_Type: 3
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -36994,7 +36994,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 1284414923, guid: 21d2cbed5fe38ad43baa7f122b4c6ef6, type: 3}
   m_Type: 3
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -37333,7 +37333,6 @@ GameObject:
   - component: {fileID: 1303651065}
   - component: {fileID: 1303651062}
   - component: {fileID: 1303651064}
-  - component: {fileID: 1303651063}
   m_Layer: 0
   m_Name: OverlayCamera
   m_TagString: MainCamera
@@ -37366,7 +37365,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 25
+  field of view: 60
   orthographic: 0
   orthographic size: 10.1066
   m_Depth: -1
@@ -37384,18 +37383,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &1303651063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303651061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392224b04d896974fab7e63d95ba138e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1303651064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38253,7 +38240,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -691782950, guid: 21d2cbed5fe38ad43baa7f122b4c6ef6, type: 3}
   m_Type: 3
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -44221,6 +44208,7 @@ GameObject:
   - component: {fileID: 1799445863}
   - component: {fileID: 1799445866}
   - component: {fileID: 1799445867}
+  - component: {fileID: 1799445868}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -44363,6 +44351,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1799445868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799445862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392224b04d896974fab7e63d95ba138e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1799445864}
+  overlayCamera: {fileID: 1303651062}
 --- !u!1 &1800205081
 GameObject:
   m_ObjectHideFlags: 0
@@ -51627,7 +51629,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.1}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999003746
 MonoBehaviour:
@@ -58094,7 +58096,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh113322
+  m_Name: pb_Mesh1664044
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

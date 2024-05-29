@@ -91,6 +91,8 @@ public class MovementTest2 : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         rb = GetComponent<Rigidbody>();
 
         previousVelocity = rb.velocity;
@@ -115,9 +117,6 @@ public class MovementTest2 : MonoBehaviour
 
     void Update()
     {
-        //Regula os parâmetros envolvendo o grind de trilhos.
-        UpdateRailGrind();
-
         //Regula o valor e a barra de boost.
         UpdateBoostValue();
 
@@ -273,14 +272,10 @@ public class MovementTest2 : MonoBehaviour
         RaycastHit hit3;
         RaycastHit hit4;
 
-        RaycastHit hit5;
-
         bool isHit1 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
         bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 4), Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
         bool isHit3 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 4), Vector3.down, out hit3, raycastDistanceToFloor, floorLayerMask);
         bool isHit4 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 4), Vector3.down, out hit4, raycastDistanceToFloor, floorLayerMask);
-
-        bool isHit5 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.005f, floorLayerMask);
 
         if (isHit1 || isHit2 || isHit3 || isHit4)
         {
@@ -292,28 +287,6 @@ public class MovementTest2 : MonoBehaviour
             isGrounded = false;
             animator.SetBool("isGrounded", false);
             isAirborne = true;
-        }
-
-        if (isHit5)
-        {
-            //Evita a nulificação de velocidade ao entrar em contato com o chão.
-            if (isAirborne)
-            {
-                Vector3 velocity = previousVelocity;
-                velocity.y = 0f;
-                rb.velocity = velocity;
-                isAirborne = false;
-                ChangeLensSizeForTrick(trickCombo);
-                if (trickCombo == 0)
-                {
-                    SFXManager.Instance.PlaySFXRandomPitch("impactoPatins");
-                }
-                else
-                {
-                    SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
-                }
-                trickCombo = 0;
-            }
         }
 
         if(rb.velocity.magnitude >= maxMoveSpeed * 2 / 3 && wasFast)
@@ -343,6 +316,36 @@ public class MovementTest2 : MonoBehaviour
     //Para todas as linhas de código que envolvem a constante aplicação de forças direcionais ao Rigidbody do personagem, utilizei o FixedUpdate().
     void FixedUpdate()
     {
+
+        //Regula os parâmetros envolvendo o grind de trilhos.
+        UpdateRailGrind();
+
+        RaycastHit hit5;
+
+        bool isHit5 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.1f, floorLayerMask);
+
+        if (isHit5)
+        {
+            //Evita a nulificação de velocidade ao entrar em contato com o chão.
+            if (isAirborne)
+            {
+                Vector3 velocity = previousVelocity;
+                velocity.y = 0f;
+                rb.velocity = velocity;
+                isAirborne = false;
+                ChangeLensSizeForTrick(trickCombo);
+                if (trickCombo == 0)
+                {
+                    SFXManager.Instance.PlaySFXRandomPitch("impactoPatins");
+                }
+                else
+                {
+                    SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
+                }
+                trickCombo = 0;
+            }
+        }
+
         //Se personagem estiver não estiver no chão, força para baixo é aplicada.
         if (!isGrounded && !isGrinding)
         {
@@ -405,10 +408,10 @@ public class MovementTest2 : MonoBehaviour
 
             Vector3 velocity = rb.velocity;
             //velocity.x = 0f;
-            velocity.y = 0f;
+            //velocity.y = 0f;
             //velocity.z = 0f;
             rb.velocity = velocity;
-            rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.25f);
+            rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.5f);
             SFXManager.Instance.StopSFXLoop("trilhos");
         }
 
@@ -628,7 +631,7 @@ public class MovementTest2 : MonoBehaviour
 
     public void ChangeLensSizeForTrick(int combo)
     {
-        float zoomIn = 2.5f;
+        float zoomIn = 1.5f;
         virtualCamera.m_Lens.FieldOfView -= (combo * zoomIn);
         virtualCamera2.m_Lens.FieldOfView -= (combo * zoomIn);
     }
