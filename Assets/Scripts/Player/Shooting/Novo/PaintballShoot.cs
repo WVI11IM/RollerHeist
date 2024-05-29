@@ -6,7 +6,9 @@ public class PaintballShoot : MonoBehaviour
 {
     [Space]
     [Header("SHOOTING SETTINGS")]
+    public Transform center;
     public Transform firePoint; // Ponto de origem do tiro
+    public GameObject gun;
     public GameObject bulletPrefab; // Prefab da bala
     public float bulletSpeed = 20f; // Velocidade da bala
     public float maxAngle = 180f; // Ângulo máximo de tiro em relação à direção do personagem
@@ -54,7 +56,7 @@ public class PaintballShoot : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
             {
-                Vector3 direction = (hit.point - firePoint.position);
+                Vector3 direction = (hit.point - center.position);
                 direction.y = 0f;
 
 
@@ -77,6 +79,7 @@ public class PaintballShoot : MonoBehaviour
 
                 animator.SetFloat("lookAngle", lookAngle);
                 targetLayerWeight = 1f;
+                gun.SetActive(true);
                 Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
                 if (Time.time >= nextFireTime)
                 {
@@ -90,11 +93,13 @@ public class PaintballShoot : MonoBehaviour
             else
             {
                 targetLayerWeight = 0f;
+                gun.SetActive(false);
             }
         }
         else
         {
             targetLayerWeight = 0f;
+            gun.SetActive(false);
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
 
@@ -144,7 +149,7 @@ public class PaintballShoot : MonoBehaviour
         //if (Physics.Raycast(ray, out hit))
         {
             // Calcula a direção do tiro baseado na posição do mouse e do personagem
-            Vector3 direction = (hit.point - firePoint.position).normalized;
+            Vector3 direction = (hit.point - center.position).normalized;
 
             // Zera o componente Y da direção para garantir que o tiro permaneça na mesma altura
             direction.y = 0f;
