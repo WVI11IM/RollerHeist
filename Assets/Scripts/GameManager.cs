@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
         //When player didnt get the pieces yet
         //reset elapsedTime
         //bool runTime = true;
+        EnemyManager.Instance.canSpawn = true;
         EnemyManager.Instance.canFollow = true;
 
         objIndicator.SetActive(true);
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
     {
         //Pleyer got pieces and need to escape
         //Spawn more security guards
-        EnemyManager.Instance.canSpawn = true;
+        //EnemyManager.Instance.canSpawn = true;
 
         objIndicator.SetActive(false);
         exitIndicator.SetActive(true);

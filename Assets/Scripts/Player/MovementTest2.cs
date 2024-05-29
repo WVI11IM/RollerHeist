@@ -289,7 +289,7 @@ public class MovementTest2 : MonoBehaviour
             {
                 Vector3 velocity = rb.velocity;
                 velocity.y = 0f;
-                rb.velocity = velocity;
+                rb.velocity = velocity * 1.1f;
                 isAirborne = false;
                 if(trickCombo == 0)
                 {

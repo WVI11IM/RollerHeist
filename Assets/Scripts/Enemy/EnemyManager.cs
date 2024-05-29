@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public bool canFollow = true;
-    public bool canSpawn = false;
+    public bool canSpawn = true;
 
     public List<GameObject> enemySpawners;
 
@@ -35,7 +35,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        canSpawn = false;
+        canSpawn = true;
         //enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
     }
 

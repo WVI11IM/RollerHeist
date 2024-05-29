@@ -17,11 +17,7 @@ public class Collectable : MonoBehaviour
             {
                 CollectableManager.instance.smallItensCollected++;
             }
-            //Destroy this gameobject
-            Destroy(gameObject);
-
-            //Hide this gameObject
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
