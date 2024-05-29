@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverUI;
     public static GameManager Instance;
 
+    //target arrow reference
+    private GameObject objIndicator;
+    private GameObject exitIndicator;
+
+
     public GameState state;
 
     public static event Action<GameState> OnGameStateChange;
@@ -26,6 +31,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        objIndicator = GameObject.FindGameObjectWithTag("ObjectTarget");
+        exitIndicator = GameObject.FindGameObjectWithTag("ExitTarget");
+
         UpdateGameState(GameState.Invade);
     }
 
@@ -64,6 +72,9 @@ public class GameManager : MonoBehaviour
         //reset elapsedTime
         //bool runTime = true;
         EnemyManager.Instance.canFollow = true;
+
+        objIndicator.SetActive(true);
+        exitIndicator.SetActive(false);
     }
 
     private void HandleEscape()
@@ -71,6 +82,9 @@ public class GameManager : MonoBehaviour
         //Pleyer got pieces and need to escape
         //Spawn more security guards
         EnemyManager.Instance.canSpawn = true;
+
+        objIndicator.SetActive(false);
+        exitIndicator.SetActive(true);
     }
 
     private void HandleWin()
