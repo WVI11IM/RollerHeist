@@ -273,25 +273,38 @@ public class MovementTest2 : MonoBehaviour
         RaycastHit hit3;
         RaycastHit hit4;
 
+        RaycastHit hit5;
+
         bool isHit1 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
         bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 4), Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
         bool isHit3 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 4), Vector3.down, out hit3, raycastDistanceToFloor, floorLayerMask);
         bool isHit4 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 4), Vector3.down, out hit4, raycastDistanceToFloor, floorLayerMask);
 
+        bool isHit5 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.005f, floorLayerMask);
+
         if (isHit1 || isHit2 || isHit3 || isHit4)
         {
             isGrounded = true;
             animator.SetBool("isGrounded", true);
-            ChangeLensSizeForTrick(trickCombo);
+        }
+        else
+        {
+            isGrounded = false;
+            animator.SetBool("isGrounded", false);
+            isAirborne = true;
+        }
 
+        if (isHit5)
+        {
             //Evita a nulificação de velocidade ao entrar em contato com o chão.
             if (isAirborne)
             {
-                Vector3 velocity = rb.velocity;
+                Vector3 velocity = previousVelocity;
                 velocity.y = 0f;
-                rb.velocity = velocity * 1.1f;
+                rb.velocity = velocity;
                 isAirborne = false;
-                if(trickCombo == 0)
+                ChangeLensSizeForTrick(trickCombo);
+                if (trickCombo == 0)
                 {
                     SFXManager.Instance.PlaySFXRandomPitch("impactoPatins");
                 }
@@ -301,12 +314,6 @@ public class MovementTest2 : MonoBehaviour
                 }
                 trickCombo = 0;
             }
-        }
-        else
-        {
-            isGrounded = false;
-            animator.SetBool("isGrounded", false);
-            isAirborne = true;
         }
 
         if(rb.velocity.magnitude >= maxMoveSpeed * 2 / 3 && wasFast)
@@ -397,9 +404,9 @@ public class MovementTest2 : MonoBehaviour
             directionFront = transform.TransformDirection(directionFront);
 
             Vector3 velocity = rb.velocity;
-            velocity.x = 0f;
+            //velocity.x = 0f;
             velocity.y = 0f;
-            velocity.z = 0f;
+            //velocity.z = 0f;
             rb.velocity = velocity;
             rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.25f);
             SFXManager.Instance.StopSFXLoop("trilhos");

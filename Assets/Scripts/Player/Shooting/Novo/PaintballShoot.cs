@@ -44,8 +44,8 @@ public class PaintballShoot : MonoBehaviour
             StartCoroutine(Reload());
         }
 
-        // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo
-        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && currentAmmo > 0)
+        // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo. Tambem confere se jogo esta pausado ou foi finalizado
+        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && currentAmmo > 0 && Time.timeScale != 0 && GameManager.Instance.state != GameState.Win && GameManager.Instance.state != GameState.Lose)
         {
             Vector3 mousePosition = Input.mousePosition;
 
