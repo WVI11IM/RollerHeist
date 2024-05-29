@@ -9,6 +9,9 @@ public class EnemyManager : MonoBehaviour
 
     public List<GameObject> enemySpawners;
 
+    public float maxEnemySpawn = 25;
+    public float currentEnemySpawned = 0;
+
     [Header("Spawn's Frequency")]
     [Tooltip("This will be changed in script, no need to attribute a value :D")]
     public float currentSpawnCooldown = 0;
@@ -42,7 +45,7 @@ public class EnemyManager : MonoBehaviour
 
         ChangeSpawnFrequency();
 
-        if (canSpawn)
+        if (canSpawn && currentEnemySpawned < maxEnemySpawn)
         {
             StartCoroutine(EnemySpawner());
         }
@@ -50,6 +53,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator EnemySpawner()
     {
+        currentEnemySpawned++;
         canSpawn = false;
 
         int i = Random.Range(0, enemySpawners.Count);

@@ -221,6 +221,7 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("hasFainted");
             hasFainted = true;
             canDamage = false;
+            EnemyManager.Instance.currentEnemySpawned--;
             Destroy(gameObject, 5);
         }
     }
