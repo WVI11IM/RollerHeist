@@ -10278,7 +10278,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30196
+  m_Name: pb_Mesh194412
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13255,7 +13255,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30332
+  m_Name: pb_Mesh194542
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16477,7 +16477,7 @@ MonoBehaviour:
     volumeModifier: 0.5
   - musicName: skateHeistFinal
     soundClip: {fileID: 8300000, guid: 57ba2c9c7971a1e4e813629966a424b5, type: 3}
-    volumeModifier: 0.35
+    volumeModifier: 0.3
 --- !u!4 &827404183
 Transform:
   m_ObjectHideFlags: 0
@@ -24656,7 +24656,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29654
+  m_Name: pb_Mesh193856
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40798,7 +40798,7 @@ MonoBehaviour:
   - {fileID: 893352984}
   - {fileID: 1235323060}
   isGrounded: 0
-  raycastDistanceToFloor: 1.35
+  raycastDistanceToFloor: 1.5
   minDistForTrick: 4.15
   floorLayerMask:
     serializedVersion: 2
@@ -44094,6 +44094,8 @@ MonoBehaviour:
   - {fileID: 865018919}
   - {fileID: 1096895756}
   - {fileID: 603667205}
+  maxEnemySpawn: 25
+  currentEnemySpawned: 0
   currentSpawnCooldown: 0
   startSpawnCooldown: 10
   oneItemSpawnCooldown: 8
@@ -52690,12 +52692,12 @@ MonoBehaviour:
     maxPitch: 1.15
   - soundEffectName: tiro1
     soundClip: {fileID: 8300000, guid: aaf6d45bb88a818469c8a29af10e6b5e, type: 3}
-    volumeModifier: 0.25
+    volumeModifier: 0.35
     minPitch: 0.75
     maxPitch: 1.25
   - soundEffectName: tiro2
     soundClip: {fileID: 8300000, guid: b39727832c1bae64ba6d8575230a9545, type: 3}
-    volumeModifier: 0.03
+    volumeModifier: 0.075
     minPitch: 1.25
     maxPitch: 1.75
   - soundEffectName: truque1
@@ -57971,7 +57973,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29550
+  m_Name: pb_Mesh193752
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

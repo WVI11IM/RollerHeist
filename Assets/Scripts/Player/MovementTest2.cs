@@ -609,7 +609,7 @@ public class MovementTest2 : MonoBehaviour
     {
         float normalizedSpeed = Mathf.Clamp01(rb.velocity.magnitude / boostMaxSpeed);
 
-        float dampingFactor = 0.025f;
+        float dampingFactor = 0.02f;
         float targetSize = Mathf.Lerp(minLensFOV, maxLensFOV, normalizedSpeed);
         float currentSize = virtualCamera.m_Lens.FieldOfView;
         float currentSize2 = virtualCamera2.m_Lens.FieldOfView;
