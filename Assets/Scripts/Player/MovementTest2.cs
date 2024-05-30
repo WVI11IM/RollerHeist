@@ -22,7 +22,7 @@ public class MovementTest2 : MonoBehaviour
     public bool canInput = true;
 
     private Vector3 previousVelocity;
-    private float decelerationThreshold = 15f;
+    private float decelerationThreshold = 17.5f;
 
     [Space]
     [Header("DRIFT SETTINGS")]

@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     private GameObject objIndicator;
     private GameObject exitIndicator;
 
+    //collider switches to trigger when escaping
+    public BoxCollider exitCollider;
+
+
 
     public GameState state;
 
@@ -76,6 +80,8 @@ public class GameManager : MonoBehaviour
 
         objIndicator.SetActive(true);
         exitIndicator.SetActive(false);
+
+        exitCollider.isTrigger = false;
     }
 
     private void HandleEscape()
@@ -86,6 +92,8 @@ public class GameManager : MonoBehaviour
 
         objIndicator.SetActive(false);
         exitIndicator.SetActive(true);
+
+        exitCollider.isTrigger = true;
     }
 
     private void HandleWin()

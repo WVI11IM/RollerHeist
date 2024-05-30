@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public EnemySO enemyType;
     public NavMeshAgent enemy;
     [HideInInspector] public Transform player;
+    [HideInInspector] public MovementTest2 playerMovement;
     public float health;
     public bool isAttacking = false;
     public bool isStunned = false;
@@ -42,6 +43,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementTest2>();
         health = enemyType.health;
 
         enemyState = State.PATROL;
@@ -193,7 +195,15 @@ public class Enemy : MonoBehaviour
 
         //Perseguir jogador com velocidade alta
         enemy.isStopped = false;
-        enemy.SetDestination(player.position);
+
+        if (!playerMovement.isGrounded)
+        {
+            enemy.SetDestination(player.position);
+        }
+        else
+        {
+            enemy.SetDestination(new Vector3(player.position.x, transform.position.y, player.position.z));
+        }
         enemy.speed = enemyType.runSpeed;
     }
     public void AttackPlayer()

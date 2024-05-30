@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PaintballShoot : MonoBehaviour
 {
@@ -14,9 +16,13 @@ public class PaintballShoot : MonoBehaviour
     public float maxAngle = 180f; // Ângulo máximo de tiro em relação à direção do personagem
     public float fireRate = 0.5f; // Taxa de disparo em tiros por segundo
     private float nextFireTime = 0f; // Tempo do próximo disparo, inicializado como 0 para permitir o primeiro tiro imediatamente
-    public float maxAmmo = 5;
+    public float maxAmmo = 20;
     public float currentAmmo;
     public float reloadTime = 2;
+    private bool isReloading = false;
+    public Color[] reloadingColors;
+    public Image ammoReloadMeter;
+    public TextMeshProUGUI ammoText;
 
     [Space]
     [Header("ANIMATION PROPERTIES")]
@@ -41,7 +47,14 @@ public class PaintballShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo)
+        if(currentAmmo > 0)
+        {
+            ammoReloadMeter.fillAmount = currentAmmo / maxAmmo;
+        }
+
+        ammoText.text = currentAmmo.ToString();
+
+        if (currentAmmo <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
         }
@@ -79,6 +92,7 @@ public class PaintballShoot : MonoBehaviour
 
                 animator.SetFloat("lookAngle", lookAngle);
                 targetLayerWeight = 1f;
+                ammoReloadMeter.gameObject.SetActive(true);
                 gun.SetActive(true);
                 Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
                 if (Time.time >= nextFireTime)
@@ -93,12 +107,22 @@ public class PaintballShoot : MonoBehaviour
             else
             {
                 targetLayerWeight = 0f;
+                if (isReloading)
+                {
+                    ammoReloadMeter.gameObject.SetActive(true);
+                }
+                else ammoReloadMeter.gameObject.SetActive(false);
                 gun.SetActive(false);
             }
         }
         else
         {
             targetLayerWeight = 0f;
+            if (isReloading)
+            {
+                ammoReloadMeter.gameObject.SetActive(true);
+            }
+            else ammoReloadMeter.gameObject.SetActive(false);
             gun.SetActive(false);
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
@@ -168,7 +192,15 @@ public class PaintballShoot : MonoBehaviour
 
     IEnumerator Reload()
     {
-        yield return new WaitForSeconds(reloadTime);
+        isReloading = true;
+        for (int i = 0; i < maxAmmo; i++)
+        {
+            ammoReloadMeter.color = reloadingColors[1];
+            ammoReloadMeter.fillAmount = i / maxAmmo;
+            yield return new WaitForSeconds(reloadTime / maxAmmo);
+        }
+        ammoReloadMeter.color = reloadingColors[0];
         currentAmmo = maxAmmo;
+        isReloading = false;
     }
 }
