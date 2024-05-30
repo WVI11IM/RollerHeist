@@ -22,7 +22,7 @@ public class MovementTest2 : MonoBehaviour
     public bool canInput = true;
 
     private Vector3 previousVelocity;
-    private float decelerationThreshold = 17.5f;
+    private float decelerationThreshold = 15f;
 
     [Space]
     [Header("DRIFT SETTINGS")]
@@ -91,8 +91,6 @@ public class MovementTest2 : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
-
         rb = GetComponent<Rigidbody>();
 
         previousVelocity = rb.velocity;
@@ -117,6 +115,12 @@ public class MovementTest2 : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            maxBoostValue = 10000;
+            boostValue = maxBoostValue;
+        }
+
         //Regula o valor e a barra de boost.
         UpdateBoostValue();
 
@@ -418,6 +422,7 @@ public class MovementTest2 : MonoBehaviour
         if (!wasOnRail && isGrinding)
         {
             animator.SetTrigger("startedGrind");
+            animator.ResetTrigger("bumped");
             SFXManager.Instance.PlaySFXRandomPitch("impactoTrilhos");
         }
 

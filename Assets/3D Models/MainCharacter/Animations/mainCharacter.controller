@@ -183,8 +183,10 @@ AnimatorStateMachine:
     m_Position: {x: -120, y: 40, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
+  - {fileID: -3000133651555033505}
   - {fileID: 9109143020927330631}
   - {fileID: -2425543082463131442}
+  - {fileID: 5323340823212136195}
   - {fileID: 3099897301927703772}
   - {fileID: 541052295588556461}
   - {fileID: -4673391962091505196}
@@ -198,8 +200,6 @@ AnimatorStateMachine:
   - {fileID: 4809063906212127896}
   - {fileID: -1827621434824876310}
   - {fileID: -3482016915532762676}
-  - {fileID: 5323340823212136195}
-  - {fileID: -3000133651555033505}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
@@ -935,6 +935,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isGrinding
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4879158068880688361}
   m_Solo: 0
@@ -946,7 +949,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 0
-  m_InterruptionSource: 0
+  m_InterruptionSource: 1
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &-3327941612595439663
@@ -1023,7 +1026,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 1
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &-2850350018318960008
@@ -1156,7 +1159,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 2
+  m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &-2349474597650270343
@@ -2642,7 +2645,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 0
-  m_InterruptionSource: 0
+  m_InterruptionSource: 1
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &5450005651345882496
@@ -3245,6 +3248,6 @@ AnimatorStateTransition:
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 2
+  m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1

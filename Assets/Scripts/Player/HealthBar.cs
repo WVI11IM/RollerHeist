@@ -24,6 +24,12 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            maxHealth = 10000;
+            health = maxHealth;
+        }
+
         if (isInvincible)
         {
             invincibilityTimer -= Time.deltaTime;
