@@ -27,6 +27,7 @@ public class TargetIndicator : MonoBehaviour
         this.target = target;
         this.mainCamera = mainCamera;
         canvasRect = canvas.GetComponent<RectTransform>();
+        gameObject.GetComponent<RectTransform>().SetAsFirstSibling();
     }
 
     public void UpdateTargetIndicator()
