@@ -89,6 +89,11 @@ public class MovementTest2 : MonoBehaviour
 
     Rigidbody rb;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
