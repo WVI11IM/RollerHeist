@@ -4,37 +4,29 @@ using UnityEngine;
 
 public class SwitchPalette : MonoBehaviour
 {
-    SkinnedMeshRenderer sMR;
     public Material[] materials;
 
-    // Start is called before the first frame update
+    SkinnedMeshRenderer sMR;
+
     void Start()
     {
         sMR = GetComponent<SkinnedMeshRenderer>();
+        Debug.Log("SwitchPalette: SkinnedMeshRenderer atribuído corretamente.");
+        
+        int index = PlayerPrefs.GetInt("selectedCharacter");
+        ChangePalette(index);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangePalette(int index)
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (index >= 0 && index < materials.Length)
         {
-            sMR.material = materials[0];
+            sMR.material = materials[index];
+            Debug.Log("SwitchPalette: Paleta alterada para índice " + index);
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        else
         {
-            sMR.material = materials[1];
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            sMR.material = materials[2];
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            sMR.material = materials[3];
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            sMR.material = materials[4];
+            Debug.LogWarning("SwitchPalette: Índice de paleta inválido: " + index);
         }
     }
 }
