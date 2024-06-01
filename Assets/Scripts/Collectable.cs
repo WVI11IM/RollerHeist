@@ -3,40 +3,36 @@ using UnityEngine;
 public class Collectable : MonoBehaviour
 {
     [SerializeField] private bool canCollect;
+    private CapsuleCollider capsuleCollider;
 
-    private void Update()
+    private void Start()
     {
-        if (canCollect)
-        {
-            if (gameObject.tag == "BigItem")
-            {
-                Debug.Log("Collect Item");
-                CollectableManager.instance.bigItemCollected++;
-            }
-            else if (gameObject.tag == "SmallItem")
-            {
-                CollectableManager.instance.smallItensCollected++;
-            }
-            gameObject.SetActive(false);
-        }
+        canCollect = true;
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        capsuleCollider.enabled = true;
     }
 
     private void OnTriggerEnter(Collider collision)
     {
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && canCollect)
         {
-            canCollect = true;
-
+            Collect();
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void Collect()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (gameObject.tag == "BigItem")
         {
-
-            canCollect = false;
+            Debug.Log("Collect Item");
+            CollectableManager.instance.bigItemCollected++;
         }
+        else if (gameObject.tag == "SmallItem")
+        {
+            CollectableManager.instance.smallItensCollected++;
+        }
+        capsuleCollider.enabled = false;
+        canCollect = false;
     }
 }

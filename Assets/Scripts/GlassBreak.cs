@@ -70,7 +70,7 @@ public class GlassBreak : MonoBehaviour
 
     private IEnumerator DestroyGlassAfterDelay(float delay)
     {
-        int vidroInteger = Random.Range(0, 2) + 1;
+        int vidroInteger = Random.Range(3, 4) + 1;
         SFXManager.Instance.PlaySFXRandomPitch("glass" + vidroInteger);
         yield return new WaitForSeconds(delay);
         DestroyGlass();

@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent enemy;
     [HideInInspector] public Transform player;
     [HideInInspector] public MovementTest2 playerMovement;
-    public float health;
+    [HideInInspector] public float health;
     public bool isAttacking = false;
     public bool isStunned = false;
     public bool hasFainted = false;
@@ -236,6 +236,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /*
     private void OnDrawGizmos()
     {
         float radius = enemyType.detectionDist;
@@ -259,6 +260,7 @@ public class Enemy : MonoBehaviour
             previousPoint = point;
         }
     }
+    */
 
     public float damage = 10f;
 
