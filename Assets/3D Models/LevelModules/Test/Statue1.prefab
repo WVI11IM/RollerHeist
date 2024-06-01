@@ -259,6 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8039921852658478849}
   - component: {fileID: 1563477381171746836}
+  - component: {fileID: 7413621825388009376}
   m_Layer: 0
   m_Name: Statue1
   m_TagString: Untagged
@@ -298,3 +299,19 @@ CapsuleCollider:
   m_Height: 25
   m_Direction: 1
   m_Center: {x: 0, y: 6, z: 0}
+--- !u!208 &7413621825388009376
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2493526270427338123}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 7, y: 12.5, z: 7}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 6, z: 0}
+  m_TimeToStationary: 0.5

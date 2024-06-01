@@ -17,8 +17,16 @@ public class Projetil : MonoBehaviour
         // Se colidir com algo que não seja o jogador
         if (!other.gameObject.CompareTag("Player") && !other.CompareTag("Spawner") && !other.CompareTag("AimHitLayer"))
         {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Enemy enemy = other.GetComponent<Enemy>();
+                if (!enemy.hasFainted)
+                {
+                    Destroy(gameObject);
+                }
+            }
             // Destroi o projetil
-            Destroy(gameObject);
+            else Destroy(gameObject);
 
             // Se o objeto atingido for uma parede
             if (other.gameObject.CompareTag("Parede"))

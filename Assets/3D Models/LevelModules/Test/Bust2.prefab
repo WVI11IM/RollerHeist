@@ -342,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6340922139557902276}
   - component: {fileID: 1763874897135546187}
+  - component: {fileID: 9203840818595782134}
   m_Layer: 0
   m_Name: Bust2
   m_TagString: Untagged
@@ -382,3 +383,19 @@ CapsuleCollider:
   m_Height: 10.5
   m_Direction: 0
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!208 &9203840818595782134
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965230141927740734}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5.125, y: 1.5, z: 3}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2, z: 0}
+  m_TimeToStationary: 0.5
