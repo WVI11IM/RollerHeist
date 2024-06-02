@@ -11,7 +11,6 @@ public class SwitchPalette : MonoBehaviour
     void Start()
     {
         sMR = GetComponent<SkinnedMeshRenderer>();
-        Debug.Log("SwitchPalette: SkinnedMeshRenderer atribuído corretamente.");
         
         int index = PlayerPrefs.GetInt("selectedCharacter");
         ChangePalette(index);

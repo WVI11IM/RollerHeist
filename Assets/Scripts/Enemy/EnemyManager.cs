@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
     public bool canSpawn = true;
 
     public List<GameObject> enemySpawners;
+    public GameObject[] enemies;
 
     public float maxEnemySpawn = 25;
     public float currentEnemySpawned = 0;
@@ -56,9 +57,10 @@ public class EnemyManager : MonoBehaviour
         currentEnemySpawned++;
         canSpawn = false;
 
-        int i = Random.Range(0, enemySpawners.Count);
+        int n1 = Random.Range(0, enemies.Length);
+        int n2 = Random.Range(0, enemySpawners.Count);
 
-        Instantiate(Resources.Load<GameObject>("ENEMY"), enemySpawners[i].transform);
+        Instantiate(enemies[n1], enemySpawners[n2].transform);
 
         yield return new WaitForSeconds(currentSpawnCooldown);
         canSpawn = true;

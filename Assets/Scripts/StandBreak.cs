@@ -20,22 +20,16 @@ public class StandBreak : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !isBroken)
         {
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            float mms = other.gameObject.GetComponent<MovementTest2>().maxMoveSpeed;
-
-            if(rb.velocity.magnitude >= mms * 2 / 3)
-            {
-                brokenStand.SetActive(true);
-                normalStand.SetActive(false);
-                isBroken = true;
-                StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
-            }
+            brokenStand.SetActive(true);
+            normalStand.SetActive(false);
+            isBroken = true;
+            StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
         }
     }
 
     private IEnumerator DestroyGlassAfterDelay(float delay)
     {
-        int vidroInteger = Random.Range(0, 2) + 1;
+        int vidroInteger = Random.Range(2, 4) + 1;
         SFXManager.Instance.PlaySFXRandomPitch("glass" + vidroInteger);
         yield return new WaitForSeconds(delay);
         DestroyGlass();

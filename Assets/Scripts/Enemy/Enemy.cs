@@ -13,13 +13,14 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public MovementTest2 playerMovement;
     [HideInInspector] public float health;
     public bool isAttacking = false;
+    public bool isShooting = false;
     public bool isStunned = false;
     public bool hasFainted = false;
     private bool canDamage = true;
 
     [SerializeField] Animator animator;
 
-    private enum State
+    public enum State
     {
         PATROL,
         CHASE,
@@ -28,7 +29,7 @@ public class Enemy : MonoBehaviour
         FAINTED
     }
 
-    private State enemyState;
+    public State enemyState;
 
     [Space]
     [Header("PATROL SETTINGS")]
@@ -52,7 +53,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (enemy.speed == 0f && enemyState == State.ATTACK)
+        {
+            RotateTowardsTarget();
+        }
+
         animator.SetBool("isAttacking", isAttacking);
+        animator.SetBool("isShooting", isShooting);
         animator.SetBool("isStunned", isStunned);
         animator.SetFloat("speed", enemy.velocity.magnitude / enemyType.runSpeed);
 
@@ -122,6 +129,7 @@ public class Enemy : MonoBehaviour
     public void PatrolArea()
     {
         isAttacking = false;
+        isShooting = false;
 
         // Set a random patrol target if not already set or if close to the current target
         if (!hasPatrolTarget || Vector3.Distance(transform.position, patrolTarget) < 1f)
@@ -134,6 +142,7 @@ public class Enemy : MonoBehaviour
         // Move towards the random patrol target
         enemy.isStopped = false;
         enemy.speed = enemyType.walkSpeed;
+        enemy.updateRotation = true;
         enemy.SetDestination(patrolTarget);
 
         // Check if the enemy has reached the patrol target
@@ -192,6 +201,7 @@ public class Enemy : MonoBehaviour
     public void ChasePlayer()
     {
         isAttacking = false;
+        isShooting = false;
 
         //Perseguir jogador com velocidade alta
         enemy.isStopped = false;
@@ -205,16 +215,28 @@ public class Enemy : MonoBehaviour
             enemy.SetDestination(new Vector3(player.position.x, transform.position.y, player.position.z));
         }
         enemy.speed = enemyType.runSpeed;
+        enemy.updateRotation = true;
     }
     public void AttackPlayer()
     {
         isAttacking = true;
-        GiveDamage();
         enemy.speed = 0;
+        enemy.updateRotation = false;
+
+        if (enemyType.enemyName == "Guard")
+        {
+            GiveDamage();
+            isShooting = false;
+        }
+        else if (enemyType.enemyName == "Taser")
+        {
+            isShooting = true;
+        }
     }
     public void Stun()
     {
         isAttacking = false;
+        isShooting = false;
         enemy.isStopped = true;
         if (!isStunned)
         {
@@ -225,6 +247,7 @@ public class Enemy : MonoBehaviour
     public void Faint()
     {
         isAttacking = false;
+        isShooting = false;
         enemy.isStopped = true;
         if (!hasFainted)
         {
@@ -266,17 +289,6 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        /*
-        if (collider.gameObject.CompareTag("Player"))
-        {
-            HealthBar playerHealth = collider.gameObject.GetComponent<HealthBar>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage);
-            }
-        }
-        else
-        */
         if (collider.gameObject.CompareTag("Projetil"))
         {
             TakeDamage();
@@ -320,6 +332,17 @@ public class Enemy : MonoBehaviour
         if (playerHealth != null && !playerHealth.isInvincible && canDamage && !isStunned)
         {
             playerHealth.TakeDamage(damage);
+        }
+    }
+
+    private void RotateTowardsTarget()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0f; // Keep the rotation on the horizontal plane
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * enemy.angularSpeed / 2);
         }
     }
 }

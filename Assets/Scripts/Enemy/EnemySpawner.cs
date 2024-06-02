@@ -9,8 +9,6 @@ public class EnemySpawner : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             EnemyManager.Instance.enemySpawners.Remove(gameObject);
-            //isAdded = false;
-            Debug.Log("Remove from list");
         }
     }
 
@@ -19,8 +17,6 @@ public class EnemySpawner : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             EnemyManager.Instance.enemySpawners.Add(gameObject);
-            //isAdded = true;
-            Debug.Log("Add from list");
         }
     }
 }

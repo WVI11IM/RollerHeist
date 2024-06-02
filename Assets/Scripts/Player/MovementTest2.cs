@@ -311,13 +311,11 @@ public class MovementTest2 : MonoBehaviour
         if(rb.velocity.y < -2.5f && !isGrounded && !wasFalling)
         {
             SFXManager.Instance.PlaySFXLoop("vento2");
-            Debug.Log("Playing vento2");
             wasFalling = true;
         }
         else if (isGrounded && wasFalling)
         {
             SFXManager.Instance.StopSFXLoop("vento2");
-            Debug.Log("Stopping vento2");
             wasFalling = false;
         }
     }

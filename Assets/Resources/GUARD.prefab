@@ -523,6 +523,37 @@ Transform:
   m_Father: {fileID: 1196509675992357798}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5985255664255006111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096343601409387556}
+  m_Layer: 11
+  m_Name: firePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1096343601409387556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985255664255006111}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4824934436561707793}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6072312554410492627
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +722,7 @@ GameObject:
   - component: {fileID: 6776702345067790106}
   - component: {fileID: 6776702345067790105}
   m_Layer: 11
-  m_Name: ENEMY
+  m_Name: GUARD
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -806,7 +837,7 @@ NavMeshAgent:
   m_Speed: 10
   m_Acceleration: 50
   avoidancePriority: 50
-  m_AngularSpeed: 270
+  m_AngularSpeed: 360
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
@@ -833,10 +864,12 @@ MonoBehaviour:
   playerMovement: {fileID: 0}
   health: 2
   isAttacking: 0
+  isShooting: 0
   isStunned: 0
   hasFainted: 0
   animator: {fileID: 732579505337803080}
-  patrolRadius: 20
+  enemyState: 0
+  patrolRadius: 15
   waitTimeAtPatrolPoint: 3
   damage: 20
 --- !u!1 &7287230680857974037
@@ -1120,7 +1153,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 1.0663339, z: -5.684342e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1096343601409387556}
   m_Father: {fileID: 8706423920334793073}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
