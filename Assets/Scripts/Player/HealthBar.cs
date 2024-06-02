@@ -15,11 +15,15 @@ public class HealthBar : MonoBehaviour
     private float invincibilityTimer = 0f;
 
     public GameManager gameManager;
+    MovementTest2 playerMovement;
+    PaintballShoot playerShoot;
     public Animator animator;
 
     void Start()
     {
         health = maxHealth;
+        playerMovement = GetComponent<MovementTest2>();
+        playerShoot = GetComponent<PaintballShoot>();
     }
 
     void Update()
@@ -51,7 +55,11 @@ public class HealthBar : MonoBehaviour
         if (health <= 0 && !isDead)
         {
             isDead = true;
-            gameObject.SetActive(false);
+            animator.SetBool("isFainted", true);
+            animator.SetTrigger("fainted");
+            playerMovement.enabled = false;
+            playerShoot.enabled = false;
+            animator.SetLayerWeight(1, 0);
             gameManager.UpdateGameState(GameState.Lose);
         }
     }
