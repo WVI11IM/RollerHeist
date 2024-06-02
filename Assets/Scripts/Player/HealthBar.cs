@@ -52,7 +52,7 @@ public class HealthBar : MonoBehaviour
         {
             isDead = true;
             gameObject.SetActive(false);
-            gameManager.gameOver();
+            gameManager.UpdateGameState(GameState.Lose);
         }
     }
 

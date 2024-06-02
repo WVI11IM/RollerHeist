@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject losePanel;
     public GameObject winPanel;
     public TextMeshProUGUI highScoreText;
     //public TextMeshProUGUI scoreText;
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) restart();
+        if (Input.GetKeyDown(KeyCode.Escape)) Restart();
     }
 
     public void UpdateGameState(GameState newState)
@@ -112,15 +111,15 @@ public class GameManager : MonoBehaviour
     {
         //Stop Time
         //Open Lose Panel
-        losePanel.SetActive(true);
+        GameOver();
     }
 
-    public void gameOver()
+    public void GameOver()
     {
         GameOverUI.SetActive(true);
     }
 
-    public void restart()
+    public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
