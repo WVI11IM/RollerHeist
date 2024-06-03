@@ -414,9 +414,9 @@ public class MovementTest2 : MonoBehaviour
             directionFront = transform.TransformDirection(directionFront);
 
             Vector3 velocity = rb.velocity;
-            //velocity.x = 0f;
-            //velocity.y = 0f;
-            //velocity.z = 0f;
+            velocity.x = 0f;
+            velocity.y = 0f;
+            velocity.z = 0f;
             rb.velocity = velocity;
             rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.5f);
             SFXManager.Instance.StopSFXLoop("trilhos");
