@@ -8,14 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 3
-  m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
+  m_Shader: {fileID: 4800000, guid: f7e38193b7f064d7380403618fd8b69e, type: 3}
   m_ValidKeywords:
   - DR_CEL_EXTRA_ON
-  - DR_OUTLINE_ON
+  - DR_RIM_ON
   - DR_SPECULAR_ON
-  - _DETAILMAPBLENDINGMODE_MULTIPLY
-  - _GRADIENTSPACE_WORLD
-  - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
   m_InvalidKeywords:
   - _CELPRIMARYMODE_NONE
@@ -23,10 +20,10 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -104,7 +101,7 @@ Material:
     - _BaseMapPremultiply: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _CameraDistanceImpact: 0
+    - _CameraDistanceImpact: 1
     - _CelExtraEnabled: 1
     - _CelNumSteps: 4
     - _CelPrimaryMode: 0
@@ -140,16 +137,16 @@ Material:
     - _LightmapDirectionYaw: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthOffset: 0
+    - _OutlineDepthOffset: 1
     - _OutlineEnabled: 1
-    - _OutlineScale: 1
+    - _OutlineScale: 3
     - _OutlineSpace: 0
-    - _OutlineWidth: 0.2
+    - _OutlineWidth: 3
     - _OverrideLightmapDir: 0
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimEnabled: 0
+    - _RimEnabled: 1
     - _SelfShadingSize: 0.5
     - _SelfShadingSizeExtra: 0.2
     - _ShadowEdgeSize: 0.05
@@ -180,7 +177,7 @@ Material:
     - _ColorGradient: {r: 0, g: 0, b: 0, a: 1}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FlatRimColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlatRimColor: {r: 0.07075471, g: 1, b: 0.7559257, a: 1}
     - _FlatSpecularColor: {r: 1, g: 0.8976249, b: 0.495283, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
