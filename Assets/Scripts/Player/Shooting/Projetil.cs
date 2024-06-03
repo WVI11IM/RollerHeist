@@ -6,6 +6,7 @@ public class Projetil : MonoBehaviour
 {
     public float lifetime = 3f;
     public GameObject Marca; // Referência ao Prefab da marca de tinta
+    public GameObject impactParticles;
 
     private void Start()
     {
@@ -22,17 +23,15 @@ public class Projetil : MonoBehaviour
                 Enemy enemy = other.GetComponent<Enemy>();
                 if (!enemy.hasFainted)
                 {
+                    Instantiate(impactParticles, transform.position, Quaternion.identity);
                     Destroy(gameObject);
                 }
             }
             // Destroi o projetil
-            else Destroy(gameObject);
-
-            // Se o objeto atingido for uma parede
-            if (other.gameObject.CompareTag("Parede"))
+            else
             {
-                // Instancia a marca de tinta na posição do impacto
-                Instantiate(Marca, transform.position, Quaternion.identity);
+                Instantiate(impactParticles, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
         }
     }
