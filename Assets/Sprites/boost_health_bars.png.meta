@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -20,7 +20,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -44,14 +44,14 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -101,18 +101,6 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -120,19 +108,19 @@ TextureImporter:
       name: boost_health_bars_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 2225
-        width: 2185
-        height: 2185
+        x: 0
+        y: 2220
+        width: 2236
+        height: 2220
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3aab547f3f8a37f44b5e6bf0a00139c6
-      internalID: -926742566
+      spriteID: eea56a2c2d198814d8ae5c985ca560b4
+      internalID: 1663060064
       vertices: []
       indices: 
       edges: []
@@ -141,19 +129,19 @@ TextureImporter:
       name: boost_health_bars_1
       rect:
         serializedVersion: 2
-        x: 2259
-        y: 2225
-        width: 2185
-        height: 2185
+        x: 2236
+        y: 2220
+        width: 2236
+        height: 2220
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8054425f520f1e4e9556c7fba6b2d70
-      internalID: 1284414923
+      spriteID: f72cc1155504a0f4db4dd80756e6b38d
+      internalID: 1722110034
       vertices: []
       indices: 
       edges: []
@@ -162,19 +150,19 @@ TextureImporter:
       name: boost_health_bars_2
       rect:
         serializedVersion: 2
-        x: 42
-        y: 40
-        width: 2185
-        height: 2185
+        x: 0
+        y: 0
+        width: 2236
+        height: 2220
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aef9c9f6bf6372842b4eee4e15f2f198
-      internalID: -691782950
+      spriteID: d8b6976a372a8d442962c83028dcdf1c
+      internalID: 7818242
       vertices: []
       indices: 
       edges: []
@@ -183,19 +171,19 @@ TextureImporter:
       name: boost_health_bars_3
       rect:
         serializedVersion: 2
-        x: 2259
-        y: 40
-        width: 2185
-        height: 2185
+        x: 2236
+        y: 0
+        width: 2236
+        height: 2220
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 287a43a26f4b80f45894d942d74d7ac3
-      internalID: -1913922472
+      spriteID: 341ac2d431e79e54b848bce37a8c23c6
+      internalID: 1293033988
       vertices: []
       indices: 
       edges: []
@@ -203,7 +191,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 30ac8c3b2dd3b3040892003cdfbedcfa
+    spriteID: 00d9748827da0b64c91a4755f733f880
     internalID: 0
     vertices: []
     indices: 
@@ -211,10 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boost_health_bars_1: 1284414923
-      boost_health_bars_2: -691782950
-      boost_health_bars_0: -926742566
-      boost_health_bars_3: -1913922472
+      boost_health_bars_1: 1722110034
+      boost_health_bars_2: 7818242
+      boost_health_bars_0: 1663060064
+      boost_health_bars_3: 1293033988
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
