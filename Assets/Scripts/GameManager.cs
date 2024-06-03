@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        MusicManager.Instance.StopAllLoopingMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckTimeScore()
     {
-        if (Timer.Instance.elapsedTime < PlayerPrefs.GetFloat("HighScore", 0))
+        if (Timer.Instance.elapsedTime < PlayerPrefs.GetFloat("HighScore", 6039.999f))
         {
             PlayerPrefs.SetFloat("HighScore", Timer.Instance.elapsedTime);
         }
@@ -136,9 +137,11 @@ public class GameManager : MonoBehaviour
 
     private void UpdateHighScore()
     {
+        Debug.Log(PlayerPrefs.GetFloat("HighScore"));
         int minutes = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) / 60);
         int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) % 60);
         int miliseconds = (int)((PlayerPrefs.GetFloat("HighScore", 0)) * 1000) % 1000;
+        Debug.Log(minutes + ":" + seconds + ":" + miliseconds);
         highScoreText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
     }
 }

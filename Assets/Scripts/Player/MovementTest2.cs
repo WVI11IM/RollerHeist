@@ -461,7 +461,7 @@ public class MovementTest2 : MonoBehaviour
         }
 
         float boostSliderValue = boostValue / maxBoostValue;
-        boostMeter.fillAmount = Mathf.Lerp(0.333f, 0.666f, boostSliderValue);
+        boostMeter.fillAmount = Mathf.Lerp(0.4f, 0.6f, boostSliderValue);
 
         if (boostValue > maxBoostValue) boostValue = maxBoostValue;
         if (boostValue < 0) boostValue = 0;

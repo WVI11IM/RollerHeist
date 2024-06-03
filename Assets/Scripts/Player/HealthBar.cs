@@ -44,7 +44,7 @@ public class HealthBar : MonoBehaviour
         }
 
         float healthSliderValue = health / maxHealth;
-        healthMeter.fillAmount = Mathf.Lerp(0.39f, 0.61f, healthSliderValue);
+        healthMeter.fillAmount = Mathf.Lerp(0.4f, 0.6f, healthSliderValue);
          /*
         if(healthSlider.value != health)
         {
