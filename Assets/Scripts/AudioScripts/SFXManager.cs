@@ -2,17 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SFXManager : MonoBehaviour
 {
     [SerializeField] private AudioSource sfxObject;
-    [SerializeField] private AudioSource sfxObjectSpacialBlend;
 
     private Dictionary<string, AudioSource> activeLoopAudioSources = new Dictionary<string, AudioSource>();
 
     [SerializeField] SoundEffect[] soundEffects;
     [SerializeField] SoundEffectSpacialBlend[] soundEffectsSpacialBlend;
     [SerializeField] SoundEffectRandomPitch[] soundEffectsRandomPitch;
+    [SerializeField] SoundEffect[] uiSoundEffects;
 
     public static SFXManager Instance;
 
@@ -21,7 +22,27 @@ public class SFXManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StopAllLoopingSFX();
     }
 
     public void PlaySFX(string soundEffectName)
@@ -117,6 +138,38 @@ public class SFXManager : MonoBehaviour
             audioSource.Stop();
             Destroy(audioSource.gameObject);
             activeLoopAudioSources.Remove(soundEffectName);
+        }
+    }
+
+    public void StopAllLoopingSFX()
+    {
+        foreach (var entry in activeLoopAudioSources)
+        {
+            AudioSource audioSource = entry.Value;
+            audioSource.loop = false;
+            audioSource.Stop();
+            Destroy(audioSource.gameObject);
+        }
+        activeLoopAudioSources.Clear();
+    }
+
+    public void PlayUISFX(string soundEffectName)
+    {
+        SoundEffect effect = Array.Find(uiSoundEffects, e => e.soundEffectName == soundEffectName);
+        if (effect != null)
+        {
+            AudioSource audioSource = Instantiate(sfxObject, transform.position, Quaternion.identity);
+            audioSource.clip = effect.soundClip;
+            audioSource.volume = effect.volumeModifier;
+            audioSource.ignoreListenerPause = true; // Ensure the sound continues playing when time scale is 0
+            audioSource.Play();
+            DontDestroyOnLoad(audioSource.gameObject);
+            float clipLength = audioSource.clip.length;
+            Destroy(audioSource.gameObject, clipLength);
+        }
+        else
+        {
+            Debug.LogWarning("UI Sound effect not found: " + soundEffectName);
         }
     }
 }
