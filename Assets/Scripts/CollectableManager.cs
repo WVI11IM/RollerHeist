@@ -48,8 +48,8 @@ public class CollectableManager : MonoBehaviour
 
     void SetCollectables()
     {
-        bigItem.text = "Big Item (" + bigItemCollected + "/1)";
-        smallItem.text = "Small Item (" + smallItensCollected + "/" + smallItensToCollect + ")";
+        bigItem.text = bigItemCollected + "/1";
+        smallItem.text = smallItensCollected + "/" + smallItensToCollect;
     }
 
     public void GotItem()
