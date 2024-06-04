@@ -1,34 +1,32 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class CreditsRoll : MonoBehaviour
 {
-    public TMP_Text creditsText;
-    public float scrollSpeed = 20f;
+    public Image creditsImage; // Substitui TMP_Text por Image
+    public float scrollSpeed = 10f; // Ajusta a velocidade para um valor mais baixo
 
     private RectTransform creditsRectTransform;
     private RectTransform panelRectTransform;
 
     private void Start()
     {
-        creditsRectTransform = creditsText.GetComponent<RectTransform>();
-        panelRectTransform = creditsText.transform.parent.GetComponent<RectTransform>();
+        creditsRectTransform = creditsImage.GetComponent<RectTransform>();
+        panelRectTransform = creditsImage.transform.parent.GetComponent<RectTransform>();
 
-        // Posicionar o texto fora da área visível no início
-        creditsRectTransform.anchoredPosition = new Vector2(0, panelRectTransform.rect.height / 2);
+        // Posicionar a imagem fora da área visível no início
+        creditsRectTransform.anchoredPosition = new Vector2(0, -panelRectTransform.rect.height / 2 - creditsRectTransform.rect.height / 2);
     }
 
     private void Update()
     {
-        // Move o texto para cima ao longo do tempo
+        // Move a imagem para cima ao longo do tempo
         creditsRectTransform.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
 
         // Reiniciar a posição se tiver rolado completamente fora da tela
-       if (creditsRectTransform.anchoredPosition.y > creditsRectTransform.rect.height)
-       {
-       creditsRectTransform.anchoredPosition = new Vector2(0, panelRectTransform.rect.height / 2);
-       }
-
+        if (creditsRectTransform.anchoredPosition.y > panelRectTransform.rect.height / 2 + creditsRectTransform.rect.height / 2)
+        {
+            creditsRectTransform.anchoredPosition = new Vector2(0, -panelRectTransform.rect.height / 2 - creditsRectTransform.rect.height / 2);
+        }
     }
 }
-
