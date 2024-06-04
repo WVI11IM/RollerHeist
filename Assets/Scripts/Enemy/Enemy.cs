@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     private bool canDamage = true;
 
     [SerializeField] Animator animator;
+    [SerializeField] SkinnedMeshRenderer sMR;
+    [SerializeField] Material hurtMaterial;
+    Material currentMaterial;
 
     public enum State
     {
@@ -254,6 +257,7 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("hasFainted");
             hasFainted = true;
             canDamage = false;
+            StartCoroutine(FaintRed());
             EnemyManager.Instance.currentEnemySpawned--;
             Destroy(gameObject, 5);
         }
@@ -313,7 +317,11 @@ public class Enemy : MonoBehaviour
     {
         isStunned = true;
         canDamage = false;
-        yield return new WaitForSeconds(0.5f);
+        currentMaterial = sMR.material;
+        sMR.material = hurtMaterial;
+        yield return new WaitForSeconds(0.15f);
+        sMR.material = currentMaterial;
+        yield return new WaitForSeconds(0.35f);
         isStunned = false;
         if (!hasFainted)
         {
@@ -344,5 +352,13 @@ public class Enemy : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * enemy.angularSpeed / 2);
         }
+    }
+
+    IEnumerator FaintRed()
+    {
+        currentMaterial = sMR.material;
+        sMR.material = hurtMaterial;
+        yield return new WaitForSeconds(0.15f);
+        sMR.material = currentMaterial;
     }
 }

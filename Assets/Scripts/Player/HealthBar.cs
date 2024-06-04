@@ -19,6 +19,12 @@ public class HealthBar : MonoBehaviour
     PaintballShoot playerShoot;
     public Animator animator;
 
+    public SkinnedMeshRenderer sMR;
+    public Material hurtMaterial;
+    public Material invincibleMaterial;
+    Material currentSkin;
+
+
     void Start()
     {
         health = maxHealth;
@@ -45,12 +51,6 @@ public class HealthBar : MonoBehaviour
 
         float healthSliderValue = health / maxHealth;
         healthMeter.fillAmount = Mathf.Lerp(0.4f, 0.6f, healthSliderValue);
-         /*
-        if(healthSlider.value != health)
-        {
-            healthSlider.value = health;
-        }
-         */
         
         if (health <= 0 && !isDead)
         {
@@ -66,13 +66,41 @@ public class HealthBar : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!isInvincible) // Só aplica o dano se não estiver invencível
+        if (!isInvincible && !isDead) // Só aplica o dano se não estiver invencível
         {
             animator.SetTrigger("flinched");
             health -= damage;
             health = Mathf.Clamp(health, 0f, maxHealth);
+            if (health > 0) StartCoroutine(HurtSkinChange());
             isInvincible = true;
             invincibilityTimer = invincibilityDuration;
         }
-    } 
+    }
+
+    IEnumerator HurtSkinChange()
+    {
+        Debug.Log("isWorking");
+        currentSkin = sMR.material;
+        sMR.material = hurtMaterial;
+        yield return new WaitForSeconds(invincibilityDuration / 8);
+        sMR.material = invincibleMaterial;
+        yield return new WaitForSeconds(invincibilityDuration / 8);
+
+        float firstPhaseDuration = invincibilityDuration / 2;
+        float secondPhaseDuration = invincibilityDuration / 2;
+
+        for (float t = 0; t < firstPhaseDuration; t += invincibilityDuration / 8)
+        {
+            sMR.material = (sMR.material == currentSkin) ? invincibleMaterial : currentSkin;
+            yield return new WaitForSeconds(invincibilityDuration / 8);
+        }
+
+        for (float t = 0; t < secondPhaseDuration; t += invincibilityDuration / 16)
+        {
+            sMR.material = (sMR.material == currentSkin) ? invincibleMaterial : currentSkin;
+            yield return new WaitForSeconds(invincibilityDuration / 16);
+        }
+
+        sMR.material = currentSkin;
+    }
 }
