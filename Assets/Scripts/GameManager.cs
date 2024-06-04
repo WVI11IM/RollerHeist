@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        AudioMixerManager.Instance.LoadVolumes();
         objIndicator = GameObject.FindGameObjectWithTag("ObjectTarget");
         exitIndicator = GameObject.FindGameObjectWithTag("ExitTarget");
 
