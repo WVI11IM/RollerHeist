@@ -63,7 +63,7 @@ public class AudioMixerManager : MonoBehaviour
         PlayerPrefs.SetFloat(MusicVolumeKey, level);
     }
 
-    private void LoadVolumes()
+    public void LoadVolumes()
     {
         float masterVolume = PlayerPrefs.GetFloat(MasterVolumeKey, 1f);
         float sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey, 1f);
