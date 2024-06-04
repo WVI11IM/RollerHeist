@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverUI;
     public static GameManager Instance;
 
+    public GameObject pausePanel;
+    private bool isPaused = false;
+
     //target arrow reference
     private GameObject objIndicator;
     private GameObject exitIndicator;
@@ -42,7 +45,15 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Restart();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isPaused)
+            {
+                Pause();
+            }
+            else Resume();
+        }
+
     }
 
     public void UpdateGameState(GameState newState)
@@ -105,6 +116,9 @@ public class GameManager : MonoBehaviour
         //scoreText.text = Timer.Instance.timerText.text;
         UpdateHighScore();
         //SetScore();
+
+        //Freeze time
+        Time.timeScale = 0f;
     }
 
     private void HandleLose()
@@ -121,8 +135,31 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1f;
         MusicManager.Instance.StopAllLoopingMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1f;
+        MusicManager.Instance.StopAllLoopingMusic();
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void Pause()
+    {
+        pausePanel.SetActive(true);
+        isPaused = true;
+        AudioMixerManager.Instance.UpdateSliders();
+        Time.timeScale = 0f;
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+        pausePanel.SetActive(false);
+        isPaused = false;
     }
 
     ///////////////////////////////////////////////////////
@@ -142,7 +179,7 @@ public class GameManager : MonoBehaviour
         int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) % 60);
         int miliseconds = (int)((PlayerPrefs.GetFloat("HighScore", 0)) * 1000) % 1000;
         Debug.Log(minutes + ":" + seconds + ":" + miliseconds);
-        highScoreText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+        highScoreText.text = "Highscore: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
     }
 }
 
