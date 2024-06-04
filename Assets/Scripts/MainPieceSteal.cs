@@ -6,6 +6,7 @@ public class MainPieceSteal : MonoBehaviour
 {
     public GameObject normalMainPiece;
     public GameObject stolenTreasure;
+    public GameObject stolenTreasureOnPlayer;
     private bool isStolen = false;
     public float destructionDelay = 15f; // Time in seconds before both glass objects are destroyed
 
@@ -14,6 +15,7 @@ public class MainPieceSteal : MonoBehaviour
     {
         stolenTreasure.SetActive(false);
         normalMainPiece.SetActive(true);
+        stolenTreasureOnPlayer.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +24,7 @@ public class MainPieceSteal : MonoBehaviour
         {
             stolenTreasure.SetActive(true);
             normalMainPiece.SetActive(false);
+            stolenTreasureOnPlayer.SetActive(true);
             isStolen = true;
         }
     }
