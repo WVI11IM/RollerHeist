@@ -23,22 +23,6 @@ public class MainPieceSteal : MonoBehaviour
             stolenTreasure.SetActive(true);
             normalMainPiece.SetActive(false);
             isStolen = true;
-            StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
         }
-    }
-
-    private IEnumerator DestroyGlassAfterDelay(float delay)
-    {
-        //int vidroInteger = Random.Range(2, 4) + 1;
-        //SFXManager.Instance.PlaySFXRandomPitch("glass" + vidroInteger);
-        yield return new WaitForSeconds(delay);
-        DestroyTreasure();
-    }
-
-    private void DestroyTreasure()
-    {
-        Destroy(stolenTreasure);
-        Destroy(normalMainPiece);
-        Destroy(gameObject);
     }
 }
