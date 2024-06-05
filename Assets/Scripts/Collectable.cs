@@ -23,6 +23,7 @@ public class Collectable : MonoBehaviour
 
     private void Collect()
     {
+        SFXManager.Instance.PlaySFX("coletaItem");
         if (gameObject.tag == "BigItem")
         {
             Debug.Log("Collect Item");
