@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Transform player;
     [HideInInspector] public MovementTest2 playerMovement;
     [HideInInspector] public float health;
+    [SerializeField] GameObject batton;
+    [SerializeField] GameObject taser;
     public bool isAttacking = false;
     public bool isShooting = false;
     public bool isStunned = false;
@@ -133,6 +135,8 @@ public class Enemy : MonoBehaviour
     {
         isAttacking = false;
         isShooting = false;
+        batton.SetActive(false);
+        taser.SetActive(false);
 
         // Set a random patrol target if not already set or if close to the current target
         if (!hasPatrolTarget || Vector3.Distance(transform.position, patrolTarget) < 1f)
@@ -205,6 +209,16 @@ public class Enemy : MonoBehaviour
     {
         isAttacking = false;
         isShooting = false;
+        if (enemyType.enemyName == "Guard")
+        {
+            batton.SetActive(true);
+            taser.SetActive(false);
+        }
+        else if (enemyType.enemyName == "Taser")
+        {
+            batton.SetActive(false);
+            taser.SetActive(true);
+        }
 
         //Perseguir jogador com velocidade alta
         enemy.isStopped = false;
@@ -230,16 +244,22 @@ public class Enemy : MonoBehaviour
         {
             GiveDamage();
             isShooting = false;
+            batton.SetActive(true);
+            taser.SetActive(false);
         }
         else if (enemyType.enemyName == "Taser")
         {
             isShooting = true;
+            batton.SetActive(false);
+            taser.SetActive(true);
         }
     }
     public void Stun()
     {
         isAttacking = false;
         isShooting = false;
+        batton.SetActive(false);
+        taser.SetActive(false);
         enemy.isStopped = true;
         if (!isStunned)
         {
@@ -251,6 +271,8 @@ public class Enemy : MonoBehaviour
     {
         isAttacking = false;
         isShooting = false;
+        batton.SetActive(false);
+        taser.SetActive(false);
         enemy.isStopped = true;
         if (!hasFainted)
         {

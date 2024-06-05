@@ -30,6 +30,13 @@ public class HealthBar : MonoBehaviour
         health = maxHealth;
         playerMovement = GetComponent<MovementTest2>();
         playerShoot = GetComponent<PaintballShoot>();
+        StartCoroutine(LateStart(0.5f));
+    }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        currentSkin = sMR.material;
     }
 
     void Update()
@@ -80,7 +87,6 @@ public class HealthBar : MonoBehaviour
     IEnumerator HurtSkinChange()
     {
         Debug.Log("isWorking");
-        currentSkin = sMR.material;
         sMR.material = hurtMaterial;
         yield return new WaitForSeconds(invincibilityDuration / 8);
         sMR.material = invincibleMaterial;
