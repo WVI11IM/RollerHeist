@@ -26,7 +26,7 @@ public class Collectable : MonoBehaviour
         SFXManager.Instance.PlaySFX("coletaItem");
         if (gameObject.tag == "BigItem")
         {
-            Debug.Log("Collect Item");
+            SFXManager.Instance.PlaySFX("coletaPrincipalWalkieTalkie");
             CollectableManager.instance.bigItemCollected++;
         }
         else if (gameObject.tag == "SmallItem")
