@@ -2038,6 +2038,7 @@ Transform:
   m_Children:
   - {fileID: 2530647889107756444}
   - {fileID: 712376102}
+  - {fileID: 2090618220}
   - {fileID: 1238110619}
   - {fileID: 1121964468}
   - {fileID: 668135769}
@@ -3247,192 +3248,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c580ca54f4f39b4a86890705b6f7e3e, type: 3}
---- !u!1 &270870134
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 270870135}
-  - component: {fileID: 270870136}
-  m_Layer: 0
-  m_Name: SFXManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &270870135
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270870134}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1195805519}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &270870136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270870134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e75c26d2cac1a4084d5589a8caaf94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sfxObject: {fileID: 783471986304123905, guid: 13a4a331f9aca81439f158b04e136412, type: 3}
-  soundEffects:
-  - soundEffectName: velocidade1
-    soundClip: {fileID: 8300000, guid: 6574c0a240318874890fe2bda5373a2c, type: 3}
-    volumeModifier: 0.1
-  - soundEffectName: velocidade2
-    soundClip: {fileID: 8300000, guid: 29b05960dff681d4389a08268e82bc5c, type: 3}
-    volumeModifier: 0.05
-  - soundEffectName: trilhos
-    soundClip: {fileID: 8300000, guid: e8d18dbba4f87314da1923480e65e89c, type: 3}
-    volumeModifier: 0.2
-  - soundEffectName: boost
-    soundClip: {fileID: 8300000, guid: 1c4bcf2126967b4458cd6d47f2c79b72, type: 3}
-    volumeModifier: 0.025
-  - soundEffectName: drift
-    soundClip: {fileID: 8300000, guid: e8d67790ed21e9c408127b1806f72d90, type: 3}
-    volumeModifier: 0.025
-  - soundEffectName: vento
-    soundClip: {fileID: 8300000, guid: 4d407353b9e46a740b3e0ba086c1dabb, type: 3}
-    volumeModifier: 0.03
-  - soundEffectName: vento2
-    soundClip: {fileID: 8300000, guid: d7516f469eee7f2418152d42c15351aa, type: 3}
-    volumeModifier: 0.2
-  - soundEffectName: disco1
-    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
-    volumeModifier: 0.15
-  - soundEffectName: disco2
-    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
-    volumeModifier: 0.15
-  - soundEffectName: disco3
-    soundClip: {fileID: 8300000, guid: 5cdf5f65030898c49a1602e623e3107f, type: 3}
-    volumeModifier: 0.15
-  - soundEffectName: disco4
-    soundClip: {fileID: 8300000, guid: 544d2a98a332aa74083f659450f6e024, type: 3}
-    volumeModifier: 0.15
-  - soundEffectName: introAntecipacao
-    soundClip: {fileID: 8300000, guid: 9c2dd7f82894efd4c9162dfbd71b9087, type: 3}
-    volumeModifier: 0.4
-  - soundEffectName: coletaItem
-    soundClip: {fileID: 8300000, guid: 594ee2d6bc879c4448859f800bcafba7, type: 3}
-    volumeModifier: 0.7
-  - soundEffectName: coletaPrincipalWalkieTalkie
-    soundClip: {fileID: 8300000, guid: 5298f2a6e478af6428526795e3394131, type: 3}
-    volumeModifier: 0.5
-  soundEffectsSpacialBlend: []
-  soundEffectsRandomPitch:
-  - soundEffectName: pisoCurto1
-    soundClip: {fileID: 8300000, guid: bc8fae5cc8bc50f40b1945824671f42e, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.9
-    maxPitch: 1.1
-  - soundEffectName: pisoCurto2
-    soundClip: {fileID: 8300000, guid: c322ad9da8aed9d48a84d9378ad1a80d, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.9
-    maxPitch: 1.1
-  - soundEffectName: pisoLongo1
-    soundClip: {fileID: 8300000, guid: 1814bd6058d31794dbd0e4217c317c30, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.8
-    maxPitch: 1.2
-  - soundEffectName: impactoPatins
-    soundClip: {fileID: 8300000, guid: c35a0c10d6025884c83b135b7f07a50b, type: 3}
-    volumeModifier: 0.5
-    minPitch: 1
-    maxPitch: 1.5
-  - soundEffectName: impactoPatins2
-    soundClip: {fileID: 8300000, guid: ef6afbfd7e0053f4fbe1ccb5732ea796, type: 3}
-    volumeModifier: 0.6
-    minPitch: 1.15
-    maxPitch: 1.4
-  - soundEffectName: pulo
-    soundClip: {fileID: 8300000, guid: c871a468efdc3874586c0ccd59882a15, type: 3}
-    volumeModifier: 0.35
-    minPitch: 0.75
-    maxPitch: 0.9
-  - soundEffectName: impactoTrilhos
-    soundClip: {fileID: 8300000, guid: 20a7c4afb5071c1459df7ed87e27221a, type: 3}
-    volumeModifier: 0.6
-    minPitch: 1.75
-    maxPitch: 2
-  - soundEffectName: impactoParede
-    soundClip: {fileID: 8300000, guid: c59e9acc7f109af44842bd706ef7d44f, type: 3}
-    volumeModifier: 0.25
-    minPitch: 0.85
-    maxPitch: 1.15
-  - soundEffectName: boost
-    soundClip: {fileID: 8300000, guid: c57815ff77c137e42b29503beb62f32c, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.85
-    maxPitch: 1.15
-  - soundEffectName: tiro1
-    soundClip: {fileID: 8300000, guid: aaf6d45bb88a818469c8a29af10e6b5e, type: 3}
-    volumeModifier: 0.35
-    minPitch: 0.75
-    maxPitch: 1.25
-  - soundEffectName: tiro2
-    soundClip: {fileID: 8300000, guid: b39727832c1bae64ba6d8575230a9545, type: 3}
-    volumeModifier: 0.075
-    minPitch: 1.25
-    maxPitch: 1.75
-  - soundEffectName: truque1
-    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.9
-    maxPitch: 0.9
-  - soundEffectName: truque2
-    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
-    volumeModifier: 0.15
-    minPitch: 1
-    maxPitch: 1
-  - soundEffectName: truque3
-    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
-    volumeModifier: 0.15
-    minPitch: 1.1
-    maxPitch: 1.1
-  - soundEffectName: truque4
-    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
-    volumeModifier: 0.15
-    minPitch: 1.2
-    maxPitch: 1.2
-  - soundEffectName: glass1
-    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
-    volumeModifier: 0.25
-    minPitch: 0.8
-    maxPitch: 1.2
-  - soundEffectName: glass2
-    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
-    volumeModifier: 0.25
-    minPitch: 0.8
-    maxPitch: 1.2
-  - soundEffectName: glass3
-    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
-    volumeModifier: 0.25
-    minPitch: 1.6
-    maxPitch: 2
-  - soundEffectName: glass4
-    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
-    volumeModifier: 0.25
-    minPitch: 1.6
-    maxPitch: 2
-  uiSoundEffects: []
 --- !u!1001 &274852614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9132,6 +8947,192 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &333788180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 333788181}
+  - component: {fileID: 333788182}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &333788181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333788180}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195805519}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &333788182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333788180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e75c26d2cac1a4084d5589a8caaf94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxObject: {fileID: 783471986304123905, guid: 13a4a331f9aca81439f158b04e136412, type: 3}
+  soundEffects:
+  - soundEffectName: velocidade1
+    soundClip: {fileID: 8300000, guid: 6574c0a240318874890fe2bda5373a2c, type: 3}
+    volumeModifier: 0.1
+  - soundEffectName: velocidade2
+    soundClip: {fileID: 8300000, guid: 29b05960dff681d4389a08268e82bc5c, type: 3}
+    volumeModifier: 0.05
+  - soundEffectName: trilhos
+    soundClip: {fileID: 8300000, guid: e8d18dbba4f87314da1923480e65e89c, type: 3}
+    volumeModifier: 0.2
+  - soundEffectName: boost
+    soundClip: {fileID: 8300000, guid: 1c4bcf2126967b4458cd6d47f2c79b72, type: 3}
+    volumeModifier: 0.025
+  - soundEffectName: drift
+    soundClip: {fileID: 8300000, guid: e8d67790ed21e9c408127b1806f72d90, type: 3}
+    volumeModifier: 0.025
+  - soundEffectName: vento
+    soundClip: {fileID: 8300000, guid: 4d407353b9e46a740b3e0ba086c1dabb, type: 3}
+    volumeModifier: 0.03
+  - soundEffectName: vento2
+    soundClip: {fileID: 8300000, guid: d7516f469eee7f2418152d42c15351aa, type: 3}
+    volumeModifier: 0.2
+  - soundEffectName: disco1
+    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco2
+    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco3
+    soundClip: {fileID: 8300000, guid: 5cdf5f65030898c49a1602e623e3107f, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco4
+    soundClip: {fileID: 8300000, guid: 544d2a98a332aa74083f659450f6e024, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: introAntecipacao
+    soundClip: {fileID: 8300000, guid: 9c2dd7f82894efd4c9162dfbd71b9087, type: 3}
+    volumeModifier: 0.4
+  - soundEffectName: coletaItem
+    soundClip: {fileID: 8300000, guid: 594ee2d6bc879c4448859f800bcafba7, type: 3}
+    volumeModifier: 0.7
+  - soundEffectName: coletaPrincipalWalkieTalkie
+    soundClip: {fileID: 8300000, guid: 5298f2a6e478af6428526795e3394131, type: 3}
+    volumeModifier: 0.5
+  soundEffectsSpacialBlend: []
+  soundEffectsRandomPitch:
+  - soundEffectName: pisoCurto1
+    soundClip: {fileID: 8300000, guid: bc8fae5cc8bc50f40b1945824671f42e, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.9
+    maxPitch: 1.1
+  - soundEffectName: pisoCurto2
+    soundClip: {fileID: 8300000, guid: c322ad9da8aed9d48a84d9378ad1a80d, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.9
+    maxPitch: 1.1
+  - soundEffectName: pisoLongo1
+    soundClip: {fileID: 8300000, guid: 1814bd6058d31794dbd0e4217c317c30, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: impactoPatins
+    soundClip: {fileID: 8300000, guid: c35a0c10d6025884c83b135b7f07a50b, type: 3}
+    volumeModifier: 0.5
+    minPitch: 1
+    maxPitch: 1.5
+  - soundEffectName: impactoPatins2
+    soundClip: {fileID: 8300000, guid: ef6afbfd7e0053f4fbe1ccb5732ea796, type: 3}
+    volumeModifier: 0.6
+    minPitch: 1.15
+    maxPitch: 1.4
+  - soundEffectName: pulo
+    soundClip: {fileID: 8300000, guid: c871a468efdc3874586c0ccd59882a15, type: 3}
+    volumeModifier: 0.35
+    minPitch: 0.75
+    maxPitch: 0.9
+  - soundEffectName: impactoTrilhos
+    soundClip: {fileID: 8300000, guid: 20a7c4afb5071c1459df7ed87e27221a, type: 3}
+    volumeModifier: 0.6
+    minPitch: 1.75
+    maxPitch: 2
+  - soundEffectName: impactoParede
+    soundClip: {fileID: 8300000, guid: c59e9acc7f109af44842bd706ef7d44f, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.85
+    maxPitch: 1.15
+  - soundEffectName: boost
+    soundClip: {fileID: 8300000, guid: c57815ff77c137e42b29503beb62f32c, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.85
+    maxPitch: 1.15
+  - soundEffectName: tiro1
+    soundClip: {fileID: 8300000, guid: aaf6d45bb88a818469c8a29af10e6b5e, type: 3}
+    volumeModifier: 0.35
+    minPitch: 0.75
+    maxPitch: 1.25
+  - soundEffectName: tiro2
+    soundClip: {fileID: 8300000, guid: b39727832c1bae64ba6d8575230a9545, type: 3}
+    volumeModifier: 0.075
+    minPitch: 1.25
+    maxPitch: 1.75
+  - soundEffectName: truque1
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.9
+    maxPitch: 0.9
+  - soundEffectName: truque2
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1
+    maxPitch: 1
+  - soundEffectName: truque3
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1.1
+    maxPitch: 1.1
+  - soundEffectName: truque4
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1.2
+    maxPitch: 1.2
+  - soundEffectName: glass1
+    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: glass2
+    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: glass3
+    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
+    volumeModifier: 0.25
+    minPitch: 1.6
+    maxPitch: 2
+  - soundEffectName: glass4
+    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
+    volumeModifier: 0.25
+    minPitch: 1.6
+    maxPitch: 2
+  uiSoundEffects: []
 --- !u!1 &334076880
 GameObject:
   m_ObjectHideFlags: 0
@@ -13368,7 +13369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22554,7 +22555,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 22.45
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -30031,11 +30032,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 92.6
+      value: 71.8
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30043,7 +30044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30957,6 +30958,61 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1189315431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1189315432}
+  - component: {fileID: 1189315433}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1189315432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189315431}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1195805519}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1189315433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189315431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391189aa7fb76c842ab4d604e71e1846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicObjectPrefab: {fileID: 783471986304123905, guid: 3a32482e9201e1540bfb84ed15ac74e0, type: 3}
+  musics:
+  - musicName: beanbag
+    soundClip: {fileID: 8300000, guid: 6d587165d6e13b04096715e3ee7aef4c, type: 3}
+    volumeModifier: 0.2
+  - musicName: howToSkate
+    soundClip: {fileID: 8300000, guid: 741319960eac700439d62c2886806f66, type: 3}
+    volumeModifier: 0.2
+  - musicName: skateHeistFinal
+    soundClip: {fileID: 8300000, guid: 57ba2c9c7971a1e4e813629966a424b5, type: 3}
+    volumeModifier: 0.25
 --- !u!1 &1189378111
 GameObject:
   m_ObjectHideFlags: 0
@@ -31152,66 +31208,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1117251615}
-  - {fileID: 270870135}
-  - {fileID: 1208577634}
+  - {fileID: 333788181}
+  - {fileID: 1189315432}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1208577633
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1208577634}
-  - component: {fileID: 1208577635}
-  m_Layer: 0
-  m_Name: MusicManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1208577634
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208577633}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1195805519}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1208577635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208577633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 391189aa7fb76c842ab4d604e71e1846, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicObjectPrefab: {fileID: 783471986304123905, guid: 3a32482e9201e1540bfb84ed15ac74e0, type: 3}
-  musics:
-  - musicName: beanbag
-    soundClip: {fileID: 8300000, guid: 6d587165d6e13b04096715e3ee7aef4c, type: 3}
-    volumeModifier: 0.3
-  - musicName: howToSkate
-    soundClip: {fileID: 8300000, guid: 741319960eac700439d62c2886806f66, type: 3}
-    volumeModifier: 0.3
-  - musicName: skateHeistFinal
-    soundClip: {fileID: 8300000, guid: 57ba2c9c7971a1e4e813629966a424b5, type: 3}
-    volumeModifier: 0.3
 --- !u!1001 &1232815108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36104,7 +36105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41277,7 +41278,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 22.45
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -42419,6 +42420,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2748552827706820645, guid: f9deab890cd950f42b88074f4c35d576, type: 3}
   m_PrefabInstance: {fileID: 1426990692}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1684656482
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 138593626}
+    m_Modifications:
+    - target: {fileID: 2530647889160140420, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_Name
+      value: EnemySpawner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -26.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
 --- !u!1001 &1685110030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43895,6 +43953,7 @@ MonoBehaviour:
   enemySpawners:
   - {fileID: 86463263}
   - {fileID: 1011634133}
+  - {fileID: 2090618219}
   - {fileID: 865018919}
   - {fileID: 1096895756}
   - {fileID: 603667205}
@@ -53289,6 +53348,16 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4009564794385242434, guid: 4c580ca54f4f39b4a86890705b6f7e3e, type: 3}
   m_PrefabInstance: {fileID: 715481204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2090618219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2530647889160140420, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+  m_PrefabInstance: {fileID: 1684656482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2090618220 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2530647889160140472, guid: 849ed615f2687dd4197442bd6f5df8f7, type: 3}
+  m_PrefabInstance: {fileID: 1684656482}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2094733006
 GameObject:
