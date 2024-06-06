@@ -1966,7 +1966,7 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15, y: 0.15}
-  m_AnchorMax: {x: 0.45000002, y: 0.45}
+  m_AnchorMax: {x: 0.45000002, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1990,7 +1990,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 626b9cddb29049e4cac50cd87b419945, type: 3}
+  m_Sprite: {fileID: -1790316984, guid: 46d47379a32ca2943b5db0af68e10fd4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -9035,6 +9035,12 @@ MonoBehaviour:
   - soundEffectName: coletaPrincipalWalkieTalkie
     soundClip: {fileID: 8300000, guid: 5298f2a6e478af6428526795e3394131, type: 3}
     volumeModifier: 0.5
+  - soundEffectName: dano
+    soundClip: {fileID: 8300000, guid: 84f4bfd48236b1e409346e824a2fe84b, type: 3}
+    volumeModifier: 0.25
+  - soundEffectName: taser1
+    soundClip: {fileID: 8300000, guid: 80385f240089414419b7a2c389bba578, type: 3}
+    volumeModifier: 0.25
   soundEffectsSpacialBlend: []
   soundEffectsRandomPitch:
   - soundEffectName: pisoCurto1
@@ -9132,6 +9138,26 @@ MonoBehaviour:
     volumeModifier: 0.25
     minPitch: 1.6
     maxPitch: 2
+  - soundEffectName: cassetete
+    soundClip: {fileID: 8300000, guid: bde2342c0982cfa4283d6f7b4fb47173, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: guardaDerrotado
+    soundClip: {fileID: 8300000, guid: 2f2c3f6ba0ca36348acbac01851b7710, type: 3}
+    volumeModifier: 0.75
+    minPitch: 0.9
+    maxPitch: 1.1
+  - soundEffectName: tiroAcerto
+    soundClip: {fileID: 8300000, guid: 4c18859a02cb7b343aeb5103e3e06222, type: 3}
+    volumeModifier: 0.25
+    minPitch: 1.5
+    maxPitch: 1.8
+  - soundEffectName: taser2
+    soundClip: {fileID: 8300000, guid: 58b8a3a0043695f47ae0678dbc9af30b, type: 3}
+    volumeModifier: 0.2
+    minPitch: 0.8
+    maxPitch: 1.2
   uiSoundEffects: []
 --- !u!1 &334076880
 GameObject:
@@ -22555,15 +22581,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.45
-  m_fontSizeBase: 15
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 48
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -22621,7 +22647,7 @@ RectTransform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.15}
-  m_AnchorMax: {x: 1, y: 0.45}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -38440,7 +38466,7 @@ RectTransform:
   m_Father: {fileID: 1581113168}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.15, y: 0.55}
+  m_AnchorMin: {x: 0.15, y: 0.5}
   m_AnchorMax: {x: 0.45000002, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -38465,7 +38491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 65f0e363b74cf5845ab8c3fbc14f39ac, type: 3}
+  m_Sprite: {fileID: 768562470, guid: 46d47379a32ca2943b5db0af68e10fd4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -40609,6 +40635,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   invincibilityDuration: 2
+  isDead: 0
   isInvincible: 0
   gameManager: {fileID: 66311027}
   animator: {fileID: 5866666019883864895}
@@ -41218,7 +41245,7 @@ RectTransform:
   m_Father: {fileID: 1581113168}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.55}
+  m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -41278,15 +41305,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.45
-  m_fontSizeBase: 15
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 48
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

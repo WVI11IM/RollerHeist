@@ -1219,6 +1219,7 @@ GameObject:
   - component: {fileID: 5876363781987449379}
   - component: {fileID: 535125081633382489}
   - component: {fileID: 3216967506133073932}
+  - component: {fileID: 239740356395509551}
   m_Layer: 11
   m_Name: Character_Tpose
   m_TagString: Untagged
@@ -1285,6 +1286,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 960
   enemy: {fileID: 6002223668814331400}
+--- !u!114 &239740356395509551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541154193806549145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c7f5f9c01133140af2b7077c589d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6793792258096018574
 GameObject:
   m_ObjectHideFlags: 0

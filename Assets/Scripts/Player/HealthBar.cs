@@ -10,7 +10,7 @@ public class HealthBar : MonoBehaviour
     public float health;
     public float invincibilityDuration = 2f; // Duração da invencibilidade em segundos
 
-    private bool isDead;
+    [HideInInspector] public bool isDead;
     public bool isInvincible = false;
     private float invincibilityTimer = 0f;
 
@@ -76,6 +76,7 @@ public class HealthBar : MonoBehaviour
         if (!isInvincible && !isDead) // Só aplica o dano se não estiver invencível
         {
             animator.SetTrigger("flinched");
+            SFXManager.Instance.PlaySFX("dano");
             health -= damage;
             health = Mathf.Clamp(health, 0f, maxHealth);
             if (health > 0) StartCoroutine(HurtSkinChange());

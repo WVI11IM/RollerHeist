@@ -337,6 +337,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator Stunned()
     {
+        SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto");
         isStunned = true;
         canDamage = false;
         currentMaterial = sMR.material;
@@ -359,9 +360,16 @@ public class Enemy : MonoBehaviour
     public void GiveDamage()
     {
         HealthBar playerHealth = player.GetComponent<HealthBar>();
-        if (playerHealth != null && !playerHealth.isInvincible && canDamage && !isStunned)
+        if (playerHealth != null && !playerHealth.isInvincible && !playerHealth.isDead && canDamage && !isStunned)
         {
             playerHealth.TakeDamage(damage);
+            if (enemyType.enemyName == "Guard")
+            {
+                SFXManager.Instance.PlaySFXRandomPitch("cassetete");
+            }
+            else if (enemyType.enemyName == "Taser")
+            {
+            }
         }
     }
 
@@ -378,6 +386,8 @@ public class Enemy : MonoBehaviour
 
     IEnumerator FaintRed()
     {
+        SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto");
+        SFXManager.Instance.PlaySFXRandomPitch("guardaDerrotado");
         currentMaterial = sMR.material;
         sMR.material = hurtMaterial;
         yield return new WaitForSeconds(0.15f);
