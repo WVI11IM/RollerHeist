@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        AudioListener.pause = false;
         Time.timeScale = 1f;
         MusicManager.Instance.StopAllLoopingMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -143,6 +144,7 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
+        AudioListener.pause = false;
         Time.timeScale = 1f;
         MusicManager.Instance.StopAllLoopingMusic();
         SceneManager.LoadScene("Menu");
@@ -154,10 +156,14 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         AudioMixerManager.Instance.UpdateSliders();
         Time.timeScale = 0f;
+        AudioListener.pause = true;
+        SFXManager.Instance.PauseLoopingSFX();
     }
 
     public void Resume()
     {
+        AudioListener.pause = false;
+        SFXManager.Instance.ResumeLoopingSFX();
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         isPaused = false;

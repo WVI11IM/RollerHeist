@@ -9041,6 +9041,9 @@ MonoBehaviour:
   - soundEffectName: taser1
     soundClip: {fileID: 8300000, guid: 80385f240089414419b7a2c389bba578, type: 3}
     volumeModifier: 0.25
+  - soundEffectName: recarga
+    soundClip: {fileID: 8300000, guid: 6905a5ceac62a1847b5ada14f2c8aced, type: 3}
+    volumeModifier: 0.4
   soundEffectsSpacialBlend: []
   soundEffectsRandomPitch:
   - soundEffectName: pisoCurto1
@@ -9138,11 +9141,6 @@ MonoBehaviour:
     volumeModifier: 0.25
     minPitch: 1.6
     maxPitch: 2
-  - soundEffectName: cassetete
-    soundClip: {fileID: 8300000, guid: bde2342c0982cfa4283d6f7b4fb47173, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.8
-    maxPitch: 1.2
   - soundEffectName: guardaDerrotado
     soundClip: {fileID: 8300000, guid: 2f2c3f6ba0ca36348acbac01851b7710, type: 3}
     volumeModifier: 0.75
@@ -9158,6 +9156,16 @@ MonoBehaviour:
     volumeModifier: 0.2
     minPitch: 0.8
     maxPitch: 1.2
+  - soundEffectName: cassetete
+    soundClip: {fileID: 8300000, guid: bde2342c0982cfa4283d6f7b4fb47173, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.9
+    maxPitch: 1.1
+  - soundEffectName: taser3
+    soundClip: {fileID: 8300000, guid: da5aea7c25c8ad44088ed420fd72ef5e, type: 3}
+    volumeModifier: 0.35
+    minPitch: 1.3
+    maxPitch: 1.35
   uiSoundEffects: []
 --- !u!1 &334076880
 GameObject:
@@ -31038,7 +31046,7 @@ MonoBehaviour:
     volumeModifier: 0.2
   - musicName: skateHeistFinal
     soundClip: {fileID: 8300000, guid: 57ba2c9c7971a1e4e813629966a424b5, type: 3}
-    volumeModifier: 0.25
+    volumeModifier: 0.2
 --- !u!1 &1189378111
 GameObject:
   m_ObjectHideFlags: 0
@@ -43996,7 +44004,7 @@ MonoBehaviour:
   oneItemSpawnCooldown: 8
   twoItemSpawnCooldown: 7
   threeItemSpawnCooldown: 6
-  mainItemSpawnCooldown: 5
+  mainItemSpawnCooldown: 3
 --- !u!4 &1796355124
 Transform:
   m_ObjectHideFlags: 0

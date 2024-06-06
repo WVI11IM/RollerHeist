@@ -22,7 +22,7 @@ public class MovementTest2 : MonoBehaviour
     public bool canInput = true;
 
     private Vector3 previousVelocity;
-    private float decelerationThreshold = 15f;
+    private float decelerationThreshold = 12.5f;
 
     [Space]
     [Header("DRIFT SETTINGS")]
@@ -421,12 +421,22 @@ public class MovementTest2 : MonoBehaviour
             velocity.y = 0f;
             velocity.z = 0f;
             rb.velocity = velocity;
-            rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.5f);
+
+            if (!isGrounded)
+            {
+                rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.5f);
+            }
             SFXManager.Instance.StopSFXLoop("trilhos");
         }
 
         if (!wasOnRail && isGrinding)
         {
+            Vector3 velocity = rb.velocity;
+            velocity.x = 0f;
+            velocity.y = 0f;
+            velocity.z = 0f;
+            rb.velocity = velocity;
+
             animator.SetTrigger("startedGrind");
             animator.ResetTrigger("bumped");
             SFXManager.Instance.PlaySFXRandomPitch("impactoTrilhos");
@@ -434,7 +444,7 @@ public class MovementTest2 : MonoBehaviour
 
         wasOnRail = isGrinding;
 
-        if (isGrinding)
+        if (isGrinding && !isGrounded)
         {
             Vector3 velocity = rb.velocity;
             velocity.x = 0f;

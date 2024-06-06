@@ -21,8 +21,9 @@ public class TaserShot : MonoBehaviour
             {
 
                 HealthBar playerHealth = other.GetComponent<HealthBar>();
-                if (playerHealth != null)
+                if (playerHealth != null && playerHealth.health > 0 && !playerHealth.isInvincible && !playerHealth.isDead)
                 {
+                    SFXManager.Instance.PlaySFXRandomPitch("taser3");
                     playerHealth.TakeDamage(20);
                 }
 

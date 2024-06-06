@@ -16,7 +16,7 @@ public class Projetil : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Se colidir com algo que não seja o jogador
-        if (!other.gameObject.CompareTag("Player") && !other.CompareTag("Spawner") && !other.CompareTag("AimHitLayer"))
+        if (!other.gameObject.CompareTag("Player") && !other.CompareTag("Spawner") && !other.CompareTag("AimHitLayer") && !other.CompareTag("Glass"))
         {
             if (other.gameObject.CompareTag("Enemy"))
             {

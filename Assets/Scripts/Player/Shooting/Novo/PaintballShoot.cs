@@ -193,6 +193,7 @@ public class PaintballShoot : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
+        SFXManager.Instance.PlaySFX("recarga");
         for (int i = 0; i < maxAmmo; i++)
         {
             ammoReloadMeter.color = reloadingColors[1];

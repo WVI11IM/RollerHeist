@@ -106,9 +106,9 @@ public class SFXManager : MonoBehaviour
 
     public void PlaySFXLoop(string soundEffectName)
     {
-        if (activeLoopAudioSources.ContainsKey(soundEffectName) && activeLoopAudioSources[soundEffectName].isPlaying)
+        if (activeLoopAudioSources.ContainsKey(soundEffectName))
         {
-            return; // If the looped audio source for this sound effect is already playing, do nothing.
+            return;
         }
 
         SoundEffect effect = Array.Find(soundEffects, e => e.soundEffectName == soundEffectName);
@@ -151,6 +151,22 @@ public class SFXManager : MonoBehaviour
             Destroy(audioSource.gameObject);
         }
         activeLoopAudioSources.Clear();
+    }
+
+    public void PauseLoopingSFX()
+    {
+        foreach (var entry in activeLoopAudioSources)
+        {
+            entry.Value.Pause();
+        }
+    }
+
+    public void ResumeLoopingSFX()
+    {
+        foreach (var entry in activeLoopAudioSources)
+        {
+            entry.Value.UnPause();
+        }
     }
 
     public void PlayUISFX(string soundEffectName)
