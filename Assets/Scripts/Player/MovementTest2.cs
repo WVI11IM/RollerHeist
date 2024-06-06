@@ -373,22 +373,25 @@ public class MovementTest2 : MonoBehaviour
 
         if(isGrounded && !isGrinding)
         {
-            //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
-            if (isDriftingA || isDriftingD)
+            if (canInput)
             {
-                rb.velocity *= 0.99f;
-                Vector3 driftForce = isDriftingA ? -directionSides : directionSides;
-                rb.AddForce(driftForce * acceleration);
-            }
-            //Porém se a curva for normal, a velocidade dele reduzirá, a força lateral será menor e também proporcional à velocidade frontal do personagem.
-            else
-            {
-                if (!isBraking)
+                //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
+                if (isDriftingA || isDriftingD)
                 {
-                    rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 3) * (rb.velocity.magnitude / maxMoveSpeed)));
-                    if (Input.GetAxis("Horizontal") != 0)
+                    rb.velocity *= 0.99f;
+                    Vector3 driftForce = isDriftingA ? -directionSides : directionSides;
+                    rb.AddForce(driftForce * acceleration);
+                }
+                //Porém se a curva for normal, a velocidade dele reduzirá, a força lateral será menor e também proporcional à velocidade frontal do personagem.
+                else
+                {
+                    if (!isBraking)
                     {
-                        rb.AddForce(-directionFront * acceleration / 10);
+                        rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 3) * (rb.velocity.magnitude / maxMoveSpeed)));
+                        if (Input.GetAxis("Horizontal") != 0)
+                        {
+                            rb.AddForce(-directionFront * acceleration / 10);
+                        }
                     }
                 }
             }
@@ -396,7 +399,7 @@ public class MovementTest2 : MonoBehaviour
         
 
         //Se personagem brecar, é aplicada uma força oposta para desacelerar.
-        if (isBraking && isGrounded && !isGrinding)
+        if (isBraking && isGrounded && !isGrinding && canInput)
         {
             rb.AddForce(-directionFront * acceleration);
         }
