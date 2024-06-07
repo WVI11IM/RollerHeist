@@ -119,7 +119,9 @@ public class GameManager : MonoBehaviour
         //SetScore();
 
         //Freeze time
+        AudioListener.pause = true;
         Time.timeScale = 0f;
+
     }
 
     private void HandleLose()
@@ -136,6 +138,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        SFXManager.Instance.PlayUISFX("play");
         AudioListener.pause = false;
         Time.timeScale = 1f;
         MusicManager.Instance.StopAllLoopingMusic();
@@ -144,6 +147,7 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
+        SFXManager.Instance.PlayUISFX("negativo2");
         AudioListener.pause = false;
         Time.timeScale = 1f;
         MusicManager.Instance.StopAllLoopingMusic();
@@ -152,6 +156,7 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+        SFXManager.Instance.PlayUISFX("negativo1");
         pausePanel.SetActive(true);
         isPaused = true;
         AudioMixerManager.Instance.UpdateSliders();
@@ -162,6 +167,7 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
+        SFXManager.Instance.PlayUISFX("positivo1");
         AudioListener.pause = false;
         SFXManager.Instance.ResumeLoopingSFX();
         Time.timeScale = 1f;

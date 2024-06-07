@@ -11,6 +11,8 @@ public class PaintballShoot : MonoBehaviour
     public Transform center;
     public Transform firePoint; // Ponto de origem do tiro
     public GameObject gun;
+    public GameObject chamber;
+    public GameObject chamberLeftHand;
     public GameObject bulletPrefab; // Prefab da bala
     public float bulletSpeed = 20f; // Velocidade da bala
     public float maxAngle = 180f; // Ângulo máximo de tiro em relação à direção do personagem
@@ -42,12 +44,16 @@ public class PaintballShoot : MonoBehaviour
     {
         playerMovement = GetComponent<MovementTest2>();
         currentAmmo = maxAmmo;
+        chamber.SetActive(true);
+        chamberLeftHand.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentAmmo > 0)
+        animator.SetBool("isReloading", isReloading);
+
+        if (currentAmmo > 0)
         {
             ammoReloadMeter.fillAmount = currentAmmo / maxAmmo;
         }
@@ -107,12 +113,25 @@ public class PaintballShoot : MonoBehaviour
             else
             {
                 targetLayerWeight = 0f;
+
                 if (isReloading)
                 {
+                    if (playerMovement.isGrounded || playerMovement.isGrinding)
+                    {
+                        targetLayerWeight = 1f;
+                        gun.SetActive(true);
+                    }
+                    else
+                    {
+                        gun.SetActive(false);
+                    }
                     ammoReloadMeter.gameObject.SetActive(true);
                 }
-                else ammoReloadMeter.gameObject.SetActive(false);
-                gun.SetActive(false);
+                else
+                {
+                    ammoReloadMeter.gameObject.SetActive(false);
+                    gun.SetActive(false);
+                }
             }
         }
         else
@@ -120,10 +139,23 @@ public class PaintballShoot : MonoBehaviour
             targetLayerWeight = 0f;
             if (isReloading)
             {
+                if (playerMovement.isGrounded || playerMovement.isGrinding)
+                {
+                    targetLayerWeight = 1f;
+                    gun.SetActive(true);
+                }
+                else
+                {
+                    gun.SetActive(false);
+                }
                 ammoReloadMeter.gameObject.SetActive(true);
             }
-            else ammoReloadMeter.gameObject.SetActive(false);
-            gun.SetActive(false);
+            else
+            {
+                ammoReloadMeter.gameObject.SetActive(false);
+                gun.SetActive(false);
+            }
+            
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
 
@@ -198,6 +230,21 @@ public class PaintballShoot : MonoBehaviour
         {
             ammoReloadMeter.color = reloadingColors[1];
             ammoReloadMeter.fillAmount = i / maxAmmo;
+            
+            if (i < 15)
+            {
+                chamber.SetActive(false);
+                if(playerMovement.isGrounded || playerMovement.isGrinding)
+                {
+                    chamberLeftHand.SetActive(true);
+                }
+            }
+            else
+            {
+                chamber.SetActive(true);
+                chamberLeftHand.SetActive(false);
+            }
+
             yield return new WaitForSeconds(reloadTime / maxAmmo);
         }
         ammoReloadMeter.color = reloadingColors[0];

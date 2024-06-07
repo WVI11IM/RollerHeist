@@ -13,4 +13,9 @@ public class PlaySFXScript : MonoBehaviour
     {
         SFXManager.Instance.PlaySFXRandomPitch(soundEffectName);
     }
+
+    public void PlayUISFX(string soundEffectName)
+    {
+        SFXManager.Instance.PlayUISFX(soundEffectName);
+    }
 }
