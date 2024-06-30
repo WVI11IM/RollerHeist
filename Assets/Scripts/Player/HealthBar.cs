@@ -4,21 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
-{  
+{
+    [Header("Health Bar Properties")]
+    public Animator healthBarAnimator;
     public Image healthMeter;
+    public Image whiteHealthMeter;
+    public Image meterValueLost;
     public float maxHealth = 100f;
     public float health;
     public float invincibilityDuration = 2f; // Duração da invencibilidade em segundos
 
     [HideInInspector] public bool isDead;
-    public bool isInvincible = false;
+    [HideInInspector] public bool isInvincible = false;
     private float invincibilityTimer = 0f;
 
+    [Space]
     public GameManager gameManager;
     MovementTest2 playerMovement;
     PaintballShoot playerShoot;
     public Animator animator;
 
+    [Space]
+    [Header("Player Materials")]
     public SkinnedMeshRenderer sMR;
     public Material hurtMaterial;
     public Material invincibleMaterial;
@@ -41,6 +48,7 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
+        //Ativa o cheat com a tecla P
         if (Input.GetKeyDown(KeyCode.P))
         {
             maxHealth = 10000;
@@ -58,7 +66,8 @@ public class HealthBar : MonoBehaviour
 
         float healthSliderValue = health / maxHealth;
         healthMeter.fillAmount = Mathf.Lerp(0.4f, 0.6f, healthSliderValue);
-        
+        whiteHealthMeter.fillAmount = Mathf.Lerp(0.4f, 0.6f, healthSliderValue);
+
         if (health <= 0 && !isDead)
         {
             isDead = true;
@@ -76,7 +85,10 @@ public class HealthBar : MonoBehaviour
         if (!isInvincible && !isDead) // Só aplica o dano se não estiver invencível
         {
             animator.SetTrigger("flinched");
+            healthBarAnimator.SetTrigger("valueLost");
             SFXManager.Instance.PlaySFX("dano");
+            float healthSliderValue = health / maxHealth;
+            meterValueLost.fillAmount = Mathf.Lerp(0.4f, 0.6f, healthSliderValue);
             health -= damage;
             health = Mathf.Clamp(health, 0f, maxHealth);
             if (health > 0) StartCoroutine(HurtSkinChange());
@@ -87,7 +99,6 @@ public class HealthBar : MonoBehaviour
 
     IEnumerator HurtSkinChange()
     {
-        Debug.Log("isWorking");
         sMR.material = hurtMaterial;
         yield return new WaitForSeconds(invincibilityDuration / 8);
         sMR.material = invincibleMaterial;

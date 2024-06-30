@@ -61,7 +61,13 @@ public class MovementTest2 : MonoBehaviour
     [Header("BOOST SETTINGS")]
     public bool isBoosting = false;
     public ParticleSystem boostParticleSystem;
+    public Animator boostBarAnimator;
+    public Image whiteBoostMeter;
     public Image boostMeter;
+    public Image boostMeterValueToGain;
+    public Image boostMeterValueGaining;
+    private float totalBoostValueToAdd = 0f;
+    private float boostValueToAdd = 0f;
     public float maxBoostValue;
     public float boostValue;
     public float boostSpeedMultiplier;
@@ -116,6 +122,9 @@ public class MovementTest2 : MonoBehaviour
         boostEmissionModule.enabled = false;
         var trailSparksEmissionModule = trailSparksParticleSystem.emission;
         trailSparksEmissionModule.enabled = false;
+
+        float boostSliderValueToGain = (boostValue + totalBoostValueToAdd) / maxBoostValue;
+        boostMeterValueToGain.fillAmount = Mathf.Lerp(0.4f, 0.6f, boostSliderValueToGain);
     }
 
     void Update()
@@ -153,6 +162,11 @@ public class MovementTest2 : MonoBehaviour
             }
             else
             {
+                if (Input.GetKey(KeyCode.Mouse1) && isGrounded && !isGrinding && !isBraking)
+                {
+                    boostBarAnimator.SetTrigger("valueEmpty");
+                }
+
                 isBoosting = false;
                 var emissionModule = boostParticleSystem.emission;
                 emissionModule.enabled = false;
@@ -290,11 +304,13 @@ public class MovementTest2 : MonoBehaviour
         {
             isGrounded = true;
             animator.SetBool("isGrounded", true);
+            boostBarAnimator.SetBool("isGrounded", true);
         }
         else
         {
             isGrounded = false;
             animator.SetBool("isGrounded", false);
+            boostBarAnimator.SetBool("isGrounded", false);
             isAirborne = true;
         }
 
@@ -347,9 +363,21 @@ public class MovementTest2 : MonoBehaviour
                 }
                 else
                 {
-                    SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
+                    if (Time.time > (nextActionTime - trickCooldown/4))
+                    {
+                        boostBarAnimator.SetTrigger("trickSuccess");
+                        SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
+                        boostValue += totalBoostValueToAdd;
+                    }
+                    else
+                    {
+                        boostBarAnimator.SetTrigger("trickFail");
+                    }
                 }
                 trickCombo = 0;
+                totalBoostValueToAdd = 0;
+                boostValueToAdd = 0;
+                boostMeterValueToGain.fillAmount = 0;
             }
         }
 
@@ -462,19 +490,34 @@ public class MovementTest2 : MonoBehaviour
 
     public void UpdateBoostValue()
     {
+        if(trickCombo > 0 && Time.time > nextActionTime - trickCooldown)
+        {
+            if(trickCombo == 1)
+            {
+                boostMeterValueGaining.fillAmount = Mathf.Lerp(boostMeterValueToGain.fillAmount, boostMeter.fillAmount, nextActionTime - Time.time);
+            }
+            else
+            {
+                boostMeterValueGaining.fillAmount = Mathf.Lerp(boostMeterValueToGain.fillAmount, boostMeter.fillAmount + Mathf.Lerp(0f, 0.2f, boostValueToAdd / maxBoostValue), nextActionTime - Time.time);
+            }
+        }
+
         if (isBoosting)
         {
             maxMoveSpeed = boostMaxSpeed;
             acceleration = boostAcceleration;
+            boostBarAnimator.SetBool("valueSpending", true);
         }
         else
         {
             maxMoveSpeed = normalMaxSpeed;
             acceleration = normalAcceleration;
+            boostBarAnimator.SetBool("valueSpending", false);
         }
 
         float boostSliderValue = boostValue / maxBoostValue;
         boostMeter.fillAmount = Mathf.Lerp(0.4f, 0.6f, boostSliderValue);
+        whiteBoostMeter.fillAmount = Mathf.Lerp(0.4f, 0.6f, boostSliderValue);
 
         if (boostValue > maxBoostValue) boostValue = maxBoostValue;
         if (boostValue < 0) boostValue = 0;
@@ -559,6 +602,7 @@ public class MovementTest2 : MonoBehaviour
         SFXManager.Instance.PlaySFXRandomPitch("pulo");
         rb.AddForce(Vector3.up * jumpForce * 100);
         animator.SetBool("isGrounded", false);
+        boostBarAnimator.SetBool("isGrounded", false);
         StartCoroutine(ResetJumpFlag());
     }
 
@@ -574,26 +618,31 @@ public class MovementTest2 : MonoBehaviour
         trickNumber = Random.Range(0, 12);
         animator.SetInteger("trickNumber", trickNumber);
         animator.SetTrigger("tricked");
+        boostBarAnimator.SetTrigger("trick");
         trickParticleSystem.Play();
+
         switch (trickCombo)
         {
             case 0:
                 SFXManager.Instance.PlaySFXRandomPitch("truque1");
-                boostValue += trickBoostToAdd;
+                boostValueToAdd = trickBoostToAdd;
                 break;
             case 1:
                 SFXManager.Instance.PlaySFXRandomPitch("truque2");
-                boostValue += (trickBoostToAdd + trickBoostToAdd / 4);
+                boostValueToAdd = trickBoostToAdd + trickBoostToAdd / 4;
                 break;
             case 2:
                 SFXManager.Instance.PlaySFXRandomPitch("truque3");
-                boostValue += (trickBoostToAdd + trickBoostToAdd / 2);
+                boostValueToAdd = trickBoostToAdd + trickBoostToAdd / 2;
                 break;
             default:
                 SFXManager.Instance.PlaySFXRandomPitch("truque4");
-                boostValue += (trickBoostToAdd * 2);
+                boostValueToAdd = trickBoostToAdd * 2;
                 break;
         }
+        totalBoostValueToAdd += trickBoostToAdd;
+        float boostSliderValueToGain = (boostValue + totalBoostValueToAdd) / maxBoostValue;
+        boostMeterValueToGain.fillAmount = Mathf.Lerp(0.4f, 0.6f, boostSliderValueToGain);
         int discoInteger = Random.Range(0, 4) + 1;
         SFXManager.Instance.PlaySFX("disco" + discoInteger);
 
