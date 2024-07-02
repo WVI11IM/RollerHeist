@@ -56,6 +56,7 @@ public class MovementTest2 : MonoBehaviour
     public ParticleSystem trickParticleSystem;
     private int trickCombo = 0;
     private int trickNumber;
+    private bool isTricking = false;
 
     [Space]
     [Header("BOOST SETTINGS")]
@@ -134,6 +135,12 @@ public class MovementTest2 : MonoBehaviour
             maxBoostValue = 10000;
             boostValue = maxBoostValue;
         }
+
+        if (isTricking && Time.time > (nextActionTime - trickCooldown / 4))
+        {
+            isTricking = false;
+        }
+        animator.SetBool("isTricking", isTricking);
 
         //Regula o valor e a barra de boost.
         UpdateBoostValue();
@@ -372,9 +379,11 @@ public class MovementTest2 : MonoBehaviour
                     else
                     {
                         boostBarAnimator.SetTrigger("trickFail");
+                        rb.velocity = velocity/2;
                     }
                 }
                 trickCombo = 0;
+                animator.SetInteger("trickCombo", 0);
                 totalBoostValueToAdd = 0;
                 boostValueToAdd = 0;
                 boostMeterValueToGain.fillAmount = 0;
@@ -601,6 +610,7 @@ public class MovementTest2 : MonoBehaviour
         isJumping = true;
         SFXManager.Instance.PlaySFXRandomPitch("pulo");
         rb.AddForce(Vector3.up * jumpForce * 100);
+        animator.SetTrigger("jumped");
         animator.SetBool("isGrounded", false);
         boostBarAnimator.SetBool("isGrounded", false);
         StartCoroutine(ResetJumpFlag());
@@ -610,10 +620,13 @@ public class MovementTest2 : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f);
         isJumping = false;
+        animator.ResetTrigger("jumped");
     }
 
     public void Trick()
     {
+        isTricking = true;
+
         Debug.Log("TRICK!!");
         trickNumber = Random.Range(0, 12);
         animator.SetInteger("trickNumber", trickNumber);
@@ -647,6 +660,7 @@ public class MovementTest2 : MonoBehaviour
         SFXManager.Instance.PlaySFX("disco" + discoInteger);
 
         trickCombo += 1;
+        animator.SetInteger("trickCombo", trickCombo);
         ChangeLensSizeForTrick(trickCombo);
     }
 
@@ -671,7 +685,7 @@ public class MovementTest2 : MonoBehaviour
         Vector3 currentVelocity = rb.velocity;
         Vector3 horizontalVelocityChange = new Vector3(currentVelocity.x - previousVelocity.x, 0, currentVelocity.z - previousVelocity.z);
 
-        if (horizontalVelocityChange.magnitude >= decelerationThreshold && isGrounded && !isGrinding && !isBoosting)
+        if (horizontalVelocityChange.magnitude >= decelerationThreshold && isGrounded && !isGrinding && !isBoosting && !isTricking)
         {
             animator.SetTrigger("bumped");
             SFXManager.Instance.PlaySFXRandomPitch("impactoParede");
