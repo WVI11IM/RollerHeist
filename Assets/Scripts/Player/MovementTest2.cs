@@ -202,6 +202,8 @@ public class MovementTest2 : MonoBehaviour
             //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
             if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
             {
+                //TESTE CLIQUE DUPLO
+
                 if (Input.GetKeyDown(KeyCode.A) && isGrounded && !isGrinding)
                 {
                     if (Time.time - lastATapTime <= doubleATapTimeThreshold)
@@ -220,6 +222,20 @@ public class MovementTest2 : MonoBehaviour
                     }
                     lastDTapTime = Time.time;
                 }
+
+                //TESTE SHIFT
+                /*
+                if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.D) && isGrounded && !isGrinding)
+                {
+                    isDriftingA = true;
+                    isDriftingD = false;
+                }
+                else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.A) && isGrounded && !isGrinding)
+                {
+                    isDriftingA = false;
+                    isDriftingD = true;
+                }
+                */
             }
 
             animator.SetBool("isDriftingD", isDriftingD);
@@ -278,7 +294,6 @@ public class MovementTest2 : MonoBehaviour
                 SFXManager.Instance.StopSFXLoop("drift");
             }
 
-            //Se teclas A e D estiverem sendo seguradas ao mesmo tempo, personagem para de girar para os lados e desacelera.
             if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
             {
                 rotation = 0;
@@ -417,17 +432,20 @@ public class MovementTest2 : MonoBehaviour
                 {
                     rb.velocity *= 0.99f;
                     Vector3 driftForce = isDriftingA ? -directionSides : directionSides;
-                    rb.AddForce(driftForce * acceleration);
+                    if(Mathf.Abs(rb.velocity.x) <= maxMoveSpeed)
+                    {
+                        rb.AddForce(driftForce * acceleration);
+                    }
                 }
                 //Porém se a curva for normal, a velocidade dele reduzirá, a força lateral será menor e também proporcional à velocidade frontal do personagem.
                 else
                 {
-                    if (!isBraking)
+                    if (!isBraking && Mathf.Abs(rb.velocity.x) <= maxMoveSpeed)
                     {
-                        rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 3) * (rb.velocity.magnitude / maxMoveSpeed)));
+                        rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 2.5f) * (rb.velocity.magnitude / maxMoveSpeed)));
                         if (Input.GetAxis("Horizontal") != 0)
                         {
-                            rb.AddForce(-directionFront * acceleration / 10);
+                            rb.AddForce(-directionFront * acceleration / 5);
                         }
                     }
                 }
