@@ -163,13 +163,13 @@ public class MovementTest2 : MonoBehaviour
         if (canInput)
         {
             //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
-            if (Input.GetKey(KeyCode.Mouse1) && boostValue > 0 && isGrounded && !isGrinding && !isBraking)
+            if (Input.GetKey(KeyCode.LeftShift) && boostValue > 0 && isGrounded && !isGrinding && !isBraking)
             {
                 Boost();
             }
             else
             {
-                if (Input.GetKey(KeyCode.Mouse1) && isGrounded && !isGrinding && !isBraking)
+                if (Input.GetKey(KeyCode.LeftShift) && isGrounded && !isGrinding && !isBraking)
                 {
                     boostBarAnimator.SetTrigger("valueEmpty");
                 }
