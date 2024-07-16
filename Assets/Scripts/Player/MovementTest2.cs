@@ -130,6 +130,7 @@ public class MovementTest2 : MonoBehaviour
 
     void Update()
     {
+        //Ativa o cheat
         if (Input.GetKeyDown(KeyCode.P))
         {
             maxBoostValue = 10000;
@@ -190,7 +191,7 @@ public class MovementTest2 : MonoBehaviour
             //Se personagem apertar ou segurar barra de espaço no ar, uma determinada distância do chão e com velocidade suficiente, fará um truque.
             RaycastHit hit;
             bool isHit = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, minDistForTrick, floorLayerMask);
-            if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+            if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 2)
             {
                 if (Time.time > nextActionTime)
                 {
@@ -297,7 +298,7 @@ public class MovementTest2 : MonoBehaviour
             if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
             {
                 rotation = 0;
-                if (isGrounded && !isBoosting && !isGrinding)
+                if (isGrounded && !isGrinding)
                 {
                     isBraking = true;
                 }
@@ -385,7 +386,15 @@ public class MovementTest2 : MonoBehaviour
                 }
                 else
                 {
-                    if (Time.time > (nextActionTime - trickCooldown/4))
+                    /*
+                    if (Time.time >= (nextActionTime - trickCooldown/4))
+                    {
+                        boostBarAnimator.SetTrigger("trickSuccess");
+                        SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
+                        boostValue += totalBoostValueToAdd;
+                    }
+                    */
+                    if (!isTricking)
                     {
                         boostBarAnimator.SetTrigger("trickSuccess");
                         SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
