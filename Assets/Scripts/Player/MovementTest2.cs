@@ -170,7 +170,7 @@ public class MovementTest2 : MonoBehaviour
             }
             else
             {
-                if (Input.GetKey(KeyCode.LeftShift) && isGrounded && !isGrinding && !isBraking)
+                if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded && !isGrinding && !isBraking)
                 {
                     boostBarAnimator.SetTrigger("valueEmpty");
                 }
@@ -398,11 +398,13 @@ public class MovementTest2 : MonoBehaviour
                     {
                         boostBarAnimator.SetTrigger("trickSuccess");
                         SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
+                        SFXManager.Instance.PlaySFX("truqueSucesso");
                         boostValue += totalBoostValueToAdd;
                     }
                     else
                     {
                         boostBarAnimator.SetTrigger("trickFail");
+                        SFXManager.Instance.PlaySFX("truqueFalha");
                         rb.velocity = velocity/2;
                     }
                 }

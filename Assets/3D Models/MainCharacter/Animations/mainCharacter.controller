@@ -277,7 +277,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions:
   - {fileID: -3000133651555033505}
   - {fileID: 5323340823212136195}
+  - {fileID: -7578374342121779846}
   - {fileID: 5400016469977841298}
+  - {fileID: -3482016915532762676}
   - {fileID: 9109143020927330631}
   - {fileID: -2425543082463131442}
   - {fileID: 3099897301927703772}
@@ -292,8 +294,6 @@ AnimatorStateMachine:
   - {fileID: -7783896018090331506}
   - {fileID: 4809063906212127896}
   - {fileID: -1827621434824876310}
-  - {fileID: -3482016915532762676}
-  - {fileID: -7578374342121779846}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
@@ -456,8 +456,8 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.4
-  m_TransitionOffset: 0
+  m_TransitionDuration: 0.3
+  m_TransitionOffset: 0.1
   m_ExitTime: 0.75
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -1773,7 +1773,7 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: -310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4444018712283786240}
-    m_Position: {x: 620, y: -490, z: 0}
+    m_Position: {x: 610, y: -300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3266499108837847345}
     m_Position: {x: 960, y: -310, z: 0}
@@ -1783,7 +1783,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -356843618812550491}
-    m_Position: {x: 390, y: 20, z: 0}
+    m_Position: {x: 390, y: -40, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
@@ -1792,8 +1792,8 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: -90, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_ExitPosition: {x: 790, y: 230, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: -40, z: 0}
   m_DefaultState: {fileID: 6827844093093105692}
 --- !u!1101 &-3676348592887560977
 AnimatorStateTransition:
@@ -2460,7 +2460,7 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: isTricking
     m_EventTreshold: 0
   - m_ConditionMode: 3
@@ -4217,9 +4217,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.15
+  m_TransitionDuration: 0.35
   m_TransitionOffset: 0
-  m_ExitTime: 0.8
+  m_ExitTime: 0.65
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
