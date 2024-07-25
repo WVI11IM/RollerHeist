@@ -6,7 +6,7 @@ public class GlassBreak : MonoBehaviour
 {
     public GameObject normalGlass;
     public GameObject brokenGlass;
-    private bool isBroken = false;
+    public bool isBroken = false;
     public float scaleReductionFactor = 1.01f; // Factor by which to reduce the scale
     public float destructionDelay = 5f; // Time in seconds before both glass objects are destroyed
     public float minScale = 0.1f; // Minimum scale before destroying the object
