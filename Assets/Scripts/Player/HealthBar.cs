@@ -84,6 +84,7 @@ public class HealthBar : MonoBehaviour
     {
         if (!isInvincible && !isDead) // Só aplica o dano se não estiver invencível
         {
+            ObjectiveManager.Instance.hasTakenDamage = true;
             animator.SetTrigger("flinched");
             healthBarAnimator.SetTrigger("valueLost");
             SFXManager.Instance.PlaySFX("dano");

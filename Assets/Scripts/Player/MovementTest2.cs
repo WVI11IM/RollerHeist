@@ -476,6 +476,8 @@ public class MovementTest2 : MonoBehaviour
         var emissionModule = trailSparksParticleSystem.emission;
 
         isGrinding = playerGrind.onRail;
+        ObjectiveManager.Instance.isGrinding = isGrinding;
+
         animator.SetBool("isGrinding", isGrinding);
         if (wasOnRail && !isGrinding)
         {
@@ -657,6 +659,7 @@ public class MovementTest2 : MonoBehaviour
         isTricking = true;
 
         Debug.Log("TRICK!!");
+        ObjectiveManager.Instance.tricksNumber++;
         trickNumber = Random.Range(0, 12);
         animator.SetInteger("trickNumber", trickNumber);
         animator.SetTrigger("tricked");

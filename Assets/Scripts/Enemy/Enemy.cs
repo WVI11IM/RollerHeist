@@ -263,6 +263,7 @@ public class Enemy : MonoBehaviour
         enemy.isStopped = true;
         if (!isStunned)
         {
+            ObjectiveManager.Instance.hasGivenDamage = true;
             StartCoroutine(Stunned());
         }
         //Paralisar
@@ -276,6 +277,7 @@ public class Enemy : MonoBehaviour
         enemy.isStopped = true;
         if (!hasFainted)
         {
+            ObjectiveManager.Instance.EnemyDefeated();
             animator.SetTrigger("hasFainted");
             hasFainted = true;
             canDamage = false;

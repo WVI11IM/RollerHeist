@@ -1008,7 +1008,7 @@ GameObject:
   - component: {fileID: 6193599533465341583}
   m_Layer: 0
   m_Name: GlassSmall
-  m_TagString: Untagged
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1057,6 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalGlass: {fileID: 2419786405716349185}
   brokenGlass: {fileID: 2419786404871211269}
+  isBroken: 0
   scaleReductionFactor: 1.25
   destructionDelay: 10
   minScale: 0.5

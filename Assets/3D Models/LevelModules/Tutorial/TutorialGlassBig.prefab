@@ -8277,7 +8277,7 @@ GameObject:
   - component: {fileID: 384871112047952167}
   m_Layer: 0
   m_Name: TutorialGlassBig
-  m_TagString: Untagged
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8326,6 +8326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalGlass: {fileID: 8158144431700926121}
   brokenGlass: {fileID: 8158144433389078189}
+  isBroken: 0
   scaleReductionFactor: 1.05
   destructionDelay: 15
   minScale: 0.5
