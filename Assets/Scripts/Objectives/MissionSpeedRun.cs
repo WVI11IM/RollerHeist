@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MissionSpeedRun : MonoBehaviour
 {
-    private float timeToBeat;
+    public bool isCompleted = false;
+    public float timeToBeat;
 
     void Start()
     {
@@ -14,6 +15,23 @@ public class MissionSpeedRun : MonoBehaviour
             {
                 timeToBeat = ObjectiveManager.Instance.objectiveList[i].number;
             }
+        }
+    }
+
+    private void Update()
+    {
+        VerifyMission();
+    }
+
+    void VerifyMission()
+    {
+        if (GameManager.Instance.state == GameState.Win && Timer.Instance.elapsedTime <= timeToBeat)
+        {
+            isCompleted = true;
+        }
+        else
+        {
+            isCompleted = false;
         }
     }
 }

@@ -55,7 +55,7 @@ public class Objective
 public enum ObjectiveType
 {
     SecondPieces,   //"feito"
-    SpeedRun,
+    SpeedRun,   //"feito"
     NoDamage,   //"feito"
     Pacifist,   //"feito"
     Tricks,   //"feito"
