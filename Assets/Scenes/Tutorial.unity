@@ -1008,7 +1008,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1057428785}
-  - {fileID: 495173498}
   - {fileID: 66311028}
   - {fileID: 2126649041}
   m_Father: {fileID: 0}
@@ -1124,7 +1123,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 50349531}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &67994090
 PrefabInstance:
@@ -10386,54 +10385,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1351792418577451193, guid: a29dba8c5aef9ea4aa968b92bef2c7bd, type: 3}
   m_PrefabInstance: {fileID: 494916550}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &495173496
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 495173498}
-  - component: {fileID: 495173497}
-  m_Layer: 0
-  m_Name: CollectableManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &495173497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495173496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0444a86a563f99148bba0420471fd50d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bigItem: {fileID: 1581630354}
-  smallItem: {fileID: 956427442}
-  bigItemCollected: 0
-  smallItensCollected: 0
---- !u!4 &495173498
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495173496}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 50349531}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &498116084
 GameObject:
   m_ObjectHideFlags: 0
@@ -56623,7 +56574,7 @@ Transform:
   - {fileID: 787139714}
   - {fileID: 293154008}
   m_Father: {fileID: 50349531}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2126649042
 MonoBehaviour:
@@ -56644,6 +56595,10 @@ MonoBehaviour:
   isGrinding: 0
   tricksNumber: 0
   hasTakenDamage: 0
+  bigItem: {fileID: 1581630354}
+  smallItem: {fileID: 956427442}
+  bigItemCollected: 0
+  smallItensCollected: 0
 --- !u!1 &2141881019
 GameObject:
   m_ObjectHideFlags: 0

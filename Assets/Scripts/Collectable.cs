@@ -27,11 +27,11 @@ public class Collectable : MonoBehaviour
         if (gameObject.tag == "BigItem")
         {
             SFXManager.Instance.PlaySFX("coletaPrincipalWalkieTalkie");
-            CollectableManager.instance.bigItemCollected++;
+            ObjectiveManager.Instance.bigItemCollected++;
         }
         else if (gameObject.tag == "SmallItem")
         {
-            CollectableManager.instance.smallItensCollected++;
+            ObjectiveManager.Instance.smallItensCollected++;
         }
         capsuleCollider.enabled = false;
         canCollect = false;

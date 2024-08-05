@@ -68,13 +68,13 @@ public class EnemyManager : MonoBehaviour
 
     private void ChangeSpawnFrequency()
     {
-        if (CollectableManager.instance.bigItemCollected == 1)
+        if (ObjectiveManager.Instance.bigItemCollected == 1)
         {
             currentSpawnCooldown = mainItemSpawnCooldown;
         }
-        else if (CollectableManager.instance.bigItemCollected == 0)
+        else if (ObjectiveManager.Instance.bigItemCollected == 0)
         {
-            switch (CollectableManager.instance.smallItensCollected)
+            switch (ObjectiveManager.Instance.smallItensCollected)
             {
                 case 0:
                     currentSpawnCooldown = startSpawnCooldown;

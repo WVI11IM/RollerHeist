@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ObjectiveManager : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class ObjectiveManager : MonoBehaviour
     public int tricksNumber = 0;
     public bool hasTakenDamage = false;
 
+    [Header("COLLECTABLES DATA")]
+    public TextMeshProUGUI bigItem;
+    public TextMeshProUGUI smallItem;
+    public float bigItemCollected;
+    public float smallItensCollected;
+    private float smallItensToCollect;
+
     private void Awake()
     {
         Instance = this;
@@ -29,12 +37,37 @@ public class ObjectiveManager : MonoBehaviour
         isGrinding = false;
         tricksNumber = 0;
         hasTakenDamage = false;
+
+        bigItemCollected = 0;
+        smallItensCollected = 0;
+        GameObject[] smallItens = GameObject.FindGameObjectsWithTag("SmallItem");
+        smallItensToCollect = smallItens.Length;
     }
     private void Update()
     {
         if (isGrinding)
         {
             railTime += Time.deltaTime;
+        }
+
+        if (GameManager.Instance.state == GameState.Invade)
+        {
+            GotItem();
+        }
+        SetCollectables();
+    }
+
+    void SetCollectables()
+    {
+        bigItem.text = bigItemCollected + "/1";
+        smallItem.text = smallItensCollected + "/" + smallItensToCollect;
+    }
+
+    public void GotItem()
+    {
+        if (bigItemCollected >= 1)
+        {
+            GameManager.Instance.UpdateGameState(GameState.Escape);
         }
     }
 

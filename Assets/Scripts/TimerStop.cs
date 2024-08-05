@@ -12,7 +12,7 @@ public class TimerStop : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Player") && CollectableManager.instance.bigItemCollected >= 1)
+        if (collision.gameObject.CompareTag("Player") && ObjectiveManager.Instance.bigItemCollected >= 1)
         {
             //stop time
             FindObjectOfType<Timer>().runTime = false;
