@@ -26,6 +26,13 @@ public class MissionRailTime : MonoBehaviour
         if(ObjectiveManager.Instance.railTime >= railTimeToSurpass)
         {
             isCompleted = true;
+            for (int i = 0; i < ObjectiveManager.Instance.objectiveList.Count; i++)
+            {
+                if (ObjectiveManager.Instance.objectiveList[i].objectiveType == ObjectiveType.RailTime)
+                {
+                    ObjectiveManager.Instance.objectiveList[i].isCompleted = true;
+                }
+            }
         }
         else
         {

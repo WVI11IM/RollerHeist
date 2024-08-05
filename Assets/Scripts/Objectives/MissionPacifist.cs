@@ -25,6 +25,13 @@ public class MissionPacifist : MonoBehaviour
         if(GameManager.Instance.state == GameState.Win && !hasGivenDamage)
         {
             isCompleted = true;
+            for (int i = 0; i < ObjectiveManager.Instance.objectiveList.Count; i++)
+            {
+                if (ObjectiveManager.Instance.objectiveList[i].objectiveType == ObjectiveType.Pacifist)
+                {
+                    ObjectiveManager.Instance.objectiveList[i].isCompleted = true;
+                }
+            }
         }
         else
         {

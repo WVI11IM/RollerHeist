@@ -10,6 +10,17 @@ public class ObjectiveManager : MonoBehaviour
     [Header("LEVEL OBJECTIVE LIST")]
     public List<Objective> objectiveList;
 
+    [Header("OBJECTIVES GAME OBJECTS")]
+    [SerializeField] GameObject missionSecondPieces;
+    [SerializeField] GameObject missionSpeedRun;
+    [SerializeField] GameObject missionNoDamage;
+    [SerializeField] GameObject missionPacifist;
+    [SerializeField] GameObject missionTricks;
+    [SerializeField] GameObject missionKills;
+    [SerializeField] GameObject missionGlassBreaks;
+    [SerializeField] GameObject missionNoGlassBreaks;
+    [SerializeField] GameObject missionRailTime;
+
     [Header("LEVEL DATA")]
     public int defeatedEnemies = 0;
     public bool hasGivenDamage = false;
@@ -42,7 +53,50 @@ public class ObjectiveManager : MonoBehaviour
         smallItensCollected = 0;
         GameObject[] smallItens = GameObject.FindGameObjectsWithTag("SmallItem");
         smallItensToCollect = smallItens.Length;
+
+        for (int i = 0; i < objectiveList.Count; i++)
+        {
+            switch (objectiveList[i].objectiveType)
+            {
+                case ObjectiveType.SecondPieces:
+                    Instantiate(missionSecondPieces);
+                    break;
+                case ObjectiveType.SpeedRun:
+                    Instantiate(missionSpeedRun);
+                    break;
+                case ObjectiveType.NoDamage:
+                    Instantiate(missionNoDamage);
+                    break;
+                case ObjectiveType.Pacifist:
+                    Instantiate(missionPacifist);
+                    break;
+                case ObjectiveType.Tricks:
+                    Instantiate(missionTricks);
+                    break;
+                case ObjectiveType.Kills:
+                    Instantiate(missionKills);
+                    break;
+                case ObjectiveType.GlassBreaks:
+                    Instantiate(missionGlassBreaks);
+                    break;
+                case ObjectiveType.NoGlassBreaks:
+                    Instantiate(missionNoGlassBreaks);
+                    break;
+                case ObjectiveType.RailTime:
+                    Instantiate(missionRailTime);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        Debug.Log("Level1Mission1 = " + PlayerPrefs.GetInt("Level1Mission1"));
+        Debug.Log("Level1Mission2 = " + PlayerPrefs.GetInt("Level1Mission2"));
+        Debug.Log("Level1Mission3 = " + PlayerPrefs.GetInt("Level1Mission3"));
+        Debug.Log("Level1Mission4 = " + PlayerPrefs.GetInt("Level1Mission4"));
+        Debug.Log("Level1Mission5 = " + PlayerPrefs.GetInt("Level1Mission5"));
     }
+
     private void Update()
     {
         if (isGrinding)
@@ -55,6 +109,36 @@ public class ObjectiveManager : MonoBehaviour
             GotItem();
         }
         SetCollectables();
+
+        if(GameManager.Instance.state == GameState.Win)
+        {
+            PlayerPrefs.SetInt("Level" + GameManager.Instance.levelNumber + "Mission1", 1);
+
+            for (int i = 0; i < objectiveList.Count; i++)
+            {
+                if (objectiveList[i].isCompleted)
+                {
+                    PlayerPrefs.SetInt("Level" + GameManager.Instance.levelNumber + "Mission" + (i + 2), 1);
+                }
+            }
+            Debug.Log("Level1Mission1 = " + PlayerPrefs.GetInt("Level1Mission1"));
+            Debug.Log("Level1Mission2 = " + PlayerPrefs.GetInt("Level1Mission2"));
+            Debug.Log("Level1Mission3 = " + PlayerPrefs.GetInt("Level1Mission3"));
+            Debug.Log("Level1Mission4 = " + PlayerPrefs.GetInt("Level1Mission4"));
+            Debug.Log("Level1Mission5 = " + PlayerPrefs.GetInt("Level1Mission5"));
+        }
+
+        //TEST
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                for (int j = 1; j < 6; j++)
+                {
+                    PlayerPrefs.SetInt("Level" + i + "Mission" + j, 0);
+                }
+            }
+        }
     }
 
     void SetCollectables()
@@ -82,6 +166,7 @@ public class Objective
 {
     public ObjectiveType objectiveType;
     public int number;
+    public bool isCompleted;
 }
 
 public enum ObjectiveType

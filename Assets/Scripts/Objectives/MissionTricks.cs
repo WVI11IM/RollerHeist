@@ -28,6 +28,13 @@ public class MissionTricks : MonoBehaviour
         if (ObjectiveManager.Instance.tricksNumber >= tricksToPerform)
         {
             isCompleted = true;
+            for (int i = 0; i < ObjectiveManager.Instance.objectiveList.Count; i++)
+            {
+                if (ObjectiveManager.Instance.objectiveList[i].objectiveType == ObjectiveType.Tricks)
+                {
+                    ObjectiveManager.Instance.objectiveList[i].isCompleted = true;
+                }
+            }
         }
         else
         {

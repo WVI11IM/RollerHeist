@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public int levelNumber;
+
     public GameObject winPanel;
     public TextMeshProUGUI highScoreText;
     //public TextMeshProUGUI scoreText;

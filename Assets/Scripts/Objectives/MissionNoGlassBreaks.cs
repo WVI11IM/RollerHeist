@@ -61,6 +61,13 @@ public class MissionNoGlassBreaks : MonoBehaviour
         if (glassPanelsList.Count == totalGlassScene)
         {
             isCompleted = true;
+            for (int i = 0; i < ObjectiveManager.Instance.objectiveList.Count; i++)
+            {
+                if (ObjectiveManager.Instance.objectiveList[i].objectiveType == ObjectiveType.NoGlassBreaks)
+                {
+                    ObjectiveManager.Instance.objectiveList[i].isCompleted = true;
+                }
+            }
         }
         else isCompleted = false;
     }

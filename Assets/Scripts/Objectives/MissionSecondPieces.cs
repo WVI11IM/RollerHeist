@@ -2,20 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissionKills : MonoBehaviour
+public class MissionSecondPieces : MonoBehaviour
 {
+    public int totalSecondaryPiecesScene;
     public bool isCompleted = false;
-    public int enemiesToDefeat;
+    private GameObject[] secondaryPieces;
 
     void Start()
     {
-        for (int i = 0; i < ObjectiveManager.Instance.objectiveList.Count; i++)
-        {
-            if (ObjectiveManager.Instance.objectiveList[i].objectiveType == ObjectiveType.Kills)
-            {
-                enemiesToDefeat = ObjectiveManager.Instance.objectiveList[i].number;
-            }
-        }
+        secondaryPieces = GameObject.FindGameObjectsWithTag("SmallItem");
+
+        totalSecondaryPiecesScene = secondaryPieces.Length;
     }
 
     private void Update()
@@ -25,12 +22,12 @@ public class MissionKills : MonoBehaviour
 
     void VerifyMission()
     {
-        if(ObjectiveManager.Instance.defeatedEnemies >= enemiesToDefeat)
+        if (ObjectiveManager.Instance.smallItensCollected >= totalSecondaryPiecesScene)
         {
             isCompleted = true;
             for (int i = 0; i < ObjectiveManager.Instance.objectiveList.Count; i++)
             {
-                if (ObjectiveManager.Instance.objectiveList[i].objectiveType == ObjectiveType.Kills)
+                if (ObjectiveManager.Instance.objectiveList[i].objectiveType == ObjectiveType.SecondPieces)
                 {
                     ObjectiveManager.Instance.objectiveList[i].isCompleted = true;
                 }
