@@ -6,16 +6,15 @@ public class ObjectiveManager : MonoBehaviour
 {
     public static ObjectiveManager Instance;
 
+    [Header("LEVEL OBJECTIVE LIST")]
     public List<Objective> objectiveList;
 
+    [Header("LEVEL DATA")]
     public int defeatedEnemies = 0;
     public bool hasGivenDamage = false;
-
     public float railTime = 0;
     public bool isGrinding = false;
-
     public int tricksNumber = 0;
-
     public bool hasTakenDamage = false;
 
     private void Awake()

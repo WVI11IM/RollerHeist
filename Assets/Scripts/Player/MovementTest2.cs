@@ -173,6 +173,8 @@ public class MovementTest2 : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded && !isGrinding && !isBraking)
                 {
                     boostBarAnimator.SetTrigger("valueEmpty");
+                    SFXManager.Instance.PlaySFXRandomPitch("boostVazio1");
+                    SFXManager.Instance.PlaySFXRandomPitch("boostVazio2");
                 }
 
                 isBoosting = false;
