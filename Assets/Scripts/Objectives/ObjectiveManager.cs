@@ -23,6 +23,7 @@ public class ObjectiveManager : MonoBehaviour
     public GameObject objectiveUI;
     public Transform objectiveUIList;
     private string missionText;
+    //private bool wasCompleted;
 
     [Header("LEVEL DATA")]
     public int defeatedEnemies = 0;
@@ -57,10 +58,16 @@ public class ObjectiveManager : MonoBehaviour
         GameObject[] smallItens = GameObject.FindGameObjectsWithTag("SmallItem");
         smallItensToCollect = smallItens.Length;
 
+        //Definir UI da missão principal
         GameObject mainObjectiveUIObject = objectiveUI;
-        //mainObjectiveUIObject.transform.SetSiblingIndex(0);
         ObjectiveUI mainObjectiveUIScript = mainObjectiveUIObject.GetComponent<ObjectiveUI>();
         mainObjectiveUIScript.objectiveText.text = "Roube a peça principal!";
+        if (PlayerPrefs.GetInt("Level" + GameManager.Instance.levelNumber + "Mission1") != 0)
+        {
+            mainObjectiveUIScript.wasCompleted = true;
+        }
+        else mainObjectiveUIScript.wasCompleted = false;
+        mainObjectiveUIScript.CompleteObjective();
         Instantiate(mainObjectiveUIObject, objectiveUIList);
         mainObjectiveUIObject.transform.SetAsFirstSibling();
 
@@ -110,6 +117,11 @@ public class ObjectiveManager : MonoBehaviour
             GameObject objectiveUIObject = objectiveUI;
             ObjectiveUI objectiveUIScript = objectiveUIObject.GetComponent<ObjectiveUI>();
             objectiveUIScript.objectiveText.text = missionText;
+            if (PlayerPrefs.GetInt("Level" + GameManager.Instance.levelNumber + "Mission" + (i + 2)) != 0)
+            {
+                objectiveUIScript.wasCompleted = true;
+            }
+            else objectiveUIScript.wasCompleted = false;
             Instantiate(objectiveUIObject, objectiveUIList);
             mainObjectiveUIObject.transform.SetSiblingIndex(i + 1);
         }
@@ -119,6 +131,12 @@ public class ObjectiveManager : MonoBehaviour
         Debug.Log("Level1Mission3 = " + PlayerPrefs.GetInt("Level1Mission3"));
         Debug.Log("Level1Mission4 = " + PlayerPrefs.GetInt("Level1Mission4"));
         Debug.Log("Level1Mission5 = " + PlayerPrefs.GetInt("Level1Mission5"));
+
+        for (int i = 0; i < objectiveUIList.childCount; i++)
+        {
+            ObjectiveUI script = objectiveUIList.GetChild(i).GetComponent<ObjectiveUI>();
+            script.CompleteObjective();
+        }
     }
 
     private void Update()
@@ -138,11 +156,28 @@ public class ObjectiveManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Level" + GameManager.Instance.levelNumber + "Mission1", 1);
 
+            ObjectiveUI mainMissionScript = objectiveUIList.GetChild(0).GetComponent<ObjectiveUI>();
+
+            if (PlayerPrefs.GetInt("Level" + GameManager.Instance.levelNumber + "Mission1") != 0)
+            {
+                mainMissionScript.wasCompleted = true;
+            }
+            else mainMissionScript.wasCompleted = false;
+
+            mainMissionScript.CompleteObjective();
+
             for (int i = 0; i < objectiveList.Count; i++)
             {
                 if (objectiveList[i].isCompleted)
                 {
                     PlayerPrefs.SetInt("Level" + GameManager.Instance.levelNumber + "Mission" + (i + 2), 1);
+                    ObjectiveUI script = objectiveUIList.GetChild(i + 1).GetComponent<ObjectiveUI>();
+                    if (PlayerPrefs.GetInt("Level" + GameManager.Instance.levelNumber + "Mission" + (i + 2)) != 0)
+                    {
+                        script.wasCompleted = true;
+                    }
+                    else script.wasCompleted = false;
+                    script.CompleteObjective();
                 }
             }
             Debug.Log("Level1Mission1 = " + PlayerPrefs.GetInt("Level1Mission1"));
@@ -150,6 +185,17 @@ public class ObjectiveManager : MonoBehaviour
             Debug.Log("Level1Mission3 = " + PlayerPrefs.GetInt("Level1Mission3"));
             Debug.Log("Level1Mission4 = " + PlayerPrefs.GetInt("Level1Mission4"));
             Debug.Log("Level1Mission5 = " + PlayerPrefs.GetInt("Level1Mission5"));
+
+            //ObjectiveUI mainMissionScript = objectiveUIList.GetChild(0).GetComponent<ObjectiveUI>();
+            //mainMissionScript.CompleteObjective();
+
+            /*
+            for (int i = 1; i < objectiveUIList.childCount; i++)
+            {
+                ObjectiveUI script = objectiveUIList.GetChild(i).GetComponent<ObjectiveUI>();
+                script.CompleteObjective();
+            }
+            */
         }
 
         //TEST
