@@ -20,6 +20,9 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField] GameObject missionGlassBreaks;
     [SerializeField] GameObject missionNoGlassBreaks;
     [SerializeField] GameObject missionRailTime;
+    public GameObject objectiveUI;
+    public Transform objectiveUIList;
+    private string missionText;
 
     [Header("LEVEL DATA")]
     public int defeatedEnemies = 0;
@@ -54,21 +57,34 @@ public class ObjectiveManager : MonoBehaviour
         GameObject[] smallItens = GameObject.FindGameObjectsWithTag("SmallItem");
         smallItensToCollect = smallItens.Length;
 
+        GameObject mainObjectiveUIObject = objectiveUI;
+        Instantiate(mainObjectiveUIObject, objectiveUIList);
+        //mainObjectiveUIObject.transform.SetSiblingIndex(0);
+        mainObjectiveUIObject.transform.SetAsFirstSibling();
+        ObjectiveUI mainObjectiveUIScript = mainObjectiveUIObject.GetComponent<ObjectiveUI>();
+        mainObjectiveUIScript.objectiveText.text = "Roube a peça principal!";
+
         for (int i = 0; i < objectiveList.Count; i++)
         {
+            //string missionText;
+
             switch (objectiveList[i].objectiveType)
             {
                 case ObjectiveType.SecondPieces:
                     Instantiate(missionSecondPieces);
+                    missionText = "Colete todas as peças secundárias";
                     break;
                 case ObjectiveType.SpeedRun:
                     Instantiate(missionSpeedRun);
+                    missionText = "Complete em " + objectiveList[i].number + " segundos";
                     break;
                 case ObjectiveType.NoDamage:
                     Instantiate(missionNoDamage);
+                    missionText = "Não sofra nenhum dano";
                     break;
                 case ObjectiveType.Pacifist:
                     Instantiate(missionPacifist);
+                    missionText = "Não dê nenhum dano";
                     break;
                 case ObjectiveType.Tricks:
                     Instantiate(missionTricks);
@@ -78,9 +94,11 @@ public class ObjectiveManager : MonoBehaviour
                     break;
                 case ObjectiveType.GlassBreaks:
                     Instantiate(missionGlassBreaks);
+                    missionText = "Quebre " + objectiveList[i].number + " painéis de vidros";
                     break;
                 case ObjectiveType.NoGlassBreaks:
                     Instantiate(missionNoGlassBreaks);
+                    missionText = "Quebre 0 painéis de vidros";
                     break;
                 case ObjectiveType.RailTime:
                     Instantiate(missionRailTime);
@@ -88,6 +106,11 @@ public class ObjectiveManager : MonoBehaviour
                 default:
                     break;
             }
+
+            GameObject objectiveUIObject = objectiveUI;
+            Instantiate(objectiveUIObject, objectiveUIList);
+            ObjectiveUI objectiveUIScript = objectiveUIObject.GetComponent<ObjectiveUI>();
+            objectiveUIScript.objectiveText.text = missionText;
         }
 
         Debug.Log("Level1Mission1 = " + PlayerPrefs.GetInt("Level1Mission1"));
