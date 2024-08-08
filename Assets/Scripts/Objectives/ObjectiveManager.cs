@@ -58,11 +58,11 @@ public class ObjectiveManager : MonoBehaviour
         smallItensToCollect = smallItens.Length;
 
         GameObject mainObjectiveUIObject = objectiveUI;
-        Instantiate(mainObjectiveUIObject, objectiveUIList);
         //mainObjectiveUIObject.transform.SetSiblingIndex(0);
-        mainObjectiveUIObject.transform.SetAsFirstSibling();
         ObjectiveUI mainObjectiveUIScript = mainObjectiveUIObject.GetComponent<ObjectiveUI>();
         mainObjectiveUIScript.objectiveText.text = "Roube a peça principal!";
+        Instantiate(mainObjectiveUIObject, objectiveUIList);
+        mainObjectiveUIObject.transform.SetAsFirstSibling();
 
         for (int i = 0; i < objectiveList.Count; i++)
         {
@@ -71,8 +71,8 @@ public class ObjectiveManager : MonoBehaviour
             switch (objectiveList[i].objectiveType)
             {
                 case ObjectiveType.SecondPieces:
-                    Instantiate(missionSecondPieces);
                     missionText = "Colete todas as peças secundárias";
+                    Instantiate(missionSecondPieces);
                     break;
                 case ObjectiveType.SpeedRun:
                     Instantiate(missionSpeedRun);
@@ -108,9 +108,10 @@ public class ObjectiveManager : MonoBehaviour
             }
 
             GameObject objectiveUIObject = objectiveUI;
-            Instantiate(objectiveUIObject, objectiveUIList);
             ObjectiveUI objectiveUIScript = objectiveUIObject.GetComponent<ObjectiveUI>();
             objectiveUIScript.objectiveText.text = missionText;
+            Instantiate(objectiveUIObject, objectiveUIList);
+            mainObjectiveUIObject.transform.SetSiblingIndex(i + 1);
         }
 
         Debug.Log("Level1Mission1 = " + PlayerPrefs.GetInt("Level1Mission1"));
