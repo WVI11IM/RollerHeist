@@ -407,6 +407,7 @@ public class MovementTest2 : MonoBehaviour
                     {
                         boostBarAnimator.SetTrigger("trickFail");
                         SFXManager.Instance.PlaySFX("truqueFalha");
+                        SFXManager.Instance.PlaySFXRandomPitch("impactoChao");
                         rb.velocity = velocity/2;
                     }
                 }
