@@ -410,6 +410,8 @@ public class MovementTest2 : MonoBehaviour
                         SFXManager.Instance.PlaySFXRandomPitch("impactoChao");
                         rb.velocity = velocity/2;
                     }
+                    Debug.Log(Time.time - (nextActionTime - trickCooldown / 4));
+
                 }
                 trickCombo = 0;
                 animator.SetInteger("trickCombo", 0);

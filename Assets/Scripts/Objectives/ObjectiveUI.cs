@@ -34,6 +34,7 @@ public class ObjectiveUI : MonoBehaviour
 
     public void CompleteObjective()
     {
+        //Se o objetivo for completo já uma única vez, a estrela já é adquirida.
         if (wasCompleted)
         {
             star.enabled = true;
@@ -46,13 +47,14 @@ public class ObjectiveUI : MonoBehaviour
 
     public void CompleteInScene()
     {
+        //Se o objetivo for completo dentro da fase, a caixa fica verde.
         if (isCompleted)
         {
             box.color = Color.green;
         }
         else
         {
-            
+            //Manter cor de caixa padrão.
         }
     }
 }

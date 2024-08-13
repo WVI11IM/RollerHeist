@@ -46,18 +46,20 @@ public class ObjectiveManager : MonoBehaviour
 
     private void Start()
     {
+        //Reseta os dados ao início da fase.
         defeatedEnemies = 0;
         railTime = 0;
         isGrinding = false;
         tricksNumber = 0;
         hasTakenDamage = false;
 
+        //Procura todos os itens secundários.
         bigItemCollected = 0;
         smallItensCollected = 0;
         GameObject[] smallItens = GameObject.FindGameObjectsWithTag("SmallItem");
         smallItensToCollect = smallItens.Length;
 
-        //Definir UI da missão principal
+        //Define UI da missão principal.
         GameObject mainObjectiveUIObject = objectiveUI;
         ObjectiveUI mainObjectiveUIScript = mainObjectiveUIObject.GetComponent<ObjectiveUI>();
         mainObjectiveUIScript.objectiveText.text = "Roube a peça principal!";
@@ -70,6 +72,7 @@ public class ObjectiveManager : MonoBehaviour
         Instantiate(mainObjectiveUIObject, objectiveUIList);
         mainObjectiveUIObject.transform.SetAsFirstSibling();
 
+        //Define UI dos outros objetivos da fase.
         for (int i = 0; i < objectiveList.Count; i++)
         {
             switch (objectiveList[i].objectiveType)
@@ -126,12 +129,6 @@ public class ObjectiveManager : MonoBehaviour
             mainObjectiveUIObject.transform.SetSiblingIndex(i + 1);
         }
 
-        Debug.Log("Level1Mission1 = " + PlayerPrefs.GetInt("Level1Mission1"));
-        Debug.Log("Level1Mission2 = " + PlayerPrefs.GetInt("Level1Mission2"));
-        Debug.Log("Level1Mission3 = " + PlayerPrefs.GetInt("Level1Mission3"));
-        Debug.Log("Level1Mission4 = " + PlayerPrefs.GetInt("Level1Mission4"));
-        Debug.Log("Level1Mission5 = " + PlayerPrefs.GetInt("Level1Mission5"));
-
         for (int i = 0; i < objectiveUIList.childCount; i++)
         {
             ObjectiveUI script = objectiveUIList.GetChild(i).GetComponent<ObjectiveUI>();
@@ -141,17 +138,20 @@ public class ObjectiveManager : MonoBehaviour
 
     private void Update()
     {
+        //Calcula o tempo percorrido nos trilhos.
         if (isGrinding)
         {
             railTime += Time.deltaTime;
         }
 
+        //Verifica se o player coletou o item principal para mudar o estado do jogo.
         if (GameManager.Instance.state == GameState.Invade)
         {
             GotItem();
         }
         SetCollectables();
 
+        //Caso a fase seja concluída, os dados de player prefs são atualizados dependendo de quais missões forem concluídas.
         if (GameManager.Instance.state == GameState.Win)
         {
             PlayerPrefs.SetInt("Level" + GameManager.Instance.levelNumber + "Mission1", 1);
@@ -195,28 +195,18 @@ public class ObjectiveManager : MonoBehaviour
                 script.isCompleted = true;
             }
         }
-
-        //TEST
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            for (int i = 1; i < 5; i++)
-            {
-                for (int j = 1; j < 6; j++)
-                {
-                    PlayerPrefs.SetInt("Level" + i + "Mission" + j, 0);
-                }
-            }
-        }
     }
 
     void SetCollectables()
     {
+        //Texto dos itens coletados.
         bigItem.text = bigItemCollected + "/1";
         smallItem.text = smallItensCollected + "/" + smallItensToCollect;
     }
 
     public void GotItem()
     {
+        //Se o item principal for coletado, o estado do jogo passa a ser ESCAPE.
         if (bigItemCollected >= 1)
         {
             GameManager.Instance.UpdateGameState(GameState.Escape);
