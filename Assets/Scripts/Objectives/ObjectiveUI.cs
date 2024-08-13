@@ -12,16 +12,20 @@ public class ObjectiveUI : MonoBehaviour
     public bool isCompleted;
 
     public Image star;
+    Image box;
 
     public TextMeshProUGUI objectiveText;
 
     void Start()
     {
+        box = GetComponent<Image>();
         CompleteObjective();
     }
 
     void Update()
     {
+        CompleteInScene();
+
         if (GameManager.Instance.state == GameState.Win)
         {
             CompleteObjective();
@@ -30,7 +34,6 @@ public class ObjectiveUI : MonoBehaviour
 
     public void CompleteObjective()
     {
-        //Image star = GetComponent<Image>();
         if (wasCompleted)
         {
             star.enabled = true;
@@ -38,6 +41,18 @@ public class ObjectiveUI : MonoBehaviour
         else
         {
             star.enabled = false;
+        }
+    }
+
+    public void CompleteInScene()
+    {
+        if (isCompleted)
+        {
+            box.color = Color.green;
+        }
+        else
+        {
+            
         }
     }
 }

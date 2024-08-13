@@ -23,7 +23,6 @@ public class ObjectiveManager : MonoBehaviour
     public GameObject objectiveUI;
     public Transform objectiveUIList;
     private string missionText;
-    //private bool wasCompleted;
 
     [Header("LEVEL DATA")]
     public int defeatedEnemies = 0;
@@ -73,8 +72,6 @@ public class ObjectiveManager : MonoBehaviour
 
         for (int i = 0; i < objectiveList.Count; i++)
         {
-            //string missionText;
-
             switch (objectiveList[i].objectiveType)
             {
                 case ObjectiveType.SecondPieces:
@@ -83,7 +80,7 @@ public class ObjectiveManager : MonoBehaviour
                     break;
                 case ObjectiveType.SpeedRun:
                     Instantiate(missionSpeedRun);
-                    missionText = "Complete em " + objectiveList[i].number + " segundos";
+                    missionText = "Complete a fase em " + objectiveList[i].number + " segundos";
                     break;
                 case ObjectiveType.NoDamage:
                     Instantiate(missionNoDamage);
@@ -91,24 +88,27 @@ public class ObjectiveManager : MonoBehaviour
                     break;
                 case ObjectiveType.Pacifist:
                     Instantiate(missionPacifist);
-                    missionText = "Não dê nenhum dano";
+                    missionText = "Não dê nenhum dano contra os guardas";
                     break;
                 case ObjectiveType.Tricks:
                     Instantiate(missionTricks);
+                    missionText = "Faça " + objectiveList[i].number + " truques";
                     break;
                 case ObjectiveType.Kills:
                     Instantiate(missionKills);
+                    missionText = "Derrote " + objectiveList[i].number + " guardas";
                     break;
                 case ObjectiveType.GlassBreaks:
                     Instantiate(missionGlassBreaks);
-                    missionText = "Quebre " + objectiveList[i].number + " painéis de vidros";
+                    missionText = "Quebre " + objectiveList[i].number + " painéis de vidro";
                     break;
                 case ObjectiveType.NoGlassBreaks:
                     Instantiate(missionNoGlassBreaks);
-                    missionText = "Quebre 0 painéis de vidros";
+                    missionText = "Não quebre nenhum painél de vidro";
                     break;
                 case ObjectiveType.RailTime:
                     Instantiate(missionRailTime);
+                    missionText = "Percorra os trilhos por " + objectiveList[i].number + " segundos";
                     break;
                 default:
                     break;
@@ -152,7 +152,7 @@ public class ObjectiveManager : MonoBehaviour
         }
         SetCollectables();
 
-        if(GameManager.Instance.state == GameState.Win)
+        if (GameManager.Instance.state == GameState.Win)
         {
             PlayerPrefs.SetInt("Level" + GameManager.Instance.levelNumber + "Mission1", 1);
 
@@ -160,9 +160,14 @@ public class ObjectiveManager : MonoBehaviour
 
             if (PlayerPrefs.GetInt("Level" + GameManager.Instance.levelNumber + "Mission1") != 0)
             {
+                mainMissionScript.isCompleted = true;
                 mainMissionScript.wasCompleted = true;
             }
-            else mainMissionScript.wasCompleted = false;
+            else
+            {
+                mainMissionScript.isCompleted = false;
+                mainMissionScript.wasCompleted = false;
+            }
 
             mainMissionScript.CompleteObjective();
 
@@ -180,22 +185,15 @@ public class ObjectiveManager : MonoBehaviour
                     script.CompleteObjective();
                 }
             }
-            Debug.Log("Level1Mission1 = " + PlayerPrefs.GetInt("Level1Mission1"));
-            Debug.Log("Level1Mission2 = " + PlayerPrefs.GetInt("Level1Mission2"));
-            Debug.Log("Level1Mission3 = " + PlayerPrefs.GetInt("Level1Mission3"));
-            Debug.Log("Level1Mission4 = " + PlayerPrefs.GetInt("Level1Mission4"));
-            Debug.Log("Level1Mission5 = " + PlayerPrefs.GetInt("Level1Mission5"));
+        }
 
-            //ObjectiveUI mainMissionScript = objectiveUIList.GetChild(0).GetComponent<ObjectiveUI>();
-            //mainMissionScript.CompleteObjective();
-
-            /*
-            for (int i = 1; i < objectiveUIList.childCount; i++)
+        for (int i = 0; i < objectiveList.Count; i++)
+        {
+            ObjectiveUI script = objectiveUIList.GetChild(i + 1).GetComponent<ObjectiveUI>();
+            if (objectiveList[i].isCompleted && !script.isCompleted)
             {
-                ObjectiveUI script = objectiveUIList.GetChild(i).GetComponent<ObjectiveUI>();
-                script.CompleteObjective();
+                script.isCompleted = true;
             }
-            */
         }
 
         //TEST
@@ -241,13 +239,13 @@ public class Objective
 
 public enum ObjectiveType
 {
-    SecondPieces,   //"feito"
-    SpeedRun,   //"feito"
-    NoDamage,   //"feito"
-    Pacifist,   //"feito"
-    Tricks,   //"feito"
-    Kills,  //"feito"
-    GlassBreaks,    //"feito"
-    NoGlassBreaks,  //"feito"
-    RailTime   //"feito"
+    SecondPieces,
+    SpeedRun,
+    NoDamage,
+    Pacifist,
+    Tricks,
+    Kills,
+    GlassBreaks,
+    NoGlassBreaks,
+    RailTime
 }
