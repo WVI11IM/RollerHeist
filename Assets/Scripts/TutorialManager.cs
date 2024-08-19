@@ -12,8 +12,14 @@ public class TutorialManager : MonoBehaviour
     public float tutorialTimer;
     public int tutorialJumpNumber;
 
+    public GameObject[] tutorialIndicators;
+
     public TutorialStep[] tutorialStep;
 
+    private void Start()
+    {
+        tutorialIndicators = GameObject.FindGameObjectsWithTag("TutorialGuide");
+    }
     private void Update()
     {       
         if (tutorialStepNumber >= 1 && tutorialStepNumber <= 4)

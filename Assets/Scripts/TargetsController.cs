@@ -39,5 +39,11 @@ public class TargetsController : MonoBehaviour
             indicator.InitialiseTargetIndicator(target, MainCamera, canvas);
             targetIndicators.Add(indicator);
         }
+        if (target.tag.Equals("TutorialGuide"))
+        {
+            TargetIndicator indicator = GameObject.Instantiate(TargetIndicatorPrefab, canvas.transform).GetComponent<TargetIndicator>();
+            indicator.InitialiseTargetIndicator(target, MainCamera, canvas);
+            targetIndicators.Add(indicator);
+        }
     }
 }
