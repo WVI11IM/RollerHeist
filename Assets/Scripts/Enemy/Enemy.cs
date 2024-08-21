@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     private bool canDamage = true;
 
     [SerializeField] Animator animator;
-    [SerializeField] SkinnedMeshRenderer sMR;
+    [SerializeField] SkinnedMeshRenderer[] sMR;
     [SerializeField] Material hurtMaterial;
     Material currentMaterial;
 
@@ -342,10 +342,16 @@ public class Enemy : MonoBehaviour
         SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto");
         isStunned = true;
         canDamage = false;
-        currentMaterial = sMR.material;
-        sMR.material = hurtMaterial;
+        for(int i = 0; i < sMR.Length; i++)
+        {
+            currentMaterial = sMR[i].material;
+            sMR[i].material = hurtMaterial;
+        }
         yield return new WaitForSeconds(0.15f);
-        sMR.material = currentMaterial;
+        for (int i = 0; i < sMR.Length; i++)
+        {
+            sMR[i].material = currentMaterial;
+        }
         yield return new WaitForSeconds(0.35f);
         isStunned = false;
         if (!hasFainted)
@@ -390,9 +396,15 @@ public class Enemy : MonoBehaviour
     {
         SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto");
         SFXManager.Instance.PlaySFXRandomPitch("guardaDerrotado");
-        currentMaterial = sMR.material;
-        sMR.material = hurtMaterial;
+        for (int i = 0; i < sMR.Length; i++)
+        {
+            currentMaterial = sMR[i].material;
+            sMR[i].material = hurtMaterial;
+        }
         yield return new WaitForSeconds(0.15f);
-        sMR.material = currentMaterial;
+        for (int i = 0; i < sMR.Length; i++)
+        {
+            sMR[i].material = currentMaterial;
+        }
     }
 }
