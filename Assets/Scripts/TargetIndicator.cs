@@ -32,6 +32,12 @@ public class TargetIndicator : MonoBehaviour
 
     public void UpdateTargetIndicator()
     {
+        if (target == null || !target.activeInHierarchy)
+        {
+            if (OffScreenTargetIndicator.gameObject.activeSelf) OffScreenTargetIndicator.gameObject.SetActive(false);
+            if (TargetIndicatorImage.isActiveAndEnabled) TargetIndicatorImage.enabled = false;
+            return;
+        }
         SetIndicatorPosition();
 
         //Adjust distance display
