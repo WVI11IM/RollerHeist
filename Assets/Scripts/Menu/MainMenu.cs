@@ -15,8 +15,9 @@ public class MainMenu : MonoBehaviour
     public UnityEvent creditsScreenEvent;
     public UnityEvent controlsScreenEvent;
     public UnityEvent audioScreenEvent;
+    public UnityEvent skinsScreenEvent;
     public UnityEvent exitScreenEvent;
-
+  
     UITransitionManager uiTransitionManager;
     public CinemachineVirtualCamera titleCamera, mainCamera;
 
@@ -115,6 +116,10 @@ public class MainMenu : MonoBehaviour
 
         case MenuState.Credits:
         creditsScreenEvent.Invoke();
+        break;
+        
+        case MenuState.Skins:
+        skinsScreenEvent.Invoke();
         break;
 
         case MenuState.Exit:
