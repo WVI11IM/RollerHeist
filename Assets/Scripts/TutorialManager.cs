@@ -11,10 +11,18 @@ public class TutorialManager : MonoBehaviour
 
     public float tutorialTimer;
     public int tutorialJumpNumber;
+    public int tutorialTargetCounter;
 
     public GameObject[] tutorialIndicators;
 
     public TutorialStep[] tutorialStep;
+
+    public static TutorialManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
