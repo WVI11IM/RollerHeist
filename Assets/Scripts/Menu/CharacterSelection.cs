@@ -4,42 +4,33 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CharacterSelection : MonoBehaviour
-{
-    public GameObject[] characters;
-    public GameObject[] charactersSitting;
+{   
+
+    public SkinnedMeshRenderer[] sMRs;
+    public Material[] characterSkins;
     public int selectedCharacter = 0;
 
     void Start()
     {
       selectedCharacter = PlayerPrefs.GetInt("selectedCharacter", 0);
-      characters[selectedCharacter].SetActive(true);
-      charactersSitting[selectedCharacter].SetActive(true);
-      gameObject.SetActive(false);
+      ChangePalette(selectedCharacter);
     }
-
-    public void NextCharacter()
+     
+    public void ChangePalette(int index)
     {
-        charactersSitting[selectedCharacter].SetActive(false);
-        characters[selectedCharacter].SetActive(false);
-        selectedCharacter = (selectedCharacter + 1) % characters.Length;
-        characters[selectedCharacter].SetActive(true);
-        charactersSitting[selectedCharacter].SetActive(true);
-        PlayerPrefs.SetInt("selectedCharacter", selectedCharacter);
-    }
-
-    public void PreviousCharacter()
-    {
-        
-        characters[selectedCharacter].SetActive(false);
-        charactersSitting[selectedCharacter].SetActive(false);
-        selectedCharacter--;
-        if (selectedCharacter < 0)
+        if (index >= 0 && index < characterSkins.Length)
         {
-            selectedCharacter += characters.Length;
+            for (int i = 0; i < sMRs.Length; i++)
+            {
+            sMRs[i].material = characterSkins[index];
+            }
+            PlayerPrefs.SetInt("selectedCharacter",index);
+            selectedCharacter = index;
         }
-        characters[selectedCharacter].SetActive(true);
-        charactersSitting[selectedCharacter].SetActive(true);
-        PlayerPrefs.SetInt("selectedCharacter", selectedCharacter);
+        else
+        {
+            Debug.LogWarning("SwitchPalette: Índice de paleta inválido: " + index);
+        }
     }
 
     public void StartGame()
