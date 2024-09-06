@@ -12,10 +12,14 @@ public class TutorialManager : MonoBehaviour
     public int tutorialStepNumber;
 
     public TextMeshProUGUI tutorialText;
+    public GameObject tutorialStartUI;
+    public GameObject tutorialTrickUI;
     public GameObject tutorialMeter;
     public Image[] tutorialMeterFills;
+
     private float tutorialTimer;
     private int tutorialJumpNumber;
+    private bool tutorialIsPaused = false;
     [HideInInspector] public int tutorialTargetCounter;
 
     public GameObject[] tutorialIndicators;
@@ -33,6 +37,7 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         tutorialIndicators = GameObject.FindGameObjectsWithTag("TutorialGuide");
+        TutorialStartPause();
     }
     private void Update()
     {       
@@ -41,10 +46,10 @@ public class TutorialManager : MonoBehaviour
             TutorialInputTimer();
             for (int i = 0; i < tutorialMeterFills.Length; i++)
             {
-                tutorialMeterFills[i].fillAmount = tutorialTimer / 1.25f;
+                tutorialMeterFills[i].fillAmount = tutorialTimer / 1.5f;
             }
 
-            if (tutorialTimer > 1.25f)
+            if (tutorialTimer > 1.5f)
             {
                 TutorialNextStep();
             }
@@ -98,8 +103,11 @@ public class TutorialManager : MonoBehaviour
                 break;
             default:
                 tutorialText.text = null;
+
                 break;
         }
+
+        TutorialTrickResume();
     }
 
     public void TutorialInputTimer()
@@ -124,12 +132,14 @@ public class TutorialManager : MonoBehaviour
 
         if (isInputting)
         {
-
+            tutorialText.color = new Vector4(0.75f, 1, 0.75f, 1);
+            tutorialText.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
             tutorialTimer += Time.deltaTime;
         }
         else
         {
-
+            tutorialText.color = new Vector4(1, 1, 1, 1);
+            tutorialText.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -138,6 +148,13 @@ public class TutorialManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && playerMovement.isGrounded)
         {
             tutorialJumpNumber++;
+            tutorialText.color = new Vector4(0.75f, 1, 0.75f, 1);
+            tutorialText.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+        }
+        else
+        {
+            tutorialText.color = new Vector4(1, 1, 1, 1);
+            tutorialText.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
@@ -148,13 +165,38 @@ public class TutorialManager : MonoBehaviour
         tutorialTimer = 0;
     }
 
-
-    /*
-    public void ResetTutorialInputTimer()
+    public void TutorialStartPause()
     {
-        tutorialTimer = 0;
+        tutorialIsPaused = true;
+        Time.timeScale = 0;
+        tutorialStartUI.SetActive(true);
     }
-    */
+
+    public void TutorialStartResume()
+    {
+        if (tutorialIsPaused)
+        {
+            tutorialIsPaused = false;
+            Time.timeScale = 1;
+            tutorialStartUI.SetActive(false);
+        }
+    }
+
+    public void TutorialTrickPause()
+    {
+        tutorialIsPaused = true;
+        Time.timeScale = 0;
+        tutorialTrickUI.SetActive(true);
+    }
+    public void TutorialTrickResume()
+    {
+        if (tutorialIsPaused && Input.GetKeyDown(KeyCode.Space) && tutorialStepNumber > 0)
+        {
+            tutorialIsPaused = false;
+            Time.timeScale = 1;
+            tutorialTrickUI.SetActive(false);
+        }
+    }
 }
 
 [System.Serializable]
