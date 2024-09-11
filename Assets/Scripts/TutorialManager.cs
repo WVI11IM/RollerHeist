@@ -78,6 +78,16 @@ public class TutorialManager : MonoBehaviour
             tutorialMeter.gameObject.SetActive(true);
         }
 
+        if ((tutorialStepNumber >= 13 && tutorialStepNumber <= 16) || (tutorialStepNumber >= 20 && tutorialStepNumber <= 22))
+        {
+            TutorialTrickDetect();
+        }
+
+        if (tutorialStepNumber == 18)
+        {
+            TutorialBoostDetect();
+        }
+
         if (tutorialTargetCounter >= 3 && !tutorialComplete)
         {
             TutorialNextStep();
@@ -101,9 +111,23 @@ public class TutorialManager : MonoBehaviour
             case 5:
                 tutorialText.text = "[ESPACO]\nPule 3 vezes";
                 break;
+            case 13:
+                tutorialText.text = "[ESPACO] no ar\nFaca truques";
+                break;
+            case 16:
+                tutorialText.text = "[ESPACO] no ar\nFaca truques";
+                break;
+            case 18:
+                tutorialText.text = "[SHIFT]\nAtive o boost";
+                break;
+            case 20:
+                tutorialText.text = "[ESPACO] no ar\nFaca truques";
+                break;
+            case 22:
+                tutorialText.text = "[ESPACO] no ar\nFaca truques";
+                break;
             default:
                 tutorialText.text = null;
-
                 break;
         }
 
@@ -156,6 +180,39 @@ public class TutorialManager : MonoBehaviour
             tutorialText.color = new Vector4(1, 1, 1, 1);
             tutorialText.transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    public void TutorialTrickDetect()
+    {
+        if (Input.GetKey(KeyCode.Space) && !playerMovement.isGrounded)
+        {
+            tutorialText.color = new Vector4(0.75f, 1, 0.75f, 1);
+            tutorialText.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+        }
+        else
+        {
+            tutorialText.color = new Vector4(1, 1, 1, 1);
+            tutorialText.transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
+    public void TutorialBoostDetect()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && playerMovement.isGrounded)
+        {
+            tutorialText.color = new Vector4(0.75f, 1, 0.75f, 1);
+            tutorialText.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+        }
+        else
+        {
+            tutorialText.color = new Vector4(1, 1, 1, 1);
+            tutorialText.transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
+    public void TutorialTargetCount()
+    {
+
     }
 
     public void TutorialNextStep()
