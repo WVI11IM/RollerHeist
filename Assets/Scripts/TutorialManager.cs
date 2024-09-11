@@ -57,7 +57,7 @@ public class TutorialManager : MonoBehaviour
 
         if (tutorialStepNumber == 5)
         {
-            TutorialInputCount();
+            TutorialJumpCount();
             for (int i = 0; i < tutorialMeterFills.Length; i++)
             {
                 tutorialMeterFills[i].fillAmount = (float)tutorialJumpNumber / 3;
@@ -69,13 +69,13 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        if (tutorialStepNumber < 1 || tutorialStepNumber > 5)
+        if ((tutorialStepNumber >= 1 && tutorialStepNumber <= 5) || tutorialStepNumber == 24)
         {
-            tutorialMeter.gameObject.SetActive(false);
+            tutorialMeter.gameObject.SetActive(true);
         }
         else
         {
-            tutorialMeter.gameObject.SetActive(true);
+            tutorialMeter.gameObject.SetActive(false);
         }
 
         if ((tutorialStepNumber >= 13 && tutorialStepNumber <= 16) || (tutorialStepNumber >= 20 && tutorialStepNumber <= 22))
@@ -86,6 +86,15 @@ public class TutorialManager : MonoBehaviour
         if (tutorialStepNumber == 18)
         {
             TutorialBoostDetect();
+        }
+
+        if (tutorialStepNumber == 24)
+        {
+            TutorialShootDetect();
+            for (int i = 0; i < tutorialMeterFills.Length; i++)
+            {
+                tutorialMeterFills[i].fillAmount = (float)tutorialTargetCounter / 3;
+            }
         }
 
         if (tutorialTargetCounter >= 3 && !tutorialComplete)
@@ -125,6 +134,9 @@ public class TutorialManager : MonoBehaviour
                 break;
             case 22:
                 tutorialText.text = "[ESPACO] no ar\nFaca truques";
+                break;
+            case 24:
+                tutorialText.text = "[BOTAO ESQUERDO DO MOUSE]\nAtire nos 3 alvos";
                 break;
             default:
                 tutorialText.text = null;
@@ -167,7 +179,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void TutorialInputCount()
+    public void TutorialJumpCount()
     {
         if (Input.GetKeyDown(KeyCode.Space) && playerMovement.isGrounded)
         {
@@ -210,9 +222,18 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void TutorialTargetCount()
+    public void TutorialShootDetect()
     {
-
+        if (Input.GetKey(KeyCode.Mouse0) && playerMovement.isGrounded)
+        {
+            tutorialText.color = new Vector4(0.75f, 1, 0.75f, 1);
+            tutorialText.transform.localScale = new Vector3(1.05f, 1.05f, 1.05f);
+        }
+        else
+        {
+            tutorialText.color = new Vector4(1, 1, 1, 1);
+            tutorialText.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     public void TutorialNextStep()

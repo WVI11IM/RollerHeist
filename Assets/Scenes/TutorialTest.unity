@@ -3292,6 +3292,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1351792418577451193, guid: a29dba8c5aef9ea4aa968b92bef2c7bd, type: 3}
   m_PrefabInstance: {fileID: 1160560104}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &161986658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2748552827706820642, guid: 4cbfb122dcf726a4290578ab1d65c1c3, type: 3}
+  m_PrefabInstance: {fileID: 1281729709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &173670726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11534,6 +11539,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1351792418577451193, guid: a29dba8c5aef9ea4aa968b92bef2c7bd, type: 3}
   m_PrefabInstance: {fileID: 394366017}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &404788079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2748552827706820642, guid: 4cbfb122dcf726a4290578ab1d65c1c3, type: 3}
+  m_PrefabInstance: {fileID: 2067533693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &407572948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12595,7 +12605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -299.3124, y: -196.86583}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &451910774
@@ -17539,7 +17549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -299.3124, y: -196.86583}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &694749395
@@ -19138,6 +19148,117 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1351792418577451193, guid: a29dba8c5aef9ea4aa968b92bef2c7bd, type: 3}
   m_PrefabInstance: {fileID: 764704753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &766686218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 766686223}
+  - component: {fileID: 766686222}
+  - component: {fileID: 766686221}
+  - component: {fileID: 766686220}
+  - component: {fileID: 766686219}
+  m_Layer: 0
+  m_Name: 23
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 0
+--- !u!114 &766686219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766686218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff584484f75ca574a85695fc1d9e1a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialManager: {fileID: 1514896055}
+--- !u!65 &766686220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766686218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.56, y: 0.025, z: 0.74}
+  m_Center: {x: 0, y: 0, z: 0.35}
+--- !u!23 &766686221
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766686218}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: ad5f442fa6765f845933e0ddaf2a83d1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &766686222
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766686218}
+  m_Mesh: {fileID: 4377865600221286077, guid: 64be7226129d40e4bbab30a7c4afe722, type: 3}
+--- !u!4 &766686223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766686218}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 294, y: -28, z: 448}
+  m_LocalScale: {x: 100, y: 100.00004, z: 38.000008}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &768558036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2748552827706820645, guid: 4cbfb122dcf726a4290578ab1d65c1c3, type: 3}
@@ -45505,7 +45626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -299.3124, y: -196.86583}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1374149578
@@ -48617,7 +48738,59 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - step: Door Open (after targets)
+        - m_Target: {fileID: 766686218}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - step: '24: Shoot Prompt Activate'
+    stepActions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 766686218}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 161986658}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 404788079}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - step: '25: Door Open (after targets)'
     stepActions:
       m_PersistentCalls:
         m_Calls:
@@ -52795,7 +52968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.096, y: 0.2693103}
   m_AnchorMax: {x: 0.51600003, y: 0.94072574}
-  m_AnchoredPosition: {x: 0.000015258789, y: 3}
+  m_AnchoredPosition: {x: 0, y: 3}
   m_SizeDelta: {x: 0, y: -50.453815}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1734148780
