@@ -19,6 +19,7 @@ public class MovementTest2 : MonoBehaviour
     public bool isBraking = false;
     public TrailRenderer[] trailRenderers;
     public Gradient[] trailGradients;
+    public ParticleSystem jumpParticleSystem;
     public bool canInput = true;
 
     private Vector3 previousVelocity;
@@ -47,6 +48,10 @@ public class MovementTest2 : MonoBehaviour
 
     public LayerMask floorLayerMask;
     public LayerMask wallLayerMask;
+
+    public ParticleSystem landNormalParticleSystem;
+    public ParticleSystem[] landSuccessParticleSystems;
+    public ParticleSystem[] landFailParticleSystems;
 
     [Space]
     [Header("TRICKS SETTINGS")]
@@ -137,7 +142,7 @@ public class MovementTest2 : MonoBehaviour
             boostValue = maxBoostValue;
         }
 
-        if (isTricking && Time.time > (nextActionTime - trickCooldown / 4))
+        if (isTricking && Time.time >= (nextActionTime - trickCooldown / 4))
         {
             isTricking = false;
         }
@@ -364,6 +369,8 @@ public class MovementTest2 : MonoBehaviour
     //Para todas as linhas de código que envolvem a constante aplicação de forças direcionais ao Rigidbody do personagem, utilizei o FixedUpdate().
     void FixedUpdate()
     {
+        float trickTimer = Time.time - (nextActionTime - trickCooldown / 4);
+        animator.SetFloat("trickTimer", trickTimer);
 
         //Regula os parâmetros envolvendo o grind de trilhos.
         UpdateRailGrind();
@@ -385,6 +392,7 @@ public class MovementTest2 : MonoBehaviour
                 if (trickCombo == 0)
                 {
                     SFXManager.Instance.PlaySFXRandomPitch("impactoPatins");
+                    landNormalParticleSystem.Play();
                 }
                 else
                 {
@@ -399,6 +407,10 @@ public class MovementTest2 : MonoBehaviour
                     if (!isTricking)
                     {
                         boostBarAnimator.SetTrigger("trickSuccess");
+                        for (int i = 0; i < landSuccessParticleSystems.Length; i++)
+                        {
+                            landSuccessParticleSystems[i].Play();
+                        }
                         SFXManager.Instance.PlaySFXRandomPitch("impactoPatins2");
                         SFXManager.Instance.PlaySFX("truqueSucesso");
                         boostValue += totalBoostValueToAdd;
@@ -406,11 +418,16 @@ public class MovementTest2 : MonoBehaviour
                     else
                     {
                         boostBarAnimator.SetTrigger("trickFail");
+                        for (int i = 0; i < landFailParticleSystems.Length; i++)
+                        {
+                            landFailParticleSystems[i].Play();
+                        }
                         SFXManager.Instance.PlaySFX("truqueFalha");
                         SFXManager.Instance.PlaySFXRandomPitch("impactoChao");
                         rb.velocity = velocity/2;
                     }
                     Debug.Log(Time.time - (nextActionTime - trickCooldown / 4));
+                    Debug.Log(animator.GetFloat("trickTimer"));
 
                 }
                 trickCombo = 0;
@@ -644,6 +661,7 @@ public class MovementTest2 : MonoBehaviour
     public void Jump()
     {
         isJumping = true;
+        jumpParticleSystem.Play();
         SFXManager.Instance.PlaySFXRandomPitch("pulo");
         rb.AddForce(Vector3.up * jumpForce * 100);
         animator.SetTrigger("jumped");

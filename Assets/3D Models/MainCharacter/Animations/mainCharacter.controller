@@ -114,8 +114,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -217,8 +217,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -575,8 +575,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -603,8 +603,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -912,8 +912,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1231356718366203669}
-  - {fileID: -7167764144113969759}
   - {fileID: 7094188136445508084}
+  - {fileID: -7167764144113969759}
   - {fileID: 1922094426161261871}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -969,8 +969,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -1087,9 +1087,9 @@ AnimatorState:
   m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -4802459032155297660}
-  - {fileID: -5990857079558327442}
   - {fileID: 8189023413321063727}
+  - {fileID: -5990857079558327442}
+  - {fileID: -4802459032155297660}
   - {fileID: 6044581094271936588}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -1144,8 +1144,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -1272,8 +1272,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -1303,8 +1303,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -1356,8 +1356,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -1413,8 +1413,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3088965416508025463}
-  - {fileID: -8669640173408269299}
   - {fileID: 5485248105323141063}
+  - {fileID: -8669640173408269299}
   - {fileID: -2672503360234861905}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -1442,8 +1442,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -1711,8 +1711,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3715415737349887358}
-  - {fileID: 8630142295177067600}
   - {fileID: -3245523197126192425}
+  - {fileID: 8630142295177067600}
   - {fileID: -1201020547240964542}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -1741,8 +1741,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -181085931647715879}
-  - {fileID: -837041421036206807}
   - {fileID: 845934677065012102}
+  - {fileID: -837041421036206807}
   - {fileID: 4396651736173185455}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -2000,8 +2000,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -2183,8 +2183,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -2385,8 +2385,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -2460,8 +2460,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -2858,8 +2858,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -3167,6 +3167,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: trickCombo
     m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: trickTimer
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -3492,8 +3498,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -3546,8 +3552,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3035768211353058765}
-  - {fileID: 7293171939463352305}
   - {fileID: 1753885316157813559}
+  - {fileID: 7293171939463352305}
   - {fileID: -5958755781827003451}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -3753,9 +3759,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -7160131857017498141}
-  - {fileID: 6055820561365792415}
   - {fileID: 6912825800520625484}
+  - {fileID: 6055820561365792415}
+  - {fileID: -7160131857017498141}
   - {fileID: 3225218134052485065}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -3839,8 +3845,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -4107,8 +4113,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3676348592887560977}
-  - {fileID: -4932817027368317972}
   - {fileID: -1991166845116519871}
+  - {fileID: -4932817027368317972}
   - {fileID: -6822055810150629362}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -4317,8 +4323,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -5185,8 +5191,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1109223072582308311}
-  - {fileID: 3148696714134976987}
   - {fileID: -2755820117532353775}
+  - {fileID: 3148696714134976987}
   - {fileID: -948484390972124199}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -5214,8 +5220,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -5349,8 +5355,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1285089539353460640}
-  - {fileID: -2204831143102450654}
   - {fileID: -5426902314008662019}
+  - {fileID: -2204831143102450654}
   - {fileID: -718640241734895774}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -5459,8 +5465,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -5660,9 +5666,9 @@ AnimatorState:
   m_Speed: 1.25
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -8295969123853610090}
-  - {fileID: 8015626473214397326}
   - {fileID: 6840896609946588433}
+  - {fileID: 8015626473214397326}
+  - {fileID: -8295969123853610090}
   - {fileID: 5613774308920947827}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -5841,8 +5847,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -5900,8 +5906,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
@@ -6054,8 +6060,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1381318363874180660}
-  - {fileID: -4885417312750225822}
   - {fileID: -4976669510160993754}
+  - {fileID: -4885417312750225822}
   - {fileID: 4403929023973636294}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -6083,8 +6089,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 3
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: trickCombo
@@ -6188,8 +6194,8 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isTricking
+  - m_ConditionMode: 4
+    m_ConditionEvent: trickTimer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557655421453235190}
