@@ -14,12 +14,14 @@ public class TutorialManager : MonoBehaviour
     public TextMeshProUGUI tutorialText;
     public GameObject tutorialStartUI;
     public GameObject tutorialTrickUI;
+    public GameObject tutorialEndUI;
     public GameObject tutorialMeter;
     public Image[] tutorialMeterFills;
 
     private float tutorialTimer;
     private int tutorialJumpNumber;
     private bool tutorialIsPaused = false;
+    private bool canUnpauseWithSpacebar = false;
     [HideInInspector] public int tutorialTargetCounter;
 
     public GameObject[] tutorialIndicators;
@@ -248,6 +250,7 @@ public class TutorialManager : MonoBehaviour
         tutorialIsPaused = true;
         Time.timeScale = 0;
         tutorialStartUI.SetActive(true);
+        AllowTutorialPause(false);
     }
 
     public void TutorialStartResume()
@@ -257,6 +260,7 @@ public class TutorialManager : MonoBehaviour
             tutorialIsPaused = false;
             Time.timeScale = 1;
             tutorialStartUI.SetActive(false);
+            AllowTutorialPause(true);
         }
     }
 
@@ -265,15 +269,39 @@ public class TutorialManager : MonoBehaviour
         tutorialIsPaused = true;
         Time.timeScale = 0;
         tutorialTrickUI.SetActive(true);
+        AllowTutorialPause(false);
     }
+
     public void TutorialTrickResume()
     {
-        if (tutorialIsPaused && Input.GetKeyDown(KeyCode.Space) && tutorialStepNumber > 0)
+        if (tutorialIsPaused && Input.GetKeyDown(KeyCode.Space) && tutorialStepNumber > 0 && canUnpauseWithSpacebar)
         {
             tutorialIsPaused = false;
             Time.timeScale = 1;
             tutorialTrickUI.SetActive(false);
+            AllowTutorialPause(true);
         }
+    }
+
+    public void TutorialEndPause()
+    {
+        if (tutorialComplete)
+        {
+            tutorialIsPaused = true;
+            Time.timeScale = 0;
+            tutorialEndUI.SetActive(true);
+            AllowTutorialPause(false);
+        }
+    }
+
+    public void UnpauseWithSpacebar(bool canUnpause)
+    {
+        canUnpauseWithSpacebar = canUnpause;
+    }
+
+    private void AllowTutorialPause(bool canAllowPause)
+    {
+        GameManager.Instance.canPause = canAllowPause;
     }
 }
 

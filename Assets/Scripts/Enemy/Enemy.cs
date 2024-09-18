@@ -219,6 +219,11 @@ public class Enemy : MonoBehaviour
             batton.SetActive(false);
             taser.SetActive(true);
         }
+        else if(enemyType.enemyName == "Mallcop")
+        {
+            batton.SetActive(false);
+            taser.SetActive(false);
+        }
 
         //Perseguir jogador com velocidade alta
         enemy.isStopped = false;
@@ -252,6 +257,13 @@ public class Enemy : MonoBehaviour
             isShooting = true;
             batton.SetActive(false);
             taser.SetActive(true);
+        }
+        if (enemyType.enemyName == "Mallcop")
+        {
+            GiveDamage();
+            isShooting = false;
+            batton.SetActive(false);
+            taser.SetActive(false);
         }
     }
     public void Stun()
@@ -377,6 +389,10 @@ public class Enemy : MonoBehaviour
             }
             else if (enemyType.enemyName == "Taser")
             {
+            }
+            else if (enemyType.enemyName == "Mallcop")
+            {
+                SFXManager.Instance.PlaySFXRandomPitch("cassetete");
             }
         }
     }

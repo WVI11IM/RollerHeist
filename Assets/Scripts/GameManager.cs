@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject pausePanel;
+    public bool canPause = true;
     private bool isPaused = false;
 
     //target arrow reference
@@ -50,11 +51,11 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!isPaused)
+            if (!isPaused && canPause)
             {
                 Pause();
             }
-            else
+            else if (isPaused)
             {
                 Resume(); 
             }
@@ -139,6 +140,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         GameOverUI.SetActive(true);
+        MusicManager.Instance.StopAllLoopingMusic();
+        SFXManager.Instance.PlayUISFX("gameOver");
     }
 
     public void Restart()

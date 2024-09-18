@@ -190,7 +190,7 @@ public class MovementTest2 : MonoBehaviour
             }
 
             //Faz personagem dar um pulo com barra de espaço.
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !isGrinding)
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !isGrinding && Time.timeScale != 0)
             {
                 Jump();
             }
@@ -198,7 +198,7 @@ public class MovementTest2 : MonoBehaviour
             //Se personagem apertar ou segurar barra de espaço no ar, uma determinada distância do chão e com velocidade suficiente, fará um truque.
             RaycastHit hit;
             bool isHit = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, minDistForTrick, floorLayerMask);
-            if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 2)
+            if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 2 && Time.timeScale != 0)
             {
                 if (Time.time > nextActionTime)
                 {
