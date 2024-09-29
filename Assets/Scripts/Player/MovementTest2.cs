@@ -285,10 +285,10 @@ public class MovementTest2 : MonoBehaviour
                 }
 
                 //Caso personagem esteja no ar, rotação será reduzida.
-                if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 3 * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
 
                 //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
-                else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(2.5f, 0.8f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
             }
 
             if (isDrifting && !wasDrifting)
