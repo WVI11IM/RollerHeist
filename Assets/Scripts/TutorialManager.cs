@@ -17,6 +17,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject tutorialEndUI;
     public GameObject tutorialMeter;
     public Image[] tutorialMeterFills;
+    public Animator tutorialKeysAnimator;
 
     private float tutorialTimer;
     private int tutorialJumpNumber;
@@ -42,7 +43,9 @@ public class TutorialManager : MonoBehaviour
         TutorialStartPause();
     }
     private void Update()
-    {       
+    {
+        tutorialKeysAnimator.SetInteger("stepNumber", tutorialStepNumber);
+
         if (tutorialStepNumber >= 1 && tutorialStepNumber <= 4)
         {
             TutorialInputTimer();

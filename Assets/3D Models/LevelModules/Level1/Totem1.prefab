@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 6068791452809606749}
   - component: {fileID: 859688418007532159}
   - component: {fileID: 6408899672986900410}
+  - component: {fileID: -1694066665671323370}
   m_Layer: 0
   m_Name: Totem1
   m_TagString: Untagged
@@ -281,6 +282,22 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 4.5, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &-1694066665671323370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7377863350711617003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508357b05194eb848afd2dda617acf1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundName:
+  - bumpMadeira1
+  - bumpMadeira2
+  soundCooldown: 1
 --- !u!1 &7943089498328158951
 GameObject:
   m_ObjectHideFlags: 0

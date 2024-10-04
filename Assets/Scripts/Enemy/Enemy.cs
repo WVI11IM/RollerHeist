@@ -351,7 +351,8 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator Stunned()
     {
-        SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto");
+        SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto1");
+        SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto2");
         isStunned = true;
         canDamage = false;
         for(int i = 0; i < sMR.Length; i++)
@@ -410,7 +411,8 @@ public class Enemy : MonoBehaviour
 
     IEnumerator FaintRed()
     {
-        SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto");
+        SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto1");
+        SFXManager.Instance.PlaySFXRandomPitch("tiroAcerto2");
         SFXManager.Instance.PlaySFXRandomPitch("guardaDerrotado");
         for (int i = 0; i < sMR.Length; i++)
         {

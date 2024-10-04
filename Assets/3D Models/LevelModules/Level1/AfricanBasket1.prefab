@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 1287405624036924481}
   - component: {fileID: 5045886014756959012}
   - component: {fileID: 8099361451421579556}
+  - component: {fileID: 4403847405567939893}
   m_Layer: 0
   m_Name: AfricanBasket1
   m_TagString: Untagged
@@ -196,3 +197,18 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &4403847405567939893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8099361451421579559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508357b05194eb848afd2dda617acf1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundName:
+  - bumpPalha
+  soundCooldown: 1

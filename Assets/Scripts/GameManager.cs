@@ -115,6 +115,8 @@ public class GameManager : MonoBehaviour
 
     private void HandleWin()
     {
+        SFXManager.Instance.PlayUISFX("missaoCumprida");
+
         //Stop Time
         //Open Win Panel
         winPanel.SetActive(true);
@@ -127,7 +129,6 @@ public class GameManager : MonoBehaviour
         //Freeze time
         AudioListener.pause = true;
         Time.timeScale = 0f;
-
     }
 
     private void HandleLose()
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
         GameOverUI.SetActive(true);
         MusicManager.Instance.StopAllLoopingMusic();
         SFXManager.Instance.PlayUISFX("gameOver");
+        SFXManager.Instance.PlaySFX("sirene");
     }
 
     public void Restart()

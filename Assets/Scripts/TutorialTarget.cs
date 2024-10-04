@@ -9,6 +9,8 @@ public class TutorialTarget : MonoBehaviour
     {
         if (other.CompareTag("Projetil"))
         {
+            int randomValue = Random.Range(1, 3);
+            SFXManager.Instance.PlaySFXRandomPitch("alvo"+randomValue);
             TutorialManager.Instance.tutorialTargetCounter++;
             Instantiate(targetParticles, transform.position, Quaternion.identity);
             Destroy(gameObject);

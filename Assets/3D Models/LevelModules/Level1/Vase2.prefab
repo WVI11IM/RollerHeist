@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5421998032533359714}
   - component: {fileID: 8139971065765814326}
   - component: {fileID: 3250940627492296475}
+  - component: {fileID: -4238857608946979823}
   m_Layer: 0
   m_Name: Vase2
   m_TagString: Untagged
@@ -164,3 +165,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &-4238857608946979823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699616148117234826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508357b05194eb848afd2dda617acf1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundName:
+  - bumpCeramica1
+  - bumpCeramica2
+  - bumpCeramica3
+  soundCooldown: 1
