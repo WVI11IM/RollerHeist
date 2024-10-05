@@ -194,6 +194,10 @@ public class ObjectiveManager : MonoBehaviour
             {
                 script.isCompleted = true;
             }
+            else if(!objectiveList[i].isCompleted)
+            {
+                script.isCompleted = false;
+            }
         }
     }
 

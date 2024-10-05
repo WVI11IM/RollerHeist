@@ -56,8 +56,6 @@ public class MissionNoGlassBreaks : MonoBehaviour
             }
         }
 
-        //brokenGlassPanels = totalGlassScene - glassPanelsList.Count;
-
         if (glassPanelsList.Count == totalGlassScene)
         {
             isCompleted = true;
@@ -69,6 +67,17 @@ public class MissionNoGlassBreaks : MonoBehaviour
                 }
             }
         }
-        else isCompleted = false;
+        else
+        {
+            Debug.Log("glassMissionFailed");
+            isCompleted = false;
+            for (int i = 0; i < ObjectiveManager.Instance.objectiveList.Count; i++)
+            {
+                if (ObjectiveManager.Instance.objectiveList[i].objectiveType == ObjectiveType.NoGlassBreaks)
+                {
+                    ObjectiveManager.Instance.objectiveList[i].isCompleted = false;
+                }
+            }
+        }
     }
 }

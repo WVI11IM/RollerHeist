@@ -41,6 +41,14 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            LoadScene("Tutorial");
+        }
+    }
+
     public void ChangeMenuState(string state)
     {
       switch(state)

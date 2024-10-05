@@ -6,12 +6,12 @@ using Cinemachine;
 
 public class UITransitionManager : MonoBehaviour
 {
-    public CinemachineVirtualCamera currentCamera;
+    [HideInInspector] public CinemachineVirtualCamera currentCamera;
   
 
     public void UpdateCamera(CinemachineVirtualCamera target)
     {
-        currentCamera.Priority--;
+        if(currentCamera != null) currentCamera.Priority--;
         currentCamera = target;
         currentCamera.Priority++;
     }
