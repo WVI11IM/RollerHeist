@@ -811,7 +811,7 @@ RectTransform:
   - {fileID: 1827216074}
   - {fileID: 1120087061}
   m_Father: {fileID: 1815816532}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1234,7 +1234,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh347796
+  m_Name: pb_Mesh1674452
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1905,7 +1905,7 @@ MonoBehaviour:
   levelNumber: 0
   winPanel: {fileID: 1619955635}
   highScoreText: {fileID: 1688836463}
-  GameOverUI: {fileID: 431456747}
+  uiAnimator: {fileID: 1815816537}
   pausePanel: {fileID: 334076880}
   canPause: 1
   exitCollider: {fileID: 275205852}
@@ -15641,375 +15641,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &333523309
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 333523310}
-  - component: {fileID: 333523311}
-  m_Layer: 0
-  m_Name: SFXManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &333523310
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333523309}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1825713472}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &333523311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333523309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e75c26d2cac1a4084d5589a8caaf94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sfxObject: {fileID: 783471986304123905, guid: 13a4a331f9aca81439f158b04e136412, type: 3}
-  soundEffects:
-  - soundEffectName: velocidade1
-    soundClip: {fileID: 8300000, guid: 6574c0a240318874890fe2bda5373a2c, type: 3}
-    volumeModifier: 0.1
-  - soundEffectName: velocidade2
-    soundClip: {fileID: 8300000, guid: 29b05960dff681d4389a08268e82bc5c, type: 3}
-    volumeModifier: 0.05
-  - soundEffectName: trilhos
-    soundClip: {fileID: 8300000, guid: e8d18dbba4f87314da1923480e65e89c, type: 3}
-    volumeModifier: 0.2
-  - soundEffectName: boost
-    soundClip: {fileID: 8300000, guid: 1c4bcf2126967b4458cd6d47f2c79b72, type: 3}
-    volumeModifier: 0.025
-  - soundEffectName: drift
-    soundClip: {fileID: 8300000, guid: e8d67790ed21e9c408127b1806f72d90, type: 3}
-    volumeModifier: 0.025
-  - soundEffectName: vento
-    soundClip: {fileID: 8300000, guid: 4d407353b9e46a740b3e0ba086c1dabb, type: 3}
-    volumeModifier: 0.03
-  - soundEffectName: vento2
-    soundClip: {fileID: 8300000, guid: d7516f469eee7f2418152d42c15351aa, type: 3}
-    volumeModifier: 0.2
-  - soundEffectName: disco1
-    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
-    volumeModifier: 0.15
-  - soundEffectName: disco2
-    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
-    volumeModifier: 0.15
-  - soundEffectName: disco3
-    soundClip: {fileID: 8300000, guid: 5cdf5f65030898c49a1602e623e3107f, type: 3}
-    volumeModifier: 0.15
-  - soundEffectName: disco4
-    soundClip: {fileID: 8300000, guid: 544d2a98a332aa74083f659450f6e024, type: 3}
-    volumeModifier: 0.15
-  - soundEffectName: introAntecipacao
-    soundClip: {fileID: 8300000, guid: 9c2dd7f82894efd4c9162dfbd71b9087, type: 3}
-    volumeModifier: 0.4
-  - soundEffectName: coletaItem
-    soundClip: {fileID: 8300000, guid: 594ee2d6bc879c4448859f800bcafba7, type: 3}
-    volumeModifier: 0.7
-  - soundEffectName: coletaPrincipalWalkieTalkie
-    soundClip: {fileID: 8300000, guid: 5298f2a6e478af6428526795e3394131, type: 3}
-    volumeModifier: 0.5
-  - soundEffectName: dano
-    soundClip: {fileID: 8300000, guid: 84f4bfd48236b1e409346e824a2fe84b, type: 3}
-    volumeModifier: 0.25
-  - soundEffectName: taser1
-    soundClip: {fileID: 8300000, guid: 80385f240089414419b7a2c389bba578, type: 3}
-    volumeModifier: 0.25
-  - soundEffectName: recarga
-    soundClip: {fileID: 8300000, guid: 6905a5ceac62a1847b5ada14f2c8aced, type: 3}
-    volumeModifier: 0.4
-  - soundEffectName: truqueSucesso
-    soundClip: {fileID: 8300000, guid: 394748a0e259cb8459db0dc756550986, type: 3}
-    volumeModifier: 0.5
-  - soundEffectName: truqueFalha
-    soundClip: {fileID: 8300000, guid: d722515b238005a4bbbc0efae7b98d55, type: 3}
-    volumeModifier: 0.4
-  - soundEffectName: sirene
-    soundClip: {fileID: 8300000, guid: 6756c6a2c0840ca41ba9c35e17a3ddb2, type: 3}
-    volumeModifier: 0.2
-  soundEffectsSpacialBlend: []
-  soundEffectsRandomPitch:
-  - soundEffectName: pisoCurto1
-    soundClip: {fileID: 8300000, guid: bc8fae5cc8bc50f40b1945824671f42e, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.9
-    maxPitch: 1.1
-  - soundEffectName: pisoCurto2
-    soundClip: {fileID: 8300000, guid: c322ad9da8aed9d48a84d9378ad1a80d, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.9
-    maxPitch: 1.1
-  - soundEffectName: pisoLongo1
-    soundClip: {fileID: 8300000, guid: 1814bd6058d31794dbd0e4217c317c30, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.8
-    maxPitch: 1.2
-  - soundEffectName: impactoPatins
-    soundClip: {fileID: 8300000, guid: c35a0c10d6025884c83b135b7f07a50b, type: 3}
-    volumeModifier: 0.5
-    minPitch: 1
-    maxPitch: 1.5
-  - soundEffectName: impactoPatins2
-    soundClip: {fileID: 8300000, guid: ef6afbfd7e0053f4fbe1ccb5732ea796, type: 3}
-    volumeModifier: 0.6
-    minPitch: 1.15
-    maxPitch: 1.4
-  - soundEffectName: pulo
-    soundClip: {fileID: 8300000, guid: c871a468efdc3874586c0ccd59882a15, type: 3}
-    volumeModifier: 0.35
-    minPitch: 0.75
-    maxPitch: 0.9
-  - soundEffectName: impactoTrilhos
-    soundClip: {fileID: 8300000, guid: 20a7c4afb5071c1459df7ed87e27221a, type: 3}
-    volumeModifier: 0.6
-    minPitch: 1.75
-    maxPitch: 2
-  - soundEffectName: impactoParede
-    soundClip: {fileID: 8300000, guid: c59e9acc7f109af44842bd706ef7d44f, type: 3}
-    volumeModifier: 0.25
-    minPitch: 0.85
-    maxPitch: 1.15
-  - soundEffectName: boost
-    soundClip: {fileID: 8300000, guid: c57815ff77c137e42b29503beb62f32c, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.85
-    maxPitch: 1.15
-  - soundEffectName: tiro1
-    soundClip: {fileID: 8300000, guid: aaf6d45bb88a818469c8a29af10e6b5e, type: 3}
-    volumeModifier: 0.35
-    minPitch: 0.75
-    maxPitch: 1.25
-  - soundEffectName: tiro2
-    soundClip: {fileID: 8300000, guid: b39727832c1bae64ba6d8575230a9545, type: 3}
-    volumeModifier: 0.075
-    minPitch: 1.25
-    maxPitch: 1.75
-  - soundEffectName: truque1
-    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
-    volumeModifier: 0.15
-    minPitch: 0.9
-    maxPitch: 0.9
-  - soundEffectName: truque2
-    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
-    volumeModifier: 0.15
-    minPitch: 1
-    maxPitch: 1
-  - soundEffectName: truque3
-    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
-    volumeModifier: 0.15
-    minPitch: 1.1
-    maxPitch: 1.1
-  - soundEffectName: truque4
-    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
-    volumeModifier: 0.15
-    minPitch: 1.2
-    maxPitch: 1.2
-  - soundEffectName: glass1
-    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
-    volumeModifier: 0.25
-    minPitch: 0.8
-    maxPitch: 1.2
-  - soundEffectName: glass2
-    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
-    volumeModifier: 0.25
-    minPitch: 0.8
-    maxPitch: 1.2
-  - soundEffectName: glass3
-    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
-    volumeModifier: 0.25
-    minPitch: 1.6
-    maxPitch: 2
-  - soundEffectName: glass4
-    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
-    volumeModifier: 0.25
-    minPitch: 1.6
-    maxPitch: 2
-  - soundEffectName: tiroAcerto1
-    soundClip: {fileID: 8300000, guid: 4c18859a02cb7b343aeb5103e3e06222, type: 3}
-    volumeModifier: 0.25
-    minPitch: 1.5
-    maxPitch: 1.8
-  - soundEffectName: tiroAcerto2
-    soundClip: {fileID: 8300000, guid: 021e3513c964a1c42a1bb977ec505eb3, type: 3}
-    volumeModifier: 1
-    minPitch: 1.1
-    maxPitch: 0.9
-  - soundEffectName: guardaDerrotado
-    soundClip: {fileID: 8300000, guid: 2f2c3f6ba0ca36348acbac01851b7710, type: 3}
-    volumeModifier: 0.75
-    minPitch: 0.9
-    maxPitch: 1.1
-  - soundEffectName: taser2
-    soundClip: {fileID: 8300000, guid: 58b8a3a0043695f47ae0678dbc9af30b, type: 3}
-    volumeModifier: 0.2
-    minPitch: 0.8
-    maxPitch: 1.2
-  - soundEffectName: cassetete
-    soundClip: {fileID: 8300000, guid: bde2342c0982cfa4283d6f7b4fb47173, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.9
-    maxPitch: 1.1
-  - soundEffectName: taser3
-    soundClip: {fileID: 8300000, guid: da5aea7c25c8ad44088ed420fd72ef5e, type: 3}
-    volumeModifier: 0.35
-    minPitch: 1.3
-    maxPitch: 1.35
-  - soundEffectName: boostVazio1
-    soundClip: {fileID: 8300000, guid: c1cdf0c9c72435644959cc5ce04bdca5, type: 3}
-    volumeModifier: 1
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: boostVazio2
-    soundClip: {fileID: 8300000, guid: 16d4b027cb66e0a4eaa0f83bf9234ded, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: impactoChao
-    soundClip: {fileID: 8300000, guid: c59e9acc7f109af44842bd706ef7d44f, type: 3}
-    volumeModifier: 0.85
-    minPitch: 0.7
-    maxPitch: 0.8
-  - soundEffectName: alvo1
-    soundClip: {fileID: 8300000, guid: 27597df0eb6088242965691c904aa973, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: alvo2
-    soundClip: {fileID: 8300000, guid: 7daa81f6cc4e90342b74e320fd010a23, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bump1
-    soundClip: {fileID: 8300000, guid: 02cabc194c7780e44b9b8b114272c74f, type: 3}
-    volumeModifier: 1
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bump2
-    soundClip: {fileID: 8300000, guid: 8efe8d3792570cf4ea3cf2e6b03e901c, type: 3}
-    volumeModifier: 1
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bump3
-    soundClip: {fileID: 8300000, guid: 5c8803dc514967b4384ba89b8a7cf8da, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpPalha
-    soundClip: {fileID: 8300000, guid: e85de76ada4053c4cb0c11898e186a9a, type: 3}
-    volumeModifier: 1
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpCeramica1
-    soundClip: {fileID: 8300000, guid: 5a5f62b8aa78be44ea0b47edff242eed, type: 3}
-    volumeModifier: 0.25
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpCeramica2
-    soundClip: {fileID: 8300000, guid: 95f50fa7f90be4d42b01f57e2de4a5e8, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpCeramica3
-    soundClip: {fileID: 8300000, guid: 7fd6aae3fbb243c4da9361bea69a8511, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpVidro1
-    soundClip: {fileID: 8300000, guid: 7fd6aae3fbb243c4da9361bea69a8511, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpVidro2
-    soundClip: {fileID: 8300000, guid: 99e61d7a42e83c1479bab03a563b9491, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpVidro3
-    soundClip: {fileID: 8300000, guid: 7a582c50e2d1a594e99fcbfa80db57eb, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpMetal1
-    soundClip: {fileID: 8300000, guid: 142d8b4c3d2f2294ab3ae62896f0d2e3, type: 3}
-    volumeModifier: 1
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpMetal2
-    soundClip: {fileID: 8300000, guid: aaee5ead9317df84dad3271d2e1b4331, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpMetal3
-    soundClip: {fileID: 8300000, guid: dc01361672b4b1b4ba3bcfedc1bcff00, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpMetal4
-    soundClip: {fileID: 8300000, guid: 68bb92c8fd05d01448915455cfbcb01d, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpMadeira1
-    soundClip: {fileID: 8300000, guid: 89e1eb1fcea613e49827143f027f5f84, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  - soundEffectName: bumpMadeira2
-    soundClip: {fileID: 8300000, guid: c119185b368b55446a75235a904b5d3d, type: 3}
-    volumeModifier: 0.5
-    minPitch: 0.95
-    maxPitch: 1.05
-  uiSoundEffects:
-  - soundEffectName: play
-    soundClip: {fileID: 8300000, guid: 5655fc01ecea9e642a67158196ad319d, type: 3}
-    volumeModifier: 0.5
-  - soundEffectName: negativo1
-    soundClip: {fileID: 8300000, guid: 5ba83eb759920994fbd4a05123d2c7f0, type: 3}
-    volumeModifier: 0.5
-  - soundEffectName: negativo2
-    soundClip: {fileID: 8300000, guid: 36bf779f146339540bbc14606b4755ca, type: 3}
-    volumeModifier: 1
-  - soundEffectName: positivo1
-    soundClip: {fileID: 8300000, guid: 8cddd111b2a1b7044a678429bb93bc55, type: 3}
-    volumeModifier: 0.25
-  - soundEffectName: positivo2
-    soundClip: {fileID: 8300000, guid: 26f77dfd1226139489701d2eea7f9479, type: 3}
-    volumeModifier: 0.6
-  - soundEffectName: gameOver
-    soundClip: {fileID: 8300000, guid: 0b37275052c098c43aecfc4d1217f9df, type: 3}
-    volumeModifier: 0.4
-  - soundEffectName: lockerAbrindo
-    soundClip: {fileID: 8300000, guid: df60cb8d8d3bbc34f9dd111dcfb14a41, type: 3}
-    volumeModifier: 0.75
-  - soundEffectName: lockerFechando
-    soundClip: {fileID: 8300000, guid: 55df8ba4a6f9e4247adbfeb1841ccf04, type: 3}
-    volumeModifier: 0.75
-  - soundEffectName: missaoCumprida
-    soundClip: {fileID: 8300000, guid: 16b271eab58d3704db3f5ccacc735cd8, type: 3}
-    volumeModifier: 0.5
-  - soundEffectName: tutorialPositivo1
-    soundClip: {fileID: 8300000, guid: 3785a18d62a6e724d98a5f174c141b5f, type: 3}
-    volumeModifier: 0.5
 --- !u!1 &334076880
 GameObject:
   m_ObjectHideFlags: 0
@@ -17701,7 +17332,7 @@ RectTransform:
   - {fileID: 295442263}
   - {fileID: 893290269}
   m_Father: {fileID: 1815816532}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18435,6 +18066,375 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cbfb122dcf726a4290578ab1d65c1c3, type: 3}
+--- !u!1 &455178330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 455178331}
+  - component: {fileID: 455178332}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &455178331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455178330}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1825713472}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &455178332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455178330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e75c26d2cac1a4084d5589a8caaf94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxObject: {fileID: 783471986304123905, guid: 13a4a331f9aca81439f158b04e136412, type: 3}
+  soundEffects:
+  - soundEffectName: velocidade1
+    soundClip: {fileID: 8300000, guid: 6574c0a240318874890fe2bda5373a2c, type: 3}
+    volumeModifier: 0.1
+  - soundEffectName: velocidade2
+    soundClip: {fileID: 8300000, guid: 29b05960dff681d4389a08268e82bc5c, type: 3}
+    volumeModifier: 0.05
+  - soundEffectName: trilhos
+    soundClip: {fileID: 8300000, guid: e8d18dbba4f87314da1923480e65e89c, type: 3}
+    volumeModifier: 0.2
+  - soundEffectName: boost
+    soundClip: {fileID: 8300000, guid: 1c4bcf2126967b4458cd6d47f2c79b72, type: 3}
+    volumeModifier: 0.025
+  - soundEffectName: drift
+    soundClip: {fileID: 8300000, guid: e8d67790ed21e9c408127b1806f72d90, type: 3}
+    volumeModifier: 0.025
+  - soundEffectName: vento
+    soundClip: {fileID: 8300000, guid: 4d407353b9e46a740b3e0ba086c1dabb, type: 3}
+    volumeModifier: 0.03
+  - soundEffectName: vento2
+    soundClip: {fileID: 8300000, guid: d7516f469eee7f2418152d42c15351aa, type: 3}
+    volumeModifier: 0.2
+  - soundEffectName: disco1
+    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco2
+    soundClip: {fileID: 8300000, guid: 8275bea1344fa1941a6723e2cb5d01f9, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco3
+    soundClip: {fileID: 8300000, guid: 5cdf5f65030898c49a1602e623e3107f, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: disco4
+    soundClip: {fileID: 8300000, guid: 544d2a98a332aa74083f659450f6e024, type: 3}
+    volumeModifier: 0.15
+  - soundEffectName: introAntecipacao
+    soundClip: {fileID: 8300000, guid: 9c2dd7f82894efd4c9162dfbd71b9087, type: 3}
+    volumeModifier: 0.4
+  - soundEffectName: coletaItem
+    soundClip: {fileID: 8300000, guid: 594ee2d6bc879c4448859f800bcafba7, type: 3}
+    volumeModifier: 0.7
+  - soundEffectName: coletaPrincipalWalkieTalkie
+    soundClip: {fileID: 8300000, guid: 5298f2a6e478af6428526795e3394131, type: 3}
+    volumeModifier: 0.5
+  - soundEffectName: dano
+    soundClip: {fileID: 8300000, guid: 84f4bfd48236b1e409346e824a2fe84b, type: 3}
+    volumeModifier: 0.25
+  - soundEffectName: taser1
+    soundClip: {fileID: 8300000, guid: 80385f240089414419b7a2c389bba578, type: 3}
+    volumeModifier: 0.25
+  - soundEffectName: recarga
+    soundClip: {fileID: 8300000, guid: 6905a5ceac62a1847b5ada14f2c8aced, type: 3}
+    volumeModifier: 0.4
+  - soundEffectName: truqueSucesso
+    soundClip: {fileID: 8300000, guid: b3ae7811cf6d67a4eb71e58119f48754, type: 3}
+    volumeModifier: 0.5
+  - soundEffectName: truqueFalha
+    soundClip: {fileID: 8300000, guid: d722515b238005a4bbbc0efae7b98d55, type: 3}
+    volumeModifier: 0.4
+  - soundEffectName: sirene
+    soundClip: {fileID: 8300000, guid: 6756c6a2c0840ca41ba9c35e17a3ddb2, type: 3}
+    volumeModifier: 0.2
+  soundEffectsSpacialBlend: []
+  soundEffectsRandomPitch:
+  - soundEffectName: pisoCurto1
+    soundClip: {fileID: 8300000, guid: bc8fae5cc8bc50f40b1945824671f42e, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.9
+    maxPitch: 1.1
+  - soundEffectName: pisoCurto2
+    soundClip: {fileID: 8300000, guid: c322ad9da8aed9d48a84d9378ad1a80d, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.9
+    maxPitch: 1.1
+  - soundEffectName: pisoLongo1
+    soundClip: {fileID: 8300000, guid: 1814bd6058d31794dbd0e4217c317c30, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: impactoPatins
+    soundClip: {fileID: 8300000, guid: c35a0c10d6025884c83b135b7f07a50b, type: 3}
+    volumeModifier: 0.5
+    minPitch: 1
+    maxPitch: 1.5
+  - soundEffectName: impactoPatins2
+    soundClip: {fileID: 8300000, guid: ef6afbfd7e0053f4fbe1ccb5732ea796, type: 3}
+    volumeModifier: 0.6
+    minPitch: 1.15
+    maxPitch: 1.4
+  - soundEffectName: pulo
+    soundClip: {fileID: 8300000, guid: c871a468efdc3874586c0ccd59882a15, type: 3}
+    volumeModifier: 0.35
+    minPitch: 0.75
+    maxPitch: 0.9
+  - soundEffectName: impactoTrilhos
+    soundClip: {fileID: 8300000, guid: 20a7c4afb5071c1459df7ed87e27221a, type: 3}
+    volumeModifier: 0.6
+    minPitch: 1.75
+    maxPitch: 2
+  - soundEffectName: impactoParede
+    soundClip: {fileID: 8300000, guid: c59e9acc7f109af44842bd706ef7d44f, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.85
+    maxPitch: 1.15
+  - soundEffectName: boost
+    soundClip: {fileID: 8300000, guid: c57815ff77c137e42b29503beb62f32c, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.85
+    maxPitch: 1.15
+  - soundEffectName: tiro1
+    soundClip: {fileID: 8300000, guid: aaf6d45bb88a818469c8a29af10e6b5e, type: 3}
+    volumeModifier: 0.35
+    minPitch: 0.75
+    maxPitch: 1.25
+  - soundEffectName: tiro2
+    soundClip: {fileID: 8300000, guid: b39727832c1bae64ba6d8575230a9545, type: 3}
+    volumeModifier: 0.075
+    minPitch: 1.25
+    maxPitch: 1.75
+  - soundEffectName: truque1
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 0.9
+    maxPitch: 0.9
+  - soundEffectName: truque2
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1
+    maxPitch: 1
+  - soundEffectName: truque3
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1.1
+    maxPitch: 1.1
+  - soundEffectName: truque4
+    soundClip: {fileID: 8300000, guid: 2c07cfff2bb5c10499bab088934286c0, type: 3}
+    volumeModifier: 0.15
+    minPitch: 1.2
+    maxPitch: 1.2
+  - soundEffectName: glass1
+    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: glass2
+    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: glass3
+    soundClip: {fileID: 8300000, guid: 122edd7af8355344782419971d368434, type: 3}
+    volumeModifier: 0.25
+    minPitch: 1.6
+    maxPitch: 2
+  - soundEffectName: glass4
+    soundClip: {fileID: 8300000, guid: fe08a24f6c72bc7448b4d829a5e68331, type: 3}
+    volumeModifier: 0.25
+    minPitch: 1.6
+    maxPitch: 2
+  - soundEffectName: tiroAcerto1
+    soundClip: {fileID: 8300000, guid: 4c18859a02cb7b343aeb5103e3e06222, type: 3}
+    volumeModifier: 0.25
+    minPitch: 1.5
+    maxPitch: 1.8
+  - soundEffectName: tiroAcerto2
+    soundClip: {fileID: 8300000, guid: 021e3513c964a1c42a1bb977ec505eb3, type: 3}
+    volumeModifier: 1
+    minPitch: 1.1
+    maxPitch: 0.9
+  - soundEffectName: guardaDerrotado
+    soundClip: {fileID: 8300000, guid: 2f2c3f6ba0ca36348acbac01851b7710, type: 3}
+    volumeModifier: 0.75
+    minPitch: 0.9
+    maxPitch: 1.1
+  - soundEffectName: taser2
+    soundClip: {fileID: 8300000, guid: 58b8a3a0043695f47ae0678dbc9af30b, type: 3}
+    volumeModifier: 0.2
+    minPitch: 0.8
+    maxPitch: 1.2
+  - soundEffectName: cassetete
+    soundClip: {fileID: 8300000, guid: bde2342c0982cfa4283d6f7b4fb47173, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.9
+    maxPitch: 1.1
+  - soundEffectName: taser3
+    soundClip: {fileID: 8300000, guid: da5aea7c25c8ad44088ed420fd72ef5e, type: 3}
+    volumeModifier: 0.35
+    minPitch: 1.3
+    maxPitch: 1.35
+  - soundEffectName: boostVazio1
+    soundClip: {fileID: 8300000, guid: c1cdf0c9c72435644959cc5ce04bdca5, type: 3}
+    volumeModifier: 1
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: boostVazio2
+    soundClip: {fileID: 8300000, guid: 16d4b027cb66e0a4eaa0f83bf9234ded, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: impactoChao
+    soundClip: {fileID: 8300000, guid: c59e9acc7f109af44842bd706ef7d44f, type: 3}
+    volumeModifier: 0.85
+    minPitch: 0.7
+    maxPitch: 0.8
+  - soundEffectName: alvo1
+    soundClip: {fileID: 8300000, guid: 27597df0eb6088242965691c904aa973, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: alvo2
+    soundClip: {fileID: 8300000, guid: 7daa81f6cc4e90342b74e320fd010a23, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bump1
+    soundClip: {fileID: 8300000, guid: 02cabc194c7780e44b9b8b114272c74f, type: 3}
+    volumeModifier: 1
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bump2
+    soundClip: {fileID: 8300000, guid: 8efe8d3792570cf4ea3cf2e6b03e901c, type: 3}
+    volumeModifier: 1
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bump3
+    soundClip: {fileID: 8300000, guid: 5c8803dc514967b4384ba89b8a7cf8da, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpPalha
+    soundClip: {fileID: 8300000, guid: e85de76ada4053c4cb0c11898e186a9a, type: 3}
+    volumeModifier: 1
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpCeramica1
+    soundClip: {fileID: 8300000, guid: 5a5f62b8aa78be44ea0b47edff242eed, type: 3}
+    volumeModifier: 0.25
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpCeramica2
+    soundClip: {fileID: 8300000, guid: 95f50fa7f90be4d42b01f57e2de4a5e8, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpCeramica3
+    soundClip: {fileID: 8300000, guid: 7fd6aae3fbb243c4da9361bea69a8511, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpVidro1
+    soundClip: {fileID: 8300000, guid: 7fd6aae3fbb243c4da9361bea69a8511, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpVidro2
+    soundClip: {fileID: 8300000, guid: 99e61d7a42e83c1479bab03a563b9491, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpVidro3
+    soundClip: {fileID: 8300000, guid: 7a582c50e2d1a594e99fcbfa80db57eb, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpMetal1
+    soundClip: {fileID: 8300000, guid: 142d8b4c3d2f2294ab3ae62896f0d2e3, type: 3}
+    volumeModifier: 1
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpMetal2
+    soundClip: {fileID: 8300000, guid: aaee5ead9317df84dad3271d2e1b4331, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpMetal3
+    soundClip: {fileID: 8300000, guid: dc01361672b4b1b4ba3bcfedc1bcff00, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpMetal4
+    soundClip: {fileID: 8300000, guid: 68bb92c8fd05d01448915455cfbcb01d, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpMadeira1
+    soundClip: {fileID: 8300000, guid: 89e1eb1fcea613e49827143f027f5f84, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpMadeira2
+    soundClip: {fileID: 8300000, guid: c119185b368b55446a75235a904b5d3d, type: 3}
+    volumeModifier: 0.5
+    minPitch: 0.95
+    maxPitch: 1.05
+  uiSoundEffects:
+  - soundEffectName: play
+    soundClip: {fileID: 8300000, guid: 5655fc01ecea9e642a67158196ad319d, type: 3}
+    volumeModifier: 0.5
+  - soundEffectName: negativo1
+    soundClip: {fileID: 8300000, guid: 5ba83eb759920994fbd4a05123d2c7f0, type: 3}
+    volumeModifier: 0.5
+  - soundEffectName: negativo2
+    soundClip: {fileID: 8300000, guid: 36bf779f146339540bbc14606b4755ca, type: 3}
+    volumeModifier: 1
+  - soundEffectName: positivo1
+    soundClip: {fileID: 8300000, guid: 8cddd111b2a1b7044a678429bb93bc55, type: 3}
+    volumeModifier: 0.25
+  - soundEffectName: positivo2
+    soundClip: {fileID: 8300000, guid: 26f77dfd1226139489701d2eea7f9479, type: 3}
+    volumeModifier: 0.6
+  - soundEffectName: gameOver
+    soundClip: {fileID: 8300000, guid: 0b37275052c098c43aecfc4d1217f9df, type: 3}
+    volumeModifier: 0.4
+  - soundEffectName: lockerAbrindo
+    soundClip: {fileID: 8300000, guid: df60cb8d8d3bbc34f9dd111dcfb14a41, type: 3}
+    volumeModifier: 0.75
+  - soundEffectName: lockerFechando
+    soundClip: {fileID: 8300000, guid: 55df8ba4a6f9e4247adbfeb1841ccf04, type: 3}
+    volumeModifier: 0.75
+  - soundEffectName: missaoCumprida
+    soundClip: {fileID: 8300000, guid: 16b271eab58d3704db3f5ccacc735cd8, type: 3}
+    volumeModifier: 0.5
+  - soundEffectName: tutorialPositivo1
+    soundClip: {fileID: 8300000, guid: 3785a18d62a6e724d98a5f174c141b5f, type: 3}
+    volumeModifier: 0.5
 --- !u!1001 &455214824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19632,7 +19632,7 @@ RectTransform:
   m_Children:
   - {fileID: 355780905}
   m_Father: {fileID: 2016595878}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 75, y: -45, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -24799,61 +24799,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &519990704
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 519990705}
-  - component: {fileID: 519990706}
-  m_Layer: 0
-  m_Name: MusicManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &519990705
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519990704}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1825713472}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519990706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519990704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 391189aa7fb76c842ab4d604e71e1846, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicObjectPrefab: {fileID: 783471986304123905, guid: 3a32482e9201e1540bfb84ed15ac74e0, type: 3}
-  musics:
-  - musicName: beanbag
-    soundClip: {fileID: 8300000, guid: 6d587165d6e13b04096715e3ee7aef4c, type: 3}
-    volumeModifier: 0.2
-  - musicName: howToSkate
-    soundClip: {fileID: 8300000, guid: 741319960eac700439d62c2886806f66, type: 3}
-    volumeModifier: 0.2
-  - musicName: skateHeistFinal
-    soundClip: {fileID: 8300000, guid: 57ba2c9c7971a1e4e813629966a424b5, type: 3}
-    volumeModifier: 0.2
 --- !u!1001 &520292504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26273,7 +26218,7 @@ RectTransform:
   m_Children:
   - {fileID: 2145469133}
   m_Father: {fileID: 2016595878}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 45, y: -45, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -27802,7 +27747,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh347506
+  m_Name: pb_Mesh1674162
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -28077,7 +28022,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh346234
+  m_Name: pb_Mesh1672884
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -75551,6 +75496,18 @@ MonoBehaviour:
     stepActions:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 1565437291}
+          m_TargetAssemblyTypeName: MovementTest2, Assembly-CSharp
+          m_MethodName: ActivateInput
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 1905823559}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
@@ -75638,6 +75595,18 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1565437291}
+          m_TargetAssemblyTypeName: MovementTest2, Assembly-CSharp
+          m_MethodName: ActivateInput
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
   - step: '14: Trick Unpause'
     stepActions:
@@ -77507,6 +77476,7 @@ MonoBehaviour:
   sMR: {fileID: 1205922464851593551}
   hurtMaterial: {fileID: 2100000, guid: dfa077380d746244e918a3177bb34b9d, type: 2}
   invincibleMaterial: {fileID: 2100000, guid: 7595e65656465a142ae16aaee181a9f1, type: 2}
+  damageVolume: {fileID: 2041367858}
 --- !u!114 &1565437294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78543,6 +78513,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2748552827706820645, guid: 4cbfb122dcf726a4290578ab1d65c1c3, type: 3}
   m_PrefabInstance: {fileID: 1615848975}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1615919368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615919369}
+  - component: {fileID: 1615919370}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1615919369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615919368}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1825713472}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1615919370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615919368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391189aa7fb76c842ab4d604e71e1846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicObjectPrefab: {fileID: 783471986304123905, guid: 3a32482e9201e1540bfb84ed15ac74e0, type: 3}
+  musics:
+  - musicName: beanbag
+    soundClip: {fileID: 8300000, guid: 6d587165d6e13b04096715e3ee7aef4c, type: 3}
+    volumeModifier: 0.2
+  - musicName: howToSkate
+    soundClip: {fileID: 8300000, guid: 741319960eac700439d62c2886806f66, type: 3}
+    volumeModifier: 0.25
+  - musicName: skateHeist
+    soundClip: {fileID: 8300000, guid: 57ba2c9c7971a1e4e813629966a424b5, type: 3}
+    volumeModifier: 0.25
+  - musicName: chaosGarden
+    soundClip: {fileID: 8300000, guid: 23d600e71a485e64abad0c86209d4cd2, type: 3}
+    volumeModifier: 0.25
+  - musicName: moonlitCaffeine
+    soundClip: {fileID: 8300000, guid: 0ac421283c816c4429a7619a2d1bc76c, type: 3}
+    volumeModifier: 0.35
 --- !u!1 &1619955635
 GameObject:
   m_ObjectHideFlags: 0
@@ -85789,7 +85820,7 @@ Transform:
   m_Children:
   - {fileID: 1658045296}
   m_Father: {fileID: 2016595878}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
 --- !u!1001 &1747372481
 PrefabInstance:
@@ -86601,7 +86632,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1815816532}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -87029,7 +87060,7 @@ Transform:
   m_Children:
   - {fileID: 1303651065}
   m_Father: {fileID: 2016595878}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 22.5, y: -44.76, z: 0}
 --- !u!114 &1799445866
 MonoBehaviour:
@@ -87664,9 +87695,9 @@ RectTransform:
   - {fileID: 1367639344}
   - {fileID: 1137245192}
   - {fileID: 1619955638}
-  - {fileID: 431456748}
   - {fileID: 21364658}
   - {fileID: 1787468762}
+  - {fileID: 431456748}
   - {fileID: 334076881}
   - {fileID: 451910773}
   - {fileID: 1481761776}
@@ -87824,8 +87855,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1890518370}
-  - {fileID: 333523310}
-  - {fileID: 519990705}
+  - {fileID: 455178331}
+  - {fileID: 1615919369}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -88964,7 +88995,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh347820
+  m_Name: pb_Mesh1674476
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -89191,7 +89222,7 @@ Transform:
   m_Children:
   - {fileID: 1036566962}
   m_Father: {fileID: 2016595878}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
 --- !u!4 &1887373370 stripped
 Transform:
@@ -97074,6 +97105,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 726858961}
+  - {fileID: 2041367859}
   - {fileID: 1799445865}
   - {fileID: 1743193721}
   - {fileID: 1885435286}
@@ -97660,6 +97692,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bfb32c82b7905440aa2dc9a93ec2f2d, type: 3}
+--- !u!1 &2041367857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041367859}
+  - component: {fileID: 2041367858}
+  m_Layer: 0
+  m_Name: damageVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2041367858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041367857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 1
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: 875613dea0ca5664890efbecf8703432, type: 2}
+--- !u!4 &2041367859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041367857}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 123.063805, y: -20.384544, z: 89.63424}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2016595878}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2044251310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106189,7 +106270,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 049a3067cfefee140a5654f00f133d3c, type: 3}
   m_Controller: {fileID: 9100000, guid: 01ae2f619de724340ac4a120d8ae7282, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0

@@ -11,9 +11,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject winPanel;
     public TextMeshProUGUI highScoreText;
-    //public TextMeshProUGUI scoreText;
 
-    public GameObject GameOverUI;
+    public Animator uiAnimator;
     public static GameManager Instance;
 
     public GameObject pausePanel;
@@ -88,10 +87,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleInvade()
     {
-        //Level Start
-        //When player didnt get the pieces yet
-        //reset elapsedTime
-        //bool runTime = true;
         EnemyManager.Instance.canSpawn = true;
         EnemyManager.Instance.canFollow = true;
 
@@ -103,10 +98,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleEscape()
     {
-        //Pleyer got pieces and need to escape
-        //Spawn more security guards
-        //EnemyManager.Instance.canSpawn = true;
-
         objIndicator.SetActive(false);
         exitIndicator.SetActive(true);
 
@@ -122,9 +113,7 @@ public class GameManager : MonoBehaviour
         winPanel.SetActive(true);
         //Update HighScore
         CheckTimeScore();
-        //scoreText.text = Timer.Instance.timerText.text;
         UpdateHighScore();
-        //SetScore();
 
         //Freeze time
         AudioListener.pause = true;
@@ -140,7 +129,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        GameOverUI.SetActive(true);
+        uiAnimator.SetBool("gameIsOver", true);
+        StartCoroutine(GameOverPause());
         MusicManager.Instance.StopAllLoopingMusic();
         SFXManager.Instance.PlayUISFX("gameOver");
         SFXManager.Instance.PlaySFX("sirene");
@@ -203,6 +193,15 @@ public class GameManager : MonoBehaviour
         int miliseconds = (int)((PlayerPrefs.GetFloat("HighScore", 0)) * 1000) % 1000;
         Debug.Log(minutes + ":" + seconds + ":" + miliseconds);
         highScoreText.text = "Highscore: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+    }
+
+    IEnumerator GameOverPause()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            Time.timeScale -= 0.25f;
+            yield return new WaitForSeconds(1);
+        }
     }
 }
 

@@ -7,36 +7,48 @@ public class GlassBreak : MonoBehaviour
     public GameObject normalGlass;
     public GameObject brokenGlass;
     public bool isBroken = false;
-    public float scaleReductionFactor = 1.01f; // Factor by which to reduce the scale
-    public float destructionDelay = 5f; // Time in seconds before both glass objects are destroyed
-    public float minScale = 0.1f; // Minimum scale before destroying the object
+    public float destructionDelay = 15f; // Time in seconds before both glass objects are destroyed
+    public float fadeDuration = 30f; // Duration over which transparency will fade to zero
+    public float minAlpha = 0.001f; // Minimum alpha before destroying the object
 
-    // Start is called before the first frame update
+    private List<Material> glassMaterials = new List<Material>();
+
     void Start()
     {
         brokenGlass.SetActive(false);
         normalGlass.SetActive(true);
+
+        // Get materials of all children of brokenGlass for transparency control
+        foreach (Transform child in brokenGlass.transform)
+        {
+            if (child.TryGetComponent<Renderer>(out Renderer renderer))
+            {
+                // Create a new material instance for each child to control individually
+                Material newMat = renderer.material;
+                glassMaterials.Add(newMat);
+            }
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isBroken)
         {
-            bool allChildrenBelowMinScale = true;
+            bool allChildrenBelowMinAlpha = true;
 
-            foreach (Transform child in brokenGlass.transform)
+            foreach (Material mat in glassMaterials)
             {
-                GameObject childGameObject = child.gameObject;
-                childGameObject.transform.localScale *= 1 - (Time.deltaTime * (scaleReductionFactor - 1));
+                Color color = mat.color;
+                color.a -= Time.deltaTime / fadeDuration; // Reduce alpha over time
+                mat.color = color;
 
-                if (childGameObject.transform.localScale.x > minScale || childGameObject.transform.localScale.y > minScale || childGameObject.transform.localScale.z > minScale)
+                if (mat.color.a > minAlpha)
                 {
-                    allChildrenBelowMinScale = false;
+                    allChildrenBelowMinAlpha = false;
                 }
             }
 
-            if (allChildrenBelowMinScale)
+            if (allChildrenBelowMinAlpha)
             {
                 DestroyGlass();
             }
@@ -45,26 +57,14 @@ public class GlassBreak : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Projetil") && !isBroken)
+        if ((other.gameObject.CompareTag("Projetil") || (other.gameObject.CompareTag("Player") &&
+            other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >=
+            other.gameObject.GetComponent<MovementTest2>().maxMoveSpeed * 2 / 3)) && !isBroken)
         {
             brokenGlass.SetActive(true);
             normalGlass.SetActive(false);
             isBroken = true;
             StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
-        }
-
-        if (other.gameObject.CompareTag("Player") && !isBroken)
-        {
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            float mms = other.gameObject.GetComponent<MovementTest2>().maxMoveSpeed;
-
-            if(rb.velocity.magnitude >= mms * 2 / 3)
-            {
-                brokenGlass.SetActive(true);
-                normalGlass.SetActive(false);
-                isBroken = true;
-                StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
-            }
         }
     }
 

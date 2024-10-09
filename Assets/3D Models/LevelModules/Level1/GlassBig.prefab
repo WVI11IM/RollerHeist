@@ -8327,9 +8327,9 @@ MonoBehaviour:
   normalGlass: {fileID: 8158144431700926121}
   brokenGlass: {fileID: 8158144433389078189}
   isBroken: 0
-  scaleReductionFactor: 1.1
-  destructionDelay: 10
-  minScale: 0.5
+  destructionDelay: 15
+  fadeDuration: 30
+  minAlpha: 0.01
 --- !u!1 &8158144433389078189
 GameObject:
   m_ObjectHideFlags: 0

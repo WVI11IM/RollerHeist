@@ -62,6 +62,7 @@ public class MovementTest2 : MonoBehaviour
     private int trickCombo = 0;
     private int trickNumber;
     private bool isTricking = false;
+    private bool failedTrick = false;
 
     [Space]
     [Header("BOOST SETTINGS")]
@@ -103,7 +104,7 @@ public class MovementTest2 : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
     }
 
     void Start()
@@ -142,12 +143,6 @@ public class MovementTest2 : MonoBehaviour
             boostValue = maxBoostValue;
         }
 
-        if (isTricking && Time.time >= (nextActionTime - trickCooldown / 4))
-        {
-            isTricking = false;
-        }
-        animator.SetBool("isTricking", isTricking);
-
         //Regula o valor e a barra de boost.
         UpdateBoostValue();
 
@@ -169,13 +164,13 @@ public class MovementTest2 : MonoBehaviour
         if (canInput)
         {
             //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
-            if (Input.GetKey(KeyCode.LeftShift) && boostValue > 0 && isGrounded && !isGrinding && !isBraking)
+            if (Input.GetKey(KeyCode.LeftShift) && boostValue > 0 && isGrounded && !isGrinding && !isBraking && !failedTrick)
             {
                 Boost();
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded && !isGrinding && !isBraking)
+                if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded && !isGrinding && !isBraking && !failedTrick)
                 {
                     boostBarAnimator.SetTrigger("valueEmpty");
                     SFXManager.Instance.PlaySFXRandomPitch("boostVazio1");
@@ -190,7 +185,7 @@ public class MovementTest2 : MonoBehaviour
             }
 
             //Faz personagem dar um pulo com barra de espaço.
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !isGrinding && Time.timeScale != 0)
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !isGrinding && !failedTrick && Time.timeScale != 0)
             {
                 Jump();
             }
@@ -253,7 +248,7 @@ public class MovementTest2 : MonoBehaviour
             float rotation;
 
             //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
-            if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
+            if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
             {
                 isDrifting = true;
                 rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -263,7 +258,7 @@ public class MovementTest2 : MonoBehaviour
                     emissionModule.enabled = true;
                 }
             }
-            else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
+            else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
             {
                 isDrifting = true;
                 rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -319,31 +314,6 @@ public class MovementTest2 : MonoBehaviour
             transform.eulerAngles += new Vector3(0, rotation, 0);
         }
 
-        //Gera uma Raycast abaixo do personagem que detecta colisão com chão.
-        RaycastHit hit1;
-        RaycastHit hit2;
-        RaycastHit hit3;
-        RaycastHit hit4;
-
-        bool isHit1 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
-        bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 4), Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
-        bool isHit3 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 4), Vector3.down, out hit3, raycastDistanceToFloor, floorLayerMask);
-        bool isHit4 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 4), Vector3.down, out hit4, raycastDistanceToFloor, floorLayerMask);
-
-        if (isHit1 || isHit2 || isHit3 || isHit4)
-        {
-            isGrounded = true;
-            animator.SetBool("isGrounded", true);
-            boostBarAnimator.SetBool("isGrounded", true);
-        }
-        else
-        {
-            isGrounded = false;
-            animator.SetBool("isGrounded", false);
-            boostBarAnimator.SetBool("isGrounded", false);
-            isAirborne = true;
-        }
-
         if(rb.velocity.magnitude >= maxMoveSpeed * 2 / 3 && wasFast)
         {
             SFXManager.Instance.PlaySFXLoop("vento");
@@ -369,8 +339,36 @@ public class MovementTest2 : MonoBehaviour
     //Para todas as linhas de código que envolvem a constante aplicação de forças direcionais ao Rigidbody do personagem, utilizei o FixedUpdate().
     void FixedUpdate()
     {
-        float trickTimer = Time.time - (nextActionTime - trickCooldown / 4);
-        animator.SetFloat("trickTimer", trickTimer);
+        if (isTricking && Time.time > (nextActionTime - trickCooldown / 4))
+        {
+            isTricking = false;
+        }
+        animator.SetBool("isTricking", isTricking);
+
+        //Gera uma Raycast abaixo do personagem que detecta colisão com chão.
+        RaycastHit hit1;
+        RaycastHit hit2;
+        RaycastHit hit3;
+        RaycastHit hit4;
+
+        bool isHit1 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
+        bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 4), Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
+        bool isHit3 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 4), Vector3.down, out hit3, raycastDistanceToFloor, floorLayerMask);
+        bool isHit4 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 4), Vector3.down, out hit4, raycastDistanceToFloor, floorLayerMask);
+
+        if (isHit1 || isHit2 || isHit3 || isHit4)
+        {
+            isGrounded = true;
+            animator.SetBool("isGrounded", true);
+            boostBarAnimator.SetBool("isGrounded", true);
+        }
+        else
+        {
+            isGrounded = false;
+            animator.SetBool("isGrounded", false);
+            boostBarAnimator.SetBool("isGrounded", false);
+            isAirborne = true;
+        }
 
         //Regula os parâmetros envolvendo o grind de trilhos.
         UpdateRailGrind();
@@ -424,14 +422,20 @@ public class MovementTest2 : MonoBehaviour
                         }
                         SFXManager.Instance.PlaySFX("truqueFalha");
                         SFXManager.Instance.PlaySFXRandomPitch("impactoChao");
-                        rb.velocity = velocity/2;
+                        rb.velocity = velocity/4;
+                        StartCoroutine(ResetFailedTrickFlag());
                     }
-                    Debug.Log(Time.time - (nextActionTime - trickCooldown / 4));
+                    //Debug.Log(Time.time - (nextActionTime - trickCooldown / 4));
+                    //Debug.Log(animator.GetFloat("trickTimer"));
+                    float trickTimer = Time.time - (nextActionTime - trickCooldown / 4);
+                    animator.SetFloat("trickTimer", trickTimer);
+                    animator.SetTrigger("landed");
                     Debug.Log(animator.GetFloat("trickTimer"));
 
                 }
                 trickCombo = 0;
                 animator.SetInteger("trickCombo", 0);
+                StartCoroutine(ResetLandedFlag());
                 totalBoostValueToAdd = 0;
                 boostValueToAdd = 0;
                 boostMeterValueToGain.fillAmount = 0;
@@ -672,9 +676,22 @@ public class MovementTest2 : MonoBehaviour
 
     IEnumerator ResetJumpFlag()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         isJumping = false;
         animator.ResetTrigger("jumped");
+    }
+
+    IEnumerator ResetLandedFlag()
+    {
+        yield return new WaitForSeconds(0.5f);
+        animator.ResetTrigger("landed");
+    }
+
+    IEnumerator ResetFailedTrickFlag()
+    {
+        failedTrick = true;
+        yield return new WaitForSeconds(0.75f);
+        failedTrick = false;
     }
 
     public void Trick()
@@ -740,7 +757,7 @@ public class MovementTest2 : MonoBehaviour
         Vector3 currentVelocity = rb.velocity;
         Vector3 horizontalVelocityChange = new Vector3(currentVelocity.x - previousVelocity.x, 0, currentVelocity.z - previousVelocity.z);
 
-        if (horizontalVelocityChange.magnitude >= decelerationThreshold && isGrounded && !isGrinding && !isBoosting && !isTricking)
+        if (horizontalVelocityChange.magnitude >= decelerationThreshold && isGrounded && !isGrinding && !isBoosting && !isTricking && !failedTrick)
         {
             animator.SetTrigger("bumped");
             SFXManager.Instance.PlaySFXRandomPitch("impactoParede");

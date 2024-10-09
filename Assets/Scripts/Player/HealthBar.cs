@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class HealthBar : MonoBehaviour
 {
@@ -31,9 +33,13 @@ public class HealthBar : MonoBehaviour
     public Material invincibleMaterial;
     Material currentSkin;
 
+    [Space]
+    public Volume damageVolume;
+
 
     void Start()
     {
+        damageVolume.weight = 0f;
         health = maxHealth;
         playerMovement = GetComponent<MovementTest2>();
         playerShoot = GetComponent<PaintballShoot>();
@@ -92,7 +98,11 @@ public class HealthBar : MonoBehaviour
             meterValueLost.fillAmount = Mathf.Lerp(0.4f, 0.6f, healthSliderValue);
             health -= damage;
             health = Mathf.Clamp(health, 0f, maxHealth);
-            if (health > 0) StartCoroutine(HurtSkinChange());
+            if (health > 0)
+            {
+                StartCoroutine(HurtSkinChange());
+            }
+            StartCoroutine(HurtDamageVolume());
             isInvincible = true;
             invincibilityTimer = invincibilityDuration;
         }
@@ -121,5 +131,20 @@ public class HealthBar : MonoBehaviour
         }
 
         sMR.material = currentSkin;
+    }
+
+    IEnumerator HurtDamageVolume()
+    {
+        for (int t = 0; t < 5; t++)
+        {
+            damageVolume.weight = t / 5f;
+            yield return new WaitForSeconds(0.015f);
+        }
+        for (int t = 0; t < 10; t++)
+        {
+            damageVolume.weight = 1f - (t / 10f);
+            yield return new WaitForSeconds(0.015f);
+        }
+        damageVolume.weight = 0;
     }
 }

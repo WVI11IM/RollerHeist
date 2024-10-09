@@ -100,7 +100,7 @@ public class PlayerGrind : MonoBehaviour
         timeForFullSpline = currentRailScript.totalSplineLength / grindSpeed;
         Vector3 splinePoint;
         float normalisedTime = currentRailScript.CalculateTargetRailPoint(transform.position, out splinePoint);
-        elapsedTime = timeForFullSpline * normalisedTime;
+        elapsedTime = Mathf.Clamp(timeForFullSpline * normalisedTime, 0, timeForFullSpline);
 
         float3 pos, forward, up;
         SplineUtility.Evaluate(currentRailScript.railSpline.Spline, normalisedTime, out pos, out forward, out up);
