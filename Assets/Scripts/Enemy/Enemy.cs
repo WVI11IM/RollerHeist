@@ -331,7 +331,12 @@ public class Enemy : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Projetil"))
         {
-            TakeDamage();
+            if (!hasFainted)
+            {
+                Projetil projetil = collider.gameObject.GetComponent<Projetil>();
+                projetil.ParticlesAndDestroy();
+                TakeDamage();
+            }
         }
     }
 

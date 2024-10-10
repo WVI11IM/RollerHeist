@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8445920358314092871}
   - component: {fileID: 6376687307511822733}
   - component: {fileID: 1610535806513314617}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4119,7 +4119,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0, b: 0, a: 0}
-        key1: {r: 1, g: 0, b: 0, a: 1}
+        key1: {r: 1, g: 0, b: 0.8506589, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4824,7 +4824,7 @@ GameObject:
   - component: {fileID: 4919903116694286324}
   - component: {fileID: 6727318133504640010}
   - component: {fileID: 7648034110037167615}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4928,9 +4928,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0.1
-      minScalar: 5
+      minScalar: 0.025
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -8798,9 +8798,9 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
-    mode: 1
-    ratio: 1
+    enabled: 1
+    mode: 0
+    ratio: 0.5
     lifetime:
       serializedVersion: 2
       minMaxState: 0
@@ -8989,8 +8989,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 0}
-        key1: {r: 1, g: 0, b: 0, a: 1}
+        key0: {r: 1, g: 1, b: 1, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -9633,6 +9633,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9653,7 +9654,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 5
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -9697,7 +9698,7 @@ GameObject:
   - component: {fileID: 6814165513732267862}
   - component: {fileID: 3706117595852556783}
   - component: {fileID: 1534331478844193682}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tiro 1
   m_TagString: Projetil
   m_Icon: {fileID: 0}
@@ -9749,7 +9750,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9e90fad90be8be48bfdee299d35902a, type: 2}
+  - {fileID: 2100000, guid: f767095d10c55f44ba88fe10f18c6b7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9779,7 +9780,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9070974583837955472}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5
@@ -9796,9 +9797,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207f71b607552024094734bab5c72f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 1.75
+  lifetime: 1.5
   Marca: {fileID: 0}
-  impactParticles: {fileID: 9070974583837955472, guid: a7de701f7b1b2eb42ba1e80e92cc75ff, type: 3}
+  impactParticles: {fileID: 4270870294818587218, guid: 6dde0ee408d0cf140b8988fd64839c4b, type: 3}
 --- !u!54 &1534331478844193682
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9814,4 +9815,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
