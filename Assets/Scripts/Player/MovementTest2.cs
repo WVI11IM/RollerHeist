@@ -45,6 +45,8 @@ public class MovementTest2 : MonoBehaviour
     private bool isJumping = false;
     public float raycastDistanceToFloor = 1.35f;
     public float minDistForTrick = 4f;
+    public bool isOnWater = false;
+    private bool wasOnWater = false;
 
     public LayerMask floorLayerMask;
     public LayerMask wallLayerMask;
@@ -52,6 +54,8 @@ public class MovementTest2 : MonoBehaviour
     public ParticleSystem landNormalParticleSystem;
     public ParticleSystem[] landSuccessParticleSystems;
     public ParticleSystem[] landFailParticleSystems;
+    public ParticleSystem[] waterLandParticleSystems;
+    public ParticleSystem[] waterRunParticleSystems;
 
     [Space]
     [Header("TRICKS SETTINGS")]
@@ -67,7 +71,7 @@ public class MovementTest2 : MonoBehaviour
     [Space]
     [Header("BOOST SETTINGS")]
     public bool isBoosting = false;
-    public ParticleSystem boostParticleSystem;
+    public ParticleSystem[] boostParticleSystems;
     public Animator boostBarAnimator;
     public Image whiteBoostMeter;
     public Image boostMeter;
@@ -125,8 +129,16 @@ public class MovementTest2 : MonoBehaviour
             var driftEmissionModule = driftParticleSystems[i].emission;
             driftEmissionModule.enabled = false;
         }
-        var boostEmissionModule = boostParticleSystem.emission;
-        boostEmissionModule.enabled = false;
+        for (int i = 0; i < boostParticleSystems.Length; i++)
+        {
+            var boostEmissionModule = boostParticleSystems[i].emission;
+            boostEmissionModule.enabled = false;
+        }
+        for (int i = 0; i < waterRunParticleSystems.Length; i++)
+        {
+            var waterRunEmissionModule = waterRunParticleSystems[i].emission;
+            waterRunEmissionModule.enabled = false;
+        }
         var trailSparksEmissionModule = trailSparksParticleSystem.emission;
         trailSparksEmissionModule.enabled = false;
 
@@ -178,8 +190,11 @@ public class MovementTest2 : MonoBehaviour
                 }
 
                 isBoosting = false;
-                var emissionModule = boostParticleSystem.emission;
-                emissionModule.enabled = false;
+                for (int i = 0; i < boostParticleSystems.Length; i++)
+                {
+                    var emissionModule = boostParticleSystems[i].emission;
+                    emissionModule.enabled = false;
+                }
                 wasBoosting = false;
                 SFXManager.Instance.StopSFXLoop("boost");
             }
@@ -442,10 +457,48 @@ public class MovementTest2 : MonoBehaviour
             }
         }
 
+        bool isHit6 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.1f, LayerMask.GetMask("Water"), QueryTriggerInteraction.Collide);
+        if (isHit6)
+        {
+            if (!wasOnWater)
+            {
+                for (int i = 0; i < waterLandParticleSystems.Length; i++)
+                {
+                    waterLandParticleSystems[i].Play();
+                }
+                wasOnWater = true;
+            }
+            if(rb.velocity.magnitude > 10f)
+            {
+                for (int i = 0; i < waterRunParticleSystems.Length; i++)
+                {
+                    var waterRunEmissionModule = waterRunParticleSystems[i].emission;
+                    waterRunEmissionModule.enabled = true;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < waterRunParticleSystems.Length; i++)
+                {
+                    var waterRunEmissionModule = waterRunParticleSystems[i].emission;
+                    waterRunEmissionModule.enabled = false;
+                }
+            }
+        }
+        else
+        {
+            wasOnWater = false;
+            for (int i = 0; i < waterRunParticleSystems.Length; i++)
+            {
+                var waterRunEmissionModule = waterRunParticleSystems[i].emission;
+                waterRunEmissionModule.enabled = false;
+            }
+        }
+
         //Se personagem estiver não estiver no chão, força para baixo é aplicada.
         if (!isGrounded && !isGrinding)
         {
-            rb.AddForce(Vector3.down * 15f);
+            rb.AddForce(Vector3.down * 20f);
         }
 
         Vector3 directionFront = new Vector3(0, 0, 1);
@@ -738,8 +791,11 @@ public class MovementTest2 : MonoBehaviour
 
     public void Boost()
     {
-        var emissionModule = boostParticleSystem.emission;
-        emissionModule.enabled = true;
+        for (int i = 0; i < boostParticleSystems.Length; i++)
+        {
+            var emissionModule = boostParticleSystems[i].emission;
+            emissionModule.enabled = true;
+        }
         isBoosting = true;
         boostValue -= boostToDeplete * Time.deltaTime;
 
