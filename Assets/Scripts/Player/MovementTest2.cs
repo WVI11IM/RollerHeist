@@ -131,8 +131,11 @@ public class MovementTest2 : MonoBehaviour
         }
         for (int i = 0; i < boostParticleSystems.Length; i++)
         {
-            var boostEmissionModule = boostParticleSystems[i].emission;
-            boostEmissionModule.enabled = false;
+            if (boostParticleSystems[i].main.loop)
+            {
+                var boostEmissionModule = boostParticleSystems[i].emission;
+                boostEmissionModule.enabled = false;
+            }
         }
         for (int i = 0; i < waterRunParticleSystems.Length; i++)
         {
@@ -192,8 +195,11 @@ public class MovementTest2 : MonoBehaviour
                 isBoosting = false;
                 for (int i = 0; i < boostParticleSystems.Length; i++)
                 {
-                    var emissionModule = boostParticleSystems[i].emission;
-                    emissionModule.enabled = false;
+                    if (boostParticleSystems[i].main.loop)
+                    {
+                        var emissionModule = boostParticleSystems[i].emission;
+                        emissionModule.enabled = false;
+                    }
                 }
                 wasBoosting = false;
                 SFXManager.Instance.StopSFXLoop("boost");
@@ -390,7 +396,7 @@ public class MovementTest2 : MonoBehaviour
 
         RaycastHit hit5;
 
-        bool isHit5 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.1f, floorLayerMask);
+        bool isHit5 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.15f, floorLayerMask);
 
         if (isHit5)
         {
@@ -457,7 +463,7 @@ public class MovementTest2 : MonoBehaviour
             }
         }
 
-        bool isHit6 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.1f, LayerMask.GetMask("Water"), QueryTriggerInteraction.Collide);
+        bool isHit6 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.15f, LayerMask.GetMask("Water"), QueryTriggerInteraction.Collide);
         if (isHit6)
         {
             if (!wasOnWater)
@@ -793,15 +799,25 @@ public class MovementTest2 : MonoBehaviour
     {
         for (int i = 0; i < boostParticleSystems.Length; i++)
         {
-            var emissionModule = boostParticleSystems[i].emission;
-            emissionModule.enabled = true;
+            if (boostParticleSystems[i].main.loop)
+            {
+                var emissionModule = boostParticleSystems[i].emission;
+                emissionModule.enabled = true;
+            }
         }
         isBoosting = true;
         boostValue -= boostToDeplete * Time.deltaTime;
 
 
-        if (!wasBoosting)
+        if (!wasBoosting && !failedTrick)
         {
+            for (int i = 0; i < boostParticleSystems.Length; i++)
+            {
+                if (!boostParticleSystems[i].main.loop)
+                {
+                    boostParticleSystems[i].Play();
+                }
+            }
             SFXManager.Instance.PlaySFXLoop("boost");
             SFXManager.Instance.PlaySFXRandomPitch("boost");
             wasBoosting = true;
@@ -831,7 +847,7 @@ public class MovementTest2 : MonoBehaviour
     {
         float normalizedSpeed = Mathf.Clamp01(rb.velocity.magnitude / boostMaxSpeed);
 
-        float dampingFactor = 0.02f;
+        float dampingFactor = 0.0075f;
         float targetSize = Mathf.Lerp(minLensFOV, maxLensFOV, normalizedSpeed);
         float currentSize = virtualCamera.m_Lens.FieldOfView;
         float currentSize2 = virtualCamera2.m_Lens.FieldOfView;
