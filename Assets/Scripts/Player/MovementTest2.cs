@@ -212,9 +212,11 @@ public class MovementTest2 : MonoBehaviour
             }
 
             //Se personagem apertar ou segurar barra de espaço no ar, uma determinada distância do chão e com velocidade suficiente, fará um truque.
-            RaycastHit hit;
-            bool isHit = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, minDistForTrick, floorLayerMask);
-            if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit && rb.velocity.magnitude >= maxMoveSpeed / 2 && Time.timeScale != 0)
+            RaycastHit hit1;
+            RaycastHit hit2;
+            bool isHit1 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit1, minDistForTrick, floorLayerMask);
+            bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit2, minDistForTrick, floorLayerMask);
+            if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit1 && !isHit2 && rb.velocity.magnitude >= maxMoveSpeed / 2 && Time.timeScale != 0)
             {
                 if (Time.time > nextActionTime)
                 {
@@ -395,10 +397,16 @@ public class MovementTest2 : MonoBehaviour
         UpdateRailGrind();
 
         RaycastHit hit5;
+        RaycastHit hit6;
+        RaycastHit hit7;
+        RaycastHit hit8;
 
-        bool isHit5 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.15f, floorLayerMask);
+        bool isHit5 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit5, 1.15f, floorLayerMask);
+        bool isHit6 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 4), Vector3.down, out hit6, 1.15f, floorLayerMask);
+        bool isHit7 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 4), Vector3.down, out hit7, 1.15f, floorLayerMask);
+        bool isHit8 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 4), Vector3.down, out hit8, 1.15f, floorLayerMask);
 
-        if (isHit5)
+        if (isHit5 || isHit6 || isHit7 || isHit8)
         {
             //Evita a nulificação de velocidade ao entrar em contato com o chão.
             if (isAirborne)
@@ -463,8 +471,8 @@ public class MovementTest2 : MonoBehaviour
             }
         }
 
-        bool isHit6 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.15f, LayerMask.GetMask("Water"), QueryTriggerInteraction.Collide);
-        if (isHit6)
+        bool isHit9 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit5, 1.15f, LayerMask.GetMask("Water"), QueryTriggerInteraction.Collide);
+        if (isHit9)
         {
             if (!wasOnWater)
             {

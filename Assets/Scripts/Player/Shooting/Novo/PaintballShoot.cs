@@ -18,6 +18,8 @@ public class PaintballShoot : MonoBehaviour
     public float bulletSpeed = 20f; // Velocidade da bala
     public float fireRate = 0.5f; // Taxa de disparo em tiros por segundo
     private float nextFireTime = 0f; // Tempo do próximo disparo, inicializado como 0 para permitir o primeiro tiro imediatamente
+    private bool startedShooting = false;
+    private float shootStartTime = 0f;
     public float maxAmmo = 15;
     public float currentAmmo;
     public float reloadTime = 3;
@@ -70,6 +72,12 @@ public class PaintballShoot : MonoBehaviour
         // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo. Tambem confere se jogo esta pausado ou foi finalizado
         if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && currentAmmo > 0 && Time.timeScale != 0 && GameManager.Instance.state != GameState.Win && GameManager.Instance.state != GameState.Lose)
         {
+            if (!startedShooting)
+            {
+                shootStartTime = Time.time;
+                startedShooting = true;
+            }
+
             Vector3 mousePosition = Input.mousePosition;
 
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
@@ -106,7 +114,7 @@ public class PaintballShoot : MonoBehaviour
                 ammoReloadMeter.gameObject.SetActive(true);
                 gun.SetActive(true);
                 Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
-                if (Time.time >= nextFireTime)
+                if (Time.time >= shootStartTime + 0.025f && Time.time >= nextFireTime)
                 {
                     currentAmmo--;
 
@@ -141,6 +149,7 @@ public class PaintballShoot : MonoBehaviour
         }
         else
         {
+            startedShooting = false;
             targetLayerWeight = 0f;
             if (isReloading)
             {
