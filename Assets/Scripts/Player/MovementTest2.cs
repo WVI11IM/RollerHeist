@@ -104,7 +104,12 @@ public class MovementTest2 : MonoBehaviour
     public float maxLensFOV;
     private int speedInteger;
 
+    [Space]
+    [Header("COLLISION AND MATERIAL SETTINGS")]
     Rigidbody rb;
+    public PhysicMaterial groundedCharacterPhysicMaterial;
+    public PhysicMaterial airborneCharacterPhysicMaterial;
+    CapsuleCollider capsuleCollider;
 
     private void Awake()
     {
@@ -113,6 +118,8 @@ public class MovementTest2 : MonoBehaviour
 
     void Start()
     {
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        capsuleCollider.material = groundedCharacterPhysicMaterial;
         rb = GetComponent<Rigidbody>();
 
         previousVelocity = rb.velocity;
@@ -381,12 +388,14 @@ public class MovementTest2 : MonoBehaviour
 
         if (isHit1 || isHit2 || isHit3 || isHit4)
         {
+            capsuleCollider.material = groundedCharacterPhysicMaterial;
             isGrounded = true;
             animator.SetBool("isGrounded", true);
             boostBarAnimator.SetBool("isGrounded", true);
         }
         else
         {
+            capsuleCollider.material = airborneCharacterPhysicMaterial;
             isGrounded = false;
             animator.SetBool("isGrounded", false);
             boostBarAnimator.SetBool("isGrounded", false);
@@ -521,10 +530,11 @@ public class MovementTest2 : MonoBehaviour
         Vector3 directionSides = new Vector3(1, 0, 0);
         directionSides = transform.TransformDirection(directionSides);
 
-        //Enquanto personagem estiver abaixo da velocidade máxima e no chão, ele acelera.
-        if (rb.velocity.magnitude <= maxMoveSpeed && isGrounded && !isGrinding)
+        //Enquanto personagem estiver abaixo da velocidade máxima e no chão, ele acelera. No ar, ele acelera menos.
+        if (rb.velocity.magnitude <= maxMoveSpeed && !isGrinding)
         {
-            rb.AddForce(directionFront * acceleration);
+            if(isGrounded) rb.AddForce(directionFront * acceleration);
+            else rb.AddForce(directionFront * acceleration / 4);
         }
 
         if(isGrounded && !isGrinding)
