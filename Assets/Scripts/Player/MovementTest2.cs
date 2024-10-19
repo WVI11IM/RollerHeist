@@ -23,7 +23,10 @@ public class MovementTest2 : MonoBehaviour
     public bool canInput = true;
 
     private Vector3 previousVelocity;
-    private float decelerationThreshold = 12.5f;
+    private float decelerationThreshold = 15f;
+    private bool pushedByShield = false;
+
+    private HealthBar playerHealth;
 
     [Space]
     [Header("DRIFT SETTINGS")]
@@ -100,6 +103,7 @@ public class MovementTest2 : MonoBehaviour
     [Header("CAMERA SETTINGS")]
     public CinemachineVirtualCamera virtualCamera;
     public CinemachineVirtualCamera virtualCamera2;
+    private CinemachineImpulseSource impulseSource;
     public float minLensFOV;
     public float maxLensFOV;
     private int speedInteger;
@@ -121,6 +125,8 @@ public class MovementTest2 : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         capsuleCollider.material = groundedCharacterPhysicMaterial;
         rb = GetComponent<Rigidbody>();
+
+        playerHealth = GetComponent<HealthBar>();
 
         previousVelocity = rb.velocity;
 
@@ -154,6 +160,9 @@ public class MovementTest2 : MonoBehaviour
 
         float boostSliderValueToGain = (boostValue + totalBoostValueToAdd) / maxBoostValue;
         boostMeterValueToGain.fillAmount = Mathf.Lerp(0.4f, 0.6f, boostSliderValueToGain);
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+
     }
 
     void Update()
@@ -461,6 +470,7 @@ public class MovementTest2 : MonoBehaviour
                         SFXManager.Instance.PlaySFX("truqueFalha");
                         SFXManager.Instance.PlaySFXRandomPitch("impactoChao");
                         rb.velocity = velocity/4;
+                        impulseSource.GenerateImpulse();
                         StartCoroutine(ResetFailedTrickFlag());
                     }
                     //Debug.Log(Time.time - (nextActionTime - trickCooldown / 4));
@@ -847,7 +857,7 @@ public class MovementTest2 : MonoBehaviour
         Vector3 currentVelocity = rb.velocity;
         Vector3 horizontalVelocityChange = new Vector3(currentVelocity.x - previousVelocity.x, 0, currentVelocity.z - previousVelocity.z);
 
-        if (horizontalVelocityChange.magnitude >= decelerationThreshold && isGrounded && !isGrinding && !isBoosting && !isTricking && !failedTrick)
+        if (horizontalVelocityChange.magnitude >= decelerationThreshold && isGrounded && !isGrinding && !isBoosting && !isTricking && !failedTrick && !pushedByShield)
         {
             animator.SetTrigger("bumped");
             SFXManager.Instance.PlaySFXRandomPitch("impactoParede");
@@ -859,6 +869,36 @@ public class MovementTest2 : MonoBehaviour
     public void ActivateInput(bool isActive)
     {
         canInput = isActive;
+    }
+
+    public void ShieldPush(Vector2 pushDirection)
+    {
+        Vector3 velocity = rb.velocity;
+        velocity.x = 0f;
+        velocity.y = 0f;
+        velocity.z = 0f;
+        rb.velocity = velocity;
+        if (isGrounded)
+        {
+            rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+            Vector3 forceDirection = new Vector3(pushDirection.x, 0, pushDirection.y) * 20f;
+            rb.AddForce(forceDirection, ForceMode.Impulse);
+        }
+        else
+        {
+            rb.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+            Vector3 forceDirection = new Vector3(pushDirection.x, 0, pushDirection.y) * 10f;
+            rb.AddForce(forceDirection, ForceMode.Impulse);
+        }
+
+        StartCoroutine(ShieldPushFlag());
+    }
+
+    IEnumerator ShieldPushFlag()
+    {
+        pushedByShield = true;
+        yield return new WaitForSeconds(0.75f);
+        pushedByShield = false;
     }
 
     public void ChangeLensSize()

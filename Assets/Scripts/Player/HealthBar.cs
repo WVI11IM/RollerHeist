@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using Cinemachine;
 
 public class HealthBar : MonoBehaviour
 {
@@ -36,9 +37,13 @@ public class HealthBar : MonoBehaviour
     [Space]
     public Volume damageVolume;
 
+    private CinemachineImpulseSource impulseSource;
+
 
     void Start()
     {
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+        
         damageVolume.weight = 0f;
         health = maxHealth;
         playerMovement = GetComponent<MovementTest2>();
@@ -88,8 +93,10 @@ public class HealthBar : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!isInvincible && !isDead) // Só aplica o dano se não estiver invencível
+        if (!isInvincible && !isDead)
         {
+            impulseSource.GenerateImpulse();
+
             ObjectiveManager.Instance.hasTakenDamage = true;
             animator.SetTrigger("flinched");
             healthBarAnimator.SetTrigger("valueLost");

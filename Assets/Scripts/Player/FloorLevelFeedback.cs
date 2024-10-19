@@ -7,7 +7,9 @@ public class FloorLevelFeedback : MonoBehaviour
     public LayerMask groundLayer;
     private float raycastDistance = 28f;
     public float minDistance = 2.75f;
-    public RectTransform floorLevelIcon;
+    public Transform floorLevelIcon;
+
+    public float distanceToFloor;
 
     private void Update()
     {
@@ -19,6 +21,7 @@ public class FloorLevelFeedback : MonoBehaviour
         if (Physics.Raycast(transform.position, worldDown, out hit, raycastDistance, groundLayer))
         {
             float distanceToGround = hit.distance;
+            distanceToFloor = distanceToGround;
             if (distanceToGround > minDistance)
             {
                 floorLevelIcon.gameObject.SetActive(true);

@@ -2302,7 +2302,10 @@ MonoBehaviour:
   isAttacking: 0
   isShooting: 0
   isStunned: 0
+  isDefending: 0
+  isBlocking: 0
   hasFainted: 0
+  damage: 20
   animator: {fileID: 4657890522984221334}
   sMR:
   - {fileID: 2943932082687175982}
@@ -2327,7 +2330,6 @@ MonoBehaviour:
   enemyState: 0
   patrolRadius: 15
   waitTimeAtPatrolPoint: 3
-  damage: 20
 --- !u!1 &6853238265852742106
 GameObject:
   m_ObjectHideFlags: 0

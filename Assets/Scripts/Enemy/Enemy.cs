@@ -11,14 +11,20 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent enemy;
     [HideInInspector] public Transform player;
     [HideInInspector] public MovementTest2 playerMovement;
+    [HideInInspector] public HealthBar playerHealth;
+    [HideInInspector] public FloorLevelFeedback playerFloorLevelFeedback;
     [HideInInspector] public float health;
     [SerializeField] GameObject batton;
     [SerializeField] GameObject taser;
     public bool isAttacking = false;
     public bool isShooting = false;
     public bool isStunned = false;
+    public bool isDefending = false;
+    public bool isBlocking = false;
+    public bool hasShieldBashed = false;
     public bool hasFainted = false;
     private bool canDamage = true;
+    public float damage = 10f;
 
     [SerializeField] Animator animator;
     [SerializeField] SkinnedMeshRenderer[] sMR;
@@ -30,7 +36,9 @@ public class Enemy : MonoBehaviour
         PATROL,
         CHASE,
         ATTACK,
+        DEFEND,
         STUNNED,
+        BLOCK,
         FAINTED
     }
 
@@ -48,8 +56,28 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        enemy.avoidancePriority = Random.Range(25, 100);
+
+        switch (enemyType.enemyName)
+        {
+            case "Guard":
+                animator.SetInteger("enemyType", 0);
+                break;
+            case "Taser":
+                animator.SetInteger("enemyType", 1);
+                break;
+            case "Mallcop":
+                animator.SetInteger("enemyType", 2);
+                break;
+            case "Shield":
+                animator.SetInteger("enemyType", 3);
+                break;
+        }
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementTest2>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthBar>();
+        playerFloorLevelFeedback = GameObject.FindGameObjectWithTag("Player").GetComponent<FloorLevelFeedback>();
         health = enemyType.health;
 
         enemyState = State.PATROL;
@@ -58,14 +86,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemy.speed == 0f && enemyState == State.ATTACK)
+        if (enemy.speed == 0f && (enemyState == State.ATTACK || (enemyType.enemyName == "Shield" && enemyState == State.DEFEND)))
         {
             RotateTowardsTarget();
         }
 
         animator.SetBool("isAttacking", isAttacking);
+        animator.SetBool("isDefending", isDefending);
         animator.SetBool("isShooting", isShooting);
         animator.SetBool("isStunned", isStunned);
+        animator.SetBool("isBlocking", isBlocking);
         animator.SetFloat("speed", enemy.velocity.magnitude / enemyType.runSpeed);
 
         float dist = Vector3.Distance(player.position, transform.position);
@@ -76,38 +106,71 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            switch (enemyState)
+            if(enemyState != State.STUNNED)
             {
-                case State.CHASE:
-                    if (dist > enemyType.chaseDist)
-                    {
-                        enemyState = State.PATROL;
-                    }
-                    if (dist <= enemyType.conflictDist)
-                    {
-                        if (player.position.y < transform.position.y + 3 && player.position.y > transform.position.y - 3) 
+                switch (enemyState)
+                {
+                    case State.CHASE:
+                        if (dist > enemyType.chaseDist)
                         {
-                            enemyState = State.ATTACK;
+                            enemyState = State.PATROL;
                         }
-                    }
-                    break;
-                case State.PATROL:
-                    if (dist <= enemyType.detectionDist)
-                    {
-                        enemyState = State.CHASE;
-                    }
-                    break;
-                case State.ATTACK:
-                    if (dist > enemyType.conflictDist)
-                    {
-                        enemyState = State.CHASE;
-                    }
-                    break;
-                case State.STUNNED:
-                    break;
-                default:
-                    enemyState = State.PATROL;
-                    break;
+                        else if (dist <= enemyType.conflictDist)
+                        {
+                            if (player.position.y < transform.position.y + 3 && player.position.y > transform.position.y - 3)
+                            {
+                                enemyState = State.ATTACK;
+                            }
+                        }
+                        if (enemyType.enemyName == "Shield")
+                        {
+                            if (dist <= enemyType.detectionDist / 3) enemyState = State.DEFEND;
+                        }
+                        break;
+                    case State.PATROL:
+                        if (dist <= enemyType.detectionDist)
+                        {
+                            if (enemyType.enemyName == "Shield" && (dist <= enemyType.detectionDist / 3))
+                            {
+                                enemyState = State.DEFEND;
+                            }
+                            else
+                            {
+                                enemyState = State.CHASE;
+                            }
+                        }
+                        break;
+                    case State.ATTACK:
+                        if (dist > enemyType.conflictDist)
+                        {
+                            if (enemyType.enemyName == "Shield" && (dist <= enemyType.detectionDist / 3))
+                            {
+                                enemyState = State.DEFEND;
+                            }
+                            else
+                            {
+                                enemyState = State.CHASE;
+                            }
+                        }
+                        break;
+                    case State.DEFEND:
+                        if (dist <= enemyType.conflictDist)
+                        {
+                            if (player.position.y < transform.position.y + 3 && player.position.y > transform.position.y - 3)
+                            {
+                                enemyState = State.ATTACK;
+                            }
+
+                        }
+                        if (dist > enemyType.detectionDist / 3)
+                        {
+                            enemyState = State.CHASE;
+                        }
+                        break;
+                    default:
+                        enemyState = State.PATROL;
+                        break;
+                }
             }
         }
 
@@ -122,8 +185,14 @@ public class Enemy : MonoBehaviour
             case State.ATTACK:
                 AttackPlayer();
                 break;
+            case State.DEFEND:
+                Defend();
+                break;
             case State.STUNNED:
                 Stun();
+                break;
+            case State.BLOCK:
+                Block();
                 break;
             case State.FAINTED:
                 Faint();
@@ -134,6 +203,7 @@ public class Enemy : MonoBehaviour
     public void PatrolArea()
     {
         isAttacking = false;
+        isDefending = false;
         isShooting = false;
         batton.SetActive(false);
         taser.SetActive(false);
@@ -190,7 +260,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 randomDirection;
         NavMeshHit hit;
-        int maxAttempts = 30;  // Limit the number of attempts to find a valid point
+        int maxAttempts = 30;
 
         for (int i = 0; i < maxAttempts; i++)
         {
@@ -202,12 +272,12 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // If no valid point is found after maxAttempts, return the current position
         return transform.position;
     }
     public void ChasePlayer()
     {
         isAttacking = false;
+        isDefending = false;
         isShooting = false;
         if (enemyType.enemyName == "Guard")
         {
@@ -224,11 +294,16 @@ public class Enemy : MonoBehaviour
             batton.SetActive(false);
             taser.SetActive(false);
         }
+        else if (enemyType.enemyName == "Shield")
+        {
+            batton.SetActive(false);
+            taser.SetActive(false);
+        }
 
         //Perseguir jogador com velocidade alta
         enemy.isStopped = false;
 
-        if (!playerMovement.isGrounded)
+        if (playerFloorLevelFeedback.distanceToFloor < 5f)
         {
             enemy.SetDestination(player.position);
         }
@@ -242,6 +317,7 @@ public class Enemy : MonoBehaviour
     public void AttackPlayer()
     {
         isAttacking = true;
+        isDefending = false;
         enemy.speed = 0;
         enemy.updateRotation = false;
 
@@ -265,11 +341,41 @@ public class Enemy : MonoBehaviour
             batton.SetActive(false);
             taser.SetActive(false);
         }
+        if (enemyType.enemyName == "Shield")
+        {
+            Vector3 direction3D = (player.transform.position - transform.position).normalized;
+            playerMovement.ShieldPush(new Vector2(direction3D.x, direction3D.z));
+            if (!playerHealth.isInvincible && !hasShieldBashed)
+            {
+                animator.SetTrigger("shieldBashed");
+                hasShieldBashed = true;
+                GiveDamage();
+            }
+            isShooting = false;
+            batton.SetActive(false);
+            taser.SetActive(false);
+
+            StartCoroutine(ResetShieldBash());
+        }
     }
+
+    public void Defend()
+    {
+        isAttacking = false;
+        isDefending = true;
+        enemy.speed = 0f;
+        enemy.updateRotation = false;
+        isShooting = false;
+        batton.SetActive(false);
+        taser.SetActive(false);
+    }
+
     public void Stun()
     {
         isAttacking = false;
+        isDefending = false;
         isShooting = false;
+        enemy.updateRotation = false;
         batton.SetActive(false);
         taser.SetActive(false);
         enemy.isStopped = true;
@@ -278,11 +384,23 @@ public class Enemy : MonoBehaviour
             ObjectiveManager.Instance.hasGivenDamage = true;
             StartCoroutine(Stunned());
         }
-        //Paralisar
+    }
+
+    public void Block()
+    {
+        isShooting = false;
+        batton.SetActive(false);
+        taser.SetActive(false);
+        enemy.isStopped = true;
+        if (!isBlocking)
+        {
+            StartCoroutine(Blocked());
+        }
     }
     public void Faint()
     {
         isAttacking = false;
+        isDefending = false;
         isShooting = false;
         batton.SetActive(false);
         taser.SetActive(false);
@@ -299,43 +417,33 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    /*
-    private void OnDrawGizmos()
-    {
-        float radius = enemyType.detectionDist;
-        int segments = 24; // Number of segments to approximate the circle
-
-        // Calculate the center of the circle parallel to the floor
-        Vector3 center = transform.position;
-        center.y = transform.position.y - (transform.localScale.y / 2); // Adjust the y-coordinate to be at the bottom of the GameObject
-
-        // Draw the circle using Gizmos.DrawLine
-        Vector3 previousPoint = Vector3.zero;
-        for (int i = 0; i <= 24; i++)
-        {
-            float angle = (i / (float)segments) * 360.0f;
-            Vector3 point = center + new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad) * radius, 0.0f, Mathf.Cos(angle * Mathf.Deg2Rad) * radius);
-            if (i > 0)
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawLine(previousPoint, point);
-            }
-            previousPoint = point;
-        }
-    }
-    */
-
-    public float damage = 10f;
-
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("Projetil"))
         {
             if (!hasFainted)
             {
+                Rigidbody bulletRb = collider.gameObject.GetComponent<Rigidbody>();
+                Vector3 bulletDirection = bulletRb.velocity.normalized;
+                Vector3 enemyForward = transform.forward;
+                float angle = Vector3.Angle(enemyForward, -bulletDirection);
                 Projetil projetil = collider.gameObject.GetComponent<Projetil>();
                 projetil.ParticlesAndDestroy();
-                TakeDamage();
+                if (enemyType.enemyName == "Shield")
+                {
+                    if (angle <= 70f)
+                    {
+                        Block();
+                    }
+                    else
+                    {
+                        TakeDamage();
+                    }
+                }
+                else
+                {
+                    TakeDamage();
+                }
             }
         }
     }
@@ -376,11 +484,33 @@ public class Enemy : MonoBehaviour
         {
             canDamage = true;
         }
-
         if (enemyState == State.STUNNED) // Ensure the state is still stunned before changing
         {
             enemyState = State.PATROL;
         }
+    }
+
+    private IEnumerator Blocked()
+    {
+        SFXManager.Instance.PlaySFXRandomPitch("");
+        isBlocking = true;
+        yield return new WaitForSeconds(0.25f);
+        isBlocking = false;
+        if (!hasFainted)
+        {
+            canDamage = true;
+        }
+        if (enemyState == State.STUNNED)
+        {
+            enemyState = State.PATROL;
+        }
+    }
+
+    private IEnumerator ResetShieldBash()
+    {
+        yield return new WaitUntil(() => !playerHealth.isInvincible);
+        animator.ResetTrigger("shieldBashed");
+        hasShieldBashed = false;
     }
 
     public void GiveDamage()
@@ -400,17 +530,24 @@ public class Enemy : MonoBehaviour
             {
                 SFXManager.Instance.PlaySFXRandomPitch("cassetete");
             }
+            else if (enemyType.enemyName == "Shield")
+            {
+            }
         }
     }
 
     private void RotateTowardsTarget()
     {
         Vector3 direction = (player.position - transform.position).normalized;
-        direction.y = 0f; // Keep the rotation on the horizontal plane
+        direction.y = 0f;
         if (direction != Vector3.zero)
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * enemy.angularSpeed / 2);
+            if(enemyType.enemyName == "Shield" && enemyState == State.DEFEND)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 0.8f);
+            }
+            else transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * enemy.angularSpeed / 2);
         }
     }
 
