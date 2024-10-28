@@ -44,6 +44,25 @@ public class TutorialManager : MonoBehaviour
     }
     private void Update()
     {
+
+        bool gameIsPaused;
+        if (Time.timeScale == 0)
+        {
+            gameIsPaused = true;
+            tutorialText.gameObject.SetActive(false);
+
+            if (canUnpauseWithSpacebar)
+            {
+                tutorialText.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            gameIsPaused = false;
+            tutorialText.gameObject.SetActive(true);
+        }
+        tutorialKeysAnimator.SetBool("gameIsPaused", gameIsPaused);
+
         tutorialKeysAnimator.SetInteger("stepNumber", tutorialStepNumber);
 
         if (tutorialStepNumber >= 1 && tutorialStepNumber <= 4)
@@ -74,7 +93,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        if ((tutorialStepNumber >= 1 && tutorialStepNumber <= 5) || tutorialStepNumber == 24)
+        if (((tutorialStepNumber >= 1 && tutorialStepNumber <= 5) || tutorialStepNumber == 24) && !gameIsPaused)
         {
             tutorialMeter.gameObject.SetActive(true);
         }
@@ -294,6 +313,7 @@ public class TutorialManager : MonoBehaviour
             Time.timeScale = 0;
             tutorialEndUI.SetActive(true);
             AllowTutorialPause(false);
+            PlayerPrefs.SetInt("didTutorial", 1);
         }
     }
 

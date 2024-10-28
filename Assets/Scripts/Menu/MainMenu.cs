@@ -8,9 +8,13 @@ using Cinemachine;
 public class MainMenu : MonoBehaviour
 {   
     public MenuState menuState;
+    public int levelToSelect = 1;
+    private bool selectedLevel = false;
+
     public UnityEvent titleScreenEvent;
     public UnityEvent mainScreenEvent;
     public UnityEvent playScreenEvent;
+    public UnityEvent levelsScreenEvent;
     public UnityEvent optionsScreenEvent;
     public UnityEvent creditsScreenEvent;
     public UnityEvent controlsScreenEvent;
@@ -20,9 +24,11 @@ public class MainMenu : MonoBehaviour
   
     UITransitionManager uiTransitionManager;
     public CinemachineVirtualCamera titleCamera, mainCamera;
+    public Animator levelSelectAnimator;
 
     private void Start()
     {
+
         uiTransitionManager = GetComponent<UITransitionManager>();
         AudioMixerManager.Instance.LoadVolumes();
         AudioMixerManager.Instance.UpdateSliders();
@@ -31,18 +37,20 @@ public class MainMenu : MonoBehaviour
         {
             ChangeMenuState("Title");
             PlayerPrefs.SetInt("titleScreenActivated", 1);
-            //titleCamera.Priority++;
         }
         else
         {
             ChangeMenuState("Main");
-            //mainCamera.Priority++;
         }
 
+        //didTutorial
+        //completedLevel
     }
 
     private void Update()
     {
+        levelSelectAnimator.SetInteger("level", levelToSelect);
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             LoadScene("Tutorial");
@@ -51,90 +59,129 @@ public class MainMenu : MonoBehaviour
 
     public void ChangeMenuState(string state)
     {
-      switch(state)
-       {
-         case "Title":
-         menuState = MenuState.Title;
-         break;
-         
-         case "Main":
-         menuState = MenuState.Main;
-         break;
+        switch (state)
+        {
+            case "Title":
+                menuState = MenuState.Title;
+                break;
 
-         case "Play":
-         menuState = MenuState.Play;
-         break;
+            case "Main":
+                menuState = MenuState.Main;
+                break;
 
-         case "Options":
-         menuState = MenuState.Options;
-         break;
+            case "Play":
+                menuState = MenuState.Play;
+                break;
 
-         case "Controls":
-         menuState = MenuState.Controls;
-         break;
+            case "Levels":
+                menuState = MenuState.Levels;
+                break;
 
-         case "Audio":
-         menuState = MenuState.Audio;
-         break;
-         
-         case "Credits":
-         menuState = MenuState.Credits;
-         break;
+            case "Options":
+                menuState = MenuState.Options;
+                break;
 
-         case "Skins":
-         menuState = MenuState.Skins;
-         break;
+            case "Controls":
+                menuState = MenuState.Controls;
+                break;
 
-         case "Exit":
-         menuState = MenuState.Exit;
-         break;
-       }
+            case "Audio":
+                menuState = MenuState.Audio;
+                break;
 
-       UpdateMenuState();
+            case "Credits":
+                menuState = MenuState.Credits;
+                break;
+
+            case "Skins":
+                menuState = MenuState.Skins;
+                break;
+
+            case "Exit":
+                menuState = MenuState.Exit;
+                break;
+        }
+        UpdateMenuState();
     }
 
     public void UpdateMenuState()
     {
-      
-      switch(menuState)
-      {
-        case MenuState.Title:
-        titleScreenEvent.Invoke();
-        break;
+        switch (menuState)
+        {
+            case MenuState.Title:
+                titleScreenEvent.Invoke();
+                break;
 
-        case MenuState.Main:
-        mainScreenEvent.Invoke();
-        break;
+            case MenuState.Main:
+                mainScreenEvent.Invoke();
+                break;
 
-        case MenuState.Play:
-        playScreenEvent.Invoke();
-        break;
+            case MenuState.Play:
+                playScreenEvent.Invoke();
+                break;
 
-        case MenuState.Options:
-        optionsScreenEvent.Invoke();
-        break;
+            case MenuState.Levels:
+                LoadLevelSelection();
+                levelsScreenEvent.Invoke();
+                break;
 
-        case MenuState.Controls:
-        controlsScreenEvent.Invoke();
-        break;
-        
-        case MenuState.Audio:
-        audioScreenEvent.Invoke();
-        break;
+            case MenuState.Options:
+                optionsScreenEvent.Invoke();
+                break;
 
-        case MenuState.Credits:
-        creditsScreenEvent.Invoke();
-        break;
-        
-        case MenuState.Skins:
-        skinsScreenEvent.Invoke();
-        break;
+            case MenuState.Controls:
+                controlsScreenEvent.Invoke();
+                break;
 
-        case MenuState.Exit:
-        exitScreenEvent.Invoke();
-        break;
-      }
+            case MenuState.Audio:
+                audioScreenEvent.Invoke();
+                break;
 
+            case MenuState.Credits:
+                creditsScreenEvent.Invoke();
+                break;
+
+            case MenuState.Skins:
+                skinsScreenEvent.Invoke();
+                break;
+
+            case MenuState.Exit:
+                exitScreenEvent.Invoke();
+                break;
+        }
+    }
+
+    public void ChangeLevel(int addOrSubtractOne)
+    {
+        levelToSelect += addOrSubtractOne;
+        PlayerPrefs.SetInt("levelToSelect", levelToSelect);
+    }
+
+    public void LoadLevelSelection()
+    {
+        if (PlayerPrefs.GetInt("levelToSelect") == 0)
+        {
+            PlayerPrefs.SetInt("levelToSelect", 1);
+        }
+        levelToSelect = PlayerPrefs.GetInt("levelToSelect");
+
+        if (PlayerPrefs.GetInt("didTutorial") == 0)
+        {
+            //ask about tutorial
+        }
+    }
+
+    public void SelectLevel()
+    {
+        if (!selectedLevel)
+        {
+            selectedLevel = true;
+        }
+        else
+        {
+            selectedLevel = false;
+        }
+        levelSelectAnimator.SetBool("selectedLevel", selectedLevel);
     }
 
     public void PlayGame()
@@ -164,14 +211,15 @@ public class MainMenu : MonoBehaviour
 
 public enum MenuState 
 {
-  Title,
-  Main,
-  Play,
-  Options,
-  Controls,
-  Audio,
-  Skins,
-  Credits,
-  Exit
+    Title,
+    Main,
+    Play,
+    Levels,
+    Options,
+    Controls,
+    Audio,
+    Skins,
+    Credits,
+    Exit
 }
 

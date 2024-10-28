@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] Material hurtMaterial;
     Material currentMaterial;
 
+    public LayerMask obstacleLayer;
+
     public enum State
     {
         PATROL,
@@ -119,7 +121,14 @@ public class Enemy : MonoBehaviour
                         {
                             if (player.position.y < transform.position.y + 3 && player.position.y > transform.position.y - 3)
                             {
-                                enemyState = State.ATTACK;
+                                if(enemyType.enemyName == "Taser")
+                                {
+                                    if (CanSeePlayer())
+                                    {
+                                        enemyState = State.ATTACK;
+                                    }
+                                }
+                                else enemyState = State.ATTACK;
                             }
                         }
                         if (enemyType.enemyName == "Shield")
@@ -148,6 +157,13 @@ public class Enemy : MonoBehaviour
                                 enemyState = State.DEFEND;
                             }
                             else
+                            {
+                                enemyState = State.CHASE;
+                            }
+                        }
+                        else if (enemyType.enemyName == "Taser")
+                        {
+                            if (!CanSeePlayer())
                             {
                                 enemyState = State.CHASE;
                             }
@@ -198,6 +214,18 @@ public class Enemy : MonoBehaviour
                 Faint();
                 break;
         }
+    }
+
+    private bool CanSeePlayer()
+    {
+        Vector3 adjustedPlayerPosition = player.position + new Vector3(0, 2, 0);
+        Vector3 directionToPlayer = (adjustedPlayerPosition - transform.position).normalized;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, distanceToPlayer, obstacleLayer))
+        {
+            return false;
+        }
+        return true;
     }
 
     public void PatrolArea()
