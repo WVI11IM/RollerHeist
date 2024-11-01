@@ -58,8 +58,8 @@ public class GlassBreak : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if ((other.gameObject.CompareTag("Projetil") || (other.gameObject.CompareTag("Player") &&
-            other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >=
-            other.gameObject.GetComponent<MovementTest2>().maxMoveSpeed * 2 / 3)) && !isBroken)
+            other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= other.gameObject.GetComponent<MovementTest2>().maxMoveSpeed / 2)) &&
+            !isBroken)
         {
             brokenGlass.SetActive(true);
             normalGlass.SetActive(false);
