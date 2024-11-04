@@ -64,14 +64,14 @@ MonoBehaviour:
   thickness: 1
   resolutionInvariant: 0
   useDepth: 1
-  useNormals: 0
+  useNormals: 1
   useColor: 0
   minDepthThreshold: 0
-  maxDepthThreshold: 0.5
+  maxDepthThreshold: 0.35
   minNormalsThreshold: 0.25
   maxNormalsThreshold: 2.5
-  minColorThreshold: 0.25
-  maxColorThreshold: 2
+  minColorThreshold: 0
+  maxColorThreshold: 1
   renderEvent: 500
   outlineOnly: 0
   applyInSceneView: 1

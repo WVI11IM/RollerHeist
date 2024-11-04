@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
 
     public Animator uiAnimator;
+    public Animator pauseAnimator;
     public static GameManager Instance;
 
     public GameObject pausePanel;
@@ -173,6 +174,34 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
         isPaused = false;
+    }
+
+    public void AudioOptions()
+    {
+        if(pauseAnimator.GetBool("audioOpen") == false)
+        {
+            SFXManager.Instance.PlayUISFX("positivo1");
+            pauseAnimator.SetBool("controlsOpen", false);
+            pauseAnimator.SetBool("audioOpen", true);
+        }
+        else
+        {
+            pauseAnimator.SetBool("audioOpen", false);
+        }
+    }
+
+    public void ControlsOptions()
+    {
+        if (pauseAnimator.GetBool("controlsOpen") == false)
+        {
+            SFXManager.Instance.PlayUISFX("positivo1");
+            pauseAnimator.SetBool("audioOpen", false);
+            pauseAnimator.SetBool("controlsOpen", true);
+        }
+        else
+        {
+            pauseAnimator.SetBool("controlsOpen", false);
+        }
     }
 
     ///////////////////////////////////////////////////////
