@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
     UITransitionManager uiTransitionManager;
     public CinemachineVirtualCamera titleCamera, mainCamera;
     public Animator levelSelectAnimator;
+    public Animator menuOptionsAnimator;
 
     private void Start()
     {
@@ -49,7 +50,11 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        levelSelectAnimator.SetInteger("level", levelToSelect);
+        if (menuState == MenuState.Levels)
+        {
+            levelToSelect = PlayerPrefs.GetInt("levelToSelect");
+            levelSelectAnimator.SetInteger("level", levelToSelect);
+        }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -131,10 +136,12 @@ public class MainMenu : MonoBehaviour
 
             case MenuState.Controls:
                 controlsScreenEvent.Invoke();
+                menuOptionsAnimator.SetInteger("menuState", 1);
                 break;
 
             case MenuState.Audio:
                 audioScreenEvent.Invoke();
+                menuOptionsAnimator.SetInteger("menuState", 0);
                 break;
 
             case MenuState.Credits:
@@ -154,6 +161,7 @@ public class MainMenu : MonoBehaviour
     public void ChangeLevel(int addOrSubtractOne)
     {
         levelToSelect += addOrSubtractOne;
+        levelToSelect = Mathf.Clamp(levelToSelect, 1, 3);
         PlayerPrefs.SetInt("levelToSelect", levelToSelect);
     }
 
@@ -163,7 +171,10 @@ public class MainMenu : MonoBehaviour
         {
             PlayerPrefs.SetInt("levelToSelect", 1);
         }
-        levelToSelect = PlayerPrefs.GetInt("levelToSelect");
+        else
+        {
+            levelToSelect = PlayerPrefs.GetInt("levelToSelect");
+        }
 
         if (PlayerPrefs.GetInt("didTutorial") == 0)
         {
