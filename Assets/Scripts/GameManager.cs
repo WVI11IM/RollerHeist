@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
         uiAnimator.SetBool("gameIsOver", true);
         StartCoroutine(GameOverPause());
         MusicManager.Instance.StopAllLoopingMusic();
+        SFXManager.Instance.StopAllLoopingSFX();
         SFXManager.Instance.PlayUISFX("gameOver");
         SFXManager.Instance.PlaySFX("sirene");
     }

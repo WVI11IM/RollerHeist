@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public float health;
     [SerializeField] GameObject batton;
     [SerializeField] GameObject taser;
+    [SerializeField] GameObject segway;
+    [SerializeField] GameObject segwayAfterFaint;
     public bool isAttacking = false;
     public bool isShooting = false;
     public bool isStunned = false;
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
     public bool hasFainted = false;
     private bool canDamage = true;
     public float damage = 10f;
+    public float lookAngle = 0.5f;
 
     [SerializeField] Animator animator;
     [SerializeField] SkinnedMeshRenderer[] sMR;
@@ -99,6 +102,20 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isStunned", isStunned);
         animator.SetBool("isBlocking", isBlocking);
         animator.SetFloat("speed", enemy.velocity.magnitude / enemyType.runSpeed);
+
+        Vector3 directionToPlayer = (player.position - transform.position);
+        directionToPlayer.y = 0;
+        directionToPlayer.Normalize();
+
+        Vector3 forward = transform.forward;
+        forward.y = 0f;
+
+        float angle = Vector3.SignedAngle(forward, directionToPlayer, Vector3.up);
+
+        float clampedAngle = Mathf.Clamp(angle, -45f, 45f);
+        lookAngle = (clampedAngle + 45f) / 90f;
+
+        animator.SetFloat("lookAngle", lookAngle);
 
         float dist = Vector3.Distance(player.position, transform.position);
 
@@ -230,6 +247,8 @@ public class Enemy : MonoBehaviour
 
     public void PatrolArea()
     {
+        animator.SetLayerWeight(1, 0);
+
         isAttacking = false;
         isDefending = false;
         isShooting = false;
@@ -304,6 +323,8 @@ public class Enemy : MonoBehaviour
     }
     public void ChasePlayer()
     {
+        animator.SetLayerWeight(1, 1);
+
         isAttacking = false;
         isDefending = false;
         isShooting = false;
@@ -344,6 +365,8 @@ public class Enemy : MonoBehaviour
     }
     public void AttackPlayer()
     {
+        animator.SetLayerWeight(1, 1);
+
         isAttacking = true;
         isDefending = false;
         enemy.speed = 0;
@@ -389,6 +412,8 @@ public class Enemy : MonoBehaviour
 
     public void Defend()
     {
+        animator.SetLayerWeight(1, 1);
+
         isAttacking = false;
         isDefending = true;
         enemy.speed = 0f;
@@ -416,6 +441,8 @@ public class Enemy : MonoBehaviour
 
     public void Block()
     {
+        animator.SetLayerWeight(1, 1);
+
         isShooting = false;
         batton.SetActive(false);
         taser.SetActive(false);
@@ -427,12 +454,21 @@ public class Enemy : MonoBehaviour
     }
     public void Faint()
     {
+        animator.SetLayerWeight(1, 0);
+
         isAttacking = false;
         isDefending = false;
         isShooting = false;
         batton.SetActive(false);
         taser.SetActive(false);
         enemy.isStopped = true;
+        if (enemyType.enemyName == "Mallcop")
+        {
+            segway.SetActive(false);
+            Rigidbody rb = segwayAfterFaint.GetComponent<Rigidbody>();
+            segwayAfterFaint.SetActive(true);
+            rb.AddForce(segwayAfterFaint.transform.up * -1f);
+        }
         if (!hasFainted)
         {
             ObjectiveManager.Instance.EnemyDefeated();

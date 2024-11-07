@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {   
@@ -26,10 +27,10 @@ public class MainMenu : MonoBehaviour
     public CinemachineVirtualCamera titleCamera, mainCamera;
     public Animator levelSelectAnimator;
     public Animator menuOptionsAnimator;
+    public Button playButton;
 
     private void Start()
     {
-
         uiTransitionManager = GetComponent<UITransitionManager>();
         AudioMixerManager.Instance.LoadVolumes();
         AudioMixerManager.Instance.UpdateSliders();
@@ -187,12 +188,31 @@ public class MainMenu : MonoBehaviour
         if (!selectedLevel)
         {
             selectedLevel = true;
+            //switch case for level sprites
         }
         else
         {
             selectedLevel = false;
         }
         levelSelectAnimator.SetBool("selectedLevel", selectedLevel);
+    }
+
+    public void PlayButton()
+    {
+        if (selectedLevel)
+        {
+            switch (levelToSelect)
+            {
+                case 1:
+                    LoadScene("Level1");
+                    break;
+                case 2:
+                    LoadScene("Level2");
+                    break;
+                case 3:
+                    break;
+            }
+        }
     }
 
     public void PlayGame()
