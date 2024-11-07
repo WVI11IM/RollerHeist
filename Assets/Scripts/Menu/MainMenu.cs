@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using Cinemachine;
+using TMPro;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {   
     public MenuState menuState;
     public int levelToSelect = 1;
+    public int numberOfLevels = 2;
+    public int missionTokens = 0;
     private bool selectedLevel = false;
 
     public UnityEvent titleScreenEvent;
@@ -27,10 +30,12 @@ public class MainMenu : MonoBehaviour
     public CinemachineVirtualCamera titleCamera, mainCamera;
     public Animator levelSelectAnimator;
     public Animator menuOptionsAnimator;
-    public Button playButton;
+    public TextMeshProUGUI tokenText;
 
     private void Start()
     {
+        CheckMissionTokens();
+
         uiTransitionManager = GetComponent<UITransitionManager>();
         AudioMixerManager.Instance.LoadVolumes();
         AudioMixerManager.Instance.UpdateSliders();
@@ -225,6 +230,22 @@ public class MainMenu : MonoBehaviour
     {
         MusicManager.Instance.StopAllLoopingMusic();
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void CheckMissionTokens()
+    {
+        missionTokens = 0;
+        for(int i = 1; i <= numberOfLevels; i++)
+        {
+            for(int j = 1; j <= 5; j++)
+            {
+                if(PlayerPrefs.GetInt("Level" + i + "Mission" + j) == 1)
+                {
+                    missionTokens++;
+                }
+            }
+        }
+        tokenText.text = missionTokens.ToString();
     }
 
     public void Quit()
