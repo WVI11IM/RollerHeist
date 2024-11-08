@@ -2784,6 +2784,8 @@ MonoBehaviour:
   health: 2
   batton: {fileID: 1922639193824752332}
   taser: {fileID: 988152014385960532}
+  segway: {fileID: 0}
+  segwayAfterFaint: {fileID: 0}
   isAttacking: 0
   isShooting: 0
   isStunned: 0
@@ -2792,6 +2794,7 @@ MonoBehaviour:
   hasShieldBashed: 0
   hasFainted: 0
   damage: 30
+  lookAngle: 0.5
   animator: {fileID: 5657537387158274094}
   sMR:
   - {fileID: 1104866221119199838}

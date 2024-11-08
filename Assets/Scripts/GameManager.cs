@@ -114,6 +114,9 @@ public class GameManager : MonoBehaviour
         winPanel.SetActive(true);
         //Update HighScore
         CheckTimeScore();
+
+        SFXManager.Instance.StopAllLoopingSFX();
+
         UpdateHighScore();
 
         //Freeze time

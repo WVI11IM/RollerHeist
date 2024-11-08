@@ -61,21 +61,24 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        enemy.avoidancePriority = Random.Range(25, 100);
-
         switch (enemyType.enemyName)
         {
             case "Guard":
                 animator.SetInteger("enemyType", 0);
+                enemy.avoidancePriority = 10;
                 break;
             case "Taser":
                 animator.SetInteger("enemyType", 1);
+                enemy.avoidancePriority = 20;
                 break;
             case "Mallcop":
                 animator.SetInteger("enemyType", 2);
+                enemy.avoidancePriority = 0;
+                enemy.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
                 break;
             case "Shield":
                 animator.SetInteger("enemyType", 3);
+                enemy.avoidancePriority = 5;
                 break;
         }
 
@@ -93,7 +96,10 @@ public class Enemy : MonoBehaviour
     {
         if (enemy.speed == 0f && (enemyState == State.ATTACK || (enemyType.enemyName == "Shield" && enemyState == State.DEFEND)))
         {
-            RotateTowardsTarget();
+            if(enemyType.enemyName != "Mallcop")
+            {
+                RotateTowardsTarget();
+            }
         }
 
         animator.SetBool("isAttacking", isAttacking);
@@ -352,6 +358,7 @@ public class Enemy : MonoBehaviour
         //Perseguir jogador com velocidade alta
         enemy.isStopped = false;
 
+        /*
         if (playerFloorLevelFeedback.distanceToFloor < 5f)
         {
             enemy.SetDestination(player.position);
@@ -360,6 +367,9 @@ public class Enemy : MonoBehaviour
         {
             enemy.SetDestination(new Vector3(player.position.x, transform.position.y, player.position.z));
         }
+        */
+        enemy.SetDestination(player.position);
+
         enemy.speed = enemyType.runSpeed;
         enemy.updateRotation = true;
     }

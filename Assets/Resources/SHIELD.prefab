@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &91787835121835129
 Transform:
   m_ObjectHideFlags: 0
@@ -1150,7 +1150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3400668397255048676
 Transform:
   m_ObjectHideFlags: 0
@@ -2125,6 +2125,8 @@ MonoBehaviour:
   health: 2
   batton: {fileID: 4178771542937096683}
   taser: {fileID: 8586929446544005850}
+  segway: {fileID: 0}
+  segwayAfterFaint: {fileID: 0}
   isAttacking: 0
   isShooting: 0
   isStunned: 0
@@ -2133,6 +2135,7 @@ MonoBehaviour:
   hasShieldBashed: 0
   hasFainted: 0
   damage: 10
+  lookAngle: 0.5
   animator: {fileID: 6501322597453670414}
   sMR:
   - {fileID: 3623007455457431478}
@@ -2154,6 +2157,9 @@ MonoBehaviour:
   - {fileID: 9128902140060382543}
   - {fileID: 5213233988335472896}
   hurtMaterial: {fileID: 2100000, guid: f7caee533386acc4a8da144b71b864ea, type: 2}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   enemyState: 0
   patrolRadius: 15
   waitTimeAtPatrolPoint: 3
@@ -3119,7 +3125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7611839160857486942
 Transform:
   m_ObjectHideFlags: 0

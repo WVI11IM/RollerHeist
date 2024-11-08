@@ -2296,16 +2296,22 @@ MonoBehaviour:
   enemy: {fileID: 6776702345067790106}
   player: {fileID: 0}
   playerMovement: {fileID: 0}
+  playerHealth: {fileID: 0}
+  playerFloorLevelFeedback: {fileID: 0}
   health: 2
   batton: {fileID: 2549189261150057331}
   taser: {fileID: 7905953020448929858}
+  segway: {fileID: 0}
+  segwayAfterFaint: {fileID: 0}
   isAttacking: 0
   isShooting: 0
   isStunned: 0
   isDefending: 0
   isBlocking: 0
+  hasShieldBashed: 0
   hasFainted: 0
   damage: 20
+  lookAngle: 0.5
   animator: {fileID: 4657890522984221334}
   sMR:
   - {fileID: 2943932082687175982}
@@ -2327,6 +2333,9 @@ MonoBehaviour:
   - {fileID: 7218444011521578967}
   - {fileID: 5963979791029416856}
   hurtMaterial: {fileID: 2100000, guid: f7caee533386acc4a8da144b71b864ea, type: 2}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   enemyState: 0
   patrolRadius: 15
   waitTimeAtPatrolPoint: 3

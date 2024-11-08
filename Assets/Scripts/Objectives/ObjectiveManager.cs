@@ -185,6 +185,22 @@ public class ObjectiveManager : MonoBehaviour
                     script.CompleteObjective();
                 }
             }
+
+            if(mainMissionScript.isCompleted == true)
+            {
+                int completedObjectives = 0;
+                for (int i = 0; i < objectiveList.Count; i++)
+                {
+                    if (objectiveList[i].isCompleted)
+                    {
+                        completedObjectives += 1;
+                    }
+                }
+                if (completedObjectives >= 4)
+                {
+                    PlayerPrefs.SetInt("Level" + GameManager.Instance.levelNumber + "Mission6", 1);
+                }
+            }
         }
 
         for (int i = 0; i < objectiveList.Count; i++)
