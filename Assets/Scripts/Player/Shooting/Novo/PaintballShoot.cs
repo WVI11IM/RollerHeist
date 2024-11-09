@@ -24,6 +24,8 @@ public class PaintballShoot : MonoBehaviour
     public float currentAmmo;
     public float reloadTime = 3;
     private bool isReloading = false;
+    private float lastShotTime = 0f;
+    private float cursorDisplayDuration = 0.1f;
     public Image ammoReloadMeter;
     public TextMeshProUGUI ammoText;
 
@@ -39,6 +41,7 @@ public class PaintballShoot : MonoBehaviour
     public LayerMask hitAimMask;
     public GameObject aimHitReference;
     [SerializeField] private Texture2D canShootCursor;
+    [SerializeField] private Texture2D isShootingCursor;
 
     private MovementTest2 playerMovement;
 
@@ -114,11 +117,23 @@ public class PaintballShoot : MonoBehaviour
                 ammoReloadMeter.gameObject.SetActive(true);
                 gun.SetActive(true);
                 Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
+                
+                if (Time.time < lastShotTime + cursorDisplayDuration)
+                {
+                    Cursor.SetCursor(isShootingCursor, new Vector2(isShootingCursor.width / 2, isShootingCursor.height / 2), CursorMode.Auto);
+                }
+                else
+                {
+                    Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
+                }
+
+                // Handle shooting
                 if (Time.time >= shootStartTime + 0.025f && Time.time >= nextFireTime)
                 {
                     currentAmmo--;
-
                     Shoot();
+
+                    lastShotTime = Time.time;
                     // Define o tempo do próximo disparo adicionando o intervalo entre os tiros
                     nextFireTime = Time.time + 1f / fireRate;
                 }

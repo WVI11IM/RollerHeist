@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     public int levelToSelect = 1;
     public int numberOfLevels = 2;
     public int missionTokens = 0;
+    public int levelMedals = 0;
     private bool selectedLevel = false;
 
     public UnityEvent titleScreenEvent;
@@ -35,6 +36,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         CheckMissionTokens();
+        CheckLevelMedals();
 
         uiTransitionManager = GetComponent<UITransitionManager>();
         AudioMixerManager.Instance.LoadVolumes();
@@ -248,6 +250,17 @@ public class MainMenu : MonoBehaviour
         tokenText.text = missionTokens.ToString();
     }
 
+    public void CheckLevelMedals()
+    {
+        levelMedals = 0;
+        for (int i = 1; i <= numberOfLevels; i++)
+        {
+            if (PlayerPrefs.GetInt("Level" + i + "Mission6") == 1)
+            {
+                levelMedals++;
+            }
+        }
+    }
     public void Quit()
     {
         MusicManager.Instance.StopAllLoopingMusic();
