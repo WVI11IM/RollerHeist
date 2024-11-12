@@ -130,37 +130,37 @@ public class TutorialManager : MonoBehaviour
         switch (tutorialStepNumber)
         {
             case 1:
-                tutorialText.text = "[A]\nGire para o sentido anti - horario";
+                tutorialText.text = "[A]\nGire para o sentido anti-horário";
                 break;
             case 2:
-                tutorialText.text = "[D]\nGire para o sentido horario";
+                tutorialText.text = "[D]\nGire para o sentido horário";
                 break;
             case 3:
-                tutorialText.text = "[A] x2\nFaca um drift pro sentido anti-horario";
+                tutorialText.text = "[A] x2\nFaça um drift pro sentido anti-horário";
                 break;
             case 4:
-                tutorialText.text = "[D] x2\nFaca um drift pro sentido horario";
+                tutorialText.text = "[D] x2\nFaça um drift pro sentido horário";
                 break;
             case 5:
-                tutorialText.text = "[ESPACO]\nPule 3 vezes";
+                tutorialText.text = "[ESPAÇO]\nPule 3 vezes";
                 break;
             case 13:
                 tutorialText.text = "[ESPACO] no ar\nFaca truques";
                 break;
             case 16:
-                tutorialText.text = "[ESPACO] no ar\nFaca truques";
+                tutorialText.text = "[ESPAÇO] no ar\nFaca truques";
                 break;
             case 18:
                 tutorialText.text = "[SHIFT]\nAtive o boost";
                 break;
             case 20:
-                tutorialText.text = "[ESPACO] no ar\nFaca truques";
+                tutorialText.text = "[ESPAÇO] no ar\nFaca truques";
                 break;
             case 22:
-                tutorialText.text = "[ESPACO] no ar\nFaca truques";
+                tutorialText.text = "[ESPAÇO] no ar\nFaca truques";
                 break;
             case 24:
-                tutorialText.text = "[BOTAO ESQUERDO DO MOUSE]\nAtire nos 3 alvos";
+                tutorialText.text = "[BOTÃO ESQUERDO DO MOUSE]\nAtire nos 3 alvos";
                 break;
             default:
                 tutorialText.text = null;
