@@ -14,6 +14,7 @@ public class MovementTest2 : MonoBehaviour
     public float rotSpeed;
     private bool hasJumped;
     private bool wasFast = true;
+    private bool wasFastOnWater = true;
     private bool wasFalling = false;
     public float jumpForce;
     public bool isBraking = false;
@@ -218,7 +219,8 @@ public class MovementTest2 : MonoBehaviour
                     }
                 }
                 wasBoosting = false;
-                SFXManager.Instance.StopSFXLoop("boost");
+                SFXManager.Instance.StopSFXLoop("boost1");
+                SFXManager.Instance.StopSFXLoop("boost2");
             }
 
             //Faz personagem dar um pulo com barra de espaço.
@@ -495,6 +497,7 @@ public class MovementTest2 : MonoBehaviour
         {
             if (!wasOnWater)
             {
+                SFXManager.Instance.PlaySFXRandomPitch("quedaAgua");
                 for (int i = 0; i < waterLandParticleSystems.Length; i++)
                 {
                     waterLandParticleSystems[i].Play();
@@ -517,10 +520,25 @@ public class MovementTest2 : MonoBehaviour
                     waterRunEmissionModule.enabled = false;
                 }
             }
+
+            if (rb.velocity.magnitude >= maxMoveSpeed * 2 / 3 && wasFastOnWater)
+            {
+                SFXManager.Instance.StopSFXLoop("agua1");
+                SFXManager.Instance.PlaySFXLoop("agua2");
+                wasFastOnWater = false;
+            }
+            if (rb.velocity.magnitude < maxMoveSpeed * 2 / 3 && !wasFastOnWater)
+            {
+                SFXManager.Instance.PlaySFXLoop("agua1");
+                SFXManager.Instance.StopSFXLoop("agua2");
+                wasFastOnWater = true;
+            }
         }
         else
         {
             wasOnWater = false;
+            SFXManager.Instance.StopSFXLoop("agua1");
+            SFXManager.Instance.StopSFXLoop("agua2");
             for (int i = 0; i < waterRunParticleSystems.Length; i++)
             {
                 var waterRunEmissionModule = waterRunParticleSystems[i].emission;
@@ -846,7 +864,8 @@ public class MovementTest2 : MonoBehaviour
                     boostParticleSystems[i].Play();
                 }
             }
-            SFXManager.Instance.PlaySFXLoop("boost");
+            SFXManager.Instance.PlaySFXLoop("boost1");
+            SFXManager.Instance.PlaySFXLoop("boost2");
             SFXManager.Instance.PlaySFXRandomPitch("boost");
             wasBoosting = true;
         }

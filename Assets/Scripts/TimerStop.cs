@@ -17,7 +17,9 @@ public class TimerStop : MonoBehaviour
             //stop time
             FindObjectOfType<Timer>().runTime = false;
             //game state = win
-            GameManager.Instance.UpdateGameState(GameState.Win);
+            HealthBar playerHealth = collision.gameObject.GetComponent<HealthBar>();
+            if(playerHealth.health > 0) GameManager.Instance.UpdateGameState(GameState.Win);
+            else GameManager.Instance.UpdateGameState(GameState.Lose);
         }
     }
 }

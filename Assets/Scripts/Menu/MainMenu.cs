@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
     public UnityEvent audioScreenEvent;
     public UnityEvent skinsScreenEvent;
     public UnityEvent exitScreenEvent;
+    public UnityEvent tutorialScreenEvent;
   
     UITransitionManager uiTransitionManager;
     public CinemachineVirtualCamera titleCamera, mainCamera;
@@ -62,11 +63,6 @@ public class MainMenu : MonoBehaviour
         {
             levelToSelect = PlayerPrefs.GetInt("levelToSelect");
             levelSelectAnimator.SetInteger("level", levelToSelect);
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            LoadScene("Tutorial");
         }
     }
 
@@ -112,6 +108,10 @@ public class MainMenu : MonoBehaviour
 
             case "Exit":
                 menuState = MenuState.Exit;
+                break;
+
+            case "Tutorial":
+                menuState = MenuState.Tutorial;
                 break;
         }
         UpdateMenuState();
@@ -163,7 +163,20 @@ public class MainMenu : MonoBehaviour
             case MenuState.Exit:
                 exitScreenEvent.Invoke();
                 break;
+
+            case MenuState.Tutorial:
+                tutorialScreenEvent.Invoke();
+                break;
         }
+    }
+
+    public void TutorialCheck()
+    {
+        if (missionTokens == 0 && PlayerPrefs.GetInt("didTutorial") == 0)
+        {
+            ChangeMenuState("Tutorial");
+        }
+        else ChangeMenuState("Play");
     }
 
     public void ChangeLevel(int addOrSubtractOne)
@@ -285,6 +298,7 @@ public enum MenuState
     Audio,
     Skins,
     Credits,
-    Exit
+    Exit,
+    Tutorial
 }
 

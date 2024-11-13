@@ -17,7 +17,7 @@ public class MenuRadio : MonoBehaviour
     {
         if(menuManager.menuState == MenuState.Audio)
         {
-            if(PlayerPrefs.GetFloat("MasterVolume") * PlayerPrefs.GetFloat("MusicVolume") < 0.075f)
+            if(PlayerPrefs.GetFloat("MasterVolume") * PlayerPrefs.GetFloat("MusicVolume") < 0.01f)
             {
                 animator.SetBool("volumeIsZero", true);
             }
