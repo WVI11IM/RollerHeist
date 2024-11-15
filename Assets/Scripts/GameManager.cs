@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
     //collider switches to trigger when escaping
     public BoxCollider exitCollider;
 
-
-
     public GameState state;
 
     public static event Action<GameState> OnGameStateChange;
@@ -60,7 +58,6 @@ public class GameManager : MonoBehaviour
                 Resume(); 
             }
         }
-
     }
 
     public void UpdateGameState(GameState newState)

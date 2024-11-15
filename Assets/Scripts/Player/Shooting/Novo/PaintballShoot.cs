@@ -25,7 +25,7 @@ public class PaintballShoot : MonoBehaviour
     public float reloadTime = 3;
     private bool isReloading = false;
     private float lastShotTime = 0f;
-    private float cursorDisplayDuration = 0.1f;
+    private float cursorDisplayDuration = 0.05f;
     public Image ammoReloadMeter;
     public TextMeshProUGUI ammoText;
 
@@ -40,8 +40,10 @@ public class PaintballShoot : MonoBehaviour
     [Header("LAYER MASK AND VISUAL FEEDBACK")]
     public LayerMask hitAimMask;
     public GameObject aimHitReference;
+    [SerializeField] private Texture2D normalCursor;
     [SerializeField] private Texture2D canShootCursor;
     [SerializeField] private Texture2D isShootingCursor;
+    [SerializeField] private Texture2D cannotShootCursor;
 
     private MovementTest2 playerMovement;
 
@@ -73,92 +75,97 @@ public class PaintballShoot : MonoBehaviour
         }
 
         // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo. Tambem confere se jogo esta pausado ou foi finalizado
-        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && currentAmmo > 0 && Time.timeScale != 0 && GameManager.Instance.state != GameState.Win && GameManager.Instance.state != GameState.Lose)
+        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && Time.timeScale != 0 && GameManager.Instance.state != GameState.Win && GameManager.Instance.state != GameState.Lose)
         {
-            if (!startedShooting)
+            if (currentAmmo <= 0)
             {
-                shootStartTime = Time.time;
-                startedShooting = true;
-            }
-
-            Vector3 mousePosition = Input.mousePosition;
-
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
-            {
-                Vector3 direction = (hit.point - center.position);
-                direction.y = 0f;
-
-
-                // Get the character's forward direction
-                Vector3 forward = transform.forward;
-                forward.y = 0f;
-
-                // Calculate the angle between the character's forward direction and the direction to the hit point
-                float angle = Vector3.SignedAngle(forward, direction, Vector3.up);
-
-                // Normalize the angle to be within [0, 360)
-                angle = (angle + 360) % 360;
-
-                // Map the angle to the range [0, 1] for the animator parameter
-                float lookAngle = angle / 360f;
-
-                // Adjust the lookAngle to match the desired orientation
-                lookAngle = (lookAngle + 0.5f) % 1f;
-
-
-                animator.SetFloat("lookAngle", lookAngle);
-
-                targetLayerWeight = 1f;
-                animator.SetLayerWeight(1, 1);
-
-                ammoReloadMeter.gameObject.SetActive(true);
-                gun.SetActive(true);
-                Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
-                
-                if (Time.time < lastShotTime + cursorDisplayDuration)
-                {
-                    Cursor.SetCursor(isShootingCursor, new Vector2(isShootingCursor.width / 2, isShootingCursor.height / 2), CursorMode.Auto);
-                }
-                else
-                {
-                    Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
-                }
-
-                // Handle shooting
-                if (Time.time >= shootStartTime + 0.025f && Time.time >= nextFireTime)
-                {
-                    currentAmmo--;
-                    Shoot();
-
-                    lastShotTime = Time.time;
-                    // Define o tempo do próximo disparo adicionando o intervalo entre os tiros
-                    nextFireTime = Time.time + 1f / fireRate;
-                }
+                Cursor.SetCursor(cannotShootCursor, new Vector2(cannotShootCursor.width / 2, cannotShootCursor.height / 2), CursorMode.Auto);
             }
             else
             {
-                targetLayerWeight = 0f;
-
-                if (isReloading)
+                if (!startedShooting)
                 {
-                    if (playerMovement.isGrounded || playerMovement.isGrinding)
+                    shootStartTime = Time.time;
+                    startedShooting = true;
+                }
+                Vector3 mousePosition = Input.mousePosition;
+
+                Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
+                {
+                    Vector3 direction = (hit.point - center.position);
+                    direction.y = 0f;
+
+
+                    // Get the character's forward direction
+                    Vector3 forward = transform.forward;
+                    forward.y = 0f;
+
+                    // Calculate the angle between the character's forward direction and the direction to the hit point
+                    float angle = Vector3.SignedAngle(forward, direction, Vector3.up);
+
+                    // Normalize the angle to be within [0, 360)
+                    angle = (angle + 360) % 360;
+
+                    // Map the angle to the range [0, 1] for the animator parameter
+                    float lookAngle = angle / 360f;
+
+                    // Adjust the lookAngle to match the desired orientation
+                    lookAngle = (lookAngle + 0.5f) % 1f;
+
+
+                    animator.SetFloat("lookAngle", lookAngle);
+
+                    targetLayerWeight = 1f;
+                    animator.SetLayerWeight(1, 1);
+
+                    ammoReloadMeter.gameObject.SetActive(true);
+                    gun.SetActive(true);
+
+                    if (Time.time < lastShotTime + cursorDisplayDuration)
                     {
-                        targetLayerWeight = 1f;
-                        gun.SetActive(true);
+                        Cursor.SetCursor(isShootingCursor, new Vector2(isShootingCursor.width / 2, isShootingCursor.height / 2), CursorMode.Auto);
                     }
                     else
                     {
-                        gun.SetActive(false);
+                        Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
                     }
-                    ammoReloadMeter.gameObject.SetActive(true);
+
+                    // Handle shooting
+                    if (Time.time >= shootStartTime + 0.025f && Time.time >= nextFireTime)
+                    {
+                        currentAmmo--;
+                        Shoot();
+
+                        lastShotTime = Time.time;
+                        // Define o tempo do próximo disparo adicionando o intervalo entre os tiros
+                        nextFireTime = Time.time + 1f / fireRate;
+                    }
                 }
                 else
                 {
-                    ammoReloadMeter.gameObject.SetActive(false);
-                    gun.SetActive(false);
+                    targetLayerWeight = 0f;
+
+                    if (isReloading)
+                    {
+                        if (playerMovement.isGrounded || playerMovement.isGrinding)
+                        {
+                            targetLayerWeight = 1f;
+                            gun.SetActive(true);
+                        }
+                        else
+                        {
+                            gun.SetActive(false);
+                        }
+                        ammoReloadMeter.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        ammoReloadMeter.gameObject.SetActive(false);
+                        gun.SetActive(false);
+                    }
                 }
             }
         }
@@ -185,7 +192,7 @@ public class PaintballShoot : MonoBehaviour
                 gun.SetActive(false);
             }
             
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
         }
 
         // Smoothly transition the layer weight

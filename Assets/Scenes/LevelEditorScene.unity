@@ -1073,6 +1073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 66311028}
   - component: {fileID: 66311027}
+  - component: {fileID: 66311029}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1116,6 +1117,21 @@ Transform:
   m_Father: {fileID: 50349531}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &66311029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66311026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e03f6203dd444849936838d29f90ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalCursor: {fileID: 2800000, guid: 80488bd5e8a48e54ea894f49d2811d96, type: 3}
+  clickCursor: {fileID: 2800000, guid: a70ed6a5de8ebe34e80c917fd7f91bd6, type: 3}
+  isClicking: 0
 --- !u!1001 &67994090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108575,8 +108591,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   aimHitReference: {fileID: 182604462}
-  canShootCursor: {fileID: 6192944022281365145, guid: 778ac89ed9dd7ba4b9c5b1b442a4adff, type: 3}
-  isShootingCursor: {fileID: 6192944022281365145, guid: 61d9eda753ecbbc4aa0acc59f4cfaeb1, type: 3}
+  normalCursor: {fileID: 2800000, guid: 80488bd5e8a48e54ea894f49d2811d96, type: 3}
+  canShootCursor: {fileID: 2800000, guid: 14ed5332905bc0940be6b2dbb9c1e000, type: 3}
+  isShootingCursor: {fileID: 2800000, guid: b0d4298bf87d6bb41bf506ca214bab8c, type: 3}
+  cannotShootCursor: {fileID: 2800000, guid: 06e0731afced5864bb8aa0e798ca6836, type: 3}
 --- !u!81 &1565437298
 AudioListener:
   m_ObjectHideFlags: 0
