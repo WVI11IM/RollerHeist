@@ -11,14 +11,13 @@ public class ObjectiveUI : MonoBehaviour
     //conclusão dentro de fase
     public bool isCompleted;
 
-    public Image star;
-    Image box;
+    public Image wasCompleteIcon;
+    public Image isCompleteIcon;
 
     public TextMeshProUGUI objectiveText;
 
     void Start()
     {
-        box = GetComponent<Image>();
         CompleteObjective();
     }
 
@@ -34,27 +33,27 @@ public class ObjectiveUI : MonoBehaviour
 
     public void CompleteObjective()
     {
-        //Se o objetivo for completo já uma única vez, a estrela já é adquirida.
+        //Se o objetivo for completo já uma única vez, a estrela já é adquirida, porém aparece translúcida.
         if (wasCompleted)
         {
-            star.enabled = true;
+            wasCompleteIcon.enabled = true;
         }
         else
         {
-            star.enabled = false;
+            wasCompleteIcon.enabled = false;
         }
     }
 
     public void CompleteInScene()
     {
-        //Se o objetivo for completo dentro da fase, a caixa fica verde.
+        //Se o objetivo for completo dentro da fase, a estrela é adquirida.
         if (isCompleted)
         {
-            box.color = Color.green;
+            isCompleteIcon.enabled = true;
         }
         else
         {
-            //Manter cor de caixa padrão.
+            isCompleteIcon.enabled = false;
         }
     }
 }

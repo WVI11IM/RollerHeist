@@ -209,20 +209,20 @@ public class GameManager : MonoBehaviour
 
     private void CheckTimeScore()
     {
-        if (Timer.Instance.elapsedTime < PlayerPrefs.GetFloat("HighScore", 6039.999f))
+        if (Timer.Instance.elapsedTime < PlayerPrefs.GetFloat("Level" + levelNumber + "HighScore", 6039.999f))
         {
-            PlayerPrefs.SetFloat("HighScore", Timer.Instance.elapsedTime);
+            PlayerPrefs.SetFloat("Level" + levelNumber + "HighScore", Timer.Instance.elapsedTime);
         }
     }
 
     private void UpdateHighScore()
     {
-        Debug.Log(PlayerPrefs.GetFloat("HighScore"));
-        int minutes = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) / 60);
-        int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("HighScore", 0)) % 60);
-        int miliseconds = (int)((PlayerPrefs.GetFloat("HighScore", 0)) * 1000) % 1000;
+        Debug.Log(PlayerPrefs.GetFloat("Level" + levelNumber + "HighScore"));
+        int minutes = Mathf.FloorToInt((PlayerPrefs.GetFloat("Level" + levelNumber + "HighScore", 0)) / 60);
+        int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("Level" + levelNumber + "HighScore", 0)) % 60);
+        int miliseconds = (int)((PlayerPrefs.GetFloat("Level" + levelNumber + "HighScore", 0)) * 1000) % 1000;
         Debug.Log(minutes + ":" + seconds + ":" + miliseconds);
-        highScoreText.text = "Highscore: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+        highScoreText.text = "Tempo Recorde:\n" + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
     }
 
     IEnumerator GameOverPause()
