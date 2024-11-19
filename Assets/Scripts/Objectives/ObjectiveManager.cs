@@ -22,6 +22,8 @@ public class ObjectiveManager : MonoBehaviour
     [SerializeField] GameObject missionRailTime;
     public GameObject objectiveUI;
     public Transform objectiveUIList;
+    public GameObject pauseObjectiveList;
+    public Transform pauseObjectiveUIList;
     private string missionText;
 
     [Header("LEVEL DATA")]
@@ -52,6 +54,11 @@ public class ObjectiveManager : MonoBehaviour
         isGrinding = false;
         tricksNumber = 0;
         hasTakenDamage = false;
+        if (pauseObjectiveUIList != null && GameManager.Instance.levelNumber != 0 && objectiveList.Count > 0)
+        {
+            pauseObjectiveList.SetActive(true);
+        }
+        else pauseObjectiveList.SetActive(false);
 
         //Procura todos os itens secundários.
         bigItemCollected = 0;
@@ -70,6 +77,10 @@ public class ObjectiveManager : MonoBehaviour
         else mainObjectiveUIScript.wasCompleted = false;
         mainObjectiveUIScript.CompleteObjective();
         Instantiate(mainObjectiveUIObject, objectiveUIList);
+        if(pauseObjectiveUIList != null && GameManager.Instance.levelNumber != 0 && objectiveList.Count > 0)
+        {
+            Instantiate(mainObjectiveUIObject, pauseObjectiveUIList);
+        }
         mainObjectiveUIObject.transform.SetAsFirstSibling();
 
         //Define UI dos outros objetivos da fase.
@@ -126,6 +137,10 @@ public class ObjectiveManager : MonoBehaviour
             }
             else objectiveUIScript.wasCompleted = false;
             Instantiate(objectiveUIObject, objectiveUIList);
+            if (pauseObjectiveUIList != null && GameManager.Instance.levelNumber != 0 && objectiveList.Count > 0)
+            {
+                Instantiate(objectiveUIObject, pauseObjectiveUIList);
+            }
             mainObjectiveUIObject.transform.SetSiblingIndex(i + 1);
         }
 
@@ -133,6 +148,15 @@ public class ObjectiveManager : MonoBehaviour
         {
             ObjectiveUI script = objectiveUIList.GetChild(i).GetComponent<ObjectiveUI>();
             script.CompleteObjective();
+        }
+
+        if (pauseObjectiveUIList != null && GameManager.Instance.levelNumber != 0 && objectiveList.Count > 0)
+        {
+            for (int i = 0; i < pauseObjectiveUIList.childCount; i++)
+            {
+                ObjectiveUI script = pauseObjectiveUIList.GetChild(i).GetComponent<ObjectiveUI>();
+                script.CompleteObjective();
+            }
         }
     }
 

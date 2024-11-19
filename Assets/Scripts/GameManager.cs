@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleWin()
     {
+        canPause = false;
         SFXManager.Instance.PlayUISFX("missaoCumprida");
 
         //Stop Time
@@ -130,6 +131,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        canPause = false;
         uiAnimator.SetBool("gameIsOver", true);
         StartCoroutine(GameOverPause());
         MusicManager.Instance.StopAllLoopingMusic();
