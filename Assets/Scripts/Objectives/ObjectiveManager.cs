@@ -35,8 +35,8 @@ public class ObjectiveManager : MonoBehaviour
     public bool hasTakenDamage = false;
 
     [Header("COLLECTABLES DATA")]
-    public TextMeshProUGUI bigItem;
-    public TextMeshProUGUI smallItem;
+    public TextMeshProUGUI[] bigItemTexts;
+    public TextMeshProUGUI[] smallItemTexts;
     public float bigItemCollected;
     public float smallItensCollected;
     private float smallItensToCollect;
@@ -244,8 +244,14 @@ public class ObjectiveManager : MonoBehaviour
     void SetCollectables()
     {
         //Texto dos itens coletados.
-        bigItem.text = bigItemCollected + "/1";
-        smallItem.text = smallItensCollected + "/" + smallItensToCollect;
+        for (int i = 0; i < bigItemTexts.Length; i++)
+        {
+            bigItemTexts[i].text = bigItemCollected + "/1";
+        }
+        for (int i = 0; i < smallItemTexts.Length; i++)
+        {
+            smallItemTexts[i].text = smallItensCollected + "/" + smallItensToCollect;
+        }
     }
 
     public void GotItem()
