@@ -314,6 +314,7 @@ public class TutorialManager : MonoBehaviour
             tutorialEndUI.SetActive(true);
             AllowTutorialPause(false);
             PlayerPrefs.SetInt("didTutorial", 1);
+            PlayerPrefs.SetInt("justPlayedTutorial", 1);
         }
     }
 

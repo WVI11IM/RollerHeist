@@ -47,14 +47,30 @@ public class MainMenu : MonoBehaviour
         {
             ChangeMenuState("Title");
             PlayerPrefs.SetInt("titleScreenActivated", 1);
+            PlayerPrefs.SetInt("justPlayedLevel", 0);
+            PlayerPrefs.SetInt("justPlayedTutorial", 0);
         }
         else
         {
-            ChangeMenuState("Main");
+            if(PlayerPrefs.GetInt("justPlayedTutorial") == 1)
+            {
+                ChangeMenuState("Play");
+                PlayerPrefs.SetInt("justPlayedLevel", 0);
+                PlayerPrefs.SetInt("justPlayedTutorial", 0);
+            }
+            else if (PlayerPrefs.GetInt("justPlayedLevel") == 1)
+            {
+                ChangeMenuState("Levels");
+                PlayerPrefs.SetInt("justPlayedLevel", 0);
+                PlayerPrefs.SetInt("justPlayedTutorial", 0);
+            }
+            else
+            {
+                ChangeMenuState("Main");
+                PlayerPrefs.SetInt("justPlayedLevel", 0);
+                PlayerPrefs.SetInt("justPlayedTutorial", 0);
+            }
         }
-
-        //didTutorial
-        //completedLevel
     }
 
     private void Update()

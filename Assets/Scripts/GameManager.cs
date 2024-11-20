@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
     private void HandleWin()
     {
         canPause = false;
+        PlayerPrefs.SetInt("justPlayedLevel", 1);
         SFXManager.Instance.PlayUISFX("missaoCumprida");
 
         //Stop Time
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        PlayerPrefs.SetInt("justPlayedLevel", 0);
         SFXManager.Instance.PlayUISFX("play");
         AudioListener.pause = false;
         Time.timeScale = 1f;

@@ -24,10 +24,12 @@ public class ObjectiveUI : MonoBehaviour
     void Update()
     {
         CompleteInScene();
-
-        if (GameManager.Instance.state == GameState.Win)
+        if(GameManager.Instance != null)
         {
-            CompleteObjective();
+            if (GameManager.Instance.state == GameState.Win)
+            {
+                CompleteObjective();
+            }
         }
     }
 
