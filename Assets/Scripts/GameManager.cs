@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
         SFXManager.Instance.StopAllLoopingSFX();
 
         UpdateHighScore();
+        PlayerPrefs.Save();
 
         //Freeze time
         AudioListener.pause = true;

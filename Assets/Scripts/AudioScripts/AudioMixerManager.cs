@@ -31,6 +31,11 @@ public class AudioMixerManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void OnDestroy()
     {
         if (Instance == this)
@@ -41,7 +46,16 @@ public class AudioMixerManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        LoadVolumes();
+        if (PlayerPrefs.GetInt("alreadyPlayed") == 0)
+        {
+            PlayerPrefs.SetInt("alreadyPlayed", 1);
+            SetMasterVolume(0.75f);
+            SetMusicVolume(0.75f);
+            SetSFXVolume(0.75f);
+            PlayerPrefs.Save();
+        }
+        else LoadVolumes();
+
         UpdateSliders();
     }
 
