@@ -25,6 +25,7 @@ public class ObjectiveManager : MonoBehaviour
     public GameObject pauseObjectiveList;
     public Transform pauseObjectiveUIList;
     private string missionText;
+    public GameObject medal;
 
     [Header("LEVEL DATA")]
     public int defeatedEnemies = 0;
@@ -223,7 +224,12 @@ public class ObjectiveManager : MonoBehaviour
                 if (completedObjectives >= 4)
                 {
                     PlayerPrefs.SetInt("Level" + GameManager.Instance.levelNumber + "Mission6", 1);
+                    if(GameManager.Instance.levelNumber != 0)
+                    {
+                        if (medal != null) medal.SetActive(true);
+                    }
                 }
+                else if (medal != null) medal.SetActive(false);
             }
         }
 
