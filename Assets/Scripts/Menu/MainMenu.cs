@@ -191,6 +191,7 @@ public class MainMenu : MonoBehaviour
         if (missionTokens == 0 && PlayerPrefs.GetInt("didTutorial") == 0)
         {
             ChangeMenuState("Tutorial");
+            SFXManager.Instance.PlayUISFX("woosh2");
         }
         else ChangeMenuState("Play");
     }

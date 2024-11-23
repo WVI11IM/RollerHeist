@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2208851286088966799}
   - component: {fileID: 2208851286088966833}
   - component: {fileID: 2208851286088966832}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Gong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2817198830999594762}
   - component: {fileID: 2817198830999594761}
   - component: {fileID: 2817198830999594760}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Gongo1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73413,9 +73413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundName:
-  - bumpMetal1
-  - bumpMetal2
-  - bumpMetal4
+  - bumpGongo
   soundCooldown: 1
 --- !u!1 &5737089235293171681
 GameObject:
@@ -73429,7 +73427,7 @@ GameObject:
   - component: {fileID: 8321024260908956414}
   - component: {fileID: 6097522272609914420}
   - component: {fileID: 8321024260908956415}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GongSupport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92395,8 +92393,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7356262158491914023}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -70, y: -7, z: 35}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -92404,4 +92402,4 @@ Transform:
   - {fileID: 4960131079096612187}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

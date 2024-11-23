@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5210865686416911970}
   - component: {fileID: 6023487659139120203}
   - component: {fileID: 8811047905309136311}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Umbrella3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,6 +167,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e001866f63825a74c9cf458575d98650, type: 3}
       propertyPath: m_Name
       value: GuardaChuva
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e001866f63825a74c9cf458575d98650, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e001866f63825a74c9cf458575d98650, type: 3}

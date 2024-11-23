@@ -164,6 +164,7 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         SFXManager.Instance.PlayUISFX("negativo1");
+        SFXManager.Instance.PlayUISFX("woosh2");
         pausePanel.SetActive(true);
         isPaused = true;
         AudioMixerManager.Instance.UpdateSliders();
@@ -187,6 +188,7 @@ public class GameManager : MonoBehaviour
         if(pauseAnimator.GetBool("audioOpen") == false)
         {
             SFXManager.Instance.PlayUISFX("positivo1");
+            SFXManager.Instance.PlayUISFX("woosh1");
             pauseAnimator.SetBool("controlsOpen", false);
             pauseAnimator.SetBool("audioOpen", true);
         }
@@ -201,6 +203,7 @@ public class GameManager : MonoBehaviour
         if (pauseAnimator.GetBool("controlsOpen") == false)
         {
             SFXManager.Instance.PlayUISFX("positivo1");
+            SFXManager.Instance.PlayUISFX("woosh1");
             pauseAnimator.SetBool("audioOpen", false);
             pauseAnimator.SetBool("controlsOpen", true);
         }

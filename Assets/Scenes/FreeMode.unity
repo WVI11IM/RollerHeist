@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 67c3d768e4d618d41b6347e4ba2dd954, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: d8cf5311a60228c4ebc2ce4ada85cfe1, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 9bc369b3da4578f42b47095b9ea45a26, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 56f704f5cc37cfd47b17d689524c81f0, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -39710,6 +39710,7 @@ MonoBehaviour:
   objectiveUIList: {fileID: 173895238}
   pauseObjectiveList: {fileID: 1402174201}
   pauseObjectiveUIList: {fileID: 1783233465}
+  medal: {fileID: 0}
   defeatedEnemies: 0
   hasGivenDamage: 0
   railTime: 0
@@ -79317,7 +79318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.65, y: 0}
   m_AnchorMax: {x: 0.95000005, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1021090230
@@ -118104,6 +118105,21 @@ MonoBehaviour:
     volumeModifier: 0.5
     minPitch: 0.95
     maxPitch: 1.05
+  - soundEffectName: bumpTaiko
+    soundClip: {fileID: 8300000, guid: 580629fd34c1576409666256de755f95, type: 3}
+    volumeModifier: 0.8
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpSino
+    soundClip: {fileID: 8300000, guid: e485228fce3ca4342978cfe370f63b88, type: 3}
+    volumeModifier: 0.35
+    minPitch: 0.95
+    maxPitch: 1.05
+  - soundEffectName: bumpGongo
+    soundClip: {fileID: 8300000, guid: 9fb626f61c1ba2946b0774db14d150e6, type: 3}
+    volumeModifier: 0.6
+    minPitch: 0.95
+    maxPitch: 1.05
   uiSoundEffects:
   - soundEffectName: play
     soundClip: {fileID: 8300000, guid: 5655fc01ecea9e642a67158196ad319d, type: 3}
@@ -118120,6 +118136,9 @@ MonoBehaviour:
   - soundEffectName: positivo2
     soundClip: {fileID: 8300000, guid: 26f77dfd1226139489701d2eea7f9479, type: 3}
     volumeModifier: 0.6
+  - soundEffectName: positivo3
+    soundClip: {fileID: 8300000, guid: 268cda84e017ba946aa2e210835fcd46, type: 3}
+    volumeModifier: 1
   - soundEffectName: gameOver
     soundClip: {fileID: 8300000, guid: 0b37275052c098c43aecfc4d1217f9df, type: 3}
     volumeModifier: 0.4
@@ -118135,6 +118154,18 @@ MonoBehaviour:
   - soundEffectName: tutorialPositivo1
     soundClip: {fileID: 8300000, guid: 3785a18d62a6e724d98a5f174c141b5f, type: 3}
     volumeModifier: 0.5
+  - soundEffectName: woosh1
+    soundClip: {fileID: 8300000, guid: b31fec79966cfdf47ab1b8ebdb24f244, type: 3}
+    volumeModifier: 1
+  - soundEffectName: woosh2
+    soundClip: {fileID: 8300000, guid: aedfc54b1268ab64ea678ad620e96b99, type: 3}
+    volumeModifier: 1
+  - soundEffectName: woosh3
+    soundClip: {fileID: 8300000, guid: b487dea11186e784780eede439cfbc67, type: 3}
+    volumeModifier: 1
+  - soundEffectName: papel
+    soundClip: {fileID: 8300000, guid: b571ecd479f3311409398233462367dc, type: 3}
+    volumeModifier: 1
 --- !u!1001 &1813184012
 PrefabInstance:
   m_ObjectHideFlags: 0
