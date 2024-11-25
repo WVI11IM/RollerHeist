@@ -57,14 +57,45 @@ public class GlassBreak : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.CompareTag("Projetil") || (other.gameObject.CompareTag("Player") &&
-            other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= other.gameObject.GetComponent<MovementTest2>().maxMoveSpeed / 2)) &&
+        if ((other.gameObject.CompareTag("Player") &&
+            other.gameObject.GetComponent<Rigidbody>().velocity.magnitude >= other.gameObject.GetComponent<MovementTest2>().maxMoveSpeed / 2) &&
             !isBroken)
         {
             brokenGlass.SetActive(true);
             normalGlass.SetActive(false);
             isBroken = true;
             StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
+        }
+
+        else if (other.gameObject.CompareTag("Projetil") &&
+            !isBroken)
+        {
+            Debug.Log("entered projectile");
+            if (other.GetComponent<Projetil>() != null)
+            {
+                other.GetComponent<Projetil>().ParticlesAndDestroy();
+                brokenGlass.SetActive(true);
+                normalGlass.SetActive(false);
+                isBroken = true;
+                StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Projetil") &&
+            !isBroken)
+        {
+            Debug.Log("entered projectile");
+            if (other.GetComponent<Projetil>() != null)
+            {
+                other.GetComponent<Projetil>().ParticlesAndDestroy();
+                brokenGlass.SetActive(true);
+                normalGlass.SetActive(false);
+                isBroken = true;
+                StartCoroutine(DestroyGlassAfterDelay(destructionDelay));
+            }
         }
     }
 
