@@ -18,4 +18,10 @@ public class PropPositionLock : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
         }
     }
+
+    public void LockRigidbodyConstraints(bool isLocked)
+    {
+        if(isLocked) rb.constraints = RigidbodyConstraints.FreezeAll;
+        else rb.constraints = RigidbodyConstraints.None;
+    }
 }
