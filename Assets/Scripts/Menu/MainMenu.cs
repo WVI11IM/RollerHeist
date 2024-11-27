@@ -33,6 +33,8 @@ public class MainMenu : MonoBehaviour
     public Animator levelSelectAnimator;
     public Animator menuOptionsAnimator;
     public TextMeshProUGUI tokenText;
+    public TextMeshProUGUI medalText;
+    public GameObject medalInfoButton;
 
     private void Start()
     {
@@ -289,6 +291,11 @@ public class MainMenu : MonoBehaviour
             {
                 levelMedals++;
             }
+        }
+        medalText.text = levelMedals + " / " + numberOfLevels;
+        if(levelMedals >= 2)
+        {
+            medalInfoButton.SetActive(false);
         }
     }
     public void Quit()
