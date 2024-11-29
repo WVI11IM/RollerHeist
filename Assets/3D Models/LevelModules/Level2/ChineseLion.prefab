@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2238123573023611154}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ChineseLion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 627093617948419070}
   - component: {fileID: 1478335416321283064}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,8 +162,16 @@ PrefabInstance:
       value: ChineseLion
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e68d976b7fdc2cd46837e03dce514c3c, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e68d976b7fdc2cd46837e03dce514c3c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e68d976b7fdc2cd46837e03dce514c3c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e68d976b7fdc2cd46837e03dce514c3c, type: 3}

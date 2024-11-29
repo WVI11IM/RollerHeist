@@ -35,6 +35,8 @@ public class MainMenu : MonoBehaviour
     public TextMeshProUGUI tokenText;
     public TextMeshProUGUI medalText;
     public GameObject medalInfoButton;
+    public TextMeshProUGUI levelTimeRecordText;
+    public TextMeshProUGUI museumName;
 
     private void Start()
     {
@@ -203,6 +205,40 @@ public class MainMenu : MonoBehaviour
         levelToSelect += addOrSubtractOne;
         levelToSelect = Mathf.Clamp(levelToSelect, 1, 3);
         PlayerPrefs.SetInt("levelToSelect", levelToSelect);
+
+        UpdateHighscoreText();
+        UpdateMuseumName();
+    }
+
+    public void UpdateHighscoreText()
+    {
+        if (PlayerPrefs.GetFloat("Level" + levelToSelect + "HighScore", 6039.999f) < 6039.999f)
+        {
+            int minutes = Mathf.FloorToInt((PlayerPrefs.GetFloat("Level" + levelToSelect + "HighScore", 0)) / 60);
+            int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("Level" + levelToSelect + "HighScore", 0)) % 60);
+            int miliseconds = (int)((PlayerPrefs.GetFloat("Level" + levelToSelect + "HighScore", 0)) * 1000) % 1000;
+            levelTimeRecordText.text = "Recorde: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+        }
+        else
+        {
+            levelTimeRecordText.text = "Recorde: --:--:---";
+        }
+    }
+
+    public void UpdateMuseumName()
+    {
+        switch (levelToSelect)
+        {
+            case 1:
+                museumName.text = "Museu de História Natural";
+                break;
+            case 2:
+                museumName.text = "Museu de Cultura Oriental";
+                break;
+            case 3:
+                museumName.text = "?????";
+                break;
+        }
     }
 
     public void LoadLevelSelection()
@@ -216,10 +252,8 @@ public class MainMenu : MonoBehaviour
             levelToSelect = PlayerPrefs.GetInt("levelToSelect");
         }
 
-        if (PlayerPrefs.GetInt("didTutorial") == 0)
-        {
-            //ask about tutorial
-        }
+        UpdateHighscoreText();
+        UpdateMuseumName();
     }
 
     public void SelectLevel()
@@ -298,6 +332,14 @@ public class MainMenu : MonoBehaviour
             medalInfoButton.SetActive(false);
         }
     }
+
+    public void ClearData()
+    {
+        PlayerPrefs.DeleteAll();
+        LoadScene("Intro");
+
+    }
+
     public void Quit()
     {
         MusicManager.Instance.StopAllLoopingMusic();

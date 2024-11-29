@@ -48,12 +48,25 @@ public class MissionGlassBreaks : MonoBehaviour
     {
         for (int i = 0; i < glassPanelsList.Count; i++)
         {
-            if (glassPanelsList[i].GetComponent<GlassBreak>().isBroken)
+            if (glassPanelsList[i].GetComponent<GlassBreak>() != null)
             {
-                glassPanelsList.Remove(glassPanelsList[i]);
-                brokenGlassPanels++;
-                Debug.Log("glass was break");
+                if (glassPanelsList[i].GetComponent<GlassBreak>().isBroken)
+                {
+                    glassPanelsList.Remove(glassPanelsList[i]);
+                    //brokenGlassPanels++;
+                    Debug.Log("glass was break");
+                }
             }
+            else if (glassPanelsList[i].GetComponent<DisplayCaseBreak>() != null)
+            {
+                if (glassPanelsList[i].GetComponent<DisplayCaseBreak>().isBroken)
+                {
+                    glassPanelsList.Remove(glassPanelsList[i]);
+                    //brokenGlassPanels++;
+                    Debug.Log("glass was break");
+                }
+            }
+
         }
 
         brokenGlassPanels = totalGlassScene - glassPanelsList.Count;
