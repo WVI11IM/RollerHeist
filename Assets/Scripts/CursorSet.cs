@@ -8,6 +8,11 @@ public class CursorSet : MonoBehaviour
 
     public bool isClicking = false;
 
+    private void Start()
+    {
+        SetCursor(normalCursor);
+    }
+
     void Update()
     {
         // Handle cursor update when game is not paused
