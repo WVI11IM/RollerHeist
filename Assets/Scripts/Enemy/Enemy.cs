@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     private bool canDamage = true;
     public float damage = 10f;
     public float lookAngle = 0.5f;
+    private float updateDestinationTimer = 0f;
 
     [SerializeField] Animator animator;
     [SerializeField] SkinnedMeshRenderer[] sMR;
@@ -73,7 +74,7 @@ public class Enemy : MonoBehaviour
                 break;
             case "Mallcop":
                 animator.SetInteger("enemyType", 2);
-                enemy.avoidancePriority = 0;
+                //enemy.avoidancePriority = 0;
                 enemy.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
                 break;
             case "Shield":
@@ -368,7 +369,13 @@ public class Enemy : MonoBehaviour
             enemy.SetDestination(new Vector3(player.position.x, transform.position.y, player.position.z));
         }
         */
-        enemy.SetDestination(player.position);
+
+        updateDestinationTimer -= Time.deltaTime;
+        if (updateDestinationTimer <= 0f)
+        {
+            enemy.SetDestination(player.position);
+            updateDestinationTimer = 0.5f;
+        }
 
         enemy.speed = enemyType.runSpeed;
         enemy.updateRotation = true;
@@ -379,7 +386,12 @@ public class Enemy : MonoBehaviour
 
         isAttacking = true;
         isDefending = false;
-        enemy.speed = 0;
+
+        if (enemyType.enemyName != "Mallcop")
+        {
+            enemy.speed = 0;
+        }
+
         enemy.updateRotation = false;
 
         if (enemyType.enemyName == "Guard")

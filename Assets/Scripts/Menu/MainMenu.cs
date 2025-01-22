@@ -38,6 +38,8 @@ public class MainMenu : MonoBehaviour
     public TextMeshProUGUI levelTimeRecordText;
     public TextMeshProUGUI museumName;
 
+    private SceneLoader sceneLoader;
+
     private void Start()
     {
         CheckMissionTokens();
@@ -75,6 +77,8 @@ public class MainMenu : MonoBehaviour
                 PlayerPrefs.SetInt("justPlayedTutorial", 0);
             }
         }
+
+        sceneLoader = GetComponent<SceneLoader>();
     }
 
     private void Update()
@@ -277,10 +281,10 @@ public class MainMenu : MonoBehaviour
             switch (levelToSelect)
             {
                 case 1:
-                    LoadScene("Level1");
+                    sceneLoader.LoadScene("Level1");
                     break;
                 case 2:
-                    LoadScene("Level2");
+                    sceneLoader.LoadScene("Level2");
                     break;
                 case 3:
                     break;
@@ -288,11 +292,13 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    /*
     public void PlayGame()
     {
         MusicManager.Instance.StopAllLoopingMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    */
 
     public void LoadScene(string sceneName)
     {
