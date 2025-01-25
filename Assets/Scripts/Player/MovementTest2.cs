@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 public class MovementTest2 : MonoBehaviour
 {
     public Animator animator;
+    private InputManager inputManager;
 
     [Header("PLAYER PROPERTIES")]
+    private float signedAngle = 0;
     public float acceleration;
     public float maxMoveSpeed;
     public float rotSpeed;
@@ -121,8 +124,10 @@ public class MovementTest2 : MonoBehaviour
         //Application.targetFrameRate = 60;
     }
 
+
     void Start()
     {
+        inputManager = GetComponent<InputManager>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         capsuleCollider.material = groundedCharacterPhysicMaterial;
         rb = GetComponent<Rigidbody>();
@@ -196,13 +201,13 @@ public class MovementTest2 : MonoBehaviour
         if (canInput)
         {
             //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
-            if (Input.GetKey(KeyCode.LeftShift) && boostValue > 0 && isGrounded && !isGrinding && !isBraking && !failedTrick)
+            if (inputManager.isHoldingBoost && boostValue > 0 && isGrounded && !isGrinding && !isBraking && !failedTrick)
             {
                 Boost();
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded && !isGrinding && !isBraking && !failedTrick)
+                if (inputManager.IsBoostFirstFrame() && isGrounded && !isGrinding && !isBraking && !failedTrick)
                 {
                     boostBarAnimator.SetTrigger("valueEmpty");
                     SFXManager.Instance.PlaySFXRandomPitch("boostVazio1");
@@ -224,7 +229,7 @@ public class MovementTest2 : MonoBehaviour
             }
 
             //Faz personagem dar um pulo com barra de espaço.
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping && !isGrinding && !failedTrick && Time.timeScale != 0)
+            if (inputManager.IsJumpTrickFirstFrame() && isGrounded && !isJumping && !isGrinding && !failedTrick && Time.timeScale != 0)
             {
                 Jump();
             }
@@ -234,7 +239,7 @@ public class MovementTest2 : MonoBehaviour
             RaycastHit hit2;
             bool isHit1 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit1, minDistForTrick, floorLayerMask);
             bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit2, minDistForTrick, floorLayerMask);
-            if (Input.GetKey(KeyCode.Space) && !isGrounded && !isHit1 && !isHit2 && rb.velocity.magnitude >= maxMoveSpeed / 2 && Time.timeScale != 0)
+            if (inputManager.isHoldingJumpTrick && !isGrounded && !isHit1 && !isHit2 && rb.velocity.magnitude >= maxMoveSpeed / 2 && Time.timeScale != 0)
             {
                 if (Time.time > nextActionTime)
                 {
@@ -248,7 +253,8 @@ public class MovementTest2 : MonoBehaviour
             {
                 //TESTE CLIQUE DUPLO
 
-                if (Input.GetKeyDown(KeyCode.A) && isGrounded && !isGrinding)
+
+                if (inputManager.IsNegativeRotationFirstFrame() && isGrounded && !isGrinding)
                 {
                     if (Time.time - lastATapTime <= doubleATapTimeThreshold)
                     {
@@ -257,7 +263,7 @@ public class MovementTest2 : MonoBehaviour
                     }
                     lastATapTime = Time.time;
                 }
-                if (Input.GetKeyDown(KeyCode.D) && isGrounded && !isGrinding)
+                if (inputManager.IsPositiveRotationFirstFrame() && isGrounded && !isGrinding)
                 {
                     if (Time.time - lastDTapTime <= doubleDTapTimeThreshold)
                     {
@@ -267,19 +273,34 @@ public class MovementTest2 : MonoBehaviour
                     lastDTapTime = Time.time;
                 }
 
-                //TESTE SHIFT
-                /*
-                if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.D) && isGrounded && !isGrinding)
+                //TESTE DRIFT CONTROLE 
+                if (inputManager.defaultMap == DefaultMap.ControlsRotation)
                 {
-                    isDriftingA = true;
-                    isDriftingD = false;
+                    if (inputManager.isHoldingDrift && inputManager.rotationDirection == -1 && isGrounded && !isGrinding)
+                    {
+                        isDriftingA = true;
+                        isDriftingD = false;
+                    }
+                    else if (inputManager.isHoldingDrift && inputManager.rotationDirection == 1 && isGrounded && !isGrinding)
+                    {
+                        isDriftingA = false;
+                        isDriftingD = true;
+                    }
                 }
-                else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.A) && isGrounded && !isGrinding)
+                else if (inputManager.defaultMap == DefaultMap.ControlsDirection)
                 {
-                    isDriftingA = false;
-                    isDriftingD = true;
+                    if (inputManager.isHoldingDrift && SignedAngleForControlsDirection() < 0 && signedAngle < -45f && isGrounded && !isGrinding)
+                    {
+                        isDriftingA = true;
+                        isDriftingD = false;
+                    }
+                    else if (inputManager.isHoldingDrift && SignedAngleForControlsDirection() > 0 && signedAngle > 45f && isGrounded && !isGrinding)
+                    {
+                        isDriftingA = false;
+                        isDriftingD = true;
+                    }
                 }
-                */
+                    
             }
 
             animator.SetBool("isDriftingD", isDriftingD);
@@ -288,71 +309,142 @@ public class MovementTest2 : MonoBehaviour
             //Variável local de rotação.
             float rotation;
 
-            //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
-            if (isDriftingA && isGrounded && Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
+            if (inputManager.defaultMap == DefaultMap.ControlsRotation)
             {
-                isDrifting = true;
-                rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-                for (int i = 0; i < driftParticleSystems.Length; i++)
+                //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
+                if (isDriftingA && isGrounded && inputManager.rotationDirection < 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
                 {
-                    var emissionModule = driftParticleSystems[i].emission;
-                    emissionModule.enabled = true;
+                    isDrifting = true;
+                    rotation = inputManager.rotationDirection * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    for (int i = 0; i < driftParticleSystems.Length; i++)
+                    {
+                        var emissionModule = driftParticleSystems[i].emission;
+                        emissionModule.enabled = true;
+                    }
                 }
-            }
-            else if (isDriftingD && isGrounded && Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
-            {
-                isDrifting = true;
-                rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-                for (int i = 0; i < driftParticleSystems.Length; i++)
+                else if (isDriftingD && isGrounded && inputManager.rotationDirection > 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
                 {
-                    var emissionModule = driftParticleSystems[i].emission;
-                    emissionModule.enabled = true;
+                    isDrifting = true;
+                    rotation = inputManager.rotationDirection * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    for (int i = 0; i < driftParticleSystems.Length; i++)
+                    {
+                        var emissionModule = driftParticleSystems[i].emission;
+                        emissionModule.enabled = true;
+                    }
                 }
-            }
-            else
-            {
-                isDrifting = false;
-                isDriftingA = false;
-                isDriftingD = false;
-                for (int i = 0; i < driftParticleSystems.Length; i++)
+                else
                 {
-                    var emissionModule = driftParticleSystems[i].emission;
-                    emissionModule.enabled = false;
+                    isDrifting = false;
+                    isDriftingA = false;
+                    isDriftingD = false;
+                    for (int i = 0; i < driftParticleSystems.Length; i++)
+                    {
+                        var emissionModule = driftParticleSystems[i].emission;
+                        emissionModule.enabled = false;
+                    }
+
+                    //Caso personagem esteja no ar, rotação será reduzida.
+                    if (!isGrounded) rotation = inputManager.rotationDirection * rotSpeed / 2 * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+
+                    //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
+                    else rotation = inputManager.rotationDirection * rotSpeed * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
                 }
 
-                //Caso personagem esteja no ar, rotação será reduzida.
-                if (!isGrounded) rotation = Input.GetAxis("Horizontal") * rotSpeed / 2 * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-
-                //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
-                else rotation = Input.GetAxis("Horizontal") * rotSpeed * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-            }
-
-            if (isDrifting && !wasDrifting)
-            {
-                wasDrifting = true;
-                SFXManager.Instance.PlaySFXLoop("drift");
-            }
-            else if(!isDrifting && wasDrifting)
-            {
-                wasDrifting = false;
-                SFXManager.Instance.StopSFXLoop("drift");
-            }
-
-            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
-            {
-                rotation = 0;
-                if (isGrounded && !isGrinding)
+                if (isDrifting && !wasDrifting)
                 {
-                    isBraking = true;
+                    wasDrifting = true;
+                    SFXManager.Instance.PlaySFXLoop("drift");
                 }
-            }
-            else
-            {
-                isBraking = false;
+                else if (!isDrifting && wasDrifting)
+                {
+                    wasDrifting = false;
+                    SFXManager.Instance.StopSFXLoop("drift");
+                }
+
+                if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+                {
+                    rotation = 0;
+                    if (isGrounded && !isGrinding)
+                    {
+                        isBraking = true;
+                    }
+                }
+                else
+                {
+                    isBraking = false;
+                }
+                //Rotaciona o personagem a partir da variável "rotation".
+                transform.eulerAngles += new Vector3(0, rotation, 0);
             }
 
-            //Rotaciona o personagem a partir da variável "rotation".
-            transform.eulerAngles += new Vector3(0, rotation, 0);
+            else if (inputManager.defaultMap == DefaultMap.ControlsDirection)
+            {
+                //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
+                if (isDriftingA && isGrounded && SignedAngleForControlsDirection() < 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
+                {
+                    isDrifting = true;
+                    rotation = SignedAngleForControlsDirection() * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    for (int i = 0; i < driftParticleSystems.Length; i++)
+                    {
+                        var emissionModule = driftParticleSystems[i].emission;
+                        emissionModule.enabled = true;
+                    }
+                }
+                else if (isDriftingD && isGrounded && SignedAngleForControlsDirection() > 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
+                {
+                    isDrifting = true;
+                    rotation = SignedAngleForControlsDirection() * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    for (int i = 0; i < driftParticleSystems.Length; i++)
+                    {
+                        var emissionModule = driftParticleSystems[i].emission;
+                        emissionModule.enabled = true;
+                    }
+                }
+                else
+                {
+                    isDrifting = false;
+                    isDriftingA = false;
+                    isDriftingD = false;
+                    for (int i = 0; i < driftParticleSystems.Length; i++)
+                    {
+                        var emissionModule = driftParticleSystems[i].emission;
+                        emissionModule.enabled = false;
+                    }
+
+                    //Caso personagem esteja no ar, rotação será reduzida.
+                    if (!isGrounded) rotation = SignedAngleForControlsDirection() * rotSpeed / 2 * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+
+                    //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
+                    else rotation = SignedAngleForControlsDirection() * rotSpeed * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    
+                }
+
+                if (isDrifting && !wasDrifting)
+                {
+                    wasDrifting = true;
+                    SFXManager.Instance.PlaySFXLoop("drift");
+                }
+                else if (!isDrifting && wasDrifting)
+                {
+                    wasDrifting = false;
+                    SFXManager.Instance.StopSFXLoop("drift");
+                }
+
+                if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+                {
+                    rotation = 0;
+                    if (isGrounded && !isGrinding)
+                    {
+                        isBraking = true;
+                    }
+                }
+                else
+                {
+                    isBraking = false;
+                }
+                //Rotaciona o personagem a partir da variável "rotation".
+                transform.eulerAngles += new Vector3(0, rotation, 0);
+            }
         }
 
         if(rb.velocity.magnitude >= maxMoveSpeed * 2 / 3 && wasFast)
@@ -475,8 +567,6 @@ public class MovementTest2 : MonoBehaviour
                         impulseSource.GenerateImpulse();
                         StartCoroutine(ResetFailedTrickFlag());
                     }
-                    //Debug.Log(Time.time - (nextActionTime - trickCooldown / 4));
-                    //Debug.Log(animator.GetFloat("trickTimer"));
                     float trickTimer = Time.time - (nextActionTime - trickCooldown / 4);
                     animator.SetFloat("trickTimer", trickTimer);
                     animator.SetTrigger("landed");
@@ -549,7 +639,7 @@ public class MovementTest2 : MonoBehaviour
         //Se personagem estiver não estiver no chão, força para baixo é aplicada.
         if (!isGrounded && !isGrinding)
         {
-            rb.AddForce(Vector3.down * 20f);
+            rb.AddForce(Vector3.down * 22.5f);
         }
 
         Vector3 directionFront = new Vector3(0, 0, 1);
@@ -572,7 +662,7 @@ public class MovementTest2 : MonoBehaviour
                 //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
                 if (isDriftingA || isDriftingD)
                 {
-                    rb.velocity *= 0.99f;
+                    rb.velocity *= 0.985f;
                     Vector3 driftForce = isDriftingA ? -directionSides : directionSides;
                     if(Mathf.Abs(rb.velocity.x) <= maxMoveSpeed)
                     {
@@ -584,10 +674,21 @@ public class MovementTest2 : MonoBehaviour
                 {
                     if (!isBraking && Mathf.Abs(rb.velocity.x) <= maxMoveSpeed)
                     {
-                        rb.AddForce(directionSides * Input.GetAxis("Horizontal") * ((acceleration / 2.5f) * (rb.velocity.magnitude / maxMoveSpeed)));
-                        if (Input.GetAxis("Horizontal") != 0)
+                        if(inputManager.defaultMap == DefaultMap.ControlsRotation)
                         {
-                            rb.AddForce(-directionFront * acceleration / 5);
+                            rb.AddForce(directionSides * inputManager.rotationDirection * ((acceleration / 2.5f) * (rb.velocity.magnitude / maxMoveSpeed)));
+                            if (inputManager.rotationDirection != 0)
+                            {
+                                rb.AddForce(-directionFront * acceleration / 5);
+                            }
+                        }
+                        else if (inputManager.defaultMap == DefaultMap.ControlsDirection)
+                        {
+                            rb.AddForce(directionSides * SignedAngleForControlsDirection() * ((acceleration / 2.5f) * (rb.velocity.magnitude / maxMoveSpeed)));
+                            if (inputManager.rotationDirection != 0)
+                            {
+                                rb.AddForce(-directionFront * acceleration / 5);
+                            }
                         }
                     }
                 }
@@ -767,6 +868,35 @@ public class MovementTest2 : MonoBehaviour
         }
     }
 
+    public int SignedAngleForControlsDirection()
+    {
+        Vector2 joystickInput = inputManager.moveDirection;
+        if (joystickInput.magnitude > 0.25f)
+        {
+            Vector3 cameraForward = Camera.main.transform.forward;
+            Vector3 cameraRight = Camera.main.transform.right;
+
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            Vector3 worldDirection = (cameraRight * joystickInput.x + cameraForward * joystickInput.y).normalized;
+
+            Vector3 currentForward = transform.forward;
+            currentForward.y = 0;
+            currentForward.Normalize();
+            float angle = Vector3.SignedAngle(currentForward, worldDirection, Vector3.up);
+            signedAngle = angle;
+
+
+            if (angle > 5) return 1; // Rotate clockwise
+            else if (angle < -5) return -1; // Rotate counterclockwise
+            else return 0; // No significant rotation needed
+        }
+        else return 0;
+    }
+
     public void Jump()
     {
         isJumping = true;
@@ -803,7 +933,6 @@ public class MovementTest2 : MonoBehaviour
     {
         isTricking = true;
 
-        Debug.Log("TRICK!!");
         ObjectiveManager.Instance.tricksNumber++;
         trickNumber = Random.Range(0, 12);
         animator.SetInteger("trickNumber", trickNumber);

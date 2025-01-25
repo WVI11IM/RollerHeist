@@ -7,6 +7,8 @@ using TMPro;
 
 public class PaintballShoot : MonoBehaviour
 {
+    private InputManager inputManager;
+
     [Space]
     [Header("SHOOTING SETTINGS")]
     public Transform center;
@@ -49,6 +51,8 @@ public class PaintballShoot : MonoBehaviour
 
     private void Start()
     {
+        inputManager = GetComponent<InputManager>();
+
         playerMovement = GetComponent<MovementTest2>();
         currentAmmo = maxAmmo;
         chamber.SetActive(true);
@@ -75,7 +79,7 @@ public class PaintballShoot : MonoBehaviour
         }
 
         // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo. Tambem confere se jogo esta pausado ou foi finalizado
-        if (Input.GetButton("Fire1") && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && Time.timeScale != 0 && GameManager.Instance.state != GameState.Win && GameManager.Instance.state != GameState.Lose)
+        if ((inputManager.isHoldingShoot || inputManager.isHoldingAimAndShoot) && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && Time.timeScale != 0 && GameManager.Instance.state != GameState.Win && GameManager.Instance.state != GameState.Lose)
         {
             if (currentAmmo <= 0)
             {
@@ -88,23 +92,23 @@ public class PaintballShoot : MonoBehaviour
                     shootStartTime = Time.time;
                     startedShooting = true;
                 }
-                Vector3 mousePosition = Input.mousePosition;
-
-                Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
+                if (inputManager.isHoldingAimAndShoot)
                 {
-                    Vector3 direction = (hit.point - center.position);
-                    direction.y = 0f;
+                    Vector3 cameraForward = Camera.main.transform.forward;
+                    Vector3 cameraRight = Camera.main.transform.right;
 
+                    cameraForward.y = 0;
+                    cameraRight.y = 0;
+                    cameraForward.Normalize();
+                    cameraRight.Normalize();
+
+                    Vector3 worldDirection = (cameraRight * inputManager.aimAndShootDirection.x + cameraForward * inputManager.aimAndShootDirection.y).normalized;
 
                     // Get the character's forward direction
                     Vector3 forward = transform.forward;
                     forward.y = 0f;
 
-                    // Calculate the angle between the character's forward direction and the direction to the hit point
-                    float angle = Vector3.SignedAngle(forward, direction, Vector3.up);
+                    float angle = Vector3.SignedAngle(forward, worldDirection, Vector3.up);
 
                     // Normalize the angle to be within [0, 360)
                     angle = (angle + 360) % 360;
@@ -124,7 +128,7 @@ public class PaintballShoot : MonoBehaviour
                     ammoReloadMeter.gameObject.SetActive(true);
                     gun.SetActive(true);
 
-                    if (Time.time < lastShotTime + cursorDisplayDuration)
+                    if (Time.time < lastShotTime + cursorDisplayDuration && !inputManager.isHoldingAimAndShoot)
                     {
                         Cursor.SetCursor(isShootingCursor, new Vector2(isShootingCursor.width / 2, isShootingCursor.height / 2), CursorMode.Auto);
                     }
@@ -142,6 +146,87 @@ public class PaintballShoot : MonoBehaviour
                         lastShotTime = Time.time;
                         // Define o tempo do próximo disparo adicionando o intervalo entre os tiros
                         nextFireTime = Time.time + 1f / fireRate;
+                    }
+                }
+                else if (inputManager.isHoldingShoot)
+                {
+                    Vector3 mousePosition = Input.mousePosition;
+
+                    Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
+                    {
+                        Vector3 direction = (hit.point - center.position);
+                        direction.y = 0f;
+
+
+                        // Get the character's forward direction
+                        Vector3 forward = transform.forward;
+                        forward.y = 0f;
+
+                        float angle = Vector3.SignedAngle(forward, direction, Vector3.up);
+
+                        // Normalize the angle to be within [0, 360)
+                        angle = (angle + 360) % 360;
+
+                        // Map the angle to the range [0, 1] for the animator parameter
+                        float lookAngle = angle / 360f;
+
+                        // Adjust the lookAngle to match the desired orientation
+                        lookAngle = (lookAngle + 0.5f) % 1f;
+
+
+                        animator.SetFloat("lookAngle", lookAngle);
+
+                        targetLayerWeight = 1f;
+                        animator.SetLayerWeight(1, 1);
+
+                        ammoReloadMeter.gameObject.SetActive(true);
+                        gun.SetActive(true);
+
+                        if (Time.time < lastShotTime + cursorDisplayDuration && !inputManager.isHoldingAimAndShoot)
+                        {
+                            Cursor.SetCursor(isShootingCursor, new Vector2(isShootingCursor.width / 2, isShootingCursor.height / 2), CursorMode.Auto);
+                        }
+                        else
+                        {
+                            Cursor.SetCursor(canShootCursor, new Vector2(canShootCursor.width / 2, canShootCursor.height / 2), CursorMode.Auto);
+                        }
+
+                        // Handle shooting
+                        if (Time.time >= shootStartTime + 0.025f && Time.time >= nextFireTime)
+                        {
+                            currentAmmo--;
+                            Shoot();
+
+                            lastShotTime = Time.time;
+                            // Define o tempo do próximo disparo adicionando o intervalo entre os tiros
+                            nextFireTime = Time.time + 1f / fireRate;
+                        }
+                    }
+                    else
+                    {
+                        targetLayerWeight = 0f;
+
+                        if (isReloading)
+                        {
+                            if (playerMovement.isGrounded || playerMovement.isGrinding)
+                            {
+                                targetLayerWeight = 1f;
+                                gun.SetActive(true);
+                            }
+                            else
+                            {
+                                gun.SetActive(false);
+                            }
+                            ammoReloadMeter.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            ammoReloadMeter.gameObject.SetActive(false);
+                            gun.SetActive(false);
+                        }
                     }
                 }
                 else
@@ -231,32 +316,53 @@ public class PaintballShoot : MonoBehaviour
         // Cria uma instância da bala
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
-        // Obtém a posição do mouse na tela
-        Vector3 mousePosition = Input.mousePosition;
-
-        // Converte a posição do mouse de tela para um raio no mundo 3D
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        RaycastHit hit;
-
-        // Se o raio atingir algo no mundo
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
-        //if (Physics.Raycast(ray, out hit))
+        if (inputManager.isHoldingAimAndShoot)
         {
-            // Calcula a direção do tiro baseado na posição do mouse e do personagem
-            Vector3 direction = (hit.point - center.position).normalized;
+            Vector3 cameraForward = Camera.main.transform.forward;
+            Vector3 cameraRight = Camera.main.transform.right;
 
-            // Zera o componente Y da direção para garantir que o tiro permaneça na mesma altura
-            direction.y = 0f;
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            Vector3 worldDirection = (cameraRight * inputManager.aimAndShootDirection.x + cameraForward * inputManager.aimAndShootDirection.y).normalized;
 
             // Obtém o componente Rigidbody da bala
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
 
             // Define a velocidade da bala na direção do mouse
-            rb.velocity = direction * bulletSpeed;
+            rb.velocity = worldDirection * bulletSpeed;
+
+            UnityEngine.Debug.Log("BULLET DIRECTION: " + worldDirection);
         }
-        else
+        else if (inputManager.isHoldingShoot)
         {
+            // Obtém a posição do mouse na tela
+            Vector3 mousePosition = Input.mousePosition;
+
+            // Converte a posição do mouse de tela para um raio no mundo 3D
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+            RaycastHit hit;
+
+            // Se o raio atingir algo no mundo
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitAimMask))
+            //if (Physics.Raycast(ray, out hit))
+            {
+                // Calcula a direção do tiro baseado na posição do mouse e do personagem
+                Vector3 direction = (hit.point - center.position).normalized;
+
+                // Zera o componente Y da direção para garantir que o tiro permaneça na mesma altura
+                direction.y = 0f;
+
+                // Obtém o componente Rigidbody da bala
+                Rigidbody rb = bullet.GetComponent<Rigidbody>();
+
+                // Define a velocidade da bala na direção do mouse
+                rb.velocity = direction * bulletSpeed;
+            }
         }
+        
     }
 
     IEnumerator Reload()

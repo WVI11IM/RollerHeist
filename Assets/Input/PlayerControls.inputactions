@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Controls2",
+            "name": "ControlsRotation",
             "id": "4d98d172-6688-4364-a14c-71a2d702a26a",
             "actions": [
                 {
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump/Trick",
+                    "name": "JumpTrick",
                     "type": "Button",
                     "id": "710c5c8e-1dd6-4470-81fd-b23638f7a967",
                     "expectedControlType": "Button",
@@ -131,18 +131,29 @@
                     "name": "",
                     "id": "52a96f20-4db5-4800-babb-72df1aa3fb58",
                     "path": "<Keyboard>/space",
-                    "interactions": "Tap,Hold",
+                    "interactions": "Hold(duration=0.01)",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump/Trick",
+                    "action": "JumpTrick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6589abc5-86c6-4844-a123-22f52abf78d6",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Hold(duration=0.01)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpTrick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "2ed408ec-421d-4c9f-ac7a-61ce743d5da8",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "Hold",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Hold(duration=0.025)",
                     "processors": "",
                     "groups": "",
                     "action": "Drift [Gamepad]",
@@ -152,8 +163,8 @@
                 {
                     "name": "",
                     "id": "04c8aab3-089b-410a-900e-f0b1db8eb96d",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "Hold",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Hold(duration=0.025)",
                     "processors": "",
                     "groups": "",
                     "action": "Drift [Gamepad]",
@@ -164,7 +175,7 @@
                     "name": "",
                     "id": "f07daca6-3315-4f11-b6fe-4eedd4f05263",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "Hold",
+                    "interactions": "Hold(duration=0.01)",
                     "processors": "",
                     "groups": "",
                     "action": "Boost",
@@ -174,8 +185,8 @@
                 {
                     "name": "",
                     "id": "a3c8834d-fadf-4731-8839-62b78cfcb630",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "Hold",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Hold(duration=0.01)",
                     "processors": "",
                     "groups": "",
                     "action": "Boost",
@@ -185,8 +196,8 @@
                 {
                     "name": "",
                     "id": "dd36d56b-01d5-4f92-8d32-0672391beb68",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "Hold",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Hold(duration=0.01)",
                     "processors": "",
                     "groups": "",
                     "action": "Boost",
@@ -197,7 +208,7 @@
                     "name": "",
                     "id": "3c685ba1-af98-49bc-a2ef-6269469d1238",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Hold",
+                    "interactions": "Hold(duration=1.401298E-45)",
                     "processors": "",
                     "groups": "",
                     "action": "Shoot [Mouse]",
@@ -208,7 +219,7 @@
                     "name": "2D Vector",
                     "id": "0b8f072c-a00b-4c68-a644-f17b878cc375",
                     "path": "2DVector(mode=2)",
-                    "interactions": "Hold",
+                    "interactions": "Hold(duration=0.025)",
                     "processors": "",
                     "groups": "",
                     "action": "AimAndShoot [Gamepad]",
@@ -251,6 +262,321 @@
                 {
                     "name": "right",
                     "id": "a659ce69-3eae-44be-95da-f8262bdf7395",
+                    "path": "<Gamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimAndShoot [Gamepad]",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "ControlsDirection",
+            "id": "f4402474-154c-4eed-986e-5b45cd75c3ca",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "820b49f3-ec11-4533-9a40-6f2f813964ce",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "JumpTrick",
+                    "type": "Button",
+                    "id": "067a5f3e-d7b0-434f-97a9-99e71a7fa4d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drift [Gamepad]",
+                    "type": "Button",
+                    "id": "dc9ca789-7c52-4c8a-b608-7d18ac51b268",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Boost",
+                    "type": "Button",
+                    "id": "8ffcc977-7de9-4fca-863b-3e343a2f1f11",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shoot [Mouse]",
+                    "type": "Button",
+                    "id": "442352ea-2737-49d2-853c-0ab8070ab347",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AimAndShoot [Gamepad]",
+                    "type": "Value",
+                    "id": "a695abf9-0cb9-426c-bef4-ea4f0f285f45",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector [Keyboard]",
+                    "id": "98f65928-bcfd-470b-80ae-02550993392e",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "134c3aa5-a1bb-4ec6-8bf7-5fb3f85808a0",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "87691da1-4421-4c19-8f1d-6046b5f58b5b",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "7b242695-2050-4064-8ed3-e6ff167264af",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "2ba12fca-1f73-4b72-a32a-3c84ae16dc44",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector [Gamepad]",
+                    "id": "45baed9f-772e-471c-824b-13855fe008ed",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "332d6448-5c2c-4aa7-a8a1-80ff5ce836b0",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "06dbf6c9-2b8b-4214-9728-84807523ebf1",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "e89016bd-acb5-4d27-8bc7-bcd0f10a51ad",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "b1d83895-a3b3-4c87-b423-1ed12fc26e3b",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "206682a0-4667-4e42-9b62-1b016d33bcb2",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Hold(duration=0.025)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpTrick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d61493a3-4a7f-4ca0-922d-09fd9f3e756b",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpTrick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10706b6c-5562-48e6-8555-130757112ba0",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Hold(duration=0.025)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drift [Gamepad]",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9b8ae88-6499-4a04-b23f-d3949be8fdfa",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Hold(duration=0.025)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drift [Gamepad]",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c007b00-edc6-4b87-94fb-d631aa74234f",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Hold(duration=0.1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5468c1e3-ac31-4b54-ba82-b21cebee19db",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Hold(duration=0.025)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14750e77-d74a-46ed-ac78-08e59b39000a",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Hold(duration=0.025)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a6555b0-356c-432c-a7d0-444c27c805f2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(duration=1.401298E-45)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot [Mouse]",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "afe7c019-c60b-4d9f-bdf7-2df6ab4c34a7",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "Hold(duration=0.025)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimAndShoot [Gamepad]",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "5b7c110c-67c9-453d-8a71-848a6ee5cb51",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimAndShoot [Gamepad]",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "7328ed34-a58d-4403-bb97-2d9cb9c58399",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimAndShoot [Gamepad]",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "8df81f64-ff07-46fd-92d8-f6666e9d3f15",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimAndShoot [Gamepad]",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "70034ad6-6c91-4f87-8c97-ae6f92f1bd4d",
                     "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
