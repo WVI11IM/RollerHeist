@@ -776,12 +776,14 @@ public class MovementTest2 : MonoBehaviour
 
         if (isBoosting)
         {
+            AudioMixerManager.Instance.ChangeMusicSnapshot("Boost");
             maxMoveSpeed = boostMaxSpeed;
             acceleration = boostAcceleration;
             boostBarAnimator.SetBool("valueSpending", true);
         }
         else
         {
+            AudioMixerManager.Instance.ChangeMusicSnapshot("Normal");
             maxMoveSpeed = normalMaxSpeed;
             acceleration = normalAcceleration;
             boostBarAnimator.SetBool("valueSpending", false);

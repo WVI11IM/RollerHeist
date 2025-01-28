@@ -11,6 +11,11 @@ public class AudioMixerManager : MonoBehaviour
 
     public static AudioMixerManager Instance;
 
+    private AudioMixerSnapshot normalSnapshot;
+    private AudioMixerSnapshot pausedSnapshot;
+    private AudioMixerSnapshot radioSnapshot;
+    private AudioMixerSnapshot boostSnapshot;
+
     private const string MasterVolumeKey = "MasterVolume";
     private const string SFXVolumeKey = "SFXVolume";
     private const string MusicVolumeKey = "MusicVolume";
@@ -33,7 +38,10 @@ public class AudioMixerManager : MonoBehaviour
 
     private void Start()
     {
-        
+        normalSnapshot = audioMixer.FindSnapshot("Normal");
+        pausedSnapshot = audioMixer.FindSnapshot("Paused");
+        radioSnapshot = audioMixer.FindSnapshot("Radio");
+        boostSnapshot = audioMixer.FindSnapshot("Boost");
     }
 
     private void OnDestroy()
@@ -54,26 +62,29 @@ public class AudioMixerManager : MonoBehaviour
             SetSFXVolume(0.75f);
             PlayerPrefs.Save();
         }
-        else LoadVolumes();
+        else
+        {
+            LoadVolumes();
+        }
 
         UpdateSliders();
     }
 
     public void SetMasterVolume(float level)
     {
-        audioMixer.SetFloat("masterVolume", Mathf.Log10(Mathf.Max(level, 0.0001f)) * 20f); // Avoid log(0)
+        audioMixer.SetFloat("masterVolumeModifier", Mathf.Log10(Mathf.Max(level, 0.0001f)) * 20f); // Use a modifier parameter
         PlayerPrefs.SetFloat(MasterVolumeKey, level);
     }
 
     public void SetSFXVolume(float level)
     {
-        audioMixer.SetFloat("sfxVolume", Mathf.Log10(Mathf.Max(level, 0.0001f)) * 20f); // Avoid log(0)
+        audioMixer.SetFloat("sfxVolumeModifier", Mathf.Log10(Mathf.Max(level, 0.0001f)) * 20f); // Use a modifier parameter
         PlayerPrefs.SetFloat(SFXVolumeKey, level);
     }
 
     public void SetMusicVolume(float level)
     {
-        audioMixer.SetFloat("musicVolume", Mathf.Log10(Mathf.Max(level, 0.0001f)) * 20f); // Avoid log(0)
+        audioMixer.SetFloat("musicVolumeModifier", Mathf.Log10(Mathf.Max(level, 0.0001f)) * 20f); // Use a modifier parameter
         PlayerPrefs.SetFloat(MusicVolumeKey, level);
     }
 
@@ -112,5 +123,28 @@ public class AudioMixerManager : MonoBehaviour
     public void OnMusicVolumeChanged(float level)
     {
         SetMusicVolume(level);
+    }
+
+    public void ChangeMusicSnapshot(string snapshotName)
+    {
+        switch (snapshotName)
+        {
+            case "Normal":
+                normalSnapshot.TransitionTo(0);
+                break;
+            case "Paused":
+                pausedSnapshot.TransitionTo(0);
+                break;
+            case "Radio":
+                radioSnapshot.TransitionTo(0);
+                break;
+            case "Boost":
+                boostSnapshot.TransitionTo(0);
+                break;
+            default:
+                normalSnapshot.TransitionTo(0);
+                break;
+        }
+        Debug.Log("Transitioning to: " + snapshotName);
     }
 }

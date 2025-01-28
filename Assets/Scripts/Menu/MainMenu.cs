@@ -163,6 +163,7 @@ public class MainMenu : MonoBehaviour
                 break;
 
             case MenuState.Options:
+                AudioMixerManager.Instance.ChangeMusicSnapshot("Normal");
                 optionsScreenEvent.Invoke();
                 break;
 
@@ -172,6 +173,7 @@ public class MainMenu : MonoBehaviour
                 break;
 
             case MenuState.Audio:
+                AudioMixerManager.Instance.ChangeMusicSnapshot("Radio");
                 audioScreenEvent.Invoke();
                 menuOptionsAnimator.SetInteger("menuState", 0);
                 break;
