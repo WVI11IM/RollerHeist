@@ -5505,9 +5505,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 3
+  m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!54 &2052024033628100592
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5950,6 +5950,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a695abf9-0cb9-426c-bef4-ea4f0f285f45
     m_ActionName: ControlsDirection/AimAndShoot [Gamepad][/DualShock4GamepadHID/rightStick/up,/DualShock4GamepadHID/rightStick/down,/DualShock4GamepadHID/rightStick/left,/DualShock4GamepadHID/rightStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 787ea2fe-76fa-42a9-9d17-8eb8e8affd6c
+    m_ActionName: ControlsRotation/Brake[/Keyboard/d,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3e126783-c62f-42e4-9b01-949b6456aed1
+    m_ActionName: ControlsDirection/Brake[/Keyboard/a,/Keyboard/d,/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ControlsDirection
@@ -5978,6 +5986,7 @@ MonoBehaviour:
   isHoldingShoot: 0
   aimAndShootDirection: {x: 0, y: 0}
   isHoldingAimAndShoot: 0
+  isHoldingBrake: 0
 --- !u!1 &2052024033637939033
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drift [Gamepad]",
+                    "name": "Drift",
                     "type": "Button",
                     "id": "f7429413-1bb7-4a30-8c55-cca81367a760",
                     "expectedControlType": "Button",
@@ -58,6 +58,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "536bea5c-e7e4-41e4-a3cf-7688c1ba18fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Brake",
+                    "type": "Button",
+                    "id": "787ea2fe-76fa-42a9-9d17-8eb8e8affd6c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -156,7 +174,7 @@
                     "interactions": "Hold(duration=0.025)",
                     "processors": "",
                     "groups": "",
-                    "action": "Drift [Gamepad]",
+                    "action": "Drift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -167,7 +185,18 @@
                     "interactions": "Hold(duration=0.025)",
                     "processors": "",
                     "groups": "",
-                    "action": "Drift [Gamepad]",
+                    "action": "Drift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ff6bab2-20dc-4e31-bc26-90eeefd0dd91",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -269,6 +298,72 @@
                     "action": "AimAndShoot [Gamepad]",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "696e1d3c-2587-4bf1-98f3-4111d1ad4ae7",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "f8752db4-4d05-4882-b8b1-d4612da51377",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "8efa7840-53a9-41c9-865b-3a2441581e54",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c4afb56a-b817-4c78-9329-5419b60cbd12",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b4b5759-b24e-46d4-9db9-63d29f44afc8",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "293056b9-75b5-438c-9146-7c2b4cf33cf1",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -295,7 +390,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drift [Gamepad]",
+                    "name": "Drift",
                     "type": "Button",
                     "id": "dc9ca789-7c52-4c8a-b608-7d18ac51b268",
                     "expectedControlType": "Button",
@@ -329,6 +424,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "4773c7ff-8db3-466a-98e5-aeb5188f097a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Brake",
+                    "type": "Button",
+                    "id": "3e126783-c62f-42e4-9b01-949b6456aed1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -471,7 +584,7 @@
                     "interactions": "Hold(duration=0.025)",
                     "processors": "",
                     "groups": "",
-                    "action": "Drift [Gamepad]",
+                    "action": "Drift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -482,7 +595,18 @@
                     "interactions": "Hold(duration=0.025)",
                     "processors": "",
                     "groups": "",
-                    "action": "Drift [Gamepad]",
+                    "action": "Drift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2a7addf-aaa2-4218-8d16-e9c228f1a181",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -584,6 +708,83 @@
                     "action": "AimAndShoot [Gamepad]",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "40b7eda0-407d-4d74-937f-845694910524",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Two Modifiers",
+                    "id": "d7c2b9f5-358b-4e08-be32-3b6aad9982ed",
+                    "path": "TwoModifiers",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier1",
+                    "id": "c1a01c01-c610-45ee-abd8-c190ed0a508b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "modifier2",
+                    "id": "4a4969f7-318c-45c9-b762-9d6d78ac5852",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "a141a6bb-8be4-4512-8917-ad6185c15cf1",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e5dbcd12-ef13-4d15-a072-9135d41b499b",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d87c8f0a-d7e0-496e-b7fa-f3799c46db10",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

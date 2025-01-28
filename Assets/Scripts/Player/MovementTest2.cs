@@ -361,7 +361,7 @@ public class MovementTest2 : MonoBehaviour
                     SFXManager.Instance.StopSFXLoop("drift");
                 }
 
-                if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+                if (inputManager.isHoldingBrake)
                 {
                     rotation = 0;
                     if (isGrounded && !isGrinding)
@@ -416,7 +416,6 @@ public class MovementTest2 : MonoBehaviour
 
                     //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
                     else rotation = SignedAngleForControlsDirection() * rotSpeed * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
-                    
                 }
 
                 if (isDrifting && !wasDrifting)
@@ -430,7 +429,7 @@ public class MovementTest2 : MonoBehaviour
                     SFXManager.Instance.StopSFXLoop("drift");
                 }
 
-                if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+                if (inputManager.isHoldingBrake)
                 {
                     rotation = 0;
                     if (isGrounded && !isGrinding)
@@ -484,10 +483,10 @@ public class MovementTest2 : MonoBehaviour
         RaycastHit hit3;
         RaycastHit hit4;
 
-        bool isHit1 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
-        bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 4), Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
-        bool isHit3 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 4), Vector3.down, out hit3, raycastDistanceToFloor, floorLayerMask);
-        bool isHit4 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 4), Vector3.down, out hit4, raycastDistanceToFloor, floorLayerMask);
+        bool isHit1 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 1.5f), Vector3.down, out hit1, raycastDistanceToFloor, floorLayerMask);
+        bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 1.5f), Vector3.down, out hit2, raycastDistanceToFloor, floorLayerMask);
+        bool isHit3 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 1.5f), Vector3.down, out hit3, raycastDistanceToFloor, floorLayerMask);
+        bool isHit4 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 1.5f), Vector3.down, out hit4, raycastDistanceToFloor, floorLayerMask);
 
         if (isHit1 || isHit2 || isHit3 || isHit4)
         {
@@ -513,10 +512,10 @@ public class MovementTest2 : MonoBehaviour
         RaycastHit hit7;
         RaycastHit hit8;
 
-        bool isHit5 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit5, 1.15f, floorLayerMask);
-        bool isHit6 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 4), Vector3.down, out hit6, 1.15f, floorLayerMask);
-        bool isHit7 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 4), Vector3.down, out hit7, 1.15f, floorLayerMask);
-        bool isHit8 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 4), Vector3.down, out hit8, 1.15f, floorLayerMask);
+        bool isHit5 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 1.5f), Vector3.down, out hit5, 1.15f, floorLayerMask);
+        bool isHit6 = Physics.Raycast(transform.position + Vector3.up + (Vector3.back / 1.5f), Vector3.down, out hit6, 1.15f, floorLayerMask);
+        bool isHit7 = Physics.Raycast(transform.position + Vector3.up + (Vector3.left / 1.5f), Vector3.down, out hit7, 1.15f, floorLayerMask);
+        bool isHit8 = Physics.Raycast(transform.position + Vector3.up + (Vector3.right / 1.5f), Vector3.down, out hit8, 1.15f, floorLayerMask);
 
         if (isHit5 || isHit6 || isHit7 || isHit8)
         {
@@ -641,6 +640,7 @@ public class MovementTest2 : MonoBehaviour
         {
             rb.AddForce(Vector3.down * 22.5f);
         }
+        else if(!isGrinding) rb.AddForce(Vector3.down * 5f);
 
         Vector3 directionFront = new Vector3(0, 0, 1);
         directionFront = transform.TransformDirection(directionFront);
@@ -776,14 +776,12 @@ public class MovementTest2 : MonoBehaviour
 
         if (isBoosting)
         {
-            AudioMixerManager.Instance.ChangeMusicSnapshot("Boost");
             maxMoveSpeed = boostMaxSpeed;
             acceleration = boostAcceleration;
             boostBarAnimator.SetBool("valueSpending", true);
         }
         else
         {
-            AudioMixerManager.Instance.ChangeMusicSnapshot("Normal");
             maxMoveSpeed = normalMaxSpeed;
             acceleration = normalAcceleration;
             boostBarAnimator.SetBool("valueSpending", false);
@@ -842,11 +840,13 @@ public class MovementTest2 : MonoBehaviour
     {
         if (isBoosting)
         {
+            if(Time.deltaTime > 0) AudioMixerManager.Instance.ChangeMusicSnapshot("Boost", 0.25f);
             SFXManager.Instance.PlaySFXLoop("velocidade1");
             SFXManager.Instance.PlaySFXLoop("velocidade2");
         }
         else if(isGrounded)
         {
+            if (Time.deltaTime > 0) AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0.25f);
             if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
             {
                 SFXManager.Instance.PlaySFXLoop("velocidade1");
@@ -865,6 +865,7 @@ public class MovementTest2 : MonoBehaviour
         }
         else
         {
+            if (Time.deltaTime > 0) AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0.25f);
             SFXManager.Instance.StopSFXLoop("velocidade1");
             SFXManager.Instance.StopSFXLoop("velocidade2");
         }
@@ -1096,22 +1097,22 @@ public class MovementTest2 : MonoBehaviour
         Gizmos.color = Color.red;
 
         // Draw the first raycast
-        Vector3 rayStart1 = transform.position + Vector3.up + (Vector3.forward / 4);
+        Vector3 rayStart1 = transform.position + Vector3.up + (Vector3.forward / 1.5f);
         Vector3 rayEnd1 = rayStart1 + Vector3.down * raycastDistanceToFloor;
         Gizmos.DrawLine(rayStart1, rayEnd1);
 
         // Draw the second raycast
-        Vector3 rayStart2 = transform.position + Vector3.up + (Vector3.back / 4);
+        Vector3 rayStart2 = transform.position + Vector3.up + (Vector3.back / 1.5f);
         Vector3 rayEnd2 = rayStart2 + Vector3.down * raycastDistanceToFloor;
         Gizmos.DrawLine(rayStart2, rayEnd2);
 
         // Draw the third raycast
-        Vector3 rayStart3 = transform.position + Vector3.up + (Vector3.left / 4);
+        Vector3 rayStart3 = transform.position + Vector3.up + (Vector3.left / 1.5f);
         Vector3 rayEnd3 = rayStart3 + Vector3.down * raycastDistanceToFloor;
         Gizmos.DrawLine(rayStart3, rayEnd3);
 
         // Draw the second raycast
-        Vector3 rayStart4 = transform.position + Vector3.up + (Vector3.right / 4);
+        Vector3 rayStart4 = transform.position + Vector3.up + (Vector3.right / 1.5f);
         Vector3 rayEnd4 = rayStart4 + Vector3.down * raycastDistanceToFloor;
         Gizmos.DrawLine(rayStart4, rayEnd4);
 

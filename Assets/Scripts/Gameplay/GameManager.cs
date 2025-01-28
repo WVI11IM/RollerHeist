@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal");
+        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0);
         canPause = false;
         uiAnimator.SetBool("gameIsOver", true);
         StartCoroutine(GameOverPause());
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("justPlayedLevel", 0);
         SFXManager.Instance.PlayUISFX("play");
-        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal");
+        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0);
         AudioListener.pause = false;
         Time.timeScale = 1f;
         MusicManager.Instance.StopAllLoopingMusic();
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SFXManager.Instance.PlayUISFX("negativo2");
-        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal");
+        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0);
         AudioListener.pause = false;
         Time.timeScale = 1f;
         MusicManager.Instance.StopAllLoopingMusic();
@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour
     {
         SFXManager.Instance.PlayUISFX("negativo1");
         SFXManager.Instance.PlayUISFX("woosh2");
-        AudioMixerManager.Instance.ChangeMusicSnapshot("Paused");
+        AudioMixerManager.Instance.ChangeMusicSnapshot("Paused", 0f);
         pausePanel.SetActive(true);
         isPaused = true;
         AudioMixerManager.Instance.UpdateSliders();
@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         SFXManager.Instance.PlayUISFX("positivo1");
-        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal");
+        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0f);
         AudioListener.pause = false;
         SFXManager.Instance.ResumeLoopingSFX();
         Time.timeScale = 1f;

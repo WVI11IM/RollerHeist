@@ -125,26 +125,25 @@ public class AudioMixerManager : MonoBehaviour
         SetMusicVolume(level);
     }
 
-    public void ChangeMusicSnapshot(string snapshotName)
+    public void ChangeMusicSnapshot(string snapshotName, float transitionTime)
     {
         switch (snapshotName)
         {
             case "Normal":
-                normalSnapshot.TransitionTo(0);
+                normalSnapshot.TransitionTo(transitionTime);
                 break;
             case "Paused":
-                pausedSnapshot.TransitionTo(0);
+                pausedSnapshot.TransitionTo(transitionTime);
                 break;
             case "Radio":
-                radioSnapshot.TransitionTo(0);
+                radioSnapshot.TransitionTo(transitionTime);
                 break;
             case "Boost":
-                boostSnapshot.TransitionTo(0);
+                boostSnapshot.TransitionTo(transitionTime);
                 break;
             default:
-                normalSnapshot.TransitionTo(0);
+                normalSnapshot.TransitionTo(transitionTime);
                 break;
         }
-        Debug.Log("Transitioning to: " + snapshotName);
     }
 }

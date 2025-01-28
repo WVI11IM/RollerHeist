@@ -73,13 +73,13 @@ public class PaintballShoot : MonoBehaviour
         }
         else ammoText.color = new Vector4(1, 1, 1, 1);
 
-        if (currentAmmo <= 0 && !isReloading)
+        if ((currentAmmo <= 0 || inputManager.reloaded) && !isReloading && (currentAmmo != maxAmmo))
         {
             StartCoroutine(Reload());
         }
 
         // Verifica se o botão esquerdo do mouse está pressionado e se já passou o tempo do próximo disparo. Tambem confere se jogo esta pausado ou foi finalizado
-        if ((inputManager.isHoldingShoot || inputManager.isHoldingAimAndShoot) && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && Time.timeScale != 0 && GameManager.Instance.state != GameState.Win && GameManager.Instance.state != GameState.Lose)
+        if ((inputManager.isHoldingShoot || inputManager.isHoldingAimAndShoot) && (playerMovement.isGrounded || playerMovement.isGrinding) && playerMovement.canInput && Time.timeScale != 0 && GameManager.Instance.state != GameState.Win && GameManager.Instance.state != GameState.Lose && !isReloading)
         {
             if (currentAmmo <= 0)
             {

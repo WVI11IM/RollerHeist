@@ -46,7 +46,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Drift [Gamepad]"",
+                    ""name"": ""Drift"",
                     ""type"": ""Button"",
                     ""id"": ""f7429413-1bb7-4a30-8c55-cca81367a760"",
                     ""expectedControlType"": ""Button"",
@@ -80,6 +80,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""536bea5c-e7e4-41e4-a3cf-7688c1ba18fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Brake"",
+                    ""type"": ""Button"",
+                    ""id"": ""787ea2fe-76fa-42a9-9d17-8eb8e8affd6c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,7 +196,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": ""Hold(duration=0.025)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drift [Gamepad]"",
+                    ""action"": ""Drift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -189,7 +207,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": ""Hold(duration=0.025)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drift [Gamepad]"",
+                    ""action"": ""Drift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ff6bab2-20dc-4e31-bc26-90eeefd0dd91"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -291,6 +320,72 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""AimAndShoot [Gamepad]"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""696e1d3c-2587-4bf1-98f3-4111d1ad4ae7"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""f8752db4-4d05-4882-b8b1-d4612da51377"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""8efa7840-53a9-41c9-865b-3a2441581e54"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4afb56a-b817-4c78-9329-5419b60cbd12"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b4b5759-b24e-46d4-9db9-63d29f44afc8"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""293056b9-75b5-438c-9146-7c2b4cf33cf1"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -317,7 +412,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Drift [Gamepad]"",
+                    ""name"": ""Drift"",
                     ""type"": ""Button"",
                     ""id"": ""dc9ca789-7c52-4c8a-b608-7d18ac51b268"",
                     ""expectedControlType"": ""Button"",
@@ -351,6 +446,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""4773c7ff-8db3-466a-98e5-aeb5188f097a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Brake"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e126783-c62f-42e4-9b01-949b6456aed1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -493,7 +606,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": ""Hold(duration=0.025)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drift [Gamepad]"",
+                    ""action"": ""Drift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -504,7 +617,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": ""Hold(duration=0.025)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drift [Gamepad]"",
+                    ""action"": ""Drift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2a7addf-aaa2-4218-8d16-e9c228f1a181"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -606,6 +730,83 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""AimAndShoot [Gamepad]"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40b7eda0-407d-4d74-937f-845694910524"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Two Modifiers"",
+                    ""id"": ""d7c2b9f5-358b-4e08-be32-3b6aad9982ed"",
+                    ""path"": ""TwoModifiers"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier1"",
+                    ""id"": ""c1a01c01-c610-45ee-abd8-c190ed0a508b"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""modifier2"",
+                    ""id"": ""4a4969f7-318c-45c9-b762-9d6d78ac5852"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""a141a6bb-8be4-4512-8917-ad6185c15cf1"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5dbcd12-ef13-4d15-a072-9135d41b499b"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d87c8f0a-d7e0-496e-b7fa-f3799c46db10"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -616,18 +817,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_ControlsRotation = asset.FindActionMap("ControlsRotation", throwIfNotFound: true);
         m_ControlsRotation_Rotate = m_ControlsRotation.FindAction("Rotate", throwIfNotFound: true);
         m_ControlsRotation_JumpTrick = m_ControlsRotation.FindAction("JumpTrick", throwIfNotFound: true);
-        m_ControlsRotation_DriftGamepad = m_ControlsRotation.FindAction("Drift [Gamepad]", throwIfNotFound: true);
+        m_ControlsRotation_Drift = m_ControlsRotation.FindAction("Drift", throwIfNotFound: true);
         m_ControlsRotation_Boost = m_ControlsRotation.FindAction("Boost", throwIfNotFound: true);
         m_ControlsRotation_ShootMouse = m_ControlsRotation.FindAction("Shoot [Mouse]", throwIfNotFound: true);
         m_ControlsRotation_AimAndShootGamepad = m_ControlsRotation.FindAction("AimAndShoot [Gamepad]", throwIfNotFound: true);
+        m_ControlsRotation_Reload = m_ControlsRotation.FindAction("Reload", throwIfNotFound: true);
+        m_ControlsRotation_Brake = m_ControlsRotation.FindAction("Brake", throwIfNotFound: true);
         // ControlsDirection
         m_ControlsDirection = asset.FindActionMap("ControlsDirection", throwIfNotFound: true);
         m_ControlsDirection_Move = m_ControlsDirection.FindAction("Move", throwIfNotFound: true);
         m_ControlsDirection_JumpTrick = m_ControlsDirection.FindAction("JumpTrick", throwIfNotFound: true);
-        m_ControlsDirection_DriftGamepad = m_ControlsDirection.FindAction("Drift [Gamepad]", throwIfNotFound: true);
+        m_ControlsDirection_Drift = m_ControlsDirection.FindAction("Drift", throwIfNotFound: true);
         m_ControlsDirection_Boost = m_ControlsDirection.FindAction("Boost", throwIfNotFound: true);
         m_ControlsDirection_ShootMouse = m_ControlsDirection.FindAction("Shoot [Mouse]", throwIfNotFound: true);
         m_ControlsDirection_AimAndShootGamepad = m_ControlsDirection.FindAction("AimAndShoot [Gamepad]", throwIfNotFound: true);
+        m_ControlsDirection_Reload = m_ControlsDirection.FindAction("Reload", throwIfNotFound: true);
+        m_ControlsDirection_Brake = m_ControlsDirection.FindAction("Brake", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -689,20 +894,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IControlsRotationActions m_ControlsRotationActionsCallbackInterface;
     private readonly InputAction m_ControlsRotation_Rotate;
     private readonly InputAction m_ControlsRotation_JumpTrick;
-    private readonly InputAction m_ControlsRotation_DriftGamepad;
+    private readonly InputAction m_ControlsRotation_Drift;
     private readonly InputAction m_ControlsRotation_Boost;
     private readonly InputAction m_ControlsRotation_ShootMouse;
     private readonly InputAction m_ControlsRotation_AimAndShootGamepad;
+    private readonly InputAction m_ControlsRotation_Reload;
+    private readonly InputAction m_ControlsRotation_Brake;
     public struct ControlsRotationActions
     {
         private @PlayerControls m_Wrapper;
         public ControlsRotationActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rotate => m_Wrapper.m_ControlsRotation_Rotate;
         public InputAction @JumpTrick => m_Wrapper.m_ControlsRotation_JumpTrick;
-        public InputAction @DriftGamepad => m_Wrapper.m_ControlsRotation_DriftGamepad;
+        public InputAction @Drift => m_Wrapper.m_ControlsRotation_Drift;
         public InputAction @Boost => m_Wrapper.m_ControlsRotation_Boost;
         public InputAction @ShootMouse => m_Wrapper.m_ControlsRotation_ShootMouse;
         public InputAction @AimAndShootGamepad => m_Wrapper.m_ControlsRotation_AimAndShootGamepad;
+        public InputAction @Reload => m_Wrapper.m_ControlsRotation_Reload;
+        public InputAction @Brake => m_Wrapper.m_ControlsRotation_Brake;
         public InputActionMap Get() { return m_Wrapper.m_ControlsRotation; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -718,9 +927,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @JumpTrick.started -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnJumpTrick;
                 @JumpTrick.performed -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnJumpTrick;
                 @JumpTrick.canceled -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnJumpTrick;
-                @DriftGamepad.started -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnDriftGamepad;
-                @DriftGamepad.performed -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnDriftGamepad;
-                @DriftGamepad.canceled -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnDriftGamepad;
+                @Drift.started -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnDrift;
+                @Drift.performed -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnDrift;
+                @Drift.canceled -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnDrift;
                 @Boost.started -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnBoost;
@@ -730,6 +939,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AimAndShootGamepad.started -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnAimAndShootGamepad;
                 @AimAndShootGamepad.performed -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnAimAndShootGamepad;
                 @AimAndShootGamepad.canceled -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnAimAndShootGamepad;
+                @Reload.started -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnReload;
+                @Brake.started -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnBrake;
+                @Brake.performed -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnBrake;
+                @Brake.canceled -= m_Wrapper.m_ControlsRotationActionsCallbackInterface.OnBrake;
             }
             m_Wrapper.m_ControlsRotationActionsCallbackInterface = instance;
             if (instance != null)
@@ -740,9 +955,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @JumpTrick.started += instance.OnJumpTrick;
                 @JumpTrick.performed += instance.OnJumpTrick;
                 @JumpTrick.canceled += instance.OnJumpTrick;
-                @DriftGamepad.started += instance.OnDriftGamepad;
-                @DriftGamepad.performed += instance.OnDriftGamepad;
-                @DriftGamepad.canceled += instance.OnDriftGamepad;
+                @Drift.started += instance.OnDrift;
+                @Drift.performed += instance.OnDrift;
+                @Drift.canceled += instance.OnDrift;
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
@@ -752,6 +967,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AimAndShootGamepad.started += instance.OnAimAndShootGamepad;
                 @AimAndShootGamepad.performed += instance.OnAimAndShootGamepad;
                 @AimAndShootGamepad.canceled += instance.OnAimAndShootGamepad;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+                @Brake.started += instance.OnBrake;
+                @Brake.performed += instance.OnBrake;
+                @Brake.canceled += instance.OnBrake;
             }
         }
     }
@@ -762,20 +983,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IControlsDirectionActions m_ControlsDirectionActionsCallbackInterface;
     private readonly InputAction m_ControlsDirection_Move;
     private readonly InputAction m_ControlsDirection_JumpTrick;
-    private readonly InputAction m_ControlsDirection_DriftGamepad;
+    private readonly InputAction m_ControlsDirection_Drift;
     private readonly InputAction m_ControlsDirection_Boost;
     private readonly InputAction m_ControlsDirection_ShootMouse;
     private readonly InputAction m_ControlsDirection_AimAndShootGamepad;
+    private readonly InputAction m_ControlsDirection_Reload;
+    private readonly InputAction m_ControlsDirection_Brake;
     public struct ControlsDirectionActions
     {
         private @PlayerControls m_Wrapper;
         public ControlsDirectionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_ControlsDirection_Move;
         public InputAction @JumpTrick => m_Wrapper.m_ControlsDirection_JumpTrick;
-        public InputAction @DriftGamepad => m_Wrapper.m_ControlsDirection_DriftGamepad;
+        public InputAction @Drift => m_Wrapper.m_ControlsDirection_Drift;
         public InputAction @Boost => m_Wrapper.m_ControlsDirection_Boost;
         public InputAction @ShootMouse => m_Wrapper.m_ControlsDirection_ShootMouse;
         public InputAction @AimAndShootGamepad => m_Wrapper.m_ControlsDirection_AimAndShootGamepad;
+        public InputAction @Reload => m_Wrapper.m_ControlsDirection_Reload;
+        public InputAction @Brake => m_Wrapper.m_ControlsDirection_Brake;
         public InputActionMap Get() { return m_Wrapper.m_ControlsDirection; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -791,9 +1016,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @JumpTrick.started -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnJumpTrick;
                 @JumpTrick.performed -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnJumpTrick;
                 @JumpTrick.canceled -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnJumpTrick;
-                @DriftGamepad.started -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnDriftGamepad;
-                @DriftGamepad.performed -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnDriftGamepad;
-                @DriftGamepad.canceled -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnDriftGamepad;
+                @Drift.started -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnDrift;
+                @Drift.performed -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnDrift;
+                @Drift.canceled -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnDrift;
                 @Boost.started -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnBoost;
@@ -803,6 +1028,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AimAndShootGamepad.started -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnAimAndShootGamepad;
                 @AimAndShootGamepad.performed -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnAimAndShootGamepad;
                 @AimAndShootGamepad.canceled -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnAimAndShootGamepad;
+                @Reload.started -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnReload;
+                @Brake.started -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnBrake;
+                @Brake.performed -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnBrake;
+                @Brake.canceled -= m_Wrapper.m_ControlsDirectionActionsCallbackInterface.OnBrake;
             }
             m_Wrapper.m_ControlsDirectionActionsCallbackInterface = instance;
             if (instance != null)
@@ -813,9 +1044,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @JumpTrick.started += instance.OnJumpTrick;
                 @JumpTrick.performed += instance.OnJumpTrick;
                 @JumpTrick.canceled += instance.OnJumpTrick;
-                @DriftGamepad.started += instance.OnDriftGamepad;
-                @DriftGamepad.performed += instance.OnDriftGamepad;
-                @DriftGamepad.canceled += instance.OnDriftGamepad;
+                @Drift.started += instance.OnDrift;
+                @Drift.performed += instance.OnDrift;
+                @Drift.canceled += instance.OnDrift;
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
@@ -825,6 +1056,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AimAndShootGamepad.started += instance.OnAimAndShootGamepad;
                 @AimAndShootGamepad.performed += instance.OnAimAndShootGamepad;
                 @AimAndShootGamepad.canceled += instance.OnAimAndShootGamepad;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+                @Brake.started += instance.OnBrake;
+                @Brake.performed += instance.OnBrake;
+                @Brake.canceled += instance.OnBrake;
             }
         }
     }
@@ -833,18 +1070,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnRotate(InputAction.CallbackContext context);
         void OnJumpTrick(InputAction.CallbackContext context);
-        void OnDriftGamepad(InputAction.CallbackContext context);
+        void OnDrift(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnShootMouse(InputAction.CallbackContext context);
         void OnAimAndShootGamepad(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnBrake(InputAction.CallbackContext context);
     }
     public interface IControlsDirectionActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJumpTrick(InputAction.CallbackContext context);
-        void OnDriftGamepad(InputAction.CallbackContext context);
+        void OnDrift(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnShootMouse(InputAction.CallbackContext context);
         void OnAimAndShootGamepad(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnBrake(InputAction.CallbackContext context);
     }
 }

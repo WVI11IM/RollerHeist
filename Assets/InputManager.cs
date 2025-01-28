@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
     private InputAction moveAction;
 
     [Space]
-    [Header("Drift (for Gamepad)")]
+    [Header("Drift (for Gamepad/Mouse)")]
     public bool isHoldingDrift;
     private InputAction driftAction;
 
@@ -49,6 +49,16 @@ public class InputManager : MonoBehaviour
     public Vector2 aimAndShootDirection;
     public bool isHoldingAimAndShoot;
     private InputAction aimAndShootAction;
+
+    [Space]
+    [Header("Reload")]
+    public bool reloaded;
+    private InputAction reloadAction;
+
+    [Space]
+    [Header("Brake")]
+    public bool isHoldingBrake;
+    private InputAction brakeAction;
 
     void Start()
     {
@@ -87,11 +97,13 @@ public class InputManager : MonoBehaviour
                 moveAction.canceled += OnMoveCanceled;
             }
 
-            driftAction = playerInput.actions.FindAction("Drift [Gamepad]");
+            driftAction = playerInput.actions.FindAction("Drift");
             jumpTrickAction = playerInput.actions.FindAction("JumpTrick");
             boostAction = playerInput.actions.FindAction("Boost");
             shootAction = playerInput.actions.FindAction("Shoot [Mouse]");
             aimAndShootAction = playerInput.actions.FindAction("AimAndShoot [Gamepad]");
+            reloadAction = playerInput.actions.FindAction("Reload");
+            brakeAction = playerInput.actions.FindAction("Brake");
 
             driftAction.performed += OnDriftPerformed;
             driftAction.canceled += OnDriftCanceled;
@@ -99,11 +111,15 @@ public class InputManager : MonoBehaviour
             jumpTrickAction.canceled += OnJumpTrickCanceled;
             boostAction.performed += OnBoostPerformed;
             boostAction.canceled += OnBoostCanceled;
-            shootAction.performed += OnShootPerformed;
-            shootAction.canceled += OnShootCanceled;
             aimAndShootAction.performed += OnAimAndShootPerformed;
             aimAndShootAction.canceled += OnAimAndShootCanceled;
 
+            shootAction.started += ctx => isHoldingShoot = true;
+            shootAction.canceled += ctx => isHoldingShoot = false;
+            reloadAction.started += ctx => reloaded = true;
+            reloadAction.canceled += ctx => reloaded = false;
+            brakeAction.started += ctx => isHoldingBrake = true;
+            brakeAction.canceled += ctx => isHoldingBrake = false;
         }
     }
 
@@ -117,24 +133,26 @@ public class InputManager : MonoBehaviour
         {
             if (defaultMap == DefaultMap.ControlsRotation)
             {
-                rotateAction.performed += OnRotatePerformed;
-                rotateAction.canceled += OnRotateCanceled;
+                rotateAction.performed -= OnRotatePerformed;
+                rotateAction.canceled -= OnRotateCanceled;
             }
             else if (defaultMap == DefaultMap.ControlsDirection)
             {
-                moveAction.performed += OnMovePerformed;
-                moveAction.canceled += OnMoveCanceled;
+                moveAction.performed -= OnMovePerformed;
+                moveAction.canceled -= OnMoveCanceled;
             }
-            driftAction.performed += OnDriftPerformed;
-            driftAction.canceled += OnDriftCanceled;
+            driftAction.performed -= OnDriftPerformed;
+            driftAction.canceled -= OnDriftCanceled;
             jumpTrickAction.performed -= OnJumpTrickPerformed;
             jumpTrickAction.canceled -= OnJumpTrickCanceled;
-            boostAction.performed += OnBoostPerformed;
-            boostAction.canceled += OnBoostCanceled;
-            shootAction.performed += OnShootPerformed;
-            shootAction.canceled += OnShootCanceled;
-            aimAndShootAction.performed += OnAimAndShootPerformed;
-            aimAndShootAction.canceled += OnAimAndShootCanceled;
+            boostAction.performed -= OnBoostPerformed;
+            boostAction.canceled -= OnBoostCanceled;
+            shootAction.performed -= OnShootPerformed;
+            shootAction.canceled -= OnShootCanceled;
+            aimAndShootAction.performed -= OnAimAndShootPerformed;
+            aimAndShootAction.canceled -= OnAimAndShootCanceled;
+            brakeAction.performed -= OnBrakePerformed;
+            brakeAction.performed -= OnBrakeCanceled;
         }
     }
 
@@ -169,6 +187,8 @@ public class InputManager : MonoBehaviour
                 aimAndShootDirection = aimAndShootDirectionValue.normalized;
             }
         }
+
+        brakeAction.performed += ctx => Debug.Log("Brake Pressed!");
     }
 
     private void LateUpdate()
@@ -186,6 +206,8 @@ public class InputManager : MonoBehaviour
             }
             if (jumpTrickFirstFrame) jumpTrickFirstFrame = false;
             if (boostFirstFrame && isHoldingBoost) boostFirstFrame = false;
+
+            if (reloaded) reloaded = false;
         }
     }
 
@@ -308,6 +330,15 @@ public class InputManager : MonoBehaviour
     {
         aimAndShootDirection = new Vector2(0, 0);
         isHoldingAimAndShoot = false;
+    }
+    private void OnBrakePerformed(InputAction.CallbackContext context)
+    {
+        isHoldingBrake = true;
+    }
+
+    private void OnBrakeCanceled(InputAction.CallbackContext context)
+    {
+        isHoldingBrake = false;
     }
 }
 
