@@ -249,7 +249,7 @@ public class MovementTest2 : MonoBehaviour
             }
 
             //Se jogador possuir velocidade suficiente, pode fazer uma curva brusca clicando duas vezes rapidamente para uma direção.
-            if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+            if (rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
             {
                 //TESTE CLIQUE DUPLO
 
@@ -289,12 +289,12 @@ public class MovementTest2 : MonoBehaviour
                 }
                 else if (inputManager.defaultMap == DefaultMap.ControlsDirection)
                 {
-                    if (inputManager.isHoldingDrift && SignedAngleForControlsDirection() < 0 && signedAngle < -45f && isGrounded && !isGrinding)
+                    if (inputManager.isHoldingDrift && SignedAngleForControlsDirection() < 0 && signedAngle < -30f && isGrounded && !isGrinding)
                     {
                         isDriftingA = true;
                         isDriftingD = false;
                     }
-                    else if (inputManager.isHoldingDrift && SignedAngleForControlsDirection() > 0 && signedAngle > 45f && isGrounded && !isGrinding)
+                    else if (inputManager.isHoldingDrift && SignedAngleForControlsDirection() > 0 && signedAngle > 30f && isGrounded && !isGrinding)
                     {
                         isDriftingA = false;
                         isDriftingD = true;
@@ -312,7 +312,7 @@ public class MovementTest2 : MonoBehaviour
             if (inputManager.defaultMap == DefaultMap.ControlsRotation)
             {
                 //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
-                if (isDriftingA && isGrounded && inputManager.rotationDirection < 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
+                if (isDriftingA && isGrounded && inputManager.rotationDirection < 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 2 && !failedTrick)
                 {
                     isDrifting = true;
                     rotation = inputManager.rotationDirection * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -322,7 +322,7 @@ public class MovementTest2 : MonoBehaviour
                         emissionModule.enabled = true;
                     }
                 }
-                else if (isDriftingD && isGrounded && inputManager.rotationDirection > 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
+                else if (isDriftingD && isGrounded && inputManager.rotationDirection > 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 2 && !failedTrick)
                 {
                     isDrifting = true;
                     rotation = inputManager.rotationDirection * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -380,7 +380,7 @@ public class MovementTest2 : MonoBehaviour
             else if (inputManager.defaultMap == DefaultMap.ControlsDirection)
             {
                 //Checa se personagem está realizando uma curva brusca. Se não estiver, personagem rotaciona normalmente para as direções A e D.
-                if (isDriftingA && isGrounded && SignedAngleForControlsDirection() < 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
+                if (isDriftingA && isGrounded && SignedAngleForControlsDirection() < 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 2 && !failedTrick)
                 {
                     isDrifting = true;
                     rotation = SignedAngleForControlsDirection() * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -390,7 +390,7 @@ public class MovementTest2 : MonoBehaviour
                         emissionModule.enabled = true;
                     }
                 }
-                else if (isDriftingD && isGrounded && SignedAngleForControlsDirection() > 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 3 && !failedTrick)
+                else if (isDriftingD && isGrounded && SignedAngleForControlsDirection() > 0 && rb.velocity.magnitude >= maxMoveSpeed / 5 * 2 && !failedTrick)
                 {
                     isDrifting = true;
                     rotation = SignedAngleForControlsDirection() * rotSpeed * Mathf.Lerp(0f, 2f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
@@ -569,7 +569,7 @@ public class MovementTest2 : MonoBehaviour
                     float trickTimer = Time.time - (nextActionTime - trickCooldown / 4);
                     animator.SetFloat("trickTimer", trickTimer);
                     animator.SetTrigger("landed");
-                    Debug.Log(animator.GetFloat("trickTimer"));
+                    //Debug.Log(animator.GetFloat("trickTimer"));
 
                 }
                 trickCombo = 0;
@@ -635,12 +635,16 @@ public class MovementTest2 : MonoBehaviour
             }
         }
 
+        /*
         //Se personagem estiver não estiver no chão, força para baixo é aplicada.
         if (!isGrounded && !isGrinding)
         {
             rb.AddForce(Vector3.down * 22.5f);
         }
-        else if(!isGrinding) rb.AddForce(Vector3.down * 5f);
+        else if(!isGrinding) rb.AddForce(Vector3.down * 20f);
+        */
+
+        if (!isGrinding) rb.AddForce(Vector3.down * 22.5f);
 
         Vector3 directionFront = new Vector3(0, 0, 1);
         directionFront = transform.TransformDirection(directionFront);
@@ -655,14 +659,14 @@ public class MovementTest2 : MonoBehaviour
             else rb.AddForce(directionFront * acceleration / 4);
         }
 
-        if(isGrounded && !isGrinding)
+        if(isGrounded && !isGrinding && !isBraking)
         {
             if (canInput)
             {
                 //Enquanto personagem estiver fazendo a curva brusca, a velocidade dele reduzirá e será aplicada uma força lateral ao personagem que fará o personagem dar curvas mais acentuadas.
                 if (isDriftingA || isDriftingD)
                 {
-                    rb.velocity *= 0.985f;
+                    rb.velocity *= 0.9875f;
                     Vector3 driftForce = isDriftingA ? -directionSides : directionSides;
                     if(Mathf.Abs(rb.velocity.x) <= maxMoveSpeed)
                     {
@@ -807,7 +811,7 @@ public class MovementTest2 : MonoBehaviour
         }
         else
         {
-            if (rb.velocity.magnitude >= maxMoveSpeed / 3 * 2)
+            if (rb.velocity.magnitude >= maxMoveSpeed / 5 * 3)
             {
                 for (int i = 0; i < trailRenderers.Length; i++)
                 {
@@ -815,7 +819,7 @@ public class MovementTest2 : MonoBehaviour
                 }
                 speedInteger = 2;
             }
-            else if (rb.velocity.magnitude >= maxMoveSpeed / 3)
+            else if (rb.velocity.magnitude >= maxMoveSpeed / 5 * 1.5f)
             {
                 for (int i = 0; i < trailRenderers.Length; i++)
                 {

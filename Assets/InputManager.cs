@@ -7,6 +7,8 @@ public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
     public DefaultMap defaultMap;
+    private string currentControlScheme;
+    public bool isUsingGamepad { get; private set; }
 
     [Space]
     [Header("Rotation (ControlsRotation)")]
@@ -60,9 +62,19 @@ public class InputManager : MonoBehaviour
     public bool isHoldingBrake;
     private InputAction brakeAction;
 
+    [Space]
+    [Header("Pause")]
+    public bool paused;
+    private InputAction pauseAction;
+
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        currentControlScheme = playerInput.currentControlScheme;
+        isUsingGamepad = currentControlScheme.Contains("Gamepad");
+
+        // Listen for changes in input device
+        playerInput.onControlsChanged += OnControlsChanged;
 
         switch (playerInput.currentActionMap.name)
         {
@@ -104,6 +116,7 @@ public class InputManager : MonoBehaviour
             aimAndShootAction = playerInput.actions.FindAction("AimAndShoot [Gamepad]");
             reloadAction = playerInput.actions.FindAction("Reload");
             brakeAction = playerInput.actions.FindAction("Brake");
+            pauseAction = playerInput.actions.FindAction("Pause");
 
             driftAction.performed += OnDriftPerformed;
             driftAction.canceled += OnDriftCanceled;
@@ -120,8 +133,11 @@ public class InputManager : MonoBehaviour
             reloadAction.canceled += ctx => reloaded = false;
             brakeAction.started += ctx => isHoldingBrake = true;
             brakeAction.canceled += ctx => isHoldingBrake = false;
+            pauseAction.started += ctx => paused = true;
+            pauseAction.canceled += ctx => paused = false;
         }
     }
+
 
     void OnDestroy()
     {
@@ -160,7 +176,7 @@ public class InputManager : MonoBehaviour
     {
         if (defaultMap == DefaultMap.UI)
         {
-
+            
         }
         else
         {
@@ -189,6 +205,15 @@ public class InputManager : MonoBehaviour
         }
 
         brakeAction.performed += ctx => Debug.Log("Brake Pressed!");
+
+        if (isUsingGamepad)
+        {
+            Debug.Log("Using Gamepad");
+        }
+        else
+        {
+            Debug.Log("Using Keyboard/Mouse");
+        }
     }
 
     private void LateUpdate()
@@ -208,6 +233,7 @@ public class InputManager : MonoBehaviour
             if (boostFirstFrame && isHoldingBoost) boostFirstFrame = false;
 
             if (reloaded) reloaded = false;
+            if (paused) paused = false;
         }
     }
 
@@ -339,6 +365,13 @@ public class InputManager : MonoBehaviour
     private void OnBrakeCanceled(InputAction.CallbackContext context)
     {
         isHoldingBrake = false;
+    }
+    private void OnControlsChanged(PlayerInput input)
+    {
+        currentControlScheme = input.currentControlScheme;
+        isUsingGamepad = currentControlScheme.Contains("Gamepad");
+
+        Debug.Log("Current Control Scheme: " + currentControlScheme);
     }
 }
 

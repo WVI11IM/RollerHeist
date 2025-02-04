@@ -341,7 +341,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 049a3067cfefee140a5654f00f133d3c, type: 3}
   m_Controller: {fileID: 9100000, guid: 01ae2f619de724340ac4a120d8ae7282, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 1
+  m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -5516,7 +5516,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052024033628100606}
   serializedVersion: 2
-  m_Mass: 2.75
+  m_Mass: 2.5
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -5537,7 +5537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5553172903017671077}
-  acceleration: 90
+  acceleration: 105
   maxMoveSpeed: 25
   rotSpeed: 135
   jumpForce: 12.5
@@ -5798,7 +5798,7 @@ MonoBehaviour:
   chamber: {fileID: 2104137042822358392}
   chamberLeftHand: {fileID: 2052024033707219781}
   bulletPrefab: {fileID: 9070974583837955472, guid: fb8803851824b494dac839db607160c5, type: 3}
-  bulletSpeed: 75
+  bulletSpeed: 85
   fireRate: 3.5
   maxAmmo: 15
   currentAmmo: 0
@@ -5958,6 +5958,62 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3e126783-c62f-42e4-9b01-949b6456aed1
     m_ActionName: ControlsDirection/Brake[/Keyboard/a,/Keyboard/d,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 536bea5c-e7e4-41e4-a3cf-7688c1ba18fa
+    m_ActionName: ControlsRotation/Reload[/XInputControllerWindows/rightStickPress,/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4773c7ff-8db3-466a-98e5-aeb5188f097a
+    m_ActionName: ControlsDirection/Reload[/XInputControllerWindows/rightStickPress,/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7fb6403f-98df-4239-b5be-e250e6b77e1a
+    m_ActionName: ControlsRotation/Pause[/Keyboard/escape,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ffe1fad-4400-4403-967d-348b2c3681d3
+    m_ActionName: ControlsDirection/Pause[/Keyboard/escape,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9a11b14c-28af-4a84-81ae-d796262d9f18
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e95da721-68a8-439a-8682-d50758c9d8ee
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bf9a4020-841a-427b-b798-332952d02f3c
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4deb8e0b-7616-48f0-b6ef-275dbbabb85d
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5aa2d115-fff1-4051-87e7-b7508bcc03c9
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3ec293c2-e702-477d-a102-c6b08bd519e7
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e515044c-0b9c-4514-8eb3-bf3451c56fe1
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bedcaca1-db2e-4d5b-9008-ab0c054b5a48
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ea54236f-f688-442f-8ba0-f16b5c67cac0
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c837acd-9524-4027-997d-e693bd96a8e3
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: ControlsDirection
@@ -5986,7 +6042,9 @@ MonoBehaviour:
   isHoldingShoot: 0
   aimAndShootDirection: {x: 0, y: 0}
   isHoldingAimAndShoot: 0
+  reloaded: 0
   isHoldingBrake: 0
+  paused: 0
 --- !u!1 &2052024033637939033
 GameObject:
   m_ObjectHideFlags: 0

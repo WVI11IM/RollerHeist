@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public int levelNumber;
+    public InputManager inputManager;
 
     public GameObject winPanel;
     public TextMeshProUGUI highScoreText;
@@ -29,6 +31,10 @@ public class GameManager : MonoBehaviour
 
     public GameState state;
 
+    public Button pauseButtonToSelect;
+    public Button gameOverButtonToSelect;
+    public Button winButtonToSelect;
+
     public static event Action<GameState> OnGameStateChange;
 
     private void Awake()
@@ -47,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (inputManager.paused)
         {
             if (!isPaused && canPause)
             {
@@ -105,6 +111,7 @@ public class GameManager : MonoBehaviour
     private void HandleWin()
     {
         canPause = false;
+        winButtonToSelect.Select();
         PlayerPrefs.SetInt("justPlayedLevel", 1);
         SFXManager.Instance.PlayUISFX("missaoCumprida");
 
@@ -115,6 +122,7 @@ public class GameManager : MonoBehaviour
         CheckTimeScore();
 
         SFXManager.Instance.StopAllLoopingSFX();
+        AudioMixerManager.Instance.ChangeMusicSnapshot("Paused", 0);
 
         UpdateHighScore();
         PlayerPrefs.Save();
@@ -133,6 +141,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        gameOverButtonToSelect.Select();
         AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0);
         canPause = false;
         uiAnimator.SetBool("gameIsOver", true);
@@ -166,9 +175,10 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+        pauseButtonToSelect.Select();
         SFXManager.Instance.PlayUISFX("negativo1");
         SFXManager.Instance.PlayUISFX("woosh2");
-        AudioMixerManager.Instance.ChangeMusicSnapshot("Paused", 0f);
+        AudioMixerManager.Instance.ChangeMusicSnapshot("Paused", 0f);   //COLOCAR SCRIPT PARA EVENT DA ANIMACAO
         pausePanel.SetActive(true);
         isPaused = true;
         AudioMixerManager.Instance.UpdateSliders();

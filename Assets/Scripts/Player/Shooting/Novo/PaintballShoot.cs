@@ -333,8 +333,6 @@ public class PaintballShoot : MonoBehaviour
 
             // Define a velocidade da bala na direção do mouse
             rb.velocity = worldDirection * bulletSpeed;
-
-            UnityEngine.Debug.Log("BULLET DIRECTION: " + worldDirection);
         }
         else if (inputManager.isHoldingShoot)
         {

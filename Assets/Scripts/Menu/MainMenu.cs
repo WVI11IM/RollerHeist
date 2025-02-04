@@ -37,6 +37,11 @@ public class MainMenu : MonoBehaviour
     public GameObject medalInfoButton;
     public TextMeshProUGUI levelTimeRecordText;
     public TextMeshProUGUI museumName;
+    public Button titleButtonToSelect;
+    public Button mainMenuButtonToSelect;
+    public Button tutorialButtonToSelect;
+    public Button playButtonToSelect;
+    public Button[] levelButtonsToSelect;
 
     private SceneLoader sceneLoader;
 
@@ -52,6 +57,7 @@ public class MainMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("titleScreenActivated") == 0)
         {
             ChangeMenuState("Title");
+            titleButtonToSelect.Select();
             PlayerPrefs.SetInt("titleScreenActivated", 1);
             PlayerPrefs.SetInt("justPlayedLevel", 0);
             PlayerPrefs.SetInt("justPlayedTutorial", 0);
@@ -61,6 +67,7 @@ public class MainMenu : MonoBehaviour
             if(PlayerPrefs.GetInt("justPlayedTutorial") == 1)
             {
                 ChangeMenuState("Play");
+                playButtonToSelect.Select();
                 PlayerPrefs.SetInt("justPlayedLevel", 0);
                 PlayerPrefs.SetInt("justPlayedTutorial", 0);
             }
@@ -73,6 +80,7 @@ public class MainMenu : MonoBehaviour
             else
             {
                 ChangeMenuState("Main");
+                mainMenuButtonToSelect.Select();
                 PlayerPrefs.SetInt("justPlayedLevel", 0);
                 PlayerPrefs.SetInt("justPlayedTutorial", 0);
             }
@@ -87,6 +95,11 @@ public class MainMenu : MonoBehaviour
         {
             levelToSelect = PlayerPrefs.GetInt("levelToSelect");
             levelSelectAnimator.SetInteger("level", levelToSelect);
+
+            if (!levelSelectAnimator.GetBool("selectedLevel"))
+            {
+                //select levels with joystick
+            }
         }
     }
 
@@ -201,15 +214,24 @@ public class MainMenu : MonoBehaviour
         if (missionTokens == 0 && PlayerPrefs.GetInt("didTutorial") == 0)
         {
             ChangeMenuState("Tutorial");
+            tutorialButtonToSelect.Select();
             SFXManager.Instance.PlayUISFX("woosh2");
         }
-        else ChangeMenuState("Play");
+        else
+        {
+            ChangeMenuState("Play");
+            playButtonToSelect.Select();
+        }
     }
 
     public void ChangeLevel(int addOrSubtractOne)
     {
         levelToSelect += addOrSubtractOne;
-        levelToSelect = Mathf.Clamp(levelToSelect, 1, 3);
+        levelToSelect = Mathf.Clamp(levelToSelect, 1, numberOfLevels + 1);
+        if(levelToSelect == 1 || levelToSelect == 3)
+        {
+            SelectLevelButton();
+        }
         PlayerPrefs.SetInt("levelToSelect", levelToSelect);
 
         UpdateHighscoreText();
@@ -256,6 +278,7 @@ public class MainMenu : MonoBehaviour
         else
         {
             levelToSelect = PlayerPrefs.GetInt("levelToSelect");
+            SelectLevelButton();
         }
 
         UpdateHighscoreText();
@@ -276,6 +299,11 @@ public class MainMenu : MonoBehaviour
         levelSelectAnimator.SetBool("selectedLevel", selectedLevel);
     }
 
+    public void SelectLevelButton()
+    {
+        levelButtonsToSelect[levelToSelect - 1].Select();
+    }
+
     public void PlayButton()
     {
         if (selectedLevel)
@@ -293,14 +321,6 @@ public class MainMenu : MonoBehaviour
             }
         }
     }
-
-    /*
-    public void PlayGame()
-    {
-        MusicManager.Instance.StopAllLoopingMusic();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-    */
 
     public void LoadScene(string sceneName)
     {

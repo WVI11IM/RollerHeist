@@ -27,6 +27,11 @@ public class AudioMixerManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             LoadVolumes();
+
+            normalSnapshot = audioMixer.FindSnapshot("Normal");
+            pausedSnapshot = audioMixer.FindSnapshot("Paused");
+            radioSnapshot = audioMixer.FindSnapshot("Radio");
+            boostSnapshot = audioMixer.FindSnapshot("Boost");
         }
         else
         {
@@ -38,10 +43,7 @@ public class AudioMixerManager : MonoBehaviour
 
     private void Start()
     {
-        normalSnapshot = audioMixer.FindSnapshot("Normal");
-        pausedSnapshot = audioMixer.FindSnapshot("Paused");
-        radioSnapshot = audioMixer.FindSnapshot("Radio");
-        boostSnapshot = audioMixer.FindSnapshot("Boost");
+        
     }
 
     private void OnDestroy()
