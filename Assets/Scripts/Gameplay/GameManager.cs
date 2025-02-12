@@ -5,6 +5,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChange;
 
+    private InputAction cancelAction;
+
     private void Awake()
     {
         Instance = this;
@@ -49,6 +54,21 @@ public class GameManager : MonoBehaviour
         exitIndicator = GameObject.FindGameObjectWithTag("ExitTarget");
 
         UpdateGameState(GameState.Invade);
+
+        var inputModule = EventSystem.current?.GetComponent<InputSystemUIInputModule>();
+        if (inputModule != null)
+        {
+            cancelAction = inputModule.cancel;
+            if (cancelAction != null)
+            {
+                cancelAction.Enable();
+                cancelAction.performed += OnCancelPerformed;
+            }
+        }
+        else
+        {
+            Debug.LogError("InputSystemUIInputModule not found in the EventSystem!");
+        }
     }
 
     private void Update()
@@ -254,6 +274,20 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale -= 0.25f;
             yield return new WaitForSeconds(1);
+        }
+    }
+    private void OnCancelPerformed(InputAction.CallbackContext context)
+    {
+        Debug.Log("Cancel action performed via gamepad!");
+        // Add your logic here
+    }
+
+    void OnDestroy()
+    {
+        if (cancelAction != null)
+        {
+            cancelAction.performed -= OnCancelPerformed;
+            cancelAction.Disable();
         }
     }
 }

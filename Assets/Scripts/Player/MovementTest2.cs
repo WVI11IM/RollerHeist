@@ -27,7 +27,7 @@ public class MovementTest2 : MonoBehaviour
     public bool canInput = true;
 
     private Vector3 previousVelocity;
-    private float decelerationThreshold = 15f;
+    private float decelerationThreshold = 20f;
     private bool pushedByShield = false;
 
     private HealthBar playerHealth;
@@ -644,7 +644,7 @@ public class MovementTest2 : MonoBehaviour
         else if(!isGrinding) rb.AddForce(Vector3.down * 20f);
         */
 
-        if (!isGrinding) rb.AddForce(Vector3.down * 22.5f);
+        if (!isGrinding) rb.AddForce(Vector3.down * 25f);
 
         Vector3 directionFront = new Vector3(0, 0, 1);
         directionFront = transform.TransformDirection(directionFront);

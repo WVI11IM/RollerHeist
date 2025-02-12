@@ -6,6 +6,9 @@ using UnityEngine.Events;
 using Cinemachine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {   
@@ -95,12 +98,8 @@ public class MainMenu : MonoBehaviour
         {
             levelToSelect = PlayerPrefs.GetInt("levelToSelect");
             levelSelectAnimator.SetInteger("level", levelToSelect);
-
-            if (!levelSelectAnimator.GetBool("selectedLevel"))
-            {
-                //select levels with joystick
-            }
         }
+
     }
 
     public void ChangeMenuState(string state)
@@ -228,7 +227,7 @@ public class MainMenu : MonoBehaviour
     {
         levelToSelect += addOrSubtractOne;
         levelToSelect = Mathf.Clamp(levelToSelect, 1, numberOfLevels + 1);
-        if(levelToSelect == 1 || levelToSelect == 3)
+        if(levelToSelect >= 1 && levelToSelect <= 3)
         {
             SelectLevelButton();
         }
@@ -299,8 +298,16 @@ public class MainMenu : MonoBehaviour
         levelSelectAnimator.SetBool("selectedLevel", selectedLevel);
     }
 
+
     public void SelectLevelButton()
     {
+        EventSystem.current.SetSelectedGameObject(null);
+        StartCoroutine(SelectLevelButtonAfterTime());
+    }
+
+    private IEnumerator SelectLevelButtonAfterTime()
+    {
+        yield return new WaitForSeconds(0.25f);
         levelButtonsToSelect[levelToSelect - 1].Select();
     }
 
@@ -367,6 +374,7 @@ public class MainMenu : MonoBehaviour
         LoadScene("Intro");
 
     }
+
 
     public void Quit()
     {
