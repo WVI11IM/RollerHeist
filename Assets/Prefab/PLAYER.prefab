@@ -5537,8 +5537,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5553172903017671077}
-  acceleration: 120
-  maxMoveSpeed: 27.5
+  acceleration: 112.5
+  maxMoveSpeed: 26.25
   rotSpeed: 135
   jumpForce: 12.5
   isBraking: 0
@@ -5708,7 +5708,7 @@ MonoBehaviour:
   boostMeterValueGaining: {fileID: 2052024033779708847}
   maxBoostValue: 3.5
   boostValue: 0
-  boostSpeedMultiplier: 1.2
+  boostSpeedMultiplier: 1.25
   boostToDeplete: 0.35
   playerGrind: {fileID: 2052024033628100596}
   isGrinding: 0
@@ -5779,6 +5779,7 @@ MonoBehaviour:
     m_Bits: 64
   minDistance: 3.15
   floorLevelIcon: {fileID: 2052024033797446197}
+  spriteRenderer: {fileID: 2052024034445294068}
   distanceToFloor: 0
 --- !u!114 &2052024033628100587
 MonoBehaviour:

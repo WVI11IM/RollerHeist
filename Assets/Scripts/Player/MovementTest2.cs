@@ -201,13 +201,13 @@ public class MovementTest2 : MonoBehaviour
         if (canInput)
         {
             //Enquanto jogador segurar botão direito do mouse e estiver no chão, personagem terá boost de velocidade.
-            if (inputManager.isHoldingBoost && boostValue > 0 && isGrounded && !isGrinding && !isBraking && !failedTrick)
+            if (inputManager.isHoldingBoost && boostValue > 0 && isGrounded && !isGrinding && !isBraking && !failedTrick && !GameManager.Instance.isPaused)
             {
                 Boost();
             }
             else
             {
-                if (inputManager.IsBoostFirstFrame() && isGrounded && !isGrinding && !isBraking && !failedTrick)
+                if (inputManager.IsBoostFirstFrame() && isGrounded && !isGrinding && !isBraking && !failedTrick && !GameManager.Instance.isPaused)
                 {
                     boostBarAnimator.SetTrigger("valueEmpty");
                     SFXManager.Instance.PlaySFXRandomPitch("boostVazio1");
@@ -229,7 +229,7 @@ public class MovementTest2 : MonoBehaviour
             }
 
             //Faz personagem dar um pulo com barra de espaço.
-            if (inputManager.IsJumpTrickFirstFrame() && isGrounded && !isJumping && !isGrinding && !failedTrick && Time.timeScale != 0)
+            if (inputManager.IsJumpTrickFirstFrame() && isGrounded && !isJumping && !isGrinding && !failedTrick && Time.timeScale != 0 && !GameManager.Instance.isPaused)
             {
                 Jump();
             }
@@ -239,7 +239,7 @@ public class MovementTest2 : MonoBehaviour
             RaycastHit hit2;
             bool isHit1 = Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit1, minDistForTrick, floorLayerMask);
             bool isHit2 = Physics.Raycast(transform.position + Vector3.up + (Vector3.forward / 4), Vector3.down, out hit2, minDistForTrick, floorLayerMask);
-            if (inputManager.isHoldingJumpTrick && !isGrounded && !isHit1 && !isHit2 && rb.velocity.magnitude >= maxMoveSpeed / 2 && Time.timeScale != 0)
+            if (inputManager.isHoldingJumpTrick && !isGrounded && !isHit1 && !isHit2 && rb.velocity.magnitude >= maxMoveSpeed / 2 && Time.timeScale != 0 && !GameManager.Instance.isPaused)
             {
                 if (Time.time > nextActionTime)
                 {

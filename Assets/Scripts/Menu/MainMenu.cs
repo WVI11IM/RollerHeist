@@ -307,7 +307,7 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator SelectLevelButtonAfterTime()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.2f);
         levelButtonsToSelect[levelToSelect - 1].Select();
     }
 

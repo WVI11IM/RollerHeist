@@ -304,8 +304,11 @@ public class InputManager : MonoBehaviour
 
     private void OnJumpTrickPerformed(InputAction.CallbackContext context)
     {
-        jumpTrickFirstFrame = true;
-        isHoldingJumpTrick = true;
+        if (Time.timeScale != 0)
+        {
+            jumpTrickFirstFrame = true;
+            isHoldingJumpTrick = true;
+        }
     }
 
     private void OnJumpTrickCanceled(InputAction.CallbackContext context)

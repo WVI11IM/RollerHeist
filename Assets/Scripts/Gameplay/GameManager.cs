@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject pausePanel;
     public bool canPause = true;
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     //target arrow reference
     private GameObject objIndicator;

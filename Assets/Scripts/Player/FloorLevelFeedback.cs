@@ -5,11 +5,19 @@ using UnityEngine;
 public class FloorLevelFeedback : MonoBehaviour
 {
     public LayerMask groundLayer;
-    private float raycastDistance = 28f;
+    private float raycastDistance = 40f;
     public float minDistance = 2.75f;
     public Transform floorLevelIcon;
+    public SpriteRenderer spriteRenderer;
 
     public float distanceToFloor;
+
+    private float startScale;
+
+    private void Start()
+    {
+        startScale = transform.localScale.x;
+    }
 
     private void Update()
     {
@@ -26,6 +34,10 @@ public class FloorLevelFeedback : MonoBehaviour
             {
                 floorLevelIcon.gameObject.SetActive(true);
                 floorLevelIcon.localPosition = new Vector3(0, -distanceToGround + 0.1f, 0);
+                float iconScale = startScale * (Mathf.Lerp(startScale, startScale * 4, distanceToGround / raycastDistance));
+                floorLevelIcon.localScale = new Vector3(iconScale, iconScale, iconScale);
+                Color iconColor = Color.Lerp(new Color(0.75f, 0, 0, 1), new Color(0.65f, 0.75f, 0, 0.25f), distanceToGround / raycastDistance);
+                spriteRenderer.color = iconColor;
             }
             else
             {
