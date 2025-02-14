@@ -8,7 +8,6 @@ public class InputManager : MonoBehaviour
     private PlayerInput playerInput;
     public DefaultMap defaultMap;
     private string currentControlScheme;
-    public bool isUsingGamepad { get; private set; }
 
     [Space]
     [Header("Rotation (ControlsRotation)")]
@@ -71,10 +70,6 @@ public class InputManager : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         currentControlScheme = playerInput.currentControlScheme;
-        isUsingGamepad = currentControlScheme.Contains("Gamepad");
-
-        // Listen for changes in input device
-        playerInput.onControlsChanged += OnControlsChanged;
 
         switch (playerInput.currentActionMap.name)
         {
@@ -202,17 +197,6 @@ public class InputManager : MonoBehaviour
             {
                 aimAndShootDirection = aimAndShootDirectionValue.normalized;
             }
-        }
-
-        brakeAction.performed += ctx => Debug.Log("Brake Pressed!");
-
-        if (isUsingGamepad)
-        {
-            Debug.Log("Using Gamepad");
-        }
-        else
-        {
-            Debug.Log("Using Keyboard/Mouse");
         }
     }
 
@@ -368,13 +352,6 @@ public class InputManager : MonoBehaviour
     private void OnBrakeCanceled(InputAction.CallbackContext context)
     {
         isHoldingBrake = false;
-    }
-    private void OnControlsChanged(PlayerInput input)
-    {
-        currentControlScheme = input.currentControlScheme;
-        isUsingGamepad = currentControlScheme.Contains("Gamepad");
-
-        Debug.Log("Current Control Scheme: " + currentControlScheme);
     }
 }
 

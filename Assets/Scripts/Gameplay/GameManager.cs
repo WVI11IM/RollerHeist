@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;
 
     public Animator uiAnimator;
-    public Animator pauseAnimator;
+    private Animator pauseAnimator;
     public static GameManager Instance;
 
     public GameObject pausePanel;
@@ -52,8 +52,9 @@ public class GameManager : MonoBehaviour
         AudioMixerManager.Instance.LoadVolumes();
         objIndicator = GameObject.FindGameObjectWithTag("ObjectTarget");
         exitIndicator = GameObject.FindGameObjectWithTag("ExitTarget");
+        pauseAnimator = pausePanel.GetComponent<Animator>();
 
-        UpdateGameState(GameState.Invade);
+        if(state != GameState.None) UpdateGameState(GameState.Invade);
 
         var inputModule = EventSystem.current?.GetComponent<InputSystemUIInputModule>();
         if (inputModule != null)
@@ -104,6 +105,9 @@ public class GameManager : MonoBehaviour
             case GameState.Lose:
                 HandleLose();
                 break;
+            case GameState.None:
+                HandleNone();
+                break;
         }
 
         OnGameStateChange?.Invoke(newState);
@@ -142,7 +146,6 @@ public class GameManager : MonoBehaviour
         CheckTimeScore();
 
         SFXManager.Instance.StopAllLoopingSFX();
-        AudioMixerManager.Instance.ChangeMusicSnapshot("Paused", 0);
 
         UpdateHighScore();
         PlayerPrefs.Save();
@@ -150,6 +153,8 @@ public class GameManager : MonoBehaviour
         //Freeze time
         AudioListener.pause = true;
         Time.timeScale = 0f;
+
+        AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0);
     }
 
     private void HandleLose()
@@ -170,6 +175,19 @@ public class GameManager : MonoBehaviour
         SFXManager.Instance.StopAllLoopingSFX();
         SFXManager.Instance.PlayUISFX("gameOver");
         SFXManager.Instance.PlaySFX("sirene");
+    }
+
+    private void HandleNone()
+    {
+        /*
+        EnemyManager.Instance.canSpawn = false;
+        EnemyManager.Instance.canFollow = false;
+        */
+
+        objIndicator.SetActive(false);
+        exitIndicator.SetActive(false);
+
+        //exitCollider.isTrigger = false;
     }
 
     public void Restart()
@@ -297,5 +315,6 @@ public enum GameState
     Invade,
     Escape,
     Win,
-    Lose
+    Lose,
+    None
 }
