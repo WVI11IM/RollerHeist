@@ -47,6 +47,12 @@ public class PaintballShoot : MonoBehaviour
     [SerializeField] private Texture2D isShootingCursor;
     [SerializeField] private Texture2D cannotShootCursor;
 
+    [Space]
+    [Header("LASER")]
+    public LayerMask laserLayerMask;
+    private LineRenderer laser;
+    public float laserDistance;
+
     private MovementTest2 playerMovement;
 
     private void Start()
@@ -57,6 +63,14 @@ public class PaintballShoot : MonoBehaviour
         currentAmmo = maxAmmo;
         chamber.SetActive(true);
         chamberLeftHand.SetActive(false);
+
+        laser = GetComponent<LineRenderer>();
+
+        if (laser != null)
+        {
+            laser.positionCount = 2;
+            laser.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -94,6 +108,8 @@ public class PaintballShoot : MonoBehaviour
                 }
                 if (inputManager.isHoldingAimAndShoot)
                 {
+                    Laser(true);
+
                     Vector3 cameraForward = Camera.main.transform.forward;
                     Vector3 cameraRight = Camera.main.transform.right;
 
@@ -150,6 +166,8 @@ public class PaintballShoot : MonoBehaviour
                 }
                 else if (inputManager.isHoldingShoot)
                 {
+                    Laser(false);
+
                     Vector3 mousePosition = Input.mousePosition;
 
                     Ray ray = Camera.main.ScreenPointToRay(mousePosition);
@@ -207,6 +225,7 @@ public class PaintballShoot : MonoBehaviour
                     }
                     else
                     {
+                        Laser(false);
                         targetLayerWeight = 0f;
 
                         if (isReloading)
@@ -231,6 +250,8 @@ public class PaintballShoot : MonoBehaviour
                 }
                 else
                 {
+                    Laser(false);
+
                     targetLayerWeight = 0f;
 
                     if (isReloading)
@@ -256,6 +277,8 @@ public class PaintballShoot : MonoBehaviour
         }
         else
         {
+            Laser(false);
+
             startedShooting = false;
             targetLayerWeight = 0f;
             if (isReloading)
@@ -333,6 +356,7 @@ public class PaintballShoot : MonoBehaviour
 
             // Define a velocidade da bala na direção do mouse
             rb.velocity = worldDirection * bulletSpeed;
+
         }
         else if (inputManager.isHoldingShoot)
         {
@@ -402,4 +426,51 @@ public class PaintballShoot : MonoBehaviour
         currentAmmo = maxAmmo;
         isReloading = false;
     }
+
+    public void Laser(bool isActive)
+    {
+        if (laser != null)
+        {
+            if (isActive)
+            {
+                CastLaser();
+                laser.enabled = true;
+            }
+            else laser.enabled = false;
+        }
+    }
+
+    public void CastLaser()
+    {
+        if (inputManager.aimAndShootDirection == Vector2.zero)
+            return;
+
+        // Calculate the shooting direction based on input
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        Vector3 worldDirection = (cameraRight * inputManager.aimAndShootDirection.x +
+                                  cameraForward * inputManager.aimAndShootDirection.y).normalized;
+
+        float laserRadius = 1.5f; // Adjust this for a thicker beam
+
+        // Default laser endpoint if nothing is hit
+        Vector3 laserEndPoint = firePoint.position + (worldDirection * laserDistance);
+
+        RaycastHit hit;
+        if (Physics.SphereCast(firePoint.position, laserRadius, worldDirection, out hit, laserDistance, laserLayerMask))
+        {
+            laserEndPoint = hit.point; // Stop laser at the first obstacle
+        }
+
+        // Update the LineRenderer
+        laser.SetPosition(0, firePoint.position);
+        laser.SetPosition(1, laserEndPoint);
+    }
+
 }
