@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timerText;
     public float elapsedTime;
     public bool runTime;
+    public GameObject timerPanel;
 
     public static Timer Instance;
 
@@ -38,6 +39,7 @@ public class Timer : MonoBehaviour
             elapsedTime += 0;
         }
 
+        timerPanel.SetActive(runTime);
         int minutes = Mathf.FloorToInt(elapsedTime / 60);
         int seconds = Mathf.FloorToInt(elapsedTime % 60);
         int miliseconds = (int)(elapsedTime * 1000) % 1000;
