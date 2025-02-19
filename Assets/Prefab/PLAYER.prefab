@@ -5820,8 +5820,12 @@ MonoBehaviour:
   cannotShootCursor: {fileID: 2800000, guid: 06e0731afced5864bb8aa0e798ca6836, type: 3}
   laserLayerMask:
     serializedVersion: 2
-    m_Bits: 2624
-  laserDistance: 60
+    m_Bits: 2048
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  laserDistance: 50
+  laserRadius: 5
 --- !u!120 &1694259157452204371
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5896,7 +5900,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 1, a: 0}
-      key1: {r: 1, g: 0, b: 1, a: 0.19607843}
+      key1: {r: 1, g: 0, b: 1, a: 0.25490198}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

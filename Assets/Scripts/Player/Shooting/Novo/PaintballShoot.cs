@@ -50,8 +50,10 @@ public class PaintballShoot : MonoBehaviour
     [Space]
     [Header("LASER")]
     public LayerMask laserLayerMask;
+    public LayerMask enemyLayerMask;
     private LineRenderer laser;
     public float laserDistance;
+    public float laserRadius;
 
     private MovementTest2 playerMovement;
 
@@ -299,7 +301,7 @@ public class PaintballShoot : MonoBehaviour
                 ammoReloadMeter.gameObject.SetActive(false);
                 gun.SetActive(false);
             }
-            
+
             Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
         }
 
@@ -349,13 +351,24 @@ public class PaintballShoot : MonoBehaviour
             cameraForward.Normalize();
             cameraRight.Normalize();
 
-            Vector3 worldDirection = (cameraRight * inputManager.aimAndShootDirection.x + cameraForward * inputManager.aimAndShootDirection.y).normalized;
+            Vector3 worldDirection = (cameraRight * inputManager.aimAndShootDirection.x +
+                              cameraForward * inputManager.aimAndShootDirection.y).normalized;
 
-            // Obtém o componente Rigidbody da bala
+            Vector3 targetDirection = worldDirection;
+
+            RaycastHit hit;
+            if (Physics.SphereCast(firePoint.position, laserRadius, worldDirection, out hit, laserDistance, enemyLayerMask))
+            {
+                Enemy targetedEnemy = hit.collider.gameObject.GetComponent<Enemy>();
+                if (targetedEnemy != null)
+                {
+                    if (!targetedEnemy.hasFainted)
+                        targetDirection = (hit.point - firePoint.position).normalized;
+                }
+            }
+
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-
-            // Define a velocidade da bala na direção do mouse
-            rb.velocity = worldDirection * bulletSpeed;
+            rb.velocity = targetDirection * bulletSpeed;
 
         }
         else if (inputManager.isHoldingShoot)
@@ -384,7 +397,7 @@ public class PaintballShoot : MonoBehaviour
                 rb.velocity = direction * bulletSpeed;
             }
         }
-        
+
     }
 
     IEnumerator Reload()
@@ -457,20 +470,20 @@ public class PaintballShoot : MonoBehaviour
         Vector3 worldDirection = (cameraRight * inputManager.aimAndShootDirection.x +
                                   cameraForward * inputManager.aimAndShootDirection.y).normalized;
 
-        float laserRadius = 1.5f; // Adjust this for a thicker beam
-
-        // Default laser endpoint if nothing is hit
         Vector3 laserEndPoint = firePoint.position + (worldDirection * laserDistance);
 
         RaycastHit hit;
-        if (Physics.SphereCast(firePoint.position, laserRadius, worldDirection, out hit, laserDistance, laserLayerMask))
+        if (Physics.SphereCast(firePoint.position, laserRadius, worldDirection, out hit, laserDistance, enemyLayerMask))
         {
-            laserEndPoint = hit.point; // Stop laser at the first obstacle
+            Enemy targetedEnemy = hit.collider.gameObject.GetComponent<Enemy>();
+            if (targetedEnemy != null)
+            {
+                if (!targetedEnemy.hasFainted) laserEndPoint = hit.point;
+            }
         }
 
         // Update the LineRenderer
         laser.SetPosition(0, firePoint.position);
         laser.SetPosition(1, laserEndPoint);
     }
-
 }
