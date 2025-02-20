@@ -420,6 +420,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1351792418577451193, guid: a7531c83e2a923b48826035616f7d353, type: 3}
   m_PrefabInstance: {fileID: 24983464}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &27692328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6452233221561031212, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
+  m_PrefabInstance: {fileID: 707295044}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &50349530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1593,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2748552827706820645, guid: 4cbfb122dcf726a4290578ab1d65c1c3, type: 3}
   m_PrefabInstance: {fileID: 342698807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &345806428 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4832126389471543210, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
+  m_PrefabInstance: {fileID: 707295044}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &352523057
 GameObject:
@@ -3738,7 +3754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452233221241942554, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6452233221303944668, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3766,7 +3782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452233221473866066, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
@@ -3833,17 +3849,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &707295052 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6452233219608297687, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
-  m_PrefabInstance: {fileID: 707295044}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &707295053 stripped
@@ -10202,6 +10207,7 @@ MonoBehaviour:
   - {fileID: 707295045}
   bigItemCollected: 0
   smallItensCollected: 0
+  questPanelAnimator: {fileID: 345806428}
 --- !u!1001 &1768273072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10216,7 +10222,7 @@ PrefabInstance:
     - target: {fileID: 2052024033628100587, guid: e4f0c498ae199ca499f100c7d171a038, type: 3}
       propertyPath: ammoReloadMeter
       value: 
-      objectReference: {fileID: 707295052}
+      objectReference: {fileID: 27692328}
     - target: {fileID: 2052024033628100587, guid: e4f0c498ae199ca499f100c7d171a038, type: 3}
       propertyPath: gunPanelAnimator
       value: 

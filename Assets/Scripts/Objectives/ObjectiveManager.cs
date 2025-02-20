@@ -42,6 +42,10 @@ public class ObjectiveManager : MonoBehaviour
     public float smallItensCollected;
     private float smallItensToCollect;
 
+    [Header("QUEST PANEL ANIMATOR")]
+    public Animator questPanelAnimator;
+    private bool questPanelIsOn = false;
+
     private void Awake()
     {
         Instance = this;
@@ -179,7 +183,7 @@ public class ObjectiveManager : MonoBehaviour
             {
                 GotItem();
             }
-            SetCollectables();
+            //SetCollectables();
 
             //Caso a fase seja concluída, os dados de player prefs são atualizados dependendo de quais missões forem concluídas.
             if (GameManager.Instance.state == GameState.Win)
@@ -248,6 +252,8 @@ public class ObjectiveManager : MonoBehaviour
                 }
             }
         }
+
+        questPanelAnimator.SetBool("isOn", questPanelIsOn);
     }
 
     void SetCollectables()
@@ -275,6 +281,52 @@ public class ObjectiveManager : MonoBehaviour
     public void EnemyDefeated()
     {
         defeatedEnemies++;
+    }
+
+    public void QuestPanel(bool isActive)
+    {
+        questPanelIsOn = isActive;
+    }
+
+    public void CallQuestPanel()
+    {
+        StartCoroutine(ShowQuestPanel());
+    }
+    IEnumerator ShowQuestPanel()
+    {
+        QuestPanel(true);
+        yield return new WaitForSeconds(2f);
+        QuestPanel(false);
+    }
+
+    public void QuestPanelMainItemNumber()
+    {
+        StartCoroutine(IncreaseMainItemNumber());
+    }
+
+    IEnumerator IncreaseMainItemNumber()
+    {
+        QuestPanel(true);
+        yield return new WaitForSeconds(0.25f);
+        questPanelAnimator.SetTrigger("gotMainItem");
+        yield return new WaitForSeconds(0.25f);
+        SetCollectables();
+        yield return new WaitForSeconds(1.5f);
+        QuestPanel(false);
+    }
+    public void QuestPanelSecondaryItemNumber()
+    {
+        StartCoroutine(IncreaseSecondaryItemNumber());
+    }
+    IEnumerator IncreaseSecondaryItemNumber()
+    {
+        QuestPanel(true);
+        yield return new WaitForSeconds(0.25f);
+        questPanelAnimator.SetTrigger("gotSecondaryItem");
+        yield return new WaitForSeconds(0.25f);
+        SetCollectables();
+        yield return new WaitForSeconds(1.5f);
+        QuestPanel(false);
     }
 }
 

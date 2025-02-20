@@ -4784,6 +4784,7 @@ MonoBehaviour:
   - {fileID: 1244900829}
   bigItemCollected: 0
   smallItensCollected: 0
+  questPanelAnimator: {fileID: 740177368}
 --- !u!1001 &650354698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5611,6 +5612,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2748552827706820645, guid: 4cbfb122dcf726a4290578ab1d65c1c3, type: 3}
   m_PrefabInstance: {fileID: 734958677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &740177368 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4832126389471543210, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
+  m_PrefabInstance: {fileID: 869812424}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &742829087
 PrefabInstance:
@@ -6693,7 +6699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452233221241942554, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6452233221303944668, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6721,7 +6727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452233221473866066, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f4154acd317d0d44bec5ae91d83c583, type: 3}
