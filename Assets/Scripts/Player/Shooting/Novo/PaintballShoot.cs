@@ -447,7 +447,6 @@ public class PaintballShoot : MonoBehaviour
             if (isActive)
             {
                 CastLaser();
-                laser.enabled = true;
             }
             else laser.enabled = false;
         }
@@ -485,5 +484,6 @@ public class PaintballShoot : MonoBehaviour
         // Update the LineRenderer
         laser.SetPosition(0, firePoint.position);
         laser.SetPosition(1, laserEndPoint);
+        laser.enabled = true;
     }
 }

@@ -344,10 +344,10 @@ public class MovementTest2 : MonoBehaviour
                     }
 
                     //Caso personagem esteja no ar, rotação será reduzida.
-                    if (!isGrounded) rotation = inputManager.rotationDirection * rotSpeed / 2 * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    if (!isGrounded) rotation = inputManager.rotationDirection * rotSpeed / 2 * Mathf.Lerp(1.75f, 1f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
 
                     //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
-                    else rotation = inputManager.rotationDirection * rotSpeed * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    else rotation = inputManager.rotationDirection * rotSpeed * Mathf.Lerp(1.75f, 1f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
                 }
 
                 if (isDrifting && !wasDrifting)
@@ -412,10 +412,10 @@ public class MovementTest2 : MonoBehaviour
                     }
 
                     //Caso personagem esteja no ar, rotação será reduzida.
-                    if (!isGrounded) rotation = SignedAngleForControlsDirection() * rotSpeed / 2 * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    if (!isGrounded) rotation = SignedAngleForControlsDirection() * rotSpeed / 2 * Mathf.Lerp(1.75f, 1f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
 
                     //Caso personagem esteja no chão, rotação será normal, depende do Input Horizontal, que varia de -1 a 1.
-                    else rotation = SignedAngleForControlsDirection() * rotSpeed * Mathf.Lerp(3f, 0.75f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
+                    else rotation = SignedAngleForControlsDirection() * rotSpeed * Mathf.Lerp(1.75f, 1f, rb.velocity.magnitude / maxMoveSpeed) * Time.deltaTime;
                 }
 
                 if (isDrifting && !wasDrifting)
@@ -635,16 +635,8 @@ public class MovementTest2 : MonoBehaviour
             }
         }
 
-        /*
-        //Se personagem estiver não estiver no chão, força para baixo é aplicada.
-        if (!isGrounded && !isGrinding)
-        {
-            rb.AddForce(Vector3.down * 22.5f);
-        }
-        else if(!isGrinding) rb.AddForce(Vector3.down * 20f);
-        */
-
-        if (!isGrinding) rb.AddForce(Vector3.down * 25f);
+        //Força para baixo é aplicada.
+        if (!isGrinding) rb.AddForce(Vector3.down * 27.5f);
 
         Vector3 directionFront = new Vector3(0, 0, 1);
         directionFront = transform.TransformDirection(directionFront);
@@ -656,7 +648,7 @@ public class MovementTest2 : MonoBehaviour
         if (rb.velocity.magnitude <= maxMoveSpeed && !isGrinding)
         {
             if(isGrounded) rb.AddForce(directionFront * acceleration);
-            else rb.AddForce(directionFront * acceleration / 4);
+            else rb.AddForce(directionFront * acceleration / 5);
         }
 
         if(isGrounded && !isGrinding && !isBraking)
@@ -728,7 +720,7 @@ public class MovementTest2 : MonoBehaviour
 
             if (!isGrounded)
             {
-                rb.AddForce(directionFront * acceleration * maxMoveSpeed * 1.5f);
+                rb.AddForce(directionFront * acceleration * maxMoveSpeed);
             }
             SFXManager.Instance.StopSFXLoop("trilhos");
         }

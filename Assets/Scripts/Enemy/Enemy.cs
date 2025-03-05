@@ -74,8 +74,8 @@ public class Enemy : MonoBehaviour
                 break;
             case "Mallcop":
                 animator.SetInteger("enemyType", 2);
-                //enemy.avoidancePriority = 0;
-                enemy.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+                enemy.avoidancePriority = 100;
+                //enemy.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
                 break;
             case "Shield":
                 animator.SetInteger("enemyType", 3);
