@@ -164,7 +164,7 @@ NavMeshObstacle:
   m_Extents: {x: 1, y: 3, z: 0.25}
   m_MoveThreshold: 0.1
   m_Carve: 1
-  m_CarveOnlyStationary: 0
+  m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 3, z: 0}
   m_TimeToStationary: 0.5
 --- !u!114 &2303367198254346584
@@ -196,3 +196,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb96262ff2108864592bee4af72866c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propsToUnlock: []

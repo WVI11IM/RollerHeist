@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
                 break;
             case "Mallcop":
                 animator.SetInteger("enemyType", 2);
-                enemy.avoidancePriority = 100;
+                enemy.avoidancePriority = 0;
                 //enemy.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
                 break;
             case "Shield":
@@ -95,6 +95,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (enemy.speed == 0f && (enemyState == State.ATTACK || (enemyType.enemyName == "Shield" && enemyState == State.DEFEND)))
         {
             if(enemyType.enemyName != "Mallcop")
@@ -288,7 +289,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 waitTimer += Time.deltaTime;
-                enemy.isStopped = true;
+                //enemy.isStopped = true;
             }
         }
 
@@ -359,26 +360,16 @@ public class Enemy : MonoBehaviour
         //Perseguir jogador com velocidade alta
         enemy.isStopped = false;
 
-        /*
-        if (playerFloorLevelFeedback.distanceToFloor < 5f)
-        {
-            enemy.SetDestination(player.position);
-        }
-        else
-        {
-            enemy.SetDestination(new Vector3(player.position.x, transform.position.y, player.position.z));
-        }
-        */
-
         updateDestinationTimer -= Time.deltaTime;
         if (updateDestinationTimer <= 0f)
         {
             enemy.SetDestination(player.position);
-            updateDestinationTimer = 0.5f;
+            updateDestinationTimer = 0.25f;
         }
 
         enemy.speed = enemyType.runSpeed;
         enemy.updateRotation = true;
+
     }
     public void AttackPlayer()
     {
@@ -390,9 +381,8 @@ public class Enemy : MonoBehaviour
         if (enemyType.enemyName != "Mallcop")
         {
             enemy.speed = 0;
+            enemy.updateRotation = false;
         }
-
-        enemy.updateRotation = false;
 
         if (enemyType.enemyName == "Guard")
         {
