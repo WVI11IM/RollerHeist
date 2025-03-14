@@ -363,8 +363,9 @@ public class Enemy : MonoBehaviour
         updateDestinationTimer -= Time.deltaTime;
         if (updateDestinationTimer <= 0f)
         {
-            enemy.SetDestination(player.position);
-            updateDestinationTimer = 0.25f;
+            Vector3 playerPosition = player.position;
+            enemy.SetDestination(playerPosition);
+            updateDestinationTimer = 0.5f;
         }
 
         enemy.speed = enemyType.runSpeed;

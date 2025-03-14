@@ -67,11 +67,11 @@ MonoBehaviour:
   useNormals: 1
   useColor: 0
   minDepthThreshold: 0
-  maxDepthThreshold: 2
+  maxDepthThreshold: 0.5
   minNormalsThreshold: 0.25
   maxNormalsThreshold: 2
   minColorThreshold: 0
-  maxColorThreshold: 1
-  renderEvent: 500
+  maxColorThreshold: 4
+  renderEvent: 1000
   outlineOnly: 0
   applyInSceneView: 1
