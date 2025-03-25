@@ -783,9 +783,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Two Modifiers"",
+                    ""name"": ""One Modifier"",
                     ""id"": ""d7c2b9f5-358b-4e08-be32-3b6aad9982ed"",
-                    ""path"": ""TwoModifiers"",
+                    ""path"": ""OneModifier"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -794,9 +794,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""modifier1"",
+                    ""name"": ""Modifier"",
                     ""id"": ""c1a01c01-c610-45ee-abd8-c190ed0a508b"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -805,19 +805,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""modifier2"",
+                    ""name"": ""Binding"",
                     ""id"": ""4a4969f7-318c-45c9-b762-9d6d78ac5852"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Brake"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""a141a6bb-8be4-4512-8917-ad6185c15cf1"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",

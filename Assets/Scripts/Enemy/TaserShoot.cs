@@ -14,6 +14,8 @@ public class TaserShoot : MonoBehaviour
     [SerializeField] private Enemy enemy;
 
     private bool isLaserActive = false;
+    private float laserAnimationDuration = 1;
+    private float laserTimer = 0f;
 
     void Start()
     {
@@ -35,6 +37,7 @@ public class TaserShoot : MonoBehaviour
         if (isLaserActive)
         {
             CastLaser();
+            UpdateLaserProperties();
         }
     }
 
@@ -65,6 +68,7 @@ public class TaserShoot : MonoBehaviour
         if(isActive == 1)
         {
             isLaserActive = true;
+            laserTimer = 0f;
         }
         else isLaserActive = false;
 
@@ -77,5 +81,22 @@ public class TaserShoot : MonoBehaviour
             }
             else laser.enabled = false;
         }
+    }
+
+    private void UpdateLaserProperties()
+    {
+        if (laser == null) return;
+
+        laserTimer += Time.deltaTime;
+        float t = Mathf.Pow(Mathf.PingPong(laserTimer / laserAnimationDuration, 1f), 3);
+
+        float laserWidth = Mathf.Lerp(0.5f, 0.1f, t);
+        laser.startWidth = laserWidth;
+        laser.endWidth = laserWidth;
+
+        Color startColor = new Vector4 (1, 0, 0, 0.25f);
+        Color endColor = new Vector4(1, 1, 1, 1);
+        laser.startColor = Color.Lerp(startColor, endColor, t);
+        laser.endColor = Color.Lerp(startColor, endColor, t);
     }
 }

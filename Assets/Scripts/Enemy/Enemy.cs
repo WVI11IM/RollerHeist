@@ -66,20 +66,20 @@ public class Enemy : MonoBehaviour
         {
             case "Guard":
                 animator.SetInteger("enemyType", 0);
-                enemy.avoidancePriority = 10;
+                //enemy.avoidancePriority = 10;
                 break;
             case "Taser":
                 animator.SetInteger("enemyType", 1);
-                enemy.avoidancePriority = 20;
+                //enemy.avoidancePriority = 20;
                 break;
             case "Mallcop":
                 animator.SetInteger("enemyType", 2);
-                enemy.avoidancePriority = 0;
+                //enemy.avoidancePriority = 0;
                 //enemy.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
                 break;
             case "Shield":
                 animator.SetInteger("enemyType", 3);
-                enemy.avoidancePriority = 5;
+                //enemy.avoidancePriority = 5;
                 break;
         }
 
@@ -361,11 +361,32 @@ public class Enemy : MonoBehaviour
         enemy.isStopped = false;
 
         updateDestinationTimer -= Time.deltaTime;
+        /*
         if (updateDestinationTimer <= 0f)
         {
             Vector3 playerPosition = player.position;
             enemy.SetDestination(playerPosition);
             updateDestinationTimer = 0.5f;
+        }
+        */
+        if (updateDestinationTimer <= 0f)
+        {
+            NavMeshPath path = new NavMeshPath();
+            Vector3 playerPosition = player.position;
+
+            if (NavMesh.CalculatePath(transform.position, playerPosition, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete)
+            {
+                enemy.SetPath(path);
+            }
+            /*
+            else
+            {
+                // Fallback to SetDestination if path calculation fails (e.g., between floors)
+                enemy.SetDestination(playerPosition);
+            }
+            */
+
+            updateDestinationTimer = 0.25f;
         }
 
         enemy.speed = enemyType.runSpeed;

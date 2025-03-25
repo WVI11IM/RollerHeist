@@ -9,11 +9,11 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Rock02
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _CELPRIMARYMODE_SINGLE
   - _DETAILMAPBLENDINGMODE_MULTIPLY
+  - _GRADIENTSPACE_WORLD
+  - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
   - _UNITYSHADOWMODE_MULTIPLY
   m_InvalidKeywords: []
@@ -24,7 +24,6 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -83,6 +82,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _BaseMapPremultiply: 0
     - _Blend: 0
     - _BumpScale: 1
     - _CameraDistanceImpact: 0
@@ -111,6 +111,7 @@ Material:
     - _GradientEnabled: 0
     - _GradientEnd: 1
     - _GradientSize: 10
+    - _GradientSpace: 0
     - _GradientStart: 0
     - _LightContribution: 0.5
     - _LightFalloffSize: 0.0001
@@ -122,6 +123,7 @@ Material:
     - _OutlineDepthOffset: 0
     - _OutlineEnabled: 0
     - _OutlineScale: 1
+    - _OutlineSpace: 0
     - _OutlineWidth: 0
     - _OverrideLightmapDir: 0
     - _OverrideShadows: 1
@@ -146,6 +148,7 @@ Material:
     - _UnityShadowPower: 0.2
     - _UnityShadowSharpness: 1
     - _VertexColorsEnabled: 0
+    - _VertexExtrusionSmoothNormals: 0
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.29268715, g: 0, b: 0.6037736, a: 1}

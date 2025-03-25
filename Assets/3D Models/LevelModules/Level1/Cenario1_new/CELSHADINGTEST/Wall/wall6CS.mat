@@ -28,7 +28,8 @@ Material:
   m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SRPDEFAULTUNLIT
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -145,7 +146,7 @@ Material:
     - _GradientSpace: 0
     - _Intensity: 1
     - _LightContribution: 0
-    - _LightFalloffSize: 0.01
+    - _LightFalloffSize: 0
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
     - _Metallic: 0

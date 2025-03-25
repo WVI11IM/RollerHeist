@@ -207,7 +207,7 @@ public class MovementTest2 : MonoBehaviour
             }
             else
             {
-                if (inputManager.IsBoostFirstFrame() && isGrounded && !isGrinding && !isBraking && !failedTrick && !GameManager.Instance.isPaused)
+                if (inputManager.IsBoostFirstFrame() && boostValue <= 0 && isGrounded && !isGrinding && !isBraking && !failedTrick && !GameManager.Instance.isPaused)
                 {
                     boostBarAnimator.SetTrigger("valueEmpty");
                     SFXManager.Instance.PlaySFXRandomPitch("boostVazio1");
