@@ -485,5 +485,12 @@ public class PaintballShoot : MonoBehaviour
         laser.SetPosition(0, firePoint.position);
         laser.SetPosition(1, laserEndPoint);
         laser.enabled = true;
+
+        float shootTimer = (Time.time - lastShotTime) * fireRate;
+        if(shootTimer >= 0)
+        {
+            laser.startWidth = 1f + Mathf.Lerp(-0.5f, 1f, Mathf.Pow(shootTimer, 2.5f));
+            laser.endWidth = 2f + Mathf.Lerp(-1f, 2f, Mathf.Pow(shootTimer, 2.5f));
+        }
     }
 }
