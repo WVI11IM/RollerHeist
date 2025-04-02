@@ -491,6 +491,11 @@ public class PaintballShoot : MonoBehaviour
         {
             laser.startWidth = 1f + Mathf.Lerp(-0.5f, 1f, Mathf.Pow(shootTimer, 2.5f));
             laser.endWidth = 2f + Mathf.Lerp(-1f, 2f, Mathf.Pow(shootTimer, 2.5f));
+            Color c1 = Color.Lerp(new Color(1, 1, 1, 0.2f), new Color(1, 0, 1, 0f), Mathf.Pow(shootTimer, 0.5f));
+            Color c2 = Color.Lerp(new Color(1, 1, 1, 0.6f), new Color(1, 0, 1, 0.3f), Mathf.Pow(shootTimer, 0.5f));
+
+            laser.startColor = c1;
+            laser.endColor = c2;
         }
     }
 }
