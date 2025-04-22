@@ -1077,8 +1077,8 @@ public class MovementTest2 : MonoBehaviour
         Vector3 raycastOrigin = transform.position;
         raycastOrigin.y += 2;
 
-        Debug.DrawRay(raycastOrigin, direction * 8f, Color.red);
-        if (Physics.Raycast(raycastOrigin, direction, out hit, 8, wallLayerMask))
+        Debug.DrawRay(raycastOrigin, direction * 10f, Color.red);
+        if (Physics.Raycast(raycastOrigin, direction, out hit, 10, wallLayerMask))
         {
             virtualCamera2.enabled = true;
         }

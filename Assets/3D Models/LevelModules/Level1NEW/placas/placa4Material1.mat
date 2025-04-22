@@ -25,7 +25,7 @@ Material:
   m_ValidKeywords:
   - DR_OUTLINE_ON
   - _CELPRIMARYMODE_SINGLE
-  - _DETAILMAPBLENDINGMODE_MULTIPLY
+  - _DETAILMAPBLENDINGMODE_ADD
   - _GRADIENTSPACE_WORLD
   - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
@@ -123,8 +123,8 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
-    - _DetailMapBlendingMode: 0
-    - _DetailMapImpact: 0
+    - _DetailMapBlendingMode: 1
+    - _DetailMapImpact: 0.05
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1

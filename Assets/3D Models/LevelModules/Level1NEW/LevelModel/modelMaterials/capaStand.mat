@@ -28,7 +28,7 @@ Material:
   - DR_SPECULAR_ON
   - _ALPHATEST_ON
   - _CELPRIMARYMODE_SINGLE
-  - _DETAILMAPBLENDINGMODE_MULTIPLY
+  - _DETAILMAPBLENDINGMODE_ADD
   - _GRADIENTSPACE_LOCAL
   - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
@@ -128,7 +128,7 @@ Material:
     - _Cull: 0
     - _Cutoff: 0.75
     - _DetailAlbedoMapScale: 1
-    - _DetailMapBlendingMode: 0
+    - _DetailMapBlendingMode: 1
     - _DetailMapImpact: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0

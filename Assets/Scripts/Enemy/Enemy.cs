@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     public float damage = 10f;
     public float lookAngle = 0.5f;
     private float updateDestinationTimer = 0f;
+    private float speedRandomizer = 1f;
 
     [SerializeField] Animator animator;
     [SerializeField] SkinnedMeshRenderer[] sMR;
@@ -62,6 +63,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        speedRandomizer = Random.Range(0.85f, 1.15f);
+
         switch (enemyType.enemyName)
         {
             case "Guard":
@@ -389,7 +392,7 @@ public class Enemy : MonoBehaviour
             updateDestinationTimer = 0.25f;
         }
 
-        enemy.speed = enemyType.runSpeed;
+        enemy.speed = enemyType.runSpeed * speedRandomizer;
         enemy.updateRotation = true;
 
     }
