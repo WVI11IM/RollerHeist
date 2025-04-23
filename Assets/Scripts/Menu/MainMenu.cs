@@ -318,10 +318,10 @@ public class MainMenu : MonoBehaviour
             switch (levelToSelect)
             {
                 case 1:
-                    sceneLoader.LoadScene("Level1");
+                    sceneLoader.LoadScene("Level1-NewLevelTest");
                     break;
                 case 2:
-                    sceneLoader.LoadScene("Level2");
+                    sceneLoader.LoadScene("Level2-NewLevelTest");
                     break;
                 case 3:
                     break;
