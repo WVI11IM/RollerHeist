@@ -276,7 +276,12 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            levelToSelect = PlayerPrefs.GetInt("levelToSelect");
+            //levelToSelect = PlayerPrefs.GetInt("levelToSelect");
+            //FOR DEMO, BRING PLAYERS BACK TO LEVEL 1 SELECTION
+            //
+            levelToSelect = 1;
+            PlayerPrefs.SetInt("levelToSelect", 1);
+            //
             SelectLevelButton();
         }
 
