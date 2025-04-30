@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 
 public class InactivitySceneChange : MonoBehaviour
 {
-    public float timeBeforeReset = 300;
-    private float timer;
+    public float timeBeforeReset = 120;
+    public float timer;
 
     private InputSystemUIInputModule uiInputModule;
     private List<InputAction> inputActions = new List<InputAction>();
@@ -37,7 +37,7 @@ public class InactivitySceneChange : MonoBehaviour
 
     void Update()
     {
-        timer -= Time.deltaTime;
+        timer -= Time.unscaledDeltaTime;
 
         foreach (var action in inputActions)
         {
