@@ -61,6 +61,11 @@ public class InactivitySceneChange : MonoBehaviour
         if(timer<= 0)
         {
             timer = timeBeforeReset;
+            
+            AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0f);
+            AudioListener.pause = false;
+            Time.timeScale = 1f;
+            
             PlayerPrefs.SetInt("titleScreenActivated", 0);
             PlayerPrefs.SetInt("justPlayedLevel", 0);
             PlayerPrefs.SetInt("justPlayedTutorial", 0);
