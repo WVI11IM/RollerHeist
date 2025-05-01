@@ -64,6 +64,7 @@ public class InactivitySceneChange : MonoBehaviour
             
             AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0f);
             AudioListener.pause = false;
+            MusicManager.Instance.StopAllLoopingMusic();
             Time.timeScale = 1f;
             
             PlayerPrefs.SetInt("titleScreenActivated", 0);
