@@ -1124,6 +1124,7 @@ GameObject:
   - component: {fileID: 54771834}
   - component: {fileID: 54771836}
   - component: {fileID: 54771835}
+  - component: {fileID: 54771837}
   m_Layer: 5
   m_Name: Text (TMP) (4)
   m_TagString: Untagged
@@ -1248,6 +1249,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54771833}
   m_CullTransparentMesh: 1
+--- !u!114 &54771837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54771833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: ???
+  textEN: ???
 --- !u!1 &55575681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,6 +1895,7 @@ GameObject:
   - component: {fileID: 67561164}
   - component: {fileID: 67561166}
   - component: {fileID: 67561165}
+  - component: {fileID: 67561167}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2004,6 +2020,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67561163}
   m_CullTransparentMesh: 1
+--- !u!114 &67561167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67561163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Configura\xE7\xF5es de \xE1udio"
+  textEN: Audio Settings
 --- !u!1 &68198277
 GameObject:
   m_ObjectHideFlags: 0
@@ -3119,6 +3149,7 @@ GameObject:
   - component: {fileID: 107467391}
   - component: {fileID: 107467393}
   - component: {fileID: 107467392}
+  - component: {fileID: 107467394}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3243,6 +3274,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107467390}
   m_CullTransparentMesh: 1
+--- !u!114 &107467394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107467390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: JOGAR
+  textEN: START
 --- !u!1 &116838029
 GameObject:
   m_ObjectHideFlags: 0
@@ -3254,6 +3299,7 @@ GameObject:
   - component: {fileID: 116838030}
   - component: {fileID: 116838032}
   - component: {fileID: 116838031}
+  - component: {fileID: 116838033}
   m_Layer: 5
   m_Name: Text (TMP) (9)
   m_TagString: Untagged
@@ -3378,6 +3424,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116838029}
   m_CullTransparentMesh: 1
+--- !u!114 &116838033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116838029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Saqueado em
+  textEN: Looted in
 --- !u!1 &117550748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3421,6 +3481,7 @@ GameObject:
   - component: {fileID: 124184115}
   - component: {fileID: 124184117}
   - component: {fileID: 124184116}
+  - component: {fileID: 124184118}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3545,6 +3606,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124184114}
   m_CullTransparentMesh: 1
+--- !u!114 &124184118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124184114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Master
+  textEN: Master
 --- !u!1 &125946574
 GameObject:
   m_ObjectHideFlags: 0
@@ -9715,6 +9790,7 @@ GameObject:
   - component: {fileID: 172141117}
   - component: {fileID: 172141119}
   - component: {fileID: 172141118}
+  - component: {fileID: 172141120}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -9792,9 +9868,9 @@ MonoBehaviour:
   m_fontSize: 14
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 4
-  m_fontSizeMax: 9
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 14
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
@@ -9839,6 +9915,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172141116}
   m_CullTransparentMesh: 1
+--- !u!114 &172141120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172141116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: O MUSEU
+  textEN: THE MUSEUM
 --- !u!1 &194073291
 GameObject:
   m_ObjectHideFlags: 0
@@ -10214,6 +10304,7 @@ GameObject:
   - component: {fileID: 201920472}
   - component: {fileID: 201920474}
   - component: {fileID: 201920473}
+  - component: {fileID: 201920475}
   m_Layer: 5
   m_Name: Text (TMP) (8)
   m_TagString: Untagged
@@ -10338,6 +10429,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201920471}
   m_CullTransparentMesh: 1
+--- !u!114 &201920475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201920471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: ???
+  textEN: ???
 --- !u!1 &206959646
 GameObject:
   m_ObjectHideFlags: 0
@@ -10737,6 +10842,7 @@ GameObject:
   - component: {fileID: 215323306}
   - component: {fileID: 215323308}
   - component: {fileID: 215323307}
+  - component: {fileID: 215323309}
   m_Layer: 5
   m_Name: Text (TMP) (3)
   m_TagString: Untagged
@@ -10861,6 +10967,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215323305}
   m_CullTransparentMesh: 1
+--- !u!114 &215323309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215323305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "MISS\xC3O 2"
+  textEN: MISSION 2
 --- !u!1 &216614425
 GameObject:
   m_ObjectHideFlags: 0
@@ -10872,6 +10992,7 @@ GameObject:
   - component: {fileID: 216614426}
   - component: {fileID: 216614428}
   - component: {fileID: 216614427}
+  - component: {fileID: 216614429}
   m_Layer: 5
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
@@ -10998,6 +11119,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216614425}
   m_CullTransparentMesh: 1
+--- !u!114 &216614429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216614425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Local atual:<br>Museu de Cultura Oriental
+  textEN: Current location:<br>Museum of Asian Cultures
 --- !u!1 &222921139
 GameObject:
   m_ObjectHideFlags: 0
@@ -11107,6 +11242,7 @@ GameObject:
   - component: {fileID: 240905364}
   - component: {fileID: 240905366}
   - component: {fileID: 240905365}
+  - component: {fileID: 240905367}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -11232,6 +11368,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240905363}
   m_CullTransparentMesh: 1
+--- !u!114 &240905367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240905363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Acha que est\xE1 ficando craque no jogo?<br><br>Cumpra todas as miss\xF5es
+    da fase em uma \xFAnica jogada para adquirir uma medalha!"
+  textEN: Think you're getting good at the game?<br><br>Complete all level missions
+    in a single run to earn a medal!
 --- !u!1 &248409846
 GameObject:
   m_ObjectHideFlags: 0
@@ -11456,6 +11608,7 @@ GameObject:
   - component: {fileID: 264367563}
   - component: {fileID: 264367566}
   - component: {fileID: 264367567}
+  - component: {fileID: 264367568}
   m_Layer: 13
   m_Name: Modo Livre BT
   m_TagString: Untagged
@@ -11701,6 +11854,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &264367568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264367561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Modo livre
+  textEN: Free mode
 --- !u!1001 &266229690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12045,6 +12212,7 @@ GameObject:
   - component: {fileID: 274238978}
   - component: {fileID: 274238977}
   - component: {fileID: 274238980}
+  - component: {fileID: 274238981}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -12290,6 +12458,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &274238981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274238975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: SIM
+  textEN: YES
 --- !u!1 &274939673
 GameObject:
   m_ObjectHideFlags: 0
@@ -12378,6 +12560,7 @@ GameObject:
   - component: {fileID: 276236443}
   - component: {fileID: 276236445}
   - component: {fileID: 276236444}
+  - component: {fileID: 276236446}
   m_Layer: 5
   m_Name: Text (TMP) (8)
   m_TagString: Untagged
@@ -12502,6 +12685,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276236442}
   m_CullTransparentMesh: 1
+--- !u!114 &276236446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276236442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: 1897
+  textEN: 1897
 --- !u!1 &276661733
 GameObject:
   m_ObjectHideFlags: 0
@@ -13089,6 +13286,7 @@ GameObject:
   - component: {fileID: 288703636}
   - component: {fileID: 288703638}
   - component: {fileID: 288703637}
+  - component: {fileID: 288703639}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13214,6 +13412,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288703635}
   m_CullTransparentMesh: 1
+--- !u!114 &288703639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288703635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Deseja deletar todos os dados do jogo?<br><br>Essa a\xE7\xE3o n\xE3o pode
+    ser desfeita!!"
+  textEN: Do you want to delete all game data?<br><br>This cannot be undone!!
 --- !u!1 &291634446
 GameObject:
   m_ObjectHideFlags: 0
@@ -13734,6 +13947,7 @@ GameObject:
   - component: {fileID: 317872597}
   - component: {fileID: 317872599}
   - component: {fileID: 317872598}
+  - component: {fileID: 317872600}
   m_Layer: 5
   m_Name: Text (TMP) (4)
   m_TagString: Untagged
@@ -13858,6 +14072,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317872596}
   m_CullTransparentMesh: 1
+--- !u!114 &317872600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317872596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: GADA DE HANUMAN
+  textEN: HANUMAN'S GADA
 --- !u!1001 &322835871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14290,6 +14518,7 @@ GameObject:
   - component: {fileID: 333177689}
   - component: {fileID: 333177691}
   - component: {fileID: 333177690}
+  - component: {fileID: 333177692}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -14418,6 +14647,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333177688}
   m_CullTransparentMesh: 1
+--- !u!114 &333177692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333177688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Localizado em Londres, Reino Unido. Fundado em 1753.<br><br>Possui o maior
+    acervo permanente do mundo, com mais de 8 milh\xF5es de pe\xE7as individuais,
+    que documentam a hist\xF3ria da humanidade desde seus prim\xF3rdios at\xE9 os
+    dias atuais.<br><br>No entanto, as origens das pe\xE7as de seu acervo s\xE3o
+    marcadas por muitas impunidades..."
+  textEN: Located in London, United Kingdom. Founded in 1753.<br><br>It has the largest
+    permanent collection in the world, with more than 8 million individual pieces,
+    which document the history of humanity from its beginnings to the present day.<br><br>However,
+    the origins of the pieces in its collection are marked by many impunities...
 --- !u!1 &338065736
 GameObject:
   m_ObjectHideFlags: 0
@@ -14818,6 +15068,7 @@ GameObject:
   - component: {fileID: 350206083}
   - component: {fileID: 350206082}
   - component: {fileID: 350206085}
+  - component: {fileID: 350206086}
   m_Layer: 5
   m_Name: Button (3)
   m_TagString: Untagged
@@ -15063,6 +15314,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+--- !u!114 &350206086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350206080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: SIM
+  textEN: YES
 --- !u!1 &352402003
 GameObject:
   m_ObjectHideFlags: 0
@@ -15150,6 +15415,7 @@ GameObject:
   - component: {fileID: 354325313}
   - component: {fileID: 354325315}
   - component: {fileID: 354325314}
+  - component: {fileID: 354325316}
   m_Layer: 5
   m_Name: Text (TMP) (6)
   m_TagString: Untagged
@@ -15274,6 +15540,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354325312}
   m_CullTransparentMesh: 1
+--- !u!114 &354325316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354325312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: ???
+  textEN: ???
 --- !u!1 &355634758
 GameObject:
   m_ObjectHideFlags: 0
@@ -15322,6 +15602,7 @@ GameObject:
   - component: {fileID: 359436642}
   - component: {fileID: 359436644}
   - component: {fileID: 359436643}
+  - component: {fileID: 359436645}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -15446,6 +15727,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359436641}
   m_CullTransparentMesh: 1
+--- !u!114 &359436645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359436641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Boost
+  textEN: Boost
 --- !u!1 &359576296
 GameObject:
   m_ObjectHideFlags: 0
@@ -15457,6 +15752,7 @@ GameObject:
   - component: {fileID: 359576297}
   - component: {fileID: 359576299}
   - component: {fileID: 359576298}
+  - component: {fileID: 359576300}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -15585,6 +15881,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359576296}
   m_CullTransparentMesh: 1
+--- !u!114 &359576300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359576296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Localizado em Durhan, Reino Unido. Fundado em 1753.<br><br>Desde a sua
+    funda\xE7\xE3o no s\xE9culo XIX, o museu abriga j\xF3ias raras e artefatos culturais
+    de pa\xEDses como Jap\xE3o, China e \xCDndia.<br><br>Possui um grau de seguran\xE7a
+    maior, visto que alguns visitantes \"ousados\" j\xE1 tentaram p\xF5r as m\xE3os
+    nas pe\xE7as do museu, portanto \xE9 preciso agilidade para n\xE3o arruinar o
+    plano.\n"
+  textEN: "Located in Durham, United Kingdom. Founded in 1753.\r<br><br>Since its
+    founding in the 19th century, the museum has housed rare jewels and cultural
+    artifacts from countries such as Japan, China and India.\r<br><br>It has a higher
+    level of security, as some \"daring\" visitors have tried to get their hands
+    on the museum's pieces, so you need to be quick to avoid ruining your plan."
 --- !u!1 &362192553
 GameObject:
   m_ObjectHideFlags: 0
@@ -15688,7 +16007,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364905914}
-  m_LocalRotation: {x: 0.0032725483, y: 0.9962158, z: -0.04330283, w: 0.07528756}
+  m_LocalRotation: {x: 0.003272548, y: 0.9962158, z: -0.04330283, w: 0.07528755}
   m_LocalPosition: {x: 3.95, y: -1.16, z: -4.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16505,6 +16824,7 @@ GameObject:
   - component: {fileID: 406623124}
   - component: {fileID: 406623126}
   - component: {fileID: 406623125}
+  - component: {fileID: 406623127}
   m_Layer: 5
   m_Name: Text (TMP) (5)
   m_TagString: Untagged
@@ -16629,6 +16949,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406623123}
   m_CullTransparentMesh: 1
+--- !u!114 &406623127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406623123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: A OBRA
+  textEN: THE PIECE
 --- !u!1 &408431547
 GameObject:
   m_ObjectHideFlags: 0
@@ -16913,6 +17247,7 @@ GameObject:
   - component: {fileID: 418567790}
   - component: {fileID: 418567792}
   - component: {fileID: 418567791}
+  - component: {fileID: 418567793}
   m_Layer: 5
   m_Name: Text (TMP) (7)
   m_TagString: Untagged
@@ -17037,6 +17372,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418567789}
   m_CullTransparentMesh: 1
+--- !u!114 &418567793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418567789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: 'Origem: Brasil'
+  textEN: 'Origin: Brazil'
 --- !u!1 &429498632
 GameObject:
   m_ObjectHideFlags: 0
@@ -17533,6 +17882,7 @@ GameObject:
   - component: {fileID: 447237980}
   - component: {fileID: 447237982}
   - component: {fileID: 447237981}
+  - component: {fileID: 447237983}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -17657,6 +18007,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447237979}
   m_CullTransparentMesh: 1
+--- !u!114 &447237983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447237979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: JOGAR
+  textEN: PLAY
 --- !u!1 &448207549
 GameObject:
   m_ObjectHideFlags: 0
@@ -18411,6 +18775,7 @@ GameObject:
   - component: {fileID: 480626250}
   - component: {fileID: 480626253}
   - component: {fileID: 480626254}
+  - component: {fileID: 480626255}
   m_Layer: 13
   m_Name: Sim BT
   m_TagString: Untagged
@@ -18656,6 +19021,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &480626255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480626248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: SIM
+  textEN: YES
 --- !u!1 &480684099
 GameObject:
   m_ObjectHideFlags: 0
@@ -18781,6 +19160,7 @@ GameObject:
   - component: {fileID: 484176275}
   - component: {fileID: 484176277}
   - component: {fileID: 484176276}
+  - component: {fileID: 484176278}
   m_Layer: 5
   m_Name: Text (TMP) (5)
   m_TagString: Untagged
@@ -18905,6 +19285,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484176274}
   m_CullTransparentMesh: 1
+--- !u!114 &484176278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484176274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: A OBRA
+  textEN: THE PIECE
 --- !u!1 &485679555
 GameObject:
   m_ObjectHideFlags: 0
@@ -19609,6 +20003,7 @@ GameObject:
   - component: {fileID: 513377250}
   - component: {fileID: 513377252}
   - component: {fileID: 513377251}
+  - component: {fileID: 513377253}
   m_Layer: 5
   m_Name: Text (TMP) (9)
   m_TagString: Untagged
@@ -19733,6 +20128,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513377249}
   m_CullTransparentMesh: 1
+--- !u!114 &513377253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513377249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Saqueado em
+  textEN: Looted in
 --- !u!1 &513626044
 GameObject:
   m_ObjectHideFlags: 0
@@ -19746,6 +20155,7 @@ GameObject:
   - component: {fileID: 513626047}
   - component: {fileID: 513626046}
   - component: {fileID: 513626049}
+  - component: {fileID: 513626050}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -20003,6 +20413,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &513626050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513626044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: VOLTAR
+  textEN: BACK
 --- !u!1 &520276063
 GameObject:
   m_ObjectHideFlags: 0
@@ -21025,6 +21449,7 @@ GameObject:
   - component: {fileID: 553451976}
   - component: {fileID: 553451977}
   - component: {fileID: 553451974}
+  - component: {fileID: 553451978}
   m_Layer: 13
   m_Name: Sair Bt
   m_TagString: Untagged
@@ -21229,6 +21654,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &553451978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553451972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: SAIR
+  textEN: EXIT
 --- !u!1 &554314518
 GameObject:
   m_ObjectHideFlags: 0
@@ -21711,6 +22150,7 @@ GameObject:
   - component: {fileID: 566065918}
   - component: {fileID: 566065917}
   - component: {fileID: 566065920}
+  - component: {fileID: 566065921}
   m_Layer: 5
   m_Name: Delete
   m_TagString: Untagged
@@ -21992,6 +22432,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &566065921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566065915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Deletar dados
+  textEN: Delete data
 --- !u!1 &570799086
 GameObject:
   m_ObjectHideFlags: 0
@@ -22104,6 +22558,7 @@ GameObject:
   - component: {fileID: 572959093}
   - component: {fileID: 572959096}
   - component: {fileID: 572959097}
+  - component: {fileID: 572959098}
   m_Layer: 13
   m_Name: Voltar BT
   m_TagString: Untagged
@@ -22361,6 +22816,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &572959098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572959091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: VOLTAR
+  textEN: BACK
 --- !u!1 &575123364
 GameObject:
   m_ObjectHideFlags: 0
@@ -22373,6 +22842,7 @@ GameObject:
   - component: {fileID: 575123368}
   - component: {fileID: 575123369}
   - component: {fileID: 575123366}
+  - component: {fileID: 575123370}
   m_Layer: 13
   m_Name: Credits Bt
   m_TagString: Untagged
@@ -22577,6 +23047,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &575123370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575123364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "CR\xC9DITOS"
+  textEN: CREDITS
 --- !u!1 &577734977
 GameObject:
   m_ObjectHideFlags: 0
@@ -22987,6 +23471,7 @@ GameObject:
   - component: {fileID: 584664358}
   - component: {fileID: 584664360}
   - component: {fileID: 584664359}
+  - component: {fileID: 584664361}
   m_Layer: 5
   m_Name: Text (TMP) (4)
   m_TagString: Untagged
@@ -23111,6 +23596,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584664357}
   m_CullTransparentMesh: 1
+--- !u!114 &584664361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584664357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "MANTO TUPINAMB\xC1"
+  textEN: "TUPINAMB\xC1 CAPE"
 --- !u!1 &587155158
 GameObject:
   m_ObjectHideFlags: 0
@@ -23358,6 +23857,7 @@ GameObject:
   - component: {fileID: 595880683}
   - component: {fileID: 595880685}
   - component: {fileID: 595880684}
+  - component: {fileID: 595880686}
   m_Layer: 5
   m_Name: Text (TMP) (3)
   m_TagString: Untagged
@@ -23482,6 +23982,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595880682}
   m_CullTransparentMesh: 1
+--- !u!114 &595880686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595880682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "MISS\xC3O 1"
+  textEN: MISSION 1
 --- !u!1 &600424628
 GameObject:
   m_ObjectHideFlags: 0
@@ -23937,6 +24451,7 @@ GameObject:
   - component: {fileID: 617878125}
   - component: {fileID: 617878128}
   - component: {fileID: 617878129}
+  - component: {fileID: 617878130}
   m_Layer: 5
   m_Name: Audio
   m_TagString: Untagged
@@ -24206,6 +24721,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &617878130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617878123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "\xC1udio"
+  textEN: Audio
 --- !u!1 &626824385
 GameObject:
   m_ObjectHideFlags: 0
@@ -24217,6 +24746,7 @@ GameObject:
   - component: {fileID: 626824386}
   - component: {fileID: 626824388}
   - component: {fileID: 626824387}
+  - component: {fileID: 626824389}
   m_Layer: 5
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
@@ -24343,6 +24873,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626824385}
   m_CullTransparentMesh: 1
+--- !u!114 &626824389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626824385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Local atual:<br>???
+  textEN: Current location:<br>???
 --- !u!1 &631425432
 GameObject:
   m_ObjectHideFlags: 0
@@ -25458,6 +26002,7 @@ GameObject:
   - component: {fileID: 681052378}
   - component: {fileID: 681052381}
   - component: {fileID: 681052382}
+  - component: {fileID: 681052383}
   m_Layer: 5
   m_Name: Fase 2 BT
   m_TagString: Untagged
@@ -25740,6 +26285,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &681052383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681052376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: FASE 2
+  textEN: LEVEL 2
 --- !u!1 &682757765
 GameObject:
   m_ObjectHideFlags: 0
@@ -26742,6 +27301,7 @@ GameObject:
   - component: {fileID: 712707983}
   - component: {fileID: 712707986}
   - component: {fileID: 712707987}
+  - component: {fileID: 712707988}
   m_Layer: 5
   m_Name: Fase 3 BT
   m_TagString: Untagged
@@ -27024,6 +27584,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &712707988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712707981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: FASE 3
+  textEN: LEVEL 3
 --- !u!1 &713510444
 GameObject:
   m_ObjectHideFlags: 0
@@ -28890,6 +29464,7 @@ GameObject:
   - component: {fileID: 785105296}
   - component: {fileID: 785105298}
   - component: {fileID: 785105297}
+  - component: {fileID: 785105299}
   m_Layer: 5
   m_Name: Text (TMP) (7)
   m_TagString: Untagged
@@ -29014,6 +29589,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785105295}
   m_CullTransparentMesh: 1
+--- !u!114 &785105299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785105295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Origem: Nova D\xE9lhi"
+  textEN: 'Origem: New Delhi'
 --- !u!1 &785231448
 GameObject:
   m_ObjectHideFlags: 0
@@ -29257,6 +29846,7 @@ GameObject:
   - component: {fileID: 789730231}
   - component: {fileID: 789730232}
   - component: {fileID: 789730229}
+  - component: {fileID: 789730233}
   m_Layer: 13
   m_Name: Jogar bt
   m_TagString: Untagged
@@ -29449,6 +30039,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &789730233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789730227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: JOGAR
+  textEN: PLAY
 --- !u!1 &794852413
 GameObject:
   m_ObjectHideFlags: 0
@@ -31227,6 +31831,7 @@ GameObject:
   - component: {fileID: 856923204}
   - component: {fileID: 856923206}
   - component: {fileID: 856923205}
+  - component: {fileID: 856923207}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -31351,6 +31956,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856923203}
   m_CullTransparentMesh: 1
+--- !u!114 &856923207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856923203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "M\xFAsica"
+  textEN: Music
 --- !u!1 &858099031
 GameObject:
   m_ObjectHideFlags: 0
@@ -32820,6 +33439,7 @@ GameObject:
   - component: {fileID: 931962429}
   - component: {fileID: 931962430}
   - component: {fileID: 931962431}
+  - component: {fileID: 931962432}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -34046,7 +34666,7 @@ MonoBehaviour:
     number: 0
     isCompleted: 0
   - objectiveType: 6
-    number: 5
+    number: 8
     isCompleted: 0
   - objectiveType: 1
     number: 36
@@ -34095,6 +34715,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeReset: 120
+  timer: 0
+--- !u!114 &931962432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931962422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ca3b1f9b069154b88bd582be0a6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  language: 0
 --- !u!1 &936474149
 GameObject:
   m_ObjectHideFlags: 0
@@ -34553,6 +35187,7 @@ GameObject:
   - component: {fileID: 948033564}
   - component: {fileID: 948033566}
   - component: {fileID: 948033565}
+  - component: {fileID: 948033567}
   m_Layer: 5
   m_Name: Text (TMP) (3)
   m_TagString: Untagged
@@ -34677,6 +35312,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948033563}
   m_CullTransparentMesh: 1
+--- !u!114 &948033567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948033563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "MISS\xC3O 3"
+  textEN: MISSION 3
 --- !u!1 &948955296
 GameObject:
   m_ObjectHideFlags: 0
@@ -34726,6 +35375,7 @@ GameObject:
   - component: {fileID: 949115661}
   - component: {fileID: 949115663}
   - component: {fileID: 949115662}
+  - component: {fileID: 949115664}
   m_Layer: 5
   m_Name: Text (TMP) (5)
   m_TagString: Untagged
@@ -34850,6 +35500,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949115660}
   m_CullTransparentMesh: 1
+--- !u!114 &949115664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949115660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: A OBRA
+  textEN: THE PIECE
 --- !u!1 &952299319
 GameObject:
   m_ObjectHideFlags: 0
@@ -35251,6 +35915,7 @@ GameObject:
   - component: {fileID: 980459360}
   - component: {fileID: 980459362}
   - component: {fileID: 980459361}
+  - component: {fileID: 980459363}
   m_Layer: 5
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
@@ -35375,6 +36040,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980459359}
   m_CullTransparentMesh: 1
+--- !u!114 &980459363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980459359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Local atual:<br>Museu de Hist\xF3ria Natural"
+  textEN: Current location:<br>Natural History Museum
 --- !u!1 &988245860
 GameObject:
   m_ObjectHideFlags: 0
@@ -36383,9 +37062,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.2
   far clip plane: 1000
-  field of view: 60.4
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -36410,8 +37089,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014360079}
-  m_LocalRotation: {x: -0.0024881584, y: 0.9894848, z: 0.017145317, w: 0.1435958}
-  m_LocalPosition: {x: -1.639, y: -1.9, z: -4.565}
+  m_LocalRotation: {x: 0.018454904, y: 0.9767044, z: -0.09382908, w: 0.19210443}
+  m_LocalPosition: {x: -3.886, y: -1, z: -3.453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36647,6 +37326,7 @@ GameObject:
   - component: {fileID: 1021806225}
   - component: {fileID: 1021806227}
   - component: {fileID: 1021806226}
+  - component: {fileID: 1021806228}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -36771,6 +37451,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021806224}
   m_CullTransparentMesh: 1
+--- !u!114 &1021806228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021806224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: SFX
+  textEN: SFX
 --- !u!1 &1022062722
 GameObject:
   m_ObjectHideFlags: 0
@@ -38494,6 +39188,7 @@ GameObject:
   - component: {fileID: 1111350367}
   - component: {fileID: 1111350370}
   - component: {fileID: 1111350371}
+  - component: {fileID: 1111350372}
   m_Layer: 13
   m_Name: Voltar
   m_TagString: Untagged
@@ -38751,6 +39446,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1111350372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111350365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: VOLTAR
+  textEN: BACK
 --- !u!1 &1111957509
 GameObject:
   m_ObjectHideFlags: 0
@@ -39290,6 +39999,7 @@ GameObject:
   - component: {fileID: 1151309781}
   - component: {fileID: 1151309780}
   - component: {fileID: 1151309783}
+  - component: {fileID: 1151309784}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -39547,6 +40257,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1151309784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151309778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "N\xC3O"
+  textEN: NO
 --- !u!1 &1154023121
 GameObject:
   m_ObjectHideFlags: 0
@@ -40548,6 +41272,7 @@ GameObject:
   - component: {fileID: 1184188463}
   - component: {fileID: 1184188466}
   - component: {fileID: 1184188467}
+  - component: {fileID: 1184188468}
   m_Layer: 5
   m_Name: Fase 1 BT
   m_TagString: Untagged
@@ -40830,6 +41555,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1184188468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184188461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: FASE 1
+  textEN: LEVEL 1
 --- !u!1 &1185809089
 GameObject:
   m_ObjectHideFlags: 0
@@ -41070,6 +41809,7 @@ GameObject:
   - component: {fileID: 1187370299}
   - component: {fileID: 1187370298}
   - component: {fileID: 1187370301}
+  - component: {fileID: 1187370302}
   m_Layer: 13
   m_Name: Tutorial BT
   m_TagString: Untagged
@@ -41315,6 +42055,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1187370302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187370296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Tutorial
+  textEN: Tutorial
 --- !u!1 &1190333967
 GameObject:
   m_ObjectHideFlags: 0
@@ -41435,6 +42189,7 @@ GameObject:
   - component: {fileID: 1203420464}
   - component: {fileID: 1203420466}
   - component: {fileID: 1203420465}
+  - component: {fileID: 1203420467}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -41512,9 +42267,9 @@ MonoBehaviour:
   m_fontSize: 14
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 4
-  m_fontSizeMax: 9
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 14
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
@@ -41559,6 +42314,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203420463}
   m_CullTransparentMesh: 1
+--- !u!114 &1203420467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203420463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: O MUSEU
+  textEN: THE MUSEUM
 --- !u!1 &1206915185
 GameObject:
   m_ObjectHideFlags: 0
@@ -41570,6 +42339,7 @@ GameObject:
   - component: {fileID: 1206915186}
   - component: {fileID: 1206915188}
   - component: {fileID: 1206915187}
+  - component: {fileID: 1206915189}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -41694,6 +42464,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206915185}
   m_CullTransparentMesh: 1
+--- !u!114 &1206915189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206915185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: ???
+  textEN: ???
 --- !u!1 &1213332187
 GameObject:
   m_ObjectHideFlags: 0
@@ -42739,6 +43523,7 @@ GameObject:
   - component: {fileID: 1253909356}
   - component: {fileID: 1253909359}
   - component: {fileID: 1253909360}
+  - component: {fileID: 1253909361}
   m_Layer: 13
   m_Name: Skins
   m_TagString: Untagged
@@ -43010,6 +43795,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1253909361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253909354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: SKINS<br>>>
+  textEN: SKINS<br>>>
 --- !u!1 &1255190937
 GameObject:
   m_ObjectHideFlags: 0
@@ -43104,6 +43903,7 @@ GameObject:
   - component: {fileID: 1256036652}
   - component: {fileID: 1256036654}
   - component: {fileID: 1256036653}
+  - component: {fileID: 1256036655}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -43181,9 +43981,9 @@ MonoBehaviour:
   m_fontSize: 14
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 4
-  m_fontSizeMax: 9
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 14
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
@@ -43228,6 +44028,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256036651}
   m_CullTransparentMesh: 1
+--- !u!114 &1256036655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256036651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: O MUSEU
+  textEN: THE MUSEUM
 --- !u!1001 &1266145900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44209,6 +45023,7 @@ GameObject:
   - component: {fileID: 1331595199}
   - component: {fileID: 1331595201}
   - component: {fileID: 1331595200}
+  - component: {fileID: 1331595202}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -44333,6 +45148,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331595198}
   m_CullTransparentMesh: 1
+--- !u!114 &1331595202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331595198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Controles
+  textEN: Controls
 --- !u!1 &1336090946
 GameObject:
   m_ObjectHideFlags: 0
@@ -45121,7 +45950,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1373045503}
-  m_LocalRotation: {x: 0.016519655, y: 0.9834798, z: -0.12801124, w: 0.12691657}
+  m_LocalRotation: {x: 0.016519653, y: 0.9834798, z: -0.12801127, w: 0.12691654}
   m_LocalPosition: {x: 1.159, y: -0.445, z: -1.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46814,6 +47643,7 @@ GameObject:
   - component: {fileID: 1457556784}
   - component: {fileID: 1457556786}
   - component: {fileID: 1457556785}
+  - component: {fileID: 1457556787}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -46938,6 +47768,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457556783}
   m_CullTransparentMesh: 1
+--- !u!114 &1457556787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457556783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Frear
+  textEN: Brake
 --- !u!1 &1458260603
 GameObject:
   m_ObjectHideFlags: 0
@@ -46949,6 +47793,7 @@ GameObject:
   - component: {fileID: 1458260604}
   - component: {fileID: 1458260606}
   - component: {fileID: 1458260605}
+  - component: {fileID: 1458260607}
   m_Layer: 13
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -46996,7 +47841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clique para iniciar!
+  m_text: Aperte A para iniciar!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bba61ca34d9945c42a324c1623dd57e9, type: 2}
   m_sharedMaterial: {fileID: -8507208128063967396, guid: bba61ca34d9945c42a324c1623dd57e9, type: 2}
@@ -47073,6 +47918,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458260603}
   m_CullTransparentMesh: 1
+--- !u!114 &1458260607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458260603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Aperte A para iniciar!
+  textEN: Press A to start!
 --- !u!1001 &1460937883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48638,6 +49497,7 @@ GameObject:
   - component: {fileID: 1493696239}
   - component: {fileID: 1493696241}
   - component: {fileID: 1493696240}
+  - component: {fileID: 1493696242}
   m_Layer: 5
   m_Name: Text (TMP) (6)
   m_TagString: Untagged
@@ -48766,6 +49626,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493696238}
   m_CullTransparentMesh: 1
+--- !u!114 &1493696242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493696238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "A ma\xE7a \xE9 uma representa\xE7\xE3o rara da arma usada por Hanuman,
+    deidade da religi\xE3o Hindu.<br><br>Seu saque ocorreu por volta de 1740 em um
+    ataque direto de for\xE7as iranianas, e tornou-se posse dos ingleses em um conflito
+    posterior.<br><br>Sua miss\xE3o: Retornar essa obra \xE0s m\xE3os de seus verdadeiros
+    donos."
+  textEN: "The mace is a rare representation of the weapon used by Hanuman, a Hindu
+    deity.\r<br><br>It was stolen around 1740 in a direct attack by Iranian forces,
+    and became the possession of the English in a later conflict.\r<br><br>Your mission:
+    Return his piece to its rightful owners."
 --- !u!1 &1495107700
 GameObject:
   m_ObjectHideFlags: 0
@@ -49277,6 +50158,7 @@ GameObject:
   - component: {fileID: 1522666640}
   - component: {fileID: 1522666642}
   - component: {fileID: 1522666641}
+  - component: {fileID: 1522666643}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -49401,6 +50283,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522666639}
   m_CullTransparentMesh: 1
+--- !u!114 &1522666643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522666639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Pular / Truque
+  textEN: Jump / Trick
 --- !u!1 &1523589475
 GameObject:
   m_ObjectHideFlags: 0
@@ -49944,6 +50840,7 @@ GameObject:
   - component: {fileID: 1539101865}
   - component: {fileID: 1539101864}
   - component: {fileID: 1539101867}
+  - component: {fileID: 1539101868}
   m_Layer: 5
   m_Name: Controles
   m_TagString: Untagged
@@ -50213,6 +51110,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1539101868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539101862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Controles
+  textEN: Controls
 --- !u!1 &1544045877
 GameObject:
   m_ObjectHideFlags: 0
@@ -50861,6 +51772,7 @@ GameObject:
   - component: {fileID: 1562251533}
   - component: {fileID: 1562251535}
   - component: {fileID: 1562251534}
+  - component: {fileID: 1562251536}
   m_Layer: 5
   m_Name: Text (TMP) (7)
   m_TagString: Untagged
@@ -50985,6 +51897,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562251532}
   m_CullTransparentMesh: 1
+--- !u!114 &1562251536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562251532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: 'Origem: ???'
+  textEN: 'Origin: ???'
 --- !u!1 &1573555284
 GameObject:
   m_ObjectHideFlags: 0
@@ -52215,6 +53141,7 @@ GameObject:
   - component: {fileID: 1632640876}
   - component: {fileID: 1632640875}
   - component: {fileID: 1632640878}
+  - component: {fileID: 1632640879}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -52496,6 +53423,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+--- !u!114 &1632640879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632640873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: VOLTAR
+  textEN: BACK
 --- !u!1001 &1639983178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54430,6 +55371,7 @@ GameObject:
   - component: {fileID: 1748577552}
   - component: {fileID: 1748577554}
   - component: {fileID: 1748577553}
+  - component: {fileID: 1748577555}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -54554,6 +55496,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1748577551}
   m_CullTransparentMesh: 1
+--- !u!114 &1748577555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748577551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Recarregar
+  textEN: Reload
 --- !u!1 &1750965683
 GameObject:
   m_ObjectHideFlags: 0
@@ -54565,6 +55521,7 @@ GameObject:
   - component: {fileID: 1750965684}
   - component: {fileID: 1750965686}
   - component: {fileID: 1750965685}
+  - component: {fileID: 1750965687}
   m_Layer: 13
   m_Name: text
   m_TagString: Untagged
@@ -54689,6 +55646,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750965683}
   m_CullTransparentMesh: 1
+--- !u!114 &1750965687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750965683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Tem certeza que deseja sair do jogo?
+  textEN: Are you sure you want to quit the game?
 --- !u!1 &1767384584
 GameObject:
   m_ObjectHideFlags: 0
@@ -55821,6 +56792,7 @@ GameObject:
   - component: {fileID: 1820060098}
   - component: {fileID: 1820060100}
   - component: {fileID: 1820060099}
+  - component: {fileID: 1820060101}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -55946,6 +56918,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820060097}
   m_CullTransparentMesh: 1
+--- !u!114 &1820060101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820060097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Bem-vindo!<br><br>Deseja fazer um r\xE1pido tutorial para aprender os
+    controles \xFAnicos do jogo?"
+  textEN: Welcome!<br><br>Would you like to go through a quick tutorial to learn
+    the game's unique controls?
 --- !u!1001 &1823059611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56709,6 +57697,7 @@ GameObject:
   - component: {fileID: 1844185478}
   - component: {fileID: 1844185480}
   - component: {fileID: 1844185479}
+  - component: {fileID: 1844185481}
   m_Layer: 5
   m_Name: Text (TMP) (9)
   m_TagString: Untagged
@@ -56833,6 +57822,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844185477}
   m_CullTransparentMesh: 1
+--- !u!114 &1844185481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844185477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Saqueado em
+  textEN: Looted in
 --- !u!1 &1844429946
 GameObject:
   m_ObjectHideFlags: 0
@@ -57332,6 +58335,7 @@ GameObject:
   - component: {fileID: 1888695148}
   - component: {fileID: 1888695150}
   - component: {fileID: 1888695149}
+  - component: {fileID: 1888695151}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -57456,6 +58460,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888695147}
   m_CullTransparentMesh: 1
+--- !u!114 &1888695151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888695147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Drift
+  textEN: Drift
 --- !u!1 &1896898950
 GameObject:
   m_ObjectHideFlags: 0
@@ -59238,7 +60256,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977914031}
-  m_LocalRotation: {x: 0.018454898, y: 0.97670436, z: -0.09382909, w: 0.1921044}
+  m_LocalRotation: {x: 0.018454904, y: 0.9767044, z: -0.09382908, w: 0.19210443}
   m_LocalPosition: {x: -3.886, y: -1, z: -3.453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -59841,6 +60859,7 @@ GameObject:
   - component: {fileID: 2009642491}
   - component: {fileID: 2009642493}
   - component: {fileID: 2009642492}
+  - component: {fileID: 2009642494}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -59967,6 +60986,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009642490}
   m_CullTransparentMesh: 1
+--- !u!114 &2009642494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009642490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Mover
+  textEN: Move
 --- !u!1 &2013593157
 GameObject:
   m_ObjectHideFlags: 0
@@ -60110,6 +61143,7 @@ GameObject:
   - component: {fileID: 2014306945}
   - component: {fileID: 2014306947}
   - component: {fileID: 2014306946}
+  - component: {fileID: 2014306948}
   m_Layer: 5
   m_Name: Text (TMP) (8)
   m_TagString: Untagged
@@ -60234,6 +61268,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014306944}
   m_CullTransparentMesh: 1
+--- !u!114 &2014306948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014306944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: 1740
+  textEN: 1740
 --- !u!1 &2015038305
 GameObject:
   m_ObjectHideFlags: 0
@@ -60655,6 +61703,7 @@ GameObject:
   - component: {fileID: 2047680976}
   - component: {fileID: 2047680978}
   - component: {fileID: 2047680977}
+  - component: {fileID: 2047680979}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -60779,6 +61828,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047680975}
   m_CullTransparentMesh: 1
+--- !u!114 &2047680979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047680975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: Pausar jogo
+  textEN: Pause game
 --- !u!1 &2050439245
 GameObject:
   m_ObjectHideFlags: 0
@@ -60903,7 +61966,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2050439248
@@ -61308,6 +62371,7 @@ GameObject:
   - component: {fileID: 2084310832}
   - component: {fileID: 2084310833}
   - component: {fileID: 2084310830}
+  - component: {fileID: 2084310834}
   m_Layer: 13
   m_Name: Options Bt
   m_TagString: Untagged
@@ -61524,6 +62588,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2084310834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084310828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "OP\xC7\xD5ES"
+  textEN: OPTIONS
 --- !u!1 &2085611078
 GameObject:
   m_ObjectHideFlags: 0
@@ -61750,6 +62828,7 @@ GameObject:
   - component: {fileID: 2095025900}
   - component: {fileID: 2095025897}
   - component: {fileID: 2095025901}
+  - component: {fileID: 2095025902}
   m_Layer: 13
   m_Name: ModoHistoria BT
   m_TagString: Untagged
@@ -62007,6 +63086,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2095025902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095025895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "MODO<br>HIST\xD3RIA"
+  textEN: STORY<br>MODE
 --- !u!1 &2102643681
 GameObject:
   m_ObjectHideFlags: 0
@@ -62488,6 +63581,7 @@ GameObject:
   - component: {fileID: 2123170635}
   - component: {fileID: 2123170637}
   - component: {fileID: 2123170636}
+  - component: {fileID: 2123170638}
   m_Layer: 5
   m_Name: Text (TMP) (6)
   m_TagString: Untagged
@@ -62617,6 +63711,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123170634}
   m_CullTransparentMesh: 1
+--- !u!114 &2123170638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123170634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6db5a2b10f08448ab44d90b3bb4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPT: "Este artefato foi levado pelos holandeses para longe de suas terras de
+    origem no Brasil.\r<br><br>Feito com penas de p\xE1ssaros \xEDbis-escarlates,
+    \xE9 parte importante da hist\xF3ria e da cultura do povo Tupinamb\xE1.<br><br>Acredita-se
+    que a Capa seja uma entidade que percorre a terra e pode falar com os vivos,
+    relembrando tempos passados \u200B\u200Be trazendo o conhecimento dos antigos
+    para o presente."
+  textEN: "This artifact was taken by the Dutch far from their homelands in Brazil.\r<br><br>Made
+    from scarlet ibis feathers, it is an important part of the history and culture
+    of the Tupinamb\xE1 people.\r<br><br>The Cape is believed to be an entity that
+    roams the earth and can speak to the living, recalling times past and bringing
+    the knowledge of the ancients into the present."
 --- !u!1 &2124036145
 GameObject:
   m_ObjectHideFlags: 0

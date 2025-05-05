@@ -283,7 +283,15 @@ public class GameManager : MonoBehaviour
         int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("Level" + levelNumber + "HighScore", 0)) % 60);
         int miliseconds = (int)((PlayerPrefs.GetFloat("Level" + levelNumber + "HighScore", 0)) * 1000) % 1000;
         Debug.Log(minutes + ":" + seconds + ":" + miliseconds);
-        highScoreText.text = "Tempo Recorde:\n" + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+        switch (PlayerPrefs.GetInt("languageInt"))
+        {
+            case 0: //Português
+                highScoreText.text = "Tempo Recorde:\n" + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+                break;
+            case 1: //Inglês
+                highScoreText.text = "Best time:\n" + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+                break;
+        }
     }
 
     IEnumerator GameOverPause()

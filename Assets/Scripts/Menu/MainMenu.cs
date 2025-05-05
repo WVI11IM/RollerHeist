@@ -244,11 +244,27 @@ public class MainMenu : MonoBehaviour
             int minutes = Mathf.FloorToInt((PlayerPrefs.GetFloat("Level" + levelToSelect + "HighScore", 0)) / 60);
             int seconds = Mathf.FloorToInt((PlayerPrefs.GetFloat("Level" + levelToSelect + "HighScore", 0)) % 60);
             int miliseconds = (int)((PlayerPrefs.GetFloat("Level" + levelToSelect + "HighScore", 0)) * 1000) % 1000;
-            levelTimeRecordText.text = "Recorde: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+            switch (PlayerPrefs.GetInt("languageInt"))
+            {
+                case 0: //Português
+                    levelTimeRecordText.text = "Recorde: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+                    break;
+                case 1: //Inglês
+                    levelTimeRecordText.text = "Best time: " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("000");
+                    break;
+            }
         }
         else
         {
-            levelTimeRecordText.text = "Recorde: --:--:---";
+            switch (PlayerPrefs.GetInt("languageInt"))
+            {
+                case 0: //Português
+                    levelTimeRecordText.text = "Recorde: --:--:---";
+                    break;
+                case 1: //Inglês
+                    levelTimeRecordText.text = "Best time: --:--:---";
+                    break;
+            }
         }
     }
 
@@ -257,10 +273,26 @@ public class MainMenu : MonoBehaviour
         switch (levelToSelect)
         {
             case 1:
-                museumName.text = "Museu de História Natural";
+                switch (PlayerPrefs.GetInt("languageInt"))
+                {
+                    case 0: //Português
+                        museumName.text = "Museu de História Natural";
+                        break;
+                    case 1: //Inglês
+                        museumName.text = "Natural History Museum";
+                        break;
+                }
                 break;
             case 2:
-                museumName.text = "Museu de Cultura Oriental";
+                switch (PlayerPrefs.GetInt("languageInt"))
+                {
+                    case 0: //Português
+                        museumName.text = "Museu de Cultura Oriental";
+                        break;
+                    case 1: //Inglês
+                        museumName.text = "Museum of Asian Cultures";
+                        break;
+                }
                 break;
             case 3:
                 museumName.text = "?????";

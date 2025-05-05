@@ -641,7 +641,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""10706b6c-5562-48e6-8555-130757112ba0"",
+                    ""id"": ""0a54d613-930b-46a4-be3a-9822c0adff49"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": ""Hold(duration=0.025)"",
                     ""processors"": """",
@@ -696,9 +696,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""14750e77-d74a-46ed-ac78-08e59b39000a"",
+                    ""id"": ""08cc5414-0887-4c41-80ba-e72c13d1fd67"",
                     ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": ""Hold(duration=0.025)"",
+                    ""interactions"": ""Hold(duration=0.01)"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Boost"",

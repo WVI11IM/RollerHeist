@@ -76,7 +76,15 @@ public class ObjectiveManager : MonoBehaviour
             //Define UI da missão principal.
             GameObject mainObjectiveUIObject = objectiveUI;
             ObjectiveUI mainObjectiveUIScript = mainObjectiveUIObject.GetComponent<ObjectiveUI>();
-            mainObjectiveUIScript.objectiveText.text = "Roube a peça principal!";
+            switch (PlayerPrefs.GetInt("languageInt"))
+            {
+                case 0: //Português
+                    mainObjectiveUIScript.objectiveText.text = "Roube a peça principal!";
+                    break;
+                case 1: //Inglês
+                    mainObjectiveUIScript.objectiveText.text = "Steal the main piece!";
+                    break;
+            }
             if (PlayerPrefs.GetInt("Level" + GameManager.Instance.levelNumber + "Mission1") != 0)
             {
                 mainObjectiveUIScript.wasCompleted = true;
@@ -96,40 +104,112 @@ public class ObjectiveManager : MonoBehaviour
                 switch (objectiveList[i].objectiveType)
                 {
                     case ObjectiveType.SecondPieces:
-                        missionText = "Colete todas as peças secundárias";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Colete todas as peças secundárias";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Collect all secondary pieces";
+                                break;
+                        }
                         Instantiate(missionSecondPieces);
                         break;
                     case ObjectiveType.SpeedRun:
                         Instantiate(missionSpeedRun);
-                        missionText = "Complete a fase em " + objectiveList[i].number + " segundos";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Complete a fase em " + objectiveList[i].number + " segundos";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Complete the level in " + objectiveList[i].number + " seconds";
+                                break;
+                        }
                         break;
                     case ObjectiveType.NoDamage:
                         Instantiate(missionNoDamage);
-                        missionText = "Não sofra nenhum dano";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Não sofra nenhum dano";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Don't receive any damage";
+                                break;
+                        }
                         break;
                     case ObjectiveType.Pacifist:
                         Instantiate(missionPacifist);
-                        missionText = "Não dê nenhum dano contra os guardas";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Não dê nenhum dano contra os guardas";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Don't deal any damage to the guards";
+                                break;
+                        }
                         break;
                     case ObjectiveType.Tricks:
                         Instantiate(missionTricks);
-                        missionText = "Faça " + objectiveList[i].number + " truques";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Faça " + objectiveList[i].number + " truques";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Perform " + objectiveList[i].number + " tricks";
+                                break;
+                        }
                         break;
                     case ObjectiveType.Kills:
                         Instantiate(missionKills);
-                        missionText = "Derrote " + objectiveList[i].number + " guardas";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Derrote " + objectiveList[i].number + " guardas";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Defeat " + objectiveList[i].number + " guards";
+                                break;
+                        }
                         break;
                     case ObjectiveType.GlassBreaks:
                         Instantiate(missionGlassBreaks);
-                        missionText = "Quebre " + objectiveList[i].number + " painéis de vidro";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Quebre " + objectiveList[i].number + " painéis de vidro";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Break " + objectiveList[i].number + " glass panels";
+                                break;
+                        }
                         break;
                     case ObjectiveType.NoGlassBreaks:
                         Instantiate(missionNoGlassBreaks);
-                        missionText = "Não quebre nenhum painél de vidro";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Não quebre nenhum painél de vidro";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Don't break any glass panels";
+                                break;
+                        }
                         break;
                     case ObjectiveType.RailTime:
                         Instantiate(missionRailTime);
-                        missionText = "Percorra os trilhos por " + objectiveList[i].number + " segundos";
+                        switch (PlayerPrefs.GetInt("languageInt"))
+                        {
+                            case 0: //Português
+                                missionText = "Percorra os trilhos por " + objectiveList[i].number + " segundos";
+                                break;
+                            case 1: //Inglês
+                                missionText = "Ride the rails for " + objectiveList[i].number + " seconds";
+                                break;
+                        }
                         break;
                     default:
                         break;
