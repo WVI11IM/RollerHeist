@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour
 
     private void HandleWin()
     {
+        LevelWinData();
+
         canPause = false;
         winButtonToSelect.Select();
         PlayerPrefs.SetInt("justPlayedLevel", 1);
@@ -166,6 +168,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        LevelGameOverData();
         gameOverButtonToSelect.Select();
         AudioMixerManager.Instance.ChangeMusicSnapshot("Normal", 0);
         canPause = false;
@@ -274,6 +277,12 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetFloat("Level" + levelNumber + "HighScore", Timer.Instance.elapsedTime);
         }
+
+        float averageLevelTime = (PlayerPrefs.GetFloat("Level" + levelNumber + "AverageTime", 0) * (PlayerPrefs.GetInt("Level" + levelNumber + "WinData") - 1) + Timer.Instance.elapsedTime) / PlayerPrefs.GetInt("Level" + levelNumber + "WinData");
+        if(levelNumber == 1 || levelNumber == 2)
+        {
+            PlayerPrefs.SetFloat("Level" + levelNumber + "AverageTime", averageLevelTime);
+        }
     }
 
     private void UpdateHighScore()
@@ -315,6 +324,48 @@ public class GameManager : MonoBehaviour
             cancelAction.performed -= OnCancelPerformed;
             cancelAction.Disable();
         }
+    }
+    public void LevelGameOverData()
+    {
+        int levelGameOvers = PlayerPrefs.GetInt("Level" + levelNumber + "GameOverData");
+        levelGameOvers++;
+        PlayerPrefs.SetInt("Level" + levelNumber + "GameOverData", levelGameOvers);
+    }
+    public void LevelWinData()
+    {
+        int levelWins = PlayerPrefs.GetInt("Level" + levelNumber + "WinData");
+        levelWins++;
+        PlayerPrefs.SetInt("Level" + levelNumber + "WinData", levelWins);
+    }
+    public void LevelRestartFromPauseData()
+    {
+        int levelRestartFromPauses = PlayerPrefs.GetInt("Level" + levelNumber + "RestartFromPauseData");
+        levelRestartFromPauses++;
+        PlayerPrefs.SetInt("Level" + levelNumber + "RestartFromPauseData", levelRestartFromPauses);
+    }
+    public void LevelRestartFromGameOverData()
+    {
+        int levelRestartFromGameOvers = PlayerPrefs.GetInt("Level" + levelNumber + "RestartFromGameOverData");
+        levelRestartFromGameOvers++;
+        PlayerPrefs.SetInt("Level" + levelNumber + "RestartFromGameOverData", levelRestartFromGameOvers);
+    }
+    public void LevelRestartFromWinData()
+    {
+        int levelRestartFromWins = PlayerPrefs.GetInt("Level" + levelNumber + "RestartFromWinData");
+        levelRestartFromWins++;
+        PlayerPrefs.SetInt("Level" + levelNumber + "RestartFromWinData", levelRestartFromWins);
+    }
+    public void LevelQuitFromPauseData()
+    {
+        int levelQuitFromPauses = PlayerPrefs.GetInt("Level" + levelNumber + "QuitFromPauseData");
+        levelQuitFromPauses++;
+        PlayerPrefs.SetInt("Level" + levelNumber + "QuitFromPauseData", levelQuitFromPauses);
+    }
+    public void LevelQuitFromGameOverData()
+    {
+        int levelQuitFromGameOvers = PlayerPrefs.GetInt("Level" + levelNumber + "QuitFromGameOverData");
+        levelQuitFromGameOvers++;
+        PlayerPrefs.SetInt("Level" + levelNumber + "QuitFromGameOverData", levelQuitFromGameOvers);
     }
 }
 

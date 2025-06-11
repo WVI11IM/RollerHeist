@@ -355,9 +355,11 @@ public class MainMenu : MonoBehaviour
             switch (levelToSelect)
             {
                 case 1:
+                    LevelStartData(1);
                     sceneLoader.LoadScene("Level1-NewLevelTest");
                     break;
                 case 2:
+                    LevelStartData(2);
                     sceneLoader.LoadScene("Level2-NewLevelTest");
                     break;
                 case 3:
@@ -391,6 +393,7 @@ public class MainMenu : MonoBehaviour
     public void CheckLevelMedals()
     {
         levelMedals = 0;
+        levelMedals = 0;
         for (int i = 1; i <= numberOfLevels; i++)
         {
             if (PlayerPrefs.GetInt("Level" + i + "Mission6") == 1)
@@ -405,13 +408,19 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void LevelStartData(int levelNumber)
+    {
+        int levelStarts = PlayerPrefs.GetInt("Level" + levelNumber + "StartData");
+        levelStarts++;
+        PlayerPrefs.SetInt("Level" + levelNumber + "StartData", levelStarts);
+    }
+
     public void ClearData()
     {
         PlayerPrefs.DeleteAll();
         LoadScene("Intro");
 
     }
-
 
     public void Quit()
     {
